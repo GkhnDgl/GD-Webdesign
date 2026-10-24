@@ -42,9 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
     'hero.subtitle': ['.hero-description'],
     'hero.cta_primary': ['.hero-actions .btn-primary'],
     'hero.cta_secondary': ['.hero-actions .btn-secondary'],
-    'hero.metrics.code': ['.metric-item:nth-child(1) .metric-label'],
-    'hero.metrics.speed': ['.metric-item:nth-child(2) .metric-label'],
-    'hero.metrics.a11y': ['.metric-item:nth-child(3) .metric-label'],
     'services.tag': ['#services .section-tag'],
     'services.title': ['#services-title'],
     'services.lead': ['#services .section-lead'],
@@ -126,6 +123,12 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelector('.form-privacy-note').innerHTML = language === 'de'
         ? 'Mit dem Absenden stimmen Sie zu, dass Ihre Angaben zur Kontaktaufnahme verwendet werden. Weitere Informationen finden Sie in der <a href="#datenschutz">Datenschutzerklärung</a>.'
         : 'By submitting this form, you agree that your details may be used to respond to your enquiry. See the <a href="#datenschutz">privacy notice</a> for more information.';
+      const metricLabels = document.querySelectorAll('.metric-label');
+      if (metricLabels.length >= 3) {
+        metricLabels[0].textContent = language === 'de' ? 'Maßgeschneiderter Code' : 'Bespoke code';
+        metricLabels[1].textContent = language === 'de' ? 'Performance im Fokus' : 'Performance-focused';
+        metricLabels[2].textContent = language === 'de' ? 'Barrierefreiheit im Fokus' : 'Accessibility-focused';
+      }
       const aboutFeatures = document.querySelectorAll('.feature-item');
       if (aboutFeatures.length >= 2) {
         aboutFeatures[0].querySelector('strong').textContent = language === 'de' ? 'Nutzerzentriert' : 'User-focused';
