@@ -1,33 +1,94 @@
 {
   "meta": {
     "title": "GD Webdesign – Modern Web Development & Digital Agency",
-    "description": "GD Webdesign crafts modern, accessible, and high-performance websites and bespoke web solutions."
+    "description": "GD Webdesign creates modern, accessible, and high-performance websites tailored for ambitious businesses."
   },
   "nav": {
     "brand": "GD Webdesign",
     "services": "Services",
+    "process": "Process",
     "about": "About Us",
-    "contact": "Contact"
+    "contact": "Contact",
+    "cta": "Request Project"
   },
   "hero": {
-    "title": "Digital Experiences That Deliver",
-    "subtitle": "We design and build modern websites for ambitious businesses.",
-    "cta": "Start a Project"
+    "badge": "Expert Web Design & Development",
+    "title": "Digital Experiences That Inspire and Convert",
+    "subtitle": "We design and develop fast, accessible websites and bespoke web solutions for businesses looking to grow sustainably online.",
+    "cta_primary": "Start a Project",
+    "cta_secondary": "Explore Services",
+    "metrics": {
+      "code": "Bespoke code",
+      "speed": "Performance-focused",
+      "a11y": "Accessibility-focused"
+    }
   },
   "services": {
-    "title": "Our Services",
+    "tag": "Our Expertise",
+    "title": "Custom Web Solutions Built for Your Success",
+    "lead": "All-in-one execution: From strategic concept and intuitive design to flawless technical engineering.",
     "webdesign": {
-      "title": "Web Design & Development",
-      "description": "Custom, responsive websites built with a focus on performance, accessibility, and usability."
+      "title": "Web Design & Frontend Development",
+      "description": "Modern, responsive websites with custom design, a focus on loading performance, and intuitive experiences across devices."
+    },
+    "seo": {
+      "title": "Performance & SEO Optimization",
+      "description": "Loading speed and technical SEO improvements focused on visibility and user experience."
     },
     "branding": {
-      "title": "Brand Strategy",
-      "description": "Clear digital identities and design systems crafted for long-term brand impact."
+      "title": "Brand Strategy & UX/UI Design",
+      "description": "Distinctive digital brand identities and thoughtful user flows designed to captivate your audience and build trust."
+    },
+    "architecture": {
+      "title": "Modern Jamstack & Headless Solutions",
+      "description": "Flexible, secure, low-maintenance web architectures—perfectly tailored for modular landing pages and modern web apps."
+    },
+    "maintenance": {
+      "title": "Maintenance & Support",
+      "description": "Reliable post-launch care: Regular updates, security monitoring, and continuous evolution of your web presence."
+    }
+  },
+  "process": {
+    "tag": "Transparent Workflow",
+    "title": "Your New Website in Three Simple Steps",
+    "lead": "Clearly structured, collaborative, and free of unnecessary complexity.",
+    "step1": {
+      "number": "01",
+      "title": "Concept & Strategy",
+      "description": "In an initial consultation, we analyze your goals, target audience, and requirements to create a custom concept and design framework."
+    },
+    "step2": {
+      "number": "02",
+      "title": "Implementation & Design",
+      "description": "We build your website using modern HTML, CSS, and JavaScript with strict attention to accessibility, performance, and responsive perfection."
+    },
+    "step3": {
+      "number": "03",
+      "title": "Go-Live & Maintenance",
+      "description": "After thorough quality assurance and final approval, we launch your new site and remain your trusted ongoing partner."
+    }
+  },
+  "about": {
+    "tag": "About GD Webdesign",
+    "title": "Quality, Transparency, and Technical Excellence",
+    "description": "As a specialized digital agency, we believe in lean, performant, and sustainable web architecture. Instead of bloated website builders, we focus on clean code, top-tier accessibility, and custom web design."
+  },
+  "contact": {
+    "tag": "Contact",
+    "title": "Let’s Talk About Your Project",
+    "lead": "Have questions or want to request a quote? Fill out the form below and we will get back to you within 24 hours.",
+    "fields": {
+      "name": "Your Name",
+      "email": "Email Address",
+      "subject": "Subject / Topic",
+      "message": "Your Message",
+      "submit": "Send Message"
     }
   },
   "footer": {
+    "tagline": "Modern web development & digital agency for fast, accessible digital experiences.",
     "rights": "© GD Webdesign. All rights reserved.",
-    "privacy": "Privacy Policy",
-    "imprint": "Imprint"
+    "privacy": "Privacy Policy (Placeholder)",
+    "imprint": "Imprint (Placeholder)"
   }
 }

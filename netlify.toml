@@ -1,4 +1,5 @@
 [build]
+  command = "npm run build"
   publish = "."
 
 # Keep ordinary asset URLs revalidatable. Use fingerprinted filenames before enabling immutable caching.

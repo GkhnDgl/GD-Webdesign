@@ -1,0 +1,11 @@
+{
+  "name": "gd-webdesign",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tailwindcss -i ./assets/css/tailwind.input.css -o ./assets/css/tailwind.generated.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
+  }
+}

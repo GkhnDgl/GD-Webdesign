@@ -1,33 +1,94 @@
 {
   "meta": {
     "title": "GD Webdesign – Moderne Webentwicklung & Digitalagentur",
-    "description": "GD Webdesign erstellt moderne, zugängliche und performante Websites sowie maßgeschneiderte Weblösungen."
+    "description": "GD Webdesign erstellt moderne, barrierefreie und maßgeschneiderte Websites für Unternehmen mit höchsten Ansprüchen an Performance und Design."
   },
   "nav": {
     "brand": "GD Webdesign",
     "services": "Leistungen",
+    "process": "Ablauf",
     "about": "Über uns",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "cta": "Projekt anfragen"
   },
   "hero": {
-    "title": "Digitale Erlebnisse, die überzeugen",
-    "subtitle": "Wir gestalten und entwickeln moderne Websites für Unternehmen mit hohen Ansprüchen.",
-    "cta": "Projekt starten"
+    "badge": "Webdesign & Entwicklung aus Expertenhand",
+    "title": "Digitale Erlebnisse, die begeistern und konvertieren",
+    "subtitle": "Wir gestalten und entwickeln performante, barrierefreie Websites und maßgeschneiderte Weblösungen für Unternehmen, die digital nachhaltig wachsen wollen.",
+    "cta_primary": "Jetzt Projekt starten",
+    "cta_secondary": "Leistungen entdecken",
+    "metrics": {
+      "code": "Maßgeschneiderter Code",
+      "speed": "Performance im Fokus",
+      "a11y": "Barrierefreiheit im Fokus"
+    }
   },
   "services": {
-    "title": "Unsere Leistungen",
+    "tag": "Unsere Expertise",
+    "title": "Maßgeschneiderte Weblösungen für Ihren Erfolg",
+    "lead": "Alles aus einer Hand: Vom durchdachten Konzept über ästhetisches Design bis hin zu erstklassiger technischer Umsetzung.",
     "webdesign": {
-      "title": "Webdesign & Entwicklung",
-      "description": "Maßgeschneiderte, responsive Websites mit Fokus auf Performance, Barrierefreiheit und Usability."
+      "title": "Webdesign & Frontend-Entwicklung",
+      "description": "Moderne, responsive Websites mit maßgeschneidertem Design, Fokus auf Ladezeiten und intuitiver Nutzerführung auf allen Endgeräten."
+    },
+    "seo": {
+      "title": "Performance & SEO-Optimierung",
+      "description": "Optimierung von Ladezeiten und technischer Suchmaschinenoptimierung mit Blick auf Sichtbarkeit und Nutzererfahrung."
     },
     "branding": {
-      "title": "Brand Strategy",
-      "description": "Klare digitale Identitäten und Design-Systeme für nachhaltigen Markenerfolg."
+      "title": "Brand Strategy & UX/UI Design",
+      "description": "Einzigartige digitale Markenauftritte und durchdachte Nutzerführung, die Ihre Zielgruppe begeistert und Vertrauen schafft."
+    },
+    "architecture": {
+      "title": "Moderne Jamstack & Headless Lösungen",
+      "description": "Flexible, sichere und wartungsarme Webarchitekturen – perfekt abgestimmt auf modulare Landing Pages und moderne Web-Anwendungen."
+    },
+    "maintenance": {
+      "title": "Wartung, Betreuung & DSGVO-Sicherheit",
+      "description": "Zuverlässige Betreuung nach dem Launch: Regelmäßige Updates, Sicherheits-Monitoring und kontinuierliche Weiterentwicklung Ihres Webprojekts."
+    }
+  },
+  "process": {
+    "tag": "Transparenter Ablauf",
+    "title": "In drei einfachen Schritten zu Ihrer neuen Website",
+    "lead": "Klar strukturiert, partnerschaftlich und ohne unnötige Komplexität.",
+    "step1": {
+      "number": "01",
+      "title": "Konzeption & Strategie",
+      "description": "In einem Erstgespräch analysieren wir Ihre Ziele, Zielgruppe und Anforderungen. Wir erstellen ein maßgeschneidertes Konzept und ein klares Design-Framework."
+    },
+    "step2": {
+      "number": "02",
+      "title": "Umsetzung & Design",
+      "description": "Wir entwickeln Ihr Projekt mit modernstem HTML, CSS und JavaScript. Wir achten dabei rigoros auf Barrierefreiheit, Performance und responsive Perfektion auf allen Geräten."
+    },
+    "step3": {
+      "number": "03",
+      "title": "Go-live & Betreuung",
+      "description": "Nach gründlicher Qualitätsprüfung und Abstimmung schalten wir Ihre neue Website live. Auch danach bleiben wir als zuverlässiger Partner an Ihrer Seite."
+    }
+  },
+  "about": {
+    "tag": "Über GD Webdesign",
+    "title": "Qualität, Transparenz und technische Exzellenz",
+    "description": "Als spezialisierte Digitalagentur glauben wir an schlanke, performante und nachhaltige Webarchitektur. Statt auf überladene Site-Builder setzen wir auf sauberen Code, höchste Barrierefreiheit und maßgeschneidertes Webdesign."
+  },
+  "contact": {
+    "tag": "Kontakt",
+    "title": "Lassen Sie uns über Ihr Projekt sprechen",
+    "lead": "Haben Sie Fragen oder möchten Sie ein konkretes Projekt anfragen? Füllen Sie einfach das Formular aus – wir melden uns innerhalb von 24 Stunden bei Ihnen.",
+    "fields": {
+      "name": "Ihr Name",
+      "email": "E-Mail-Adresse",
+      "subject": "Betreff / Anliegen",
+      "message": "Ihre Nachricht",
+      "submit": "Nachricht senden"
     }
   },
   "footer": {
+    "tagline": "Moderne Webentwicklung & Digitalagentur für performante und barrierefreie digitale Erlebnisse.",
     "rights": "© GD Webdesign. Alle Rechte vorbehalten.",
-    "privacy": "Datenschutz",
-    "imprint": "Impressum"
+    "privacy": "Datenschutz (Platzhalter)",
+    "imprint": "Impressum (Platzhalter)"
   }
 }
