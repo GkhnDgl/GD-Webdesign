@@ -1,0 +1,21 @@
+[build]
+  publish = "."
+
+# Static asset caching headers
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Security headers for all responses
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()"
+    # Content Security Policy Note:
+    # A full Content Security Policy (CSP) header is deliberately omitted at this scaffold stage
+    # to avoid breaking future asset loading or third-party integrations (e.g. analytics, fonts, CDN scripts).
+    # A strict CSP will be defined when production asset pipelines and external origins are finalized.
