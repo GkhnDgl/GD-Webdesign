@@ -9,7 +9,7 @@ GD Webdesign creates modern, performant, accessible, and responsive websites for
 
 ## Tech Stack
 - **HTML5**: Semantic, accessible markup.
-- **CSS**: Mobile-first responsive styles, compatible with future Tailwind CSS workflows.
+- **CSS**: Mobile-first responsive styling. The current landing page uses the project’s custom CSS; Tailwind is not yet configured as a build dependency.
 - **JavaScript**: Lightweight Vanilla JS, added only where needed.
 - **Localization (i18n)**: JSON-based key-value locale files.
 - **Hosting & Deployment**: Netlify static hosting with security headers and revalidatable asset caching.
@@ -50,9 +50,9 @@ npx serve .
 
 ## i18n Conventions
 - Translations are maintained in `locales/{lang}.json`.
-- Both `de.json` and `en.json` maintain synchronized key hierarchies (e.g. `meta`, `nav`, `hero`, `services`, `footer`).
-- Keep key names descriptive and nested by section (e.g., `services.webdesign.title`).
-- The locale files are currently a foundation only; the agency page does not yet load translations dynamically. Add the locale loader and language switcher in a dedicated follow-up change.
+- Both `de.json` and `en.json` use nested section keys (e.g. `meta`, `nav`, `hero`, `services`, `footer`).
+- The landing page includes a language switcher that loads the selected locale JSON over HTTP; use a local HTTP server rather than opening `index.html` directly.
+- Keep locale key structures synchronized and verify both languages in the browser after copy changes.
 
 ## Template Ecosystem Usage
 - Standardized templates reside under `templates/`.
