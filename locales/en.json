@@ -18,9 +18,9 @@
     "cta_primary": "Start a Project",
     "cta_secondary": "Explore Services",
     "metrics": {
-      "code": "100% Bespoke Code",
-      "speed": "< 1s Speed Focus",
-      "a11y": "WCAG 2.1 Accessibility Standard"
+      "code": "Bespoke code",
+      "speed": "Performance-focused",
+      "a11y": "Accessibility-focused"
     }
   },
   "services": {
@@ -29,11 +29,11 @@
     "lead": "All-in-one execution: From strategic concept and intuitive design to flawless technical engineering.",
     "webdesign": {
       "title": "Web Design & Frontend Development",
-      "description": "Modern, responsive websites built with custom design, blazing speed, and intuitive user experiences on every device."
+      "description": "Modern, responsive websites with custom design, a focus on loading performance, and intuitive experiences across devices."
     },
     "seo": {
       "title": "Performance & SEO Optimization",
-      "description": "Optimized loading speeds and technical SEO to maximize online visibility and achieve top Google Core Web Vitals scores."
+      "description": "Loading speed and technical SEO improvements focused on visibility and user experience."
     },
     "branding": {
       "title": "Brand Strategy & UX/UI Design",
@@ -44,7 +44,7 @@
       "description": "Flexible, secure, low-maintenance web architectures—perfectly tailored for modular landing pages and modern web apps."
     },
     "maintenance": {
-      "title": "Maintenance, Support & GDPR Compliance",
+      "title": "Maintenance & Support",
       "description": "Reliable post-launch care: Regular updates, security monitoring, and continuous evolution of your web presence."
     }
   },
