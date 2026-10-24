@@ -123,6 +123,29 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelector('.form-privacy-note').innerHTML = language === 'de'
         ? 'Mit dem Absenden stimmen Sie zu, dass Ihre Angaben zur Kontaktaufnahme verwendet werden. Weitere Informationen finden Sie in der <a href="#datenschutz">Datenschutzerklärung</a>.'
         : 'By submitting this form, you agree that your details may be used to respond to your enquiry. See the <a href="#datenschutz">privacy notice</a> for more information.';
+      document.querySelectorAll('.footer-nav-group .footer-heading').forEach((heading, index) => {
+        heading.textContent = language === 'de'
+          ? ['Navigation', 'Rechtliches'][index]
+          : ['Navigation', 'Legal'][index];
+      });
+      const bentoBadge = document.querySelector('.bento-badge');
+      if (bentoBadge) bentoBadge.textContent = language === 'de' ? 'Kernkompetenz' : 'Core expertise';
+      const footerNotice = document.querySelector('.legal-notice');
+      if (footerNotice) footerNotice.textContent = language === 'de'
+        ? 'Rechtliche Angaben und Datenschutzhinweise müssen vor dem Produktivstart ergänzt und geprüft werden.'
+        : 'Legal details and privacy information must be completed and reviewed before production.';
+      const placeholders = language === 'de'
+        ? { name: 'z. B. Max Mustermann', email: 'max@beispiel.de', subject: 'z. B. Neue Website für mein Unternehmen', message: 'Beschreiben Sie kurz Ihr Vorhaben, Ihre Wünsche oder Fragen...' }
+        : { name: 'e.g. Alex Smith', email: 'alex@example.com', subject: 'e.g. New website for my business', message: 'Briefly describe your project, wishes, or questions...' };
+      Object.entries(placeholders).forEach(([field, value]) => {
+        const input = document.querySelector(`#${field}`);
+        if (input) input.placeholder = value;
+      });
+      document.querySelectorAll('.brand[aria-label]').forEach((brand) => {
+        brand.setAttribute('aria-label', language === 'de' ? 'GD Webdesign Startseite' : 'GD Webdesign homepage');
+      });
+      const formPrivacyLink = document.querySelector('.form-privacy-note a');
+      if (formPrivacyLink) formPrivacyLink.textContent = language === 'de' ? 'Datenschutzerklärung' : 'privacy notice';
       const metricLabels = document.querySelectorAll('.metric-label');
       if (metricLabels.length >= 3) {
         metricLabels[0].textContent = language === 'de' ? 'Maßgeschneiderter Code' : 'Bespoke code';
