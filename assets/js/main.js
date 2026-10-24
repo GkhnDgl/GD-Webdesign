@@ -146,6 +146,25 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       const formPrivacyLink = document.querySelector('.form-privacy-note a');
       if (formPrivacyLink) formPrivacyLink.textContent = language === 'de' ? 'Datenschutzerklärung' : 'privacy notice';
+      const metricValues = document.querySelectorAll('.metric-value');
+      if (metricValues.length >= 3) {
+        metricValues[0].textContent = '100%';
+        metricValues[1].textContent = language === 'de' ? 'Leistung' : 'Performance';
+        metricValues[2].textContent = language === 'de' ? 'Barrierefreiheit' : 'Accessibility';
+      }
+      const bentoListItems = document.querySelectorAll('.bento-list li');
+      const listCopy = language === 'de'
+        ? ['Mobile-First & responsive Layouts', 'Barrierefreiheit mit Blick auf etablierte Standards', 'Sauberer, zukunftsorientierter Code']
+        : ['Mobile-first and responsive layouts', 'Accessibility guided by established standards', 'Clean, future-oriented code'];
+      bentoListItems.forEach((item, index) => { if (listCopy[index]) item.textContent = listCopy[index]; });
+      const legalHeadings = {
+        imprint: language === 'de' ? 'Impressum – Platzhalter' : 'Imprint – Placeholder',
+        privacy: language === 'de' ? 'Datenschutzerklärung – Platzhalter' : 'Privacy notice – Placeholder'
+      };
+      const imprintHeading = document.querySelector('#impressum h2');
+      const privacyHeading = document.querySelector('#datenschutz h2');
+      if (imprintHeading) imprintHeading.textContent = legalHeadings.imprint;
+      if (privacyHeading) privacyHeading.textContent = legalHeadings.privacy;
       const metricLabels = document.querySelectorAll('.metric-label');
       if (metricLabels.length >= 3) {
         metricLabels[0].textContent = language === 'de' ? 'Maßgeschneiderter Code' : 'Bespoke code';
