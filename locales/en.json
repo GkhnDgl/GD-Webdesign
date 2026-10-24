@@ -1,0 +1,33 @@
+{
+  "meta": {
+    "title": "GD Webdesign – Modern Web Development & Digital Agency",
+    "description": "GD Webdesign crafts modern, accessible, and high-performance websites and bespoke web solutions."
+  },
+  "nav": {
+    "brand": "GD Webdesign",
+    "services": "Services",
+    "about": "About Us",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Digital Experiences That Deliver",
+    "subtitle": "We design and build modern websites for ambitious businesses.",
+    "cta": "Start a Project"
+  },
+  "services": {
+    "title": "Our Services",
+    "webdesign": {
+      "title": "Web Design & Development",
+      "description": "Custom, responsive websites built with a focus on performance, accessibility, and usability."
+    },
+    "branding": {
+      "title": "Brand Strategy",
+      "description": "Clear digital identities and design systems crafted for long-term brand impact."
+    }
+  },
+  "footer": {
+    "rights": "© GD Webdesign. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "imprint": "Imprint"
+  }
+}

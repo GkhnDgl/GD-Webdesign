@@ -1,0 +1,33 @@
+{
+  "meta": {
+    "title": "GD Webdesign – Moderne Webentwicklung & Digitalagentur",
+    "description": "GD Webdesign erstellt moderne, zugängliche und performante Websites sowie maßgeschneiderte Weblösungen."
+  },
+  "nav": {
+    "brand": "GD Webdesign",
+    "services": "Leistungen",
+    "about": "Über uns",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "title": "Digitale Erlebnisse, die überzeugen",
+    "subtitle": "Wir gestalten und entwickeln moderne Websites für Unternehmen mit hohen Ansprüchen.",
+    "cta": "Projekt starten"
+  },
+  "services": {
+    "title": "Unsere Leistungen",
+    "webdesign": {
+      "title": "Webdesign & Entwicklung",
+      "description": "Maßgeschneiderte, responsive Websites mit Fokus auf Performance, Barrierefreiheit und Usability."
+    },
+    "branding": {
+      "title": "Brand Strategy",
+      "description": "Klare digitale Identitäten und Design-Systeme für nachhaltigen Markenerfolg."
+    }
+  },
+  "footer": {
+    "rights": "© GD Webdesign. Alle Rechte vorbehalten.",
+    "privacy": "Datenschutz",
+    "imprint": "Impressum"
+  }
+}
