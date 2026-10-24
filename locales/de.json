@@ -18,9 +18,9 @@
     "cta_primary": "Jetzt Projekt starten",
     "cta_secondary": "Leistungen entdecken",
     "metrics": {
-      "code": "100% Maßgeschneiderter Code",
-      "speed": "< 1s Ladezeit-Fokus",
-      "a11y": "WCAG 2.1 Barrierefreiheit Standard"
+      "code": "Maßgeschneiderter Code",
+      "speed": "Performance im Fokus",
+      "a11y": "Barrierefreiheit im Fokus"
     }
   },
   "services": {
@@ -29,11 +29,11 @@
     "lead": "Alles aus einer Hand: Vom durchdachten Konzept über ästhetisches Design bis hin zu erstklassiger technischer Umsetzung.",
     "webdesign": {
       "title": "Webdesign & Frontend-Entwicklung",
-      "description": "Moderne, responsive Websites mit maßgeschneidertem Design, blitzschnellen Ladezeiten und intuitiver Nutzerführung auf allen Endgeräten."
+      "description": "Moderne, responsive Websites mit maßgeschneidertem Design, Fokus auf Ladezeiten und intuitiver Nutzerführung auf allen Endgeräten."
     },
     "seo": {
-      "title": "Performance & SEO Optimization",
-      "description": "Optimierte Ladezeiten und technische Suchmaschinenoptimierung für maximale Sichtbarkeit und Google Core Web Vitals Spitzenwerte."
+      "title": "Performance & SEO-Optimierung",
+      "description": "Optimierung von Ladezeiten und technischer Suchmaschinenoptimierung mit Blick auf Sichtbarkeit und Nutzererfahrung."
     },
     "branding": {
       "title": "Brand Strategy & UX/UI Design",
