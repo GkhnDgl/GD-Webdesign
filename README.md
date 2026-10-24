@@ -9,7 +9,7 @@ GD Webdesign creates modern, performant, accessible, and responsive websites for
 
 ## Tech Stack
 - **HTML5**: Semantic, accessible markup.
-- **CSS**: Mobile-first responsive styling. The current landing page uses the project’s custom CSS; Tailwind is not yet configured as a build dependency.
+- **CSS**: Mobile-first component styling plus build-time Tailwind CSS utilities.
 - **JavaScript**: Lightweight Vanilla JS, added only where needed.
 - **Localization (i18n)**: JSON-based key-value locale files.
 - **Hosting & Deployment**: Netlify static hosting with security headers and revalidatable asset caching.
@@ -35,10 +35,10 @@ GD Webdesign creates modern, performant, accessible, and responsive websites for
 ```
 
 ## Local Preview & Development
-Since the project relies on standard static assets without heavy build dependencies, you can run a local preview using any static HTTP server.
-
-For example, using Python's built-in HTTP server:
+Install the Tailwind build dependency and generate the utility stylesheet before starting a local preview:
 ```bash
+npm install
+npm run build
 python3 -m http.server 8000
 ```
 Then visit `http://localhost:8000` in your web browser.
@@ -60,7 +60,7 @@ npx serve .
 - **Guidelines**: Do not hardcode client-specific credentials, private API tokens, or unmasked client email addresses in shared templates. Configure secret values via Netlify environment variables.
 
 ## Netlify Deployment
-- The site deploys statically with publish root set to `.`.
+- The site deploys statically with publish root set to `.`. Netlify runs `npm run build` to generate `assets/css/tailwind.generated.css` before publishing.
 - Security headers include `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, and a same-origin Content Security Policy.
 - Assets under `/assets/*` use a one-hour cache lifetime with revalidation. Do not use `immutable` caching until asset filenames are fingerprinted/versioned.
 - If a future integration needs third-party scripts, fonts, APIs, or embedded content, review and explicitly adjust the CSP directives rather than disabling CSP globally.
