@@ -623,49 +623,6 @@ section {
   font-size: 0.8rem;
 }
 
-/* Legal Modals / Target Sections */
-.legal-modal-section {
-  display: none;
-}
-
-.legal-modal-section:target {
-  display: flex;
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  background-color: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(4px);
-  align-items: center;
-  justify-content: center;
-  padding: 1.25rem;
-}
-
-.legal-content {
-  background-color: #ffffff;
-  padding: 2rem;
-  border-radius: var(--radius-lg);
-  max-width: 32rem;
-  width: 100%;
-  position: relative;
-  box-shadow: var(--shadow-lg);
-}
-
-.legal-close {
-  position: absolute;
-  top: 1rem;
-  right: 1.25rem;
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: var(--color-muted);
-  text-decoration: none;
-  line-height: 1;
-}
-
-.legal-placeholder-text {
-  font-size: 0.9rem;
-  color: var(--color-body);
-}
-
 /* Responsive Media Queries (sm: 640px, md: 768px, lg: 1024px, xl: 1280px) */
 @media (min-width: 640px) {
   .mobile-menu-toggle {
