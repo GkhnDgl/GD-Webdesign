@@ -757,3 +757,48 @@ section {
     transform: none !important;
   }
 }
+
+
+/* Language switcher */
+.language-toggle {
+  flex: 0 0 auto;
+  min-width: 2.75rem;
+  min-height: 2.5rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: #fff;
+  color: var(--color-heading);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.language-toggle:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* Legal placeholders are ordinary page sections, not simulated modal dialogs. */
+.legal-information {
+  max-width: var(--max-width);
+  margin: 1rem auto;
+  padding: 1.5rem 1.25rem;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg-light);
+}
+.legal-information h2 {
+  font-size: 1.35rem;
+}
+.legal-information p {
+  max-width: 70ch;
+  color: var(--color-muted);
+}
+.nav-container {
+  gap: 0.75rem;
+}
+@media (min-width: 640px) {
+  .nav-container {
+    gap: 1rem;
+  }
+}
