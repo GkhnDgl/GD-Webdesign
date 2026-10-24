@@ -3,56 +3,327 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GD Webdesign – Moderne Webentwicklung & Digitalagentur</title>
-  <meta name="description" content="GD Webdesign erstellt moderne, zugängliche und performante Websites sowie maßgeschneiderte Weblösungen.">
+  <title>GD Webdesign – Moderne Webentwicklung &amp; Digitalagentur</title>
+  <meta name="description" content="GD Webdesign erstellt moderne, barrierefreie und maßgeschneiderte Websites für Unternehmen mit höchsten Ansprüchen an Performance und Design.">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-  <header>
-    <nav aria-label="Hauptnavigation">
-      <a href="/" class="brand">GD Webdesign</a>
-      <ul>
-        <li><a href="#services">Leistungen</a></li>
-        <li><a href="#about">Über uns</a></li>
-        <li><a href="#contact">Kontakt</a></li>
-      </ul>
-    </nav>
+  <!-- Header / Sticky Navigation -->
+  <header class="site-header">
+    <div class="nav-container">
+      <a href="#" class="brand" aria-label="GD Webdesign Startseite">
+        <span class="brand-logo" aria-hidden="true">GD</span>
+        <span class="brand-text">GD Webdesign</span>
+      </a>
+
+      <button type="button" class="mobile-menu-toggle" aria-expanded="false" aria-controls="primary-navigation" aria-label="Menü öffnen">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+
+      <nav id="primary-navigation" class="primary-navigation" aria-label="Hauptnavigation">
+        <ul class="nav-list">
+          <li><a href="#services" class="nav-link">Leistungen</a></li>
+          <li><a href="#process" class="nav-link">Ablauf</a></li>
+          <li><a href="#about" class="nav-link">Über uns</a></li>
+          <li><a href="#contact" class="nav-link">Kontakt</a></li>
+        </ul>
+        <a href="#contact" class="btn btn-primary nav-cta">Projekt anfragen</a>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <section id="hero" class="hero" aria-labelledby="hero-title">
-      <h1 id="hero-title">Digitale Erlebnisse, die überzeugen</h1>
-      <p>Wir gestalten und entwickeln moderne Websites für Unternehmen mit hohen Ansprüchen.</p>
-      <a href="#contact" class="cta-button">Projekt starten</a>
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section" aria-labelledby="hero-title">
+      <div class="hero-container">
+        <div class="hero-content">
+          <span class="badge">Webdesign &amp; Entwicklung aus Expertenhand</span>
+          <h1 id="hero-title">Digitale Erlebnisse, die begeistern und konvertieren</h1>
+          <p class="hero-description">
+            Wir gestalten und entwickeln performante, barrierefreie Websites und maßgeschneiderte Weblösungen für Unternehmen, die digital nachhaltig wachsen wollen.
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Jetzt Projekt starten</a>
+            <a href="#services" class="btn btn-secondary">Leistungen entdecken</a>
+          </div>
+          <div class="hero-metrics">
+            <div class="metric-item">
+              <span class="metric-value">100%</span>
+              <span class="metric-label">Maßgeschneiderter Code</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-value">&lt; 1s</span>
+              <span class="metric-label">Ladezeit-Fokus</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-value">WCAG 2.1</span>
+              <span class="metric-label">Barrierefreiheit Standard</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="services" class="services" aria-labelledby="services-title">
-      <h2 id="services-title">Unsere Leistungen</h2>
-      <div class="service-grid">
-        <article class="service-card">
-          <h3>Webdesign &amp; Entwicklung</h3>
-          <p>Maßgeschneiderte, responsive Websites mit Fokus auf Performance, Barrierefreiheit und Usability.</p>
+    <!-- Services Bento Grid Section -->
+    <section id="services" class="services-section" aria-labelledby="services-title">
+      <div class="section-header">
+        <span class="section-tag">Unsere Expertise</span>
+        <h2 id="services-title">Maßgeschneiderte Weblösungen für Ihren Erfolg</h2>
+        <p class="section-lead">
+          Alles aus einer Hand: Vom durchdachten Konzept über ästhetisches Design bis hin zu erstklassiger technischer Umsetzung.
+        </p>
+      </div>
+
+      <div class="bento-grid">
+        <!-- Main Highlight Card -->
+        <article class="bento-card bento-card-featured">
+          <div class="bento-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <span class="bento-badge">Kernkompetenz</span>
+          <h3>Webdesign &amp; Frontend-Entwicklung</h3>
+          <p>
+            Moderne, responsive Websites mit maßgeschneidertem Design, blitzschnellen Ladezeiten und intuitiver Nutzerführung auf allen Endgeräten.
+          </p>
+          <ul class="bento-list">
+            <li>Mobile-First &amp; Responsive Layouts</li>
+            <li>Barrierefreiheit nach WCAG 2.1 Standard</li>
+            <li>Sauberer, zukunftssicherer Code</li>
+          </ul>
         </article>
-        <article class="service-card">
-          <h3>Brand Strategy</h3>
-          <p>Klare digitale Identitäten und Design-Systeme für nachhaltigen Markenerfolg.</p>
+
+        <!-- Card 2: Performance & SEO -->
+        <article class="bento-card">
+          <div class="bento-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          </div>
+          <h3>Performance &amp; SEO Optimization</h3>
+          <p>
+            Optimierte Ladezeiten und technische Suchmaschinenoptimierung für maximale Sichtbarkeit und Google Core Web Vitals Spitzenwerte.
+          </p>
+        </article>
+
+        <!-- Card 3: Brand Strategy & UI/UX -->
+        <article class="bento-card">
+          <div class="bento-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <h3>Brand Strategy &amp; UX/UI Design</h3>
+          <p>
+            Einzigartige digitale Markenauftritte und durchdachte Nutzerführung, die Ihre Zielgruppe begeistert und Vertrauen schafft.
+          </p>
+        </article>
+
+        <!-- Card 4: Modern Web Platforms & CMS -->
+        <article class="bento-card">
+          <div class="bento-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <h3>Moderne Jamstack &amp; Headless Lösungen</h3>
+          <p>
+            Flexible, sichere und wartungsarme Webarchitekturen – perfekt abgestimmt auf modulare Landing Pages und moderne Web-Anwendungen.
+          </p>
+        </article>
+
+        <!-- Card 5: Maintenance & Security -->
+        <article class="bento-card bento-card-wide">
+          <div class="bento-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Wartung, Betreuung &amp; DSGVO-Sicherheit</h3>
+          <p>
+            Zuverlässige Betreuung nach dem Launch: Regelmäßige Updates, Sicherheits-Monitoring und kontinuierliche Weiterentwicklung Ihres Webprojekts.
+          </p>
         </article>
       </div>
     </section>
 
-    <section id="about" class="about" aria-labelledby="about-title">
-      <h2 id="about-title">Über GD Webdesign</h2>
-      <p>Als spezialisierte Digitalagentur begleiten wir Unternehmen bei der Konzeption, Gestaltung und Umsetzung von digitalen Produkten.</p>
+    <!-- Process Section -->
+    <section id="process" class="process-section" aria-labelledby="process-title">
+      <div class="section-header">
+        <span class="section-tag">Transparenter Ablauf</span>
+        <h2 id="process-title">In drei einfachen Schritten zu Ihrer neuen Website</h2>
+        <p class="section-lead">
+          Klar strukturiert, partnerschaftlich und ohne unnötige Komplexität.
+        </p>
+      </div>
+
+      <div class="process-grid">
+        <div class="process-step">
+          <div class="step-number">01</div>
+          <div class="step-content">
+            <h3>Konzeption &amp; Strategie</h3>
+            <p>
+              In einem Erstgespräch analysieren wir Ihre Ziele, Zielgruppe und Anforderungen. Wir erstellen ein maßgeschneidertes Konzept und ein klares Design-Framework.
+            </p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-number">02</div>
+          <div class="step-content">
+            <h3>Umsetzung &amp; Design</h3>
+            <p>
+              Wir entwickeln Ihr Projekt mit modernstem HTML, CSS und JavaScript. Wir achten dabei rigoros auf Barrierefreiheit, Performance und responsive Perfektion auf allen Geräten.
+            </p>
+          </div>
+        </div>
+
+        <div class="process-step">
+          <div class="step-number">03</div>
+          <div class="step-content">
+            <h3>Go-live &amp; Betreuung</h3>
+            <p>
+              Nach gründlicher Qualitätsprüfung und Abstimmung schalten wir Ihre neue Website live. Auch danach bleiben wir als zuverlässiger Partner an Ihrer Seite.
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="contact" class="contact" aria-labelledby="contact-title">
-      <h2 id="contact-title">Kontakt</h2>
-      <p>Haben Sie ein bestehendes Projekt oder eine neue Idee? Nehmen Sie Kontakt mit uns auf.</p>
+    <!-- About Section -->
+    <section id="about" class="about-section" aria-labelledby="about-title">
+      <div class="about-card">
+        <div class="about-content">
+          <span class="section-tag">Über GD Webdesign</span>
+          <h2 id="about-title">Qualität, Transparenz und technische Exzellenz</h2>
+          <p>
+            Als spezialisierte Digitalagentur glauben wir an schlanke, performante und nachhaltige Webarchitektur. Stattt auf überladene Site-Builder setzen wir auf sauberen Code, höchste Barrierefreiheit und maßgeschneidertes Webdesign.
+          </p>
+          <div class="about-features">
+            <div class="feature-item">
+              <strong>Nutzerzentriert</strong>
+              <p>Optimale Bedienbarkeit auf allen Smartphones, Tablets und Desktops.</p>
+            </div>
+            <div class="feature-item">
+              <strong>Zukunftssicher</strong>
+              <p>Erfüllt modernste Standards für Barrierefreiheit, Sicherheit und DSGVO-Konformität.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section" aria-labelledby="contact-title">
+      <div class="contact-container">
+        <div class="contact-header">
+          <span class="section-tag">Kontakt</span>
+          <h2 id="contact-title">Lassen Sie uns über Ihr Projekt sprechen</h2>
+          <p class="section-lead">
+            Haben Sie Fragen oder möchten Sie ein konkretes Projekt anfragen? Füllen Sie einfach das Formular aus – wir melden uns innerhalb von 24 Stunden bei Ihnen.
+          </p>
+        </div>
+
+        <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <!-- Required hidden input for Netlify form processing -->
+          <input type="hidden" name="form-name" value="contact" />
+
+          <!-- Honeypot field for spam prevention -->
+          <p class="hidden-field" style="display: none;">
+            <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+          </p>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Ihr Name <span class="required" aria-hidden="true">*</span></label>
+              <input type="text" id="name" name="name" required autocomplete="name" placeholder="z. B. Max Mustermann" />
+            </div>
+
+            <div class="form-group">
+              <label for="email">E-Mail-Adresse <span class="required" aria-hidden="true">*</span></label>
+              <input type="email" id="email" name="email" required autocomplete="email" placeholder="max@beispiel.de" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Betreff / Anliegen</label>
+            <input type="text" id="subject" name="subject" placeholder="z. B. Neue Website für mein Unternehmen" />
+          </div>
+
+          <div class="form-group">
+            <label for="message">Ihre Nachricht <span class="required" aria-hidden="true">*</span></label>
+            <textarea id="message" name="message" rows="5" required placeholder="Beschreiben Sie kurz Ihr Vorhaben, Ihre Wünsche oder Fragen..."></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-submit">Nachricht senden</button>
+            <p class="form-privacy-note">
+              Mit dem Absenden stimmen Sie zu, dass Ihre Angaben zur Kontaktaufnahme verwendet werden. Weitere Informationen finden Sie in der <a href="#datenschutz">Datenschutzerklärung</a>.
+            </p>
+          </div>
+        </form>
+      </div>
     </section>
   </main>
 
-  <footer>
-    <p>&copy; GD Webdesign. Alle Rechte vorbehalten.</p>
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#" class="brand" aria-label="GD Webdesign Startseite">
+            <span class="brand-logo" aria-hidden="true">GD</span>
+            <span class="brand-text">GD Webdesign</span>
+          </a>
+          <p class="footer-tagline">
+            Moderne Webentwicklung &amp; Digitalagentur für performante und barrierefreie digitale Erlebnisse.
+          </p>
+        </div>
+
+        <div class="footer-nav-group">
+          <span class="footer-heading">Navigation</span>
+          <ul class="footer-links">
+            <li><a href="#services">Leistungen</a></li>
+            <li><a href="#process">Ablauf</a></li>
+            <li><a href="#about">Über uns</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-nav-group">
+          <span class="footer-heading">Rechtliches</span>
+          <ul class="footer-links">
+            <li><a href="#impressum">Impressum (Platzhalter)</a></li>
+            <li><a href="#datenschutz">Datenschutz (Platzhalter)</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; GD Webdesign. Alle Rechte vorbehalten.</p>
+        <p class="legal-notice">Hinweis: Gesetzliche Anbieterkennzeichnung und Datenschutzhinweise folgen dem finalen Mandatsvertrag.</p>
+      </div>
+    </div>
   </footer>
+
+  <!-- Legal Information Placeholder Modals / Target Sections -->
+  <div id="impressum" class="legal-modal-section" tabindex="-1">
+    <div class="legal-content">
+      <a href="#" class="legal-close" aria-label="Schließen">&times;</a>
+      <h3>Impressum (Anbieterkennzeichnung)</h3>
+      <p class="legal-placeholder-text">
+        <strong>GD Webdesign</strong><br>
+        Digitalagentur für moderne Webentwicklung<br>
+        E-Mail: info [at] gd-webdesign.de<br>
+        <em>Hinweis: Dies ist ein Platzhalter für die Anbieterkennzeichnung gemäß § 5 DDG / TMG. Endgültige Unternehmensdaten werden vor Produktivschaltung hinterlegt.</em>
+      </p>
+    </div>
+  </div>
+
+  <div id="datenschutz" class="legal-modal-section" tabindex="-1">
+    <div class="legal-content">
+      <a href="#" class="legal-close" aria-label="Schließen">&times;</a>
+      <h3>Datenschutzerklärung (Platzhalter)</h3>
+      <p class="legal-placeholder-text">
+        Verantwortlicher für die Datenverarbeitung ist GD Webdesign. Personenbezogene Daten (wie Name und E-Mail-Adresse im Kontaktformular) werden ausschließlich zur Bearbeitung Ihrer Anfrage verarbeitet. Es werden keine ungefragten Tracking-Cookies Dritter gesetzt.<br>
+        <em>Hinweis: Dies ist eine Platzhalter-Information. Die finale Datenschutzerklärung richtet sich nach den rechtlichen Bestimmungen des Betreibers.</em>
+      </p>
+    </div>
+  </div>
+
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
