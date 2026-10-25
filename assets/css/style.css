@@ -759,3 +759,24 @@ section {
     gap: 1rem;
   }
 }
+
+
+/* Extra-wide desktop refinements (xl: 1280px). */
+@media (min-width: 1280px) {
+  .nav-container,
+  .footer-container {
+    padding-inline: 2.5rem;
+  }
+
+  .bento-grid {
+    gap: 2rem;
+  }
+
+  .hero-container {
+    max-width: 56rem;
+  }
+
+  .section-header {
+    max-width: 48rem;
+  }
+}
