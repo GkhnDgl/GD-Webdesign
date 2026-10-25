@@ -19,7 +19,8 @@ GD Webdesign creates modern, performant, accessible, and responsive websites for
 ├── .github/                       # GitHub workflows and template configuration
 ├── assets/                        # Static website assets
 │   ├── css/
-│   │   └── style.css              # Agency starter styles
+│   │   ├── style.css              # Shared responsive component styles
+│   │   └── tailwind.input.css      # Tailwind source utilities
 │   ├── js/                        # JavaScript scripts (add when needed)
 │   └── images/                    # Images, icons, and media
 ├── locales/                       # i18n JSON translation files
@@ -27,8 +28,7 @@ GD Webdesign creates modern, performant, accessible, and responsive websites for
 │   └── en.json                    # English starter locale
 ├── templates/                     # Reusable template ecosystem
 │   └── one-pager-boilerplate/     # Single-page client site starter template
-│       ├── index.html
-│       └── README.md
+│       └── index.html
 ├── index.html                     # Main GD Webdesign landing page
 ├── netlify.toml                   # Netlify build, routing, caching, & security headers
 └── README.md                      # Repository documentation
@@ -49,10 +49,16 @@ npx serve .
 ```
 
 ## i18n Conventions
-- Translations are maintained in `locales/{lang}.json`.
-- Both `de.json` and `en.json` use nested section keys (e.g. `meta`, `nav`, `hero`, `services`, `footer`).
-- The landing page includes a language switcher that loads the selected locale JSON over HTTP; use a local HTTP server rather than opening `index.html` directly.
-- Keep locale key structures synchronized and verify both languages in the browser after copy changes.
+- All visible copy, accessibility labels, form placeholders, and legal placeholder copy for the reusable boilerplate live in `locales/de.json` and `locales/en.json`.
+- Keep both locale files structurally identical; `npm test` checks JSON validity, matching keys, and required template translation hooks.
+- The boilerplate loads locale JSON over HTTP. Preview it from the repository root using `python3 -m http.server 8000`, then open `http://localhost:8000/templates/one-pager-boilerplate/`.
+- The language preference is stored in localStorage when available; the page remains usable when storage is blocked.
+
+## Reusing the one-pager boilerplate
+- Replace the generic business name, service descriptions, and contact details with verified client-approved content in the locale JSON files.
+- Update the color tokens in `assets/css/style.css` and replace the initials in the brand mark in `templates/one-pager-boilerplate/index.html`.
+- Replace the legal placeholders with reviewed, business-specific legal content before publishing. The included text is not legal advice and is not ready for production.
+- Configure form handling and confirm the deployed host supports the chosen form provider before accepting real enquiries.
 
 ## Template Ecosystem Usage
 - Standardized templates reside under `templates/`.
