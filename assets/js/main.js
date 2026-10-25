@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     'nav.about': ['.nav-list li:nth-child(3) .nav-link', '.footer-nav-group:nth-child(1) li:nth-child(3) a'],
     'nav.contact': ['.nav-list li:nth-child(4) .nav-link', '.footer-nav-group:nth-child(1) li:nth-child(4) a'],
     'nav.cta': ['.nav-cta'],
-    'nav.label': ['#primary-navigation'],
     'hero.badge': ['.hero-content > .badge'],
     'hero.title': ['#hero-title'],
     'hero.subtitle': ['.hero-description'],
@@ -113,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const brandLabel = getValue(locale, 'nav.brand_label');
       document.querySelectorAll('.brand').forEach((brand) => brand.setAttribute('aria-label', brandLabel));
-      if (navigation) navigation.setAttribute('aria-label', getValue(locale, 'nav.label'));
+      if (navigation) navigation.setAttribute('aria-label', locale.nav.label);
       if (menuButton) {
         const expanded = menuButton.getAttribute('aria-expanded') === 'true';
         menuButton.setAttribute('aria-label', expanded ? locale.accessibility.close_menu : locale.accessibility.open_menu);
