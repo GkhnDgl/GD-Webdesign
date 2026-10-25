@@ -52,12 +52,12 @@ test('locally hosted woff2 font file and font-face declarations exist', () => {
   assert.ok(fs.existsSync(path.join(root, 'assets/fonts/PlusJakartaSans-Variable.woff2')), 'woff2 font file missing in assets/fonts/');
   assert.ok(fs.existsSync(path.join(root, 'assets/fonts/LICENSE.txt')), 'Font license file missing in assets/fonts/');
   assert.match(styles, /@font-face\s*\{[^}]*PlusJakartaSans-Variable\.woff2/);
-  assert.match(styles, /:root\\s*\\{[^}]*font-family: Inter,/s, 'Agency homepage must retain its original font');
-  assert.match(styles, /\\.template-master-a\\s*\\{[^}]*font-family: 'Plus Jakarta Sans'/s, 'Template font must be scoped');
-  assert.match(styles, /:root\\s*\\{[^}]*--color-primary: #4f46e5/s, 'Agency palette must remain unchanged');
-  assert.match(styles, /\\.template-master-a\\s*\\{[^}]*--color-primary: #047857/s, 'Template palette must be scoped');
-  assert.match(styles, /\\.about-card\\s*\\{[^}]*#1e1b4b/s, 'Agency about-card gradient must remain unchanged');
-  assert.match(styles, /\\.template-master-a \\.about-card\\s*\\{[^}]*#064e3b/s, 'Template about-card gradient must be scoped');
+  assert.ok(styles.includes(":root {\n  color-scheme: light;\n  font-family: Inter,"), 'Agency homepage must retain its original font');
+  assert.ok(styles.includes(".template-master-a {\n  font-family: 'Plus Jakarta Sans'"), 'Template font must be scoped');
+  assert.ok(styles.includes("--color-primary: #4f46e5"), 'Agency palette must remain unchanged');
+  assert.ok(styles.includes("--color-primary: #047857"), 'Template palette must be scoped');
+  assert.ok(styles.includes("background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);"), 'Agency about-card gradient must remain unchanged');
+  assert.ok(styles.includes(".template-master-a .about-card { background: linear-gradient(135deg, #064e3b"), 'Template about-card gradient must be scoped');
 });
 
 test('template links to locale files and script updates document language', () => {
