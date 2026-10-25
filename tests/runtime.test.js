@@ -231,8 +231,8 @@ test('DOM translation and accessibility updates function correctly during langua
       this.href = '';
       this.listeners = {};
       this.classList = {
-        contains: (c) => this.className.split(/\\s+/).includes(c),
-        add: (c) => { if (!this.className.split(/\\s+/).includes(c)) this.className = (this.className + ' ' + c).trim(); },
+        contains: (c) => this.className.split(/\s+/).includes(c),
+        add: (c) => { if (!this.className.split(/\s+/).includes(c)) this.className = (this.className + ' ' + c).trim(); },
         remove: (c) => { this.className = this.className.replace(new RegExp('\\b' + c + '\\b', 'g'), '').trim(); },
         toggle: (c, force) => {
           const has = this.className.includes(c);
