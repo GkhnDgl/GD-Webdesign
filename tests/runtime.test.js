@@ -73,29 +73,138 @@ test('Contact form placeholders exist in both locales', () => {
   }
 });
 
-function checkSelectorMatchesHtml(selector, html, docName) {
-  if (selector.startsWith('#') && selector.includes(' ')) {
-    const [idPart, childPart] = selector.split(/\s+/);
-    const id = idPart.replace('#', '');
-    const tagMatch = html.match(new RegExp('<(section|article|div|header|main|footer)\\b[^>]*id=["\']' + id + '["\'][^>]*>[\\s\\S]*?<\\/\\1>'));
-    assert.ok(tagMatch, `Container #${id} not found in ${docName}`);
-    const containerHtml = tagMatch[0];
-    if (childPart.startsWith('.')) {
-      const cls = childPart.replace('.', '');
-      assert.match(containerHtml, new RegExp(`class=["'][^"']*\\b${cls}\\b[^"']*["']`), `Selector "${selector}" failed in ${docName}`);
-    } else {
-      assert.match(containerHtml, new RegExp(`<${childPart}\\b`), `Selector "${selector}" failed in ${docName}`);
+function parseHtml(html) {
+  const rootNode = { tagName: '#document', attributes: {}, children: [], parent: null };
+  const stack = [rootNode];
+  const voidTags = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr']);
+  const tokens = html.match(/<!--[\s\S]*?-->|<![^>]*>|<\/?[a-zA-Z][^>]*>|[^<]+/g) || [];
+
+  for (const token of tokens) {
+    if (token.startsWith('<!--') || token.startsWith('<!')) continue;
+    if (/^<\//.test(token)) {
+      const tag = token.match(/^<\/\s*([a-zA-Z0-9-]+)/)?.[1]?.toLowerCase();
+      if (tag) {
+        for (let index = stack.length - 1; index > 0; index -= 1) {
+          if (stack[index].tagName === tag) {
+            stack.length = index;
+            break;
+          }
+        }
+      }
+      continue;
     }
-  } else if (selector.startsWith('#')) {
-    const id = selector.replace('#', '');
-    assert.match(html, new RegExp(`id=["']${id}["']`), `Selector "${selector}" failed in ${docName}`);
-  } else if (selector.startsWith('.')) {
-    const cls = selector.replace('.', '').split(/\s+|>|:|\./)[0];
-    assert.match(html, new RegExp(`class=["'][^"']*\\b${cls}\\b[^"']*["']`), `Selector "${selector}" failed in ${docName}`);
-  } else if (selector.startsWith('label[')) {
-    const forAttr = selector.match(/for="([^"]+)"/)[1];
-    assert.match(html, new RegExp(`for=["']${forAttr}["']`), `Selector "${selector}" failed in ${docName}`);
+    if (!token.startsWith('<')) continue;
+    const tagName = token.match(/^<\s*([a-zA-Z0-9-]+)/)?.[1]?.toLowerCase();
+    if (!tagName) continue;
+    const attributes = {};
+    const attributeSource = token.slice(tagName.length + token.indexOf(tagName), token.length - 1);
+    const attributePattern = /([^\s=/>]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+)))?/g;
+    let attribute;
+    while ((attribute = attributePattern.exec(attributeSource))) {
+      attributes[attribute[1].toLowerCase()] = attribute[2] ?? attribute[3] ?? attribute[4] ?? '';
+    }
+    const node = { tagName, attributes, children: [], parent: stack[stack.length - 1] };
+    node.parent.children.push(node);
+    if (!voidTags.has(tagName) && !/\/\s*>$/.test(token)) stack.push(node);
   }
+  return rootNode;
+}
+
+function tokenizeSelector(selector) {
+  const parts = [];
+  let buffer = '';
+  let bracketDepth = 0;
+  let quote = '';
+  let pendingCombinator = null;
+  for (const character of selector.trim()) {
+    if (quote) {
+      buffer += character;
+      if (character === quote) quote = '';
+      continue;
+    }
+    if ((character === '"' || character === "'") && bracketDepth) {
+      quote = character;
+      buffer += character;
+    } else if (character === '[') {
+      bracketDepth += 1;
+      buffer += character;
+    } else if (character === ']') {
+      bracketDepth -= 1;
+      buffer += character;
+    } else if (!bracketDepth && (character === '>' || /\s/.test(character))) {
+      if (buffer.trim()) {
+        parts.push({ compound: buffer.trim(), combinator: pendingCombinator });
+        buffer = '';
+      }
+      if (character === '>') pendingCombinator = '>';
+      else if (pendingCombinator !== '>') pendingCombinator = ' ';
+    } else {
+      buffer += character;
+    }
+  }
+  if (buffer.trim()) parts.push({ compound: buffer.trim(), combinator: pendingCombinator });
+  if (parts.length) parts[0].combinator = null;
+  return parts;
+}
+
+function matchesCompound(node, compound) {
+  if (!node || node.tagName === '#document') return false;
+  const tag = compound.match(/^[a-zA-Z][a-zA-Z0-9-]*/)?.[0]?.toLowerCase();
+  if (tag && node.tagName !== tag) return false;
+  for (const match of compound.matchAll(/#([a-zA-Z0-9_-]+)/g)) {
+    if (node.attributes.id !== match[1]) return false;
+  }
+  for (const match of compound.matchAll(/\.([a-zA-Z0-9_-]+)/g)) {
+    if (!(node.attributes.class || '').split(/\s+/).includes(match[1])) return false;
+  }
+  for (const match of compound.matchAll(/\[([^\]=~\s]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\]]+)))?\]/g)) {
+    const [, name, doubleQuoted, singleQuoted, unquoted] = match;
+    if (!(name in node.attributes)) return false;
+    const expected = doubleQuoted ?? singleQuoted ?? unquoted?.trim();
+    if (expected !== undefined && node.attributes[name] !== expected) return false;
+  }
+  for (const match of compound.matchAll(/:nth-child\((\d+)\)/g)) {
+    const siblings = node.parent?.children || [];
+    if (siblings.indexOf(node) + 1 !== Number(match[1])) return false;
+  }
+  if (/:first-child\b/.test(compound)) {
+    if (node.parent?.children[0] !== node) return false;
+  }
+  return true;
+}
+
+function matchesSelector(node, selector) {
+  const parts = tokenizeSelector(selector);
+  let current = node;
+  let index = parts.length - 1;
+  if (!matchesCompound(current, parts[index].compound)) return false;
+  while (index > 0) {
+    const combinator = parts[index].combinator || ' ';
+    index -= 1;
+    if (combinator === '>') {
+      current = current.parent;
+      if (!matchesCompound(current, parts[index].compound)) return false;
+    } else {
+      let ancestor = current.parent;
+      while (ancestor && !matchesCompound(ancestor, parts[index].compound)) ancestor = ancestor.parent;
+      if (!ancestor) return false;
+      current = ancestor;
+    }
+  }
+  return true;
+}
+
+function checkSelectorMatchesHtml(selector, html, docName) {
+  const documentTree = parseHtml(html);
+  const matchingNodes = [];
+  const visit = (node) => {
+    for (const child of node.children) {
+      if (matchesSelector(child, selector)) matchingNodes.push(child);
+      visit(child);
+    }
+  };
+  visit(documentTree);
+  assert.ok(matchingNodes.length > 0, 'Selector "' + selector + '" matched no DOM elements in ' + docName);
 }
 
 test('All translation map selectors match elements in both index.html and boilerplate index.html', () => {
@@ -122,7 +231,8 @@ test('DOM translation and accessibility updates function correctly during langua
       this.href = '';
       this.listeners = {};
       this.classList = {
-        add: (c) => { if (!this.className.includes(c)) this.className += ' ' + c; },
+        contains: (c) => this.className.split(/\\s+/).includes(c),
+        add: (c) => { if (!this.className.split(/\\s+/).includes(c)) this.className = (this.className + ' ' + c).trim(); },
         remove: (c) => { this.className = this.className.replace(new RegExp('\\b' + c + '\\b', 'g'), '').trim(); },
         toggle: (c, force) => {
           const has = this.className.includes(c);
@@ -166,6 +276,8 @@ test('DOM translation and accessibility updates function correctly during langua
 
   const menuBtn = new MockElement('button', '', 'mobile-menu-toggle', { 'aria-expanded': 'false', 'aria-label': 'Menü öffnen' });
   const nav = new MockElement('nav', 'primary-navigation', 'primary-navigation', { 'aria-label': 'Hauptnavigation' });
+  const navLink = new MockElement('a');
+  nav.querySelectorAll = (selector) => selector === 'a' ? [navLink] : [];
   const langBtn = new MockElement('button', 'language-toggle', 'language-toggle', { 'aria-label': 'Switch language to English', 'aria-pressed': 'false' });
   langBtn.textContent = 'EN';
 
@@ -254,9 +366,13 @@ test('DOM translation and accessibility updates function correctly during langua
   assert.equal(langBtn.getAttribute('aria-pressed'), 'false');
   assert.equal(langBtn.getAttribute('aria-label'), de.accessibility.switch_to_english);
 
-  // Simulate menu toggle expand to test accessibility label handling
-  menuBtn.setAttribute('aria-expanded', 'true');
-  menuBtn.setAttribute('aria-label', de.accessibility.close_menu);
+  // Exercise the registered mobile-menu click handler.
+  menuBtn.click();
+  await new Promise(r => setTimeout(r, 10));
+  assert.equal(menuBtn.getAttribute('aria-expanded'), 'true');
+  assert.equal(menuBtn.getAttribute('aria-label'), de.accessibility.close_menu);
+  assert.equal(nav.classList.contains('is-open'), true);
+  assert.equal(mockDoc.body.classList.contains('menu-open'), true);
 
   // Switch language to EN
   langBtn.click();
@@ -272,4 +388,20 @@ test('DOM translation and accessibility updates function correctly during langua
   assert.equal(langBtn.getAttribute('aria-label'), en.accessibility.switch_to_german);
   assert.equal(menuBtn.getAttribute('aria-label'), en.accessibility.close_menu);
   assert.equal(storedLang, 'en');
+
+  // Escape closes the menu and resets state and accessibility label.
+  listeners['keydown']({ key: 'Escape' });
+  await new Promise(r => setTimeout(r, 10));
+  assert.equal(menuBtn.getAttribute('aria-expanded'), 'false');
+  assert.equal(menuBtn.getAttribute('aria-label'), en.accessibility.open_menu);
+  assert.equal(nav.classList.contains('is-open'), false);
+  assert.equal(mockDoc.body.classList.contains('menu-open'), false);
+
+  // Clicking a navigation link also closes the menu.
+  menuBtn.click();
+  await new Promise(r => setTimeout(r, 10));
+  navLink.click();
+  await new Promise(r => setTimeout(r, 10));
+  assert.equal(menuBtn.getAttribute('aria-expanded'), 'false');
+  assert.equal(nav.classList.contains('is-open'), false);
 });
