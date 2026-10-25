@@ -21,7 +21,9 @@
     "secondary": "Explore Our Services",
     "metric_code": "Personal Service",
     "metric_speed": "Dependable",
-    "metric_accessibility": "Here for You"
+    "metric_speed_label": "Focus on Performance",
+    "metric_accessibility": "Here for You",
+    "metric_accessibility_label": "Focus on Accessibility"
   },
   "services": {
     "tag": "What We Offer",
