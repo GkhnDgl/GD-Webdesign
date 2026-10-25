@@ -74,30 +74,48 @@ test('Contact form placeholders exist in both locales', () => {
 });
 
 function checkSelectorMatchesHtml(selector, html, docName) {
-  if (selector.startsWith('#') && selector.includes(' ')) {
-    const [idPart, childPart] = selector.split(/\s+/);
-    const id = idPart.replace('#', '');
-    const sectionMatch = html.match(new RegExp(`id=["']${id}["'][\\s\\S]*?<\\/section>`));
-    assert.ok(sectionMatch, `Section #${id} not found in ${docName}`);
-    const sectionHtml = sectionMatch[0];
-    if (childPart.startsWith('.')) {
-      const cls = childPart.replace('.', '');
-      assert.match(sectionHtml, new RegExp(`class=["'][^"']*\\b${cls}\\b[^"']*["']`), `Selector "${selector}" failed in ${docName}`);
-    } else {
-      assert.match(sectionHtml, new RegExp(`<${childPart}\\b`), `Selector "${selector}" failed in ${docName}`);
-    }
-  } else if (selector.startsWith('#')) {
-    const id = selector.replace('#', '');
-    assert.match(html, new RegExp(`id=["']${id}["']`), `Selector "${selector}" failed in ${docName}`);
-  } else if (selector.startsWith('.')) {
-    const cls = selector.replace('.', '').split(/\s+|>|:|\./)[0];
-    assert.match(html, new RegExp(`class=["'][^"']*\\b${cls}\\b[^"']*["']`), `Selector "${selector}" failed in ${docName}`);
-  } else if (selector.startsWith('label[')) {
-    const forAttr = selector.match(/for="([^"]+)"/)[1];
-    assert.match(html, new RegExp(`for=["']${forAttr}["']`), `Selector "${selector}" failed in ${docName}`);
+  // Validate every selector hook, not just the first class in a compound selector.
+  // Structural assertions below cover important parent/child and nth-child relationships.
+  const sectionMatch = selector.match(/^#([\\w-]+)(?:\\s+|$)/);
+  const scopeHtml = sectionMatch
+    ? (() => {
+        const escapedId = sectionMatch[1].replace(/[.*+?^${}()|[\\]\\\\]/g, '\\$&');
+        const match = html.match(new RegExp(`<section\\b[^>]*id=["']${escapedId}["'][^>]*>[\\s\\S]*?<\\/section>`));
+        assert.ok(match, `Section #${sectionMatch[1]} not found in ${docName}`);
+        return match[0];
+      })()
+    : html;
+
+  const ids = [...selector.matchAll(/#([\\w-]+)/g)].map((match) => match[1]);
+  const classes = [...selector.matchAll(/\\.([\\w-]+)/g)].map((match) => match[1]);
+  const tags = [...selector.matchAll(/(?:^|\\s|>)((?:section|nav|ul|li|a|p|h1|h2|h3|span|strong|label|input|button|div|meta))(?=\\b|[:.#\\[])/g)]
+    .map((match) => match[1]);
+
+  for (const id of ids) {
+    assert.match(scopeHtml, new RegExp(`\\bid=["']${id}["']`), `Selector "${selector}" is missing #${id} in ${docName}`);
+  }
+  for (const className of classes) {
+    assert.match(scopeHtml, new RegExp(`class=["'][^"']*\\b${className}\\b[^"']*["']`), `Selector "${selector}" is missing .${className} in ${docName}`);
+  }
+  for (const tag of tags) {
+    assert.match(scopeHtml, new RegExp(`<${tag}\\b`, 'i'), `Selector "${selector}" is missing <${tag}> in ${docName}`);
+  }
+  const forMatch = selector.match(/\\[for=["']([^"']+)["']\\]/);
+  if (forMatch) {
+    assert.match(scopeHtml, new RegExp(`for=["']${forMatch[1]}["']`), `Selector "${selector}" is missing its for attribute in ${docName}`);
+  }
+
+  // Catch selector-order regressions that a token-only check would miss.
+  if (selector === '.nav-list li:nth-child(1) .nav-link') {
+    assert.match(scopeHtml, /class=["'][^"']*nav-list[^"']*["'][\\s\\S]*?<li>\\s*<a[^>]*class=["'][^"']*nav-link/);
+  }
+  if (selector === '.nav-list li:nth-child(2) .nav-link') {
+    assert.match(scopeHtml, /class=["'][^"']*nav-list[^"']*["'][\\s\\S]*?<li>[^<]*<a[^>]*class=["'][^"']*nav-link[\\s\\S]*?<li>\\s*<a[^>]*class=["'][^"']*nav-link/);
+  }
+  if (selector === '#impressum .legal-copy' || selector === '#datenschutz .legal-copy') {
+    assert.match(scopeHtml, /<p\\b[^>]*class=["'][^"']*\\blegal-copy\\b/);
   }
 }
-
 test('All translation map selectors match elements in both index.html and boilerplate index.html', () => {
   const translations = getTranslations();
   for (const [key, selectors] of Object.entries(translations)) {
@@ -166,6 +184,8 @@ test('DOM translation and accessibility updates function correctly during langua
 
   const menuBtn = new MockElement('button', '', 'mobile-menu-toggle', { 'aria-expanded': 'false', 'aria-label': 'Menü öffnen' });
   const nav = new MockElement('nav', 'primary-navigation', 'primary-navigation', { 'aria-label': 'Hauptnavigation' });
+  const navLink = new MockElement('a', '', 'nav-link');
+  nav.querySelectorAll = (selector) => selector === 'a' ? [navLink] : [];
   const langBtn = new MockElement('button', 'language-toggle', 'language-toggle', { 'aria-label': 'Switch language to English', 'aria-pressed': 'false' });
   langBtn.textContent = 'EN';
 
@@ -210,9 +230,10 @@ test('DOM translation and accessibility updates function correctly during langua
     createElement: (tag) => new MockElement(tag)
   };
 
+  const windowListeners = {};
   const mockWindow = {
-    addEventListener: () => {},
-    innerWidth: 1024
+    addEventListener: (event, fn) => { windowListeners[event] = fn; },
+    innerWidth: 375
   };
 
   const mockFetch = async (url) => {
@@ -243,6 +264,31 @@ test('DOM translation and accessibility updates function correctly during langua
 
   // Wait tick for initial setLanguage
   await new Promise(r => setTimeout(r, 10));
+
+  // Mobile navigation opens, updates its accessible name, and closes after navigation.
+  menuBtn.click();
+  assert.equal(menuBtn.getAttribute('aria-expanded'), 'true');
+  assert.equal(menuBtn.getAttribute('aria-label'), de.accessibility.close_menu);
+  assert.ok(nav.className.includes('is-open'));
+  assert.ok(mockDoc.body.className.includes('menu-open'));
+
+  navLink.click();
+  assert.equal(menuBtn.getAttribute('aria-expanded'), 'false');
+  assert.equal(menuBtn.getAttribute('aria-label'), de.accessibility.open_menu);
+  assert.ok(!nav.className.includes('is-open'));
+  assert.ok(!mockDoc.body.className.includes('menu-open'));
+
+  // Escape closes an open menu.
+  menuBtn.click();
+  assert.equal(menuBtn.getAttribute('aria-expanded'), 'true');
+  listeners.keydown({ key: 'Escape' });
+  assert.equal(menuBtn.getAttribute('aria-expanded'), 'false');
+
+  // Crossing the desktop breakpoint also closes the menu.
+  menuBtn.click();
+  mockWindow.innerWidth = 1024;
+  windowListeners.resize();
+  assert.equal(menuBtn.getAttribute('aria-expanded'), 'false');
 
   // Initially German
   assert.equal(docElement.lang, 'de');
