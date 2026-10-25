@@ -62,6 +62,30 @@ test('Every translation map key exists in both locales with string values', () =
   }
 });
 
+test('Root locale files contain agency-specific content and no generic business placeholders', () => {
+  const genericPlaceholders = [
+    'Ihr Firmenname',
+    'Your Business Name',
+    'Gute Arbeit. Klare Lösungen. Für Sie.',
+    'Quality Work. Clear Solutions. For You.',
+    'Unsere Hauptleistung',
+    'Our Main Service'
+  ];
+
+  const deStr = JSON.stringify(de);
+  const enStr = JSON.stringify(en);
+
+  for (const placeholder of genericPlaceholders) {
+    assert.ok(!deStr.includes(placeholder), `de.json still contains generic placeholder: "${placeholder}"`);
+    assert.ok(!enStr.includes(placeholder), `en.json still contains generic placeholder: "${placeholder}"`);
+  }
+
+  assert.equal(de.nav.brand, 'GD Webdesign');
+  assert.equal(en.nav.brand, 'GD Webdesign');
+  assert.match(de.hero.title, /Digitale Erlebnisse/);
+  assert.match(en.hero.title, /Digital experiences/);
+});
+
 test('Contact form placeholders exist in both locales', () => {
   for (const locale of [de, en]) {
     assert.ok(locale.contact && locale.contact.placeholders, 'Missing contact placeholders object');
@@ -169,6 +193,8 @@ test('DOM translation and accessibility updates function correctly during langua
   const langBtn = new MockElement('button', 'language-toggle', 'language-toggle', { 'aria-label': 'Switch language to English', 'aria-pressed': 'false' });
   langBtn.textContent = 'EN';
 
+  const heroTitle = new MockElement('h1', 'hero-title');
+  const brandText = new MockElement('span', '', 'brand-text');
   const impressumTitle = new MockElement('h2', 'impressum-title');
   const impressumCopy = new MockElement('p', '', 'legal-copy');
 
@@ -181,6 +207,8 @@ test('DOM translation and accessibility updates function correctly during langua
   const brandEl = new MockElement('a', '', 'brand');
 
   const queryAll = (sel) => {
+    if (sel === '#hero-title') return [heroTitle];
+    if (sel === '.brand-text') return [brandText];
     if (sel === '#impressum h2') return [impressumTitle];
     if (sel === '#impressum .legal-copy') return [impressumCopy];
     if (sel === '#datenschutz h2') return [datenschutzTitle];
@@ -246,6 +274,8 @@ test('DOM translation and accessibility updates function correctly during langua
 
   // Initially German
   assert.equal(docElement.lang, 'de');
+  assert.equal(brandText.textContent, 'GD Webdesign');
+  assert.equal(heroTitle.textContent, 'Digitale Erlebnisse, die begeistern und konvertieren');
   assert.equal(impressumTitle.textContent, de.legal.imprint_title);
   assert.equal(impressumCopy.textContent, de.legal.imprint_text);
   assert.equal(datenschutzTitle.textContent, de.legal.privacy_title);
@@ -266,6 +296,8 @@ test('DOM translation and accessibility updates function correctly during langua
   }
 
   assert.equal(docElement.lang, 'en');
+  assert.equal(brandText.textContent, 'GD Webdesign');
+  assert.equal(heroTitle.textContent, 'Digital experiences that inspire and convert');
   assert.equal(impressumTitle.textContent, en.legal.imprint_title);
   assert.equal(impressumCopy.textContent, en.legal.imprint_text);
   assert.equal(datenschutzTitle.textContent, en.legal.privacy_title);

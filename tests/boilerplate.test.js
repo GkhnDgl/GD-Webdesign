@@ -6,6 +6,8 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const de = JSON.parse(fs.readFileSync(path.join(root, 'locales/de.json'), 'utf8'));
 const en = JSON.parse(fs.readFileSync(path.join(root, 'locales/en.json'), 'utf8'));
+const boilerplateDe = JSON.parse(fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/locales/de.json'), 'utf8'));
+const boilerplateEn = JSON.parse(fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/locales/en.json'), 'utf8'));
 const template = fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/index.html'), 'utf8');
 const script = fs.readFileSync(path.join(root, 'assets/js/main.js'), 'utf8');
 const styles = fs.readFileSync(path.join(root, 'assets/css/style.css'), 'utf8');
@@ -21,10 +23,11 @@ function keyPaths(value, prefix = '') {
 
 test('German and English locale files have identical key structures', () => {
   assert.deepEqual(keyPaths(de), keyPaths(en));
+  assert.deepEqual(keyPaths(boilerplateDe), keyPaths(boilerplateEn));
 });
 
 test('both locales include the template content and accessibility copy', () => {
-  for (const locale of [de, en]) {
+  for (const locale of [de, en, boilerplateDe, boilerplateEn]) {
     for (const key of [
       'meta.title', 'meta.description', 'nav.brand', 'nav.brand_label',
       'nav.label', 'hero.title', 'services.primary_title', 'process.one_title',
@@ -39,8 +42,8 @@ test('both locales include the template content and accessibility copy', () => {
 
 test('boilerplate is generic and does not contain agency branding', () => {
   assert.doesNotMatch(template.replace(/<!--[\s\S]*?-->/g, ''), /GD Webdesign|Digitalagentur|Jamstack|SEO-Optimierung/i);
-  assert.match(de.nav.brand, /Ihr Firmenname/);
-  assert.match(en.nav.brand, /Your Business Name/);
+  assert.match(boilerplateDe.nav.brand, /Ihr Firmenname/);
+  assert.match(boilerplateEn.nav.brand, /Your Business Name/);
 });
 
 test('template links to locale files and script updates document language', () => {
