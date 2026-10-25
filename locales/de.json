@@ -32,14 +32,14 @@
     "primary_badge": "Kernkompetenz",
     "primary_title": "Webdesign & Frontend-Entwicklung",
     "primary_description": "Moderne, responsive Websites mit maßgeschneidertem Design, blitzschnellen Ladezeiten und intuitiver Nutzerführung auf allen Endgeräten.",
-    "list_one": "Mobile-First & Responsive Layouts",
-    "list_two": "Barrierefreiheit mit Blick auf etablierte Standards",
+    "list_one": "Mobiloptimierte, responsive Layouts",
+    "list_two": "Barrierefreiheit nach etablierten Standards",
     "list_three": "Sauberer, zukunftssicherer Code",
-    "second_title": "Performance & SEO Optimization",
+    "second_title": "Performance & Suchmaschinenoptimierung",
     "second_description": "Optimierte Ladezeiten und technische Suchmaschinenoptimierung für maximale Sichtbarkeit, hervorragende Nutzererfahrung und technische Qualität.",
-    "third_title": "Brand Strategy & UX/UI Design",
+    "third_title": "Markenstrategie & UX/UI-Design",
     "third_description": "Einzigartige digitale Markenauftritte und durchdachte Nutzerführung, die Ihre Zielgruppe begeistert und Vertrauen schafft.",
-    "fourth_title": "Moderne Jamstack & Headless Lösungen",
+    "fourth_title": "Moderne Jamstack- und Headless-Lösungen",
     "fourth_description": "Flexible, sichere und wartungsarme Webarchitekturen – perfekt abgestimmt auf modulare Landing Pages und moderne Web-Anwendungen.",
     "fifth_title": "Wartung, Betreuung & DSGVO-Sicherheit",
     "fifth_description": "Zuverlässige Betreuung nach dem Launch: Regelmäßige Updates, Sicherheits-Monitoring und kontinuierliche Weiterentwicklung Ihres Webprojekts."
@@ -79,7 +79,7 @@
       "subject": "z. B. Neue Website für mein Unternehmen",
       "message": "Beschreiben Sie kurz Ihr Vorhaben, Ihre Wünsche oder Fragen..."
     },
-    "privacy_prefix": "Mit dem Absenden stimmen Sie zu, dass Ihre Angaben zur Kontaktaufnahme verwendet werden. Weitere Informationen finden Sie in der",
+    "privacy_prefix": "Ihre Angaben werden zur Bearbeitung Ihrer Anfrage verwendet. Weitere Informationen finden Sie in der",
     "privacy_link": "Datenschutzerklärung",
     "privacy_suffix": "."
   },
@@ -90,13 +90,13 @@
     "imprint": "Impressum (Platzhalter)",
     "privacy": "Datenschutz (Platzhalter)",
     "rights": "© GD Webdesign. Alle Rechte vorbehalten.",
-    "notice": "Rechtliche Angaben und Datenschutzhinweise müssen vor dem Produktivstart ergänzt und geprüft werden."
+    "notice": "Bitte ergänzen und prüfen Sie die rechtlichen Angaben vor der Veröffentlichung."
   },
   "legal": {
     "imprint_title": "Impressum – Platzhalter",
-    "imprint_text": "Angaben zum Betreiber fehlen noch. Bitte ergänzen Sie vor der Veröffentlichung den vollständigen rechtlichen Namen, die ladungsfähige Anschrift und die erforderlichen Kontakt- und Registerangaben. Keine Angaben auf dieser Seite sind als verifizierte Betreiberinformationen zu verstehen.",
+    "imprint_text": "Bitte ergänzen Sie vor der Veröffentlichung den vollständigen rechtlichen Namen, die ladungsfähige Anschrift und die erforderlichen Kontakt- und Registerangaben. Diese Vorlage enthält keine verifizierten Betreiberinformationen.",
     "privacy_title": "Datenschutzerklärung – Platzhalter",
-    "privacy_text": "Die Datenschutzerklärung ist noch nicht fertiggestellt. Vor der Veröffentlichung müssen insbesondere Verantwortlicher, Rechtsgrundlagen, Aufbewahrungsfristen, Empfänger und die Verarbeitung durch Netlify Forms anhand der tatsächlichen Konfiguration geprüft und ergänzt werden."
+    "privacy_text": "Erstellen und prüfen Sie vor der Veröffentlichung eine Datenschutzerklärung, die zur tatsächlichen Datenverarbeitung, zu verwendeten Diensten, Rechtsgrundlagen, Aufbewahrungsfristen und Empfängern passt."
   },
   "accessibility": {
     "open_menu": "Menü öffnen",
