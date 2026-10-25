@@ -85,11 +85,30 @@ document.addEventListener('DOMContentLoaded', () => {
     return path.split('.').reduce((value, key) => value && value[key], object);
   }
 
+  async function fetchLocale(language) {
+    const candidatePaths = [
+      `locales/${language}.json`,
+      `../../locales/${language}.json`,
+      `/locales/${language}.json`
+    ];
+
+    for (const path of candidatePaths) {
+      try {
+        const response = await fetch(path);
+        if (response.ok) {
+          return await response.json();
+        }
+      } catch (err) {
+        // Try next path
+      }
+    }
+    throw new Error(`Locale file for '${language}' could not be loaded from any candidate path.`);
+  }
+
   async function setLanguage(language) {
     try {
-      const response = await fetch(`locales/${language}.json`);
-      if (!response.ok) throw new Error('Locale file could not be loaded');
-      const locale = await response.json();
+      const locale = await fetchLocale(language);
+
       Object.entries(translations).forEach(([key, selectors]) => {
         const value = getValue(locale, key);
         if (typeof value !== 'string') return;
@@ -120,9 +139,12 @@ document.addEventListener('DOMContentLoaded', () => {
           ? (language === 'en' ? 'Close menu' : 'Menü schließen')
           : (language === 'en' ? 'Open menu' : 'Menü öffnen'));
       }
-      document.querySelector('.form-privacy-note').innerHTML = language === 'de'
-        ? 'Mit dem Absenden stimmen Sie zu, dass Ihre Angaben zur Kontaktaufnahme verwendet werden. Weitere Informationen finden Sie in der <a href="#datenschutz">Datenschutzerklärung</a>.'
-        : 'By submitting this form, you agree that your details may be used to respond to your enquiry. See the <a href="#datenschutz">privacy notice</a> for more information.';
+      const formPrivacyNote = document.querySelector('.form-privacy-note');
+      if (formPrivacyNote) {
+        formPrivacyNote.innerHTML = language === 'de'
+          ? 'Mit dem Absenden stimmen Sie zu, dass Ihre Angaben zur Kontaktaufnahme verwendet werden. Weitere Informationen finden Sie in der <a href="#datenschutz" class="underline text-indigo-600 hover:text-indigo-800">Datenschutzerklärung</a>.'
+          : 'By submitting this form, you agree that your details may be used to respond to your enquiry. See the <a href="#datenschutz" class="underline text-indigo-600 hover:text-indigo-800">privacy notice</a> for more information.';
+      }
       document.querySelectorAll('.footer-nav-group .footer-heading').forEach((heading, index) => {
         heading.textContent = language === 'de'
           ? ['Navigation', 'Rechtliches'][index]
@@ -144,8 +166,6 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.brand[aria-label]').forEach((brand) => {
         brand.setAttribute('aria-label', language === 'de' ? 'GD Webdesign Startseite' : 'GD Webdesign homepage');
       });
-      const formPrivacyLink = document.querySelector('.form-privacy-note a');
-      if (formPrivacyLink) formPrivacyLink.textContent = language === 'de' ? 'Datenschutzerklärung' : 'privacy notice';
       const metricValues = document.querySelectorAll('.metric-value');
       if (metricValues.length >= 3) {
         metricValues[0].textContent = '100%';
@@ -190,9 +210,25 @@ document.addEventListener('DOMContentLoaded', () => {
       if (legalPrivacy) legalPrivacy.textContent = language === 'de'
         ? 'Die Datenschutzerklärung ist noch nicht fertiggestellt. Vor der Veröffentlichung müssen insbesondere Verantwortlicher, Rechtsgrundlagen, Aufbewahrungsfristen, Empfänger und die Verarbeitung durch Netlify Forms anhand der tatsächlichen Konfiguration geprüft und ergänzt werden.'
         : 'The privacy notice is not complete yet. Before publication, verify and document the controller, legal bases, retention periods, recipients, and processing through Netlify Forms against the actual configuration.';
+
+      try {
+        localStorage.setItem('preferred_language', language);
+      } catch (err) {
+        // Ignore quota/private browsing errors
+      }
     } catch (error) {
       console.error('Unable to apply the selected language:', error);
     }
+  }
+
+  // Restore preferred language if saved in localStorage
+  try {
+    const savedLang = localStorage.getItem('preferred_language');
+    if (savedLang && (savedLang === 'en' || savedLang === 'de') && savedLang !== document.documentElement.lang) {
+      setLanguage(savedLang);
+    }
+  } catch (err) {
+    // Ignore localStorage read errors
   }
 
   if (languageToggle) {
