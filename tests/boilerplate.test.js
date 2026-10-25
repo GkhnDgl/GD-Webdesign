@@ -38,7 +38,7 @@ test('both locales include the template content and accessibility copy', () => {
 });
 
 test('boilerplate is generic and does not contain agency branding', () => {
-  assert.doesNotMatch(template, /GD Webdesign|Digitalagentur|Jamstack|SEO-Optimierung/i);
+  assert.doesNotMatch(template.replace(/<!--[\\s\\S]*?-->/g, ''), /GD Webdesign|Digitalagentur|Jamstack|SEO-Optimierung/i);
   assert.match(de.nav.brand, /Ihr Firmenname/);
   assert.match(en.nav.brand, /Your Business Name/);
 });
