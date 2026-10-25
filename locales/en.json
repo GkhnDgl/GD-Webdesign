@@ -1,94 +1,105 @@
 {
   "meta": {
-    "title": "GD Webdesign – Modern Web Development & Digital Agency",
-    "description": "GD Webdesign creates modern, accessible, and high-performance websites tailored for ambitious businesses."
+    "title": "Your Business – Services and Contact",
+    "description": "Discover our services, learn more about our business, and get in touch with our team."
   },
   "nav": {
-    "brand": "GD Webdesign",
+    "brand": "Your Business Name",
+    "brand_label": "Homepage",
     "services": "Services",
-    "process": "Process",
+    "process": "How It Works",
     "about": "About Us",
     "contact": "Contact",
-    "cta": "Request Project"
+    "cta": "Get in Touch",
+    "label": "Main navigation"
   },
   "hero": {
-    "badge": "Expert Web Design & Development",
-    "title": "Digital Experiences That Inspire and Convert",
-    "subtitle": "We design and develop fast, accessible websites and bespoke web solutions for businesses looking to grow sustainably online.",
-    "cta_primary": "Start a Project",
-    "cta_secondary": "Explore Services",
-    "metrics": {
-      "code": "Bespoke code",
-      "speed": "Performance-focused",
-      "a11y": "Accessibility-focused"
-    }
+    "badge": "Personal. Reliable. Local.",
+    "title": "Quality Work. Clear Solutions. For You.",
+    "subtitle": "We help our customers with personal advice, dependable service, and solutions that fit their everyday needs.",
+    "primary": "Request an Enquiry",
+    "secondary": "Explore Our Services",
+    "metric_code": "Personal Service",
+    "metric_speed": "Dependable",
+    "metric_accessibility": "Here for You"
   },
   "services": {
-    "tag": "Our Expertise",
-    "title": "Custom Web Solutions Built for Your Success",
-    "lead": "All-in-one execution: From strategic concept and intuitive design to flawless technical engineering.",
-    "webdesign": {
-      "title": "Web Design & Frontend Development",
-      "description": "Modern, responsive websites with custom design, a focus on loading performance, and intuitive experiences across devices."
-    },
-    "seo": {
-      "title": "Performance & SEO Optimization",
-      "description": "Loading speed and technical SEO improvements focused on visibility and user experience."
-    },
-    "branding": {
-      "title": "Brand Strategy & UX/UI Design",
-      "description": "Distinctive digital brand identities and thoughtful user flows designed to captivate your audience and build trust."
-    },
-    "architecture": {
-      "title": "Modern Jamstack & Headless Solutions",
-      "description": "Flexible, secure, low-maintenance web architectures—perfectly tailored for modular landing pages and modern web apps."
-    },
-    "maintenance": {
-      "title": "Maintenance & Support",
-      "description": "Reliable post-launch care: Regular updates, security monitoring, and continuous evolution of your web presence."
-    }
+    "tag": "What We Offer",
+    "title": "Services That Work for You",
+    "lead": "Explore our services and find the right support for your needs.",
+    "primary_badge": "Our Focus",
+    "primary_title": "Our Main Service",
+    "primary_description": "Describe your main service, the value it provides to customers, and what makes your business stand out.",
+    "list_one": "Personal advice and clear communication",
+    "list_two": "Careful work and dependable service",
+    "list_three": "Solutions tailored to your needs",
+    "second_title": "Advice and Planning",
+    "second_description": "Explain how you help customers plan and choose the right service for their needs.",
+    "third_title": "Quality and Care",
+    "third_description": "Describe your quality standards, experience, and the care you put into your work.",
+    "fourth_title": "Flexible and Straightforward",
+    "fourth_description": "Explain how your services can adapt to individual preferences and different situations.",
+    "fifth_title": "Support Beyond the Job",
+    "fifth_description": "Describe any service, maintenance, or support you offer after the work is complete."
   },
   "process": {
-    "tag": "Transparent Workflow",
-    "title": "Your New Website in Three Simple Steps",
-    "lead": "Clearly structured, collaborative, and free of unnecessary complexity.",
-    "step1": {
-      "number": "01",
-      "title": "Concept & Strategy",
-      "description": "In an initial consultation, we analyze your goals, target audience, and requirements to create a custom concept and design framework."
-    },
-    "step2": {
-      "number": "02",
-      "title": "Implementation & Design",
-      "description": "We build your website using modern HTML, CSS, and JavaScript with strict attention to accessibility, performance, and responsive perfection."
-    },
-    "step3": {
-      "number": "03",
-      "title": "Go-Live & Maintenance",
-      "description": "After thorough quality assurance and final approval, we launch your new site and remain your trusted ongoing partner."
-    }
+    "tag": "How It Works",
+    "title": "A Clear and Simple Process from Start to Finish",
+    "lead": "We explain the next steps, agree on the details with you, and keep you informed.",
+    "one_title": "Get in Touch",
+    "one_description": "Tell us briefly what you need help with. We will work through the key questions together.",
+    "two_title": "Agree on a Plan",
+    "two_description": "We discuss your needs, confirm the details, and prepare a suitable plan or quotation.",
+    "three_title": "Deliver with Care",
+    "three_description": "We complete the agreed work carefully and remain available for questions and feedback."
   },
   "about": {
-    "tag": "About GD Webdesign",
-    "title": "Quality, Transparency, and Technical Excellence",
-    "description": "As a specialized digital agency, we believe in lean, performant, and sustainable web architecture. Instead of bloated website builders, we focus on clean code, top-tier accessibility, and custom web design."
+    "tag": "About Our Business",
+    "title": "A Local Business You Can Rely On",
+    "description": "Introduce your business, experience, and approach. Explain what matters to you when working with customers.",
+    "feature_one_title": "Personal",
+    "feature_one_description": "Direct communication and individual advice are at the heart of our service.",
+    "feature_two_title": "Dependable",
+    "feature_two_description": "Clear agreements, careful work, and an open ear for your needs."
   },
   "contact": {
     "tag": "Contact",
-    "title": "Let’s Talk About Your Project",
-    "lead": "Have questions or want to request a quote? Fill out the form below and we will get back to you within 24 hours.",
-    "fields": {
-      "name": "Your Name",
-      "email": "Email Address",
-      "subject": "Subject / Topic",
-      "message": "Your Message",
-      "submit": "Send Message"
-    }
+    "title": "Let’s Talk About Your Needs",
+    "lead": "Have a question or would like a quote? Send us a message and we will get back to you as soon as we can.",
+    "name": "Your Name",
+    "email": "Email Address",
+    "subject": "Subject / Topic",
+    "message": "Your Message",
+    "submit": "Send Message",
+    "placeholders": {
+      "name": "Your name",
+      "email": "name@example.com",
+      "subject": "What is this about?",
+      "message": "Briefly describe what you need …"
+    },
+    "privacy_prefix": "Your details will be used to respond to your enquiry. Read our",
+    "privacy_link": "privacy notice",
+    "privacy_suffix": " for more information."
   },
   "footer": {
-    "tagline": "Modern web development & digital agency for fast, accessible digital experiences.",
-    "rights": "© GD Webdesign. All rights reserved.",
-    "privacy": "Privacy Policy (Placeholder)",
-    "imprint": "Imprint (Placeholder)"
+    "tagline": "Personal service and dependable solutions for our customers.",
+    "navigation_heading": "Navigation",
+    "legal_heading": "Legal",
+    "imprint": "Imprint (Placeholder)",
+    "privacy": "Privacy Notice (Placeholder)",
+    "rights": "© Your Business Name. All rights reserved.",
+    "notice": "Complete and review all legal information before publishing."
+  },
+  "legal": {
+    "imprint_title": "Imprint – Placeholder",
+    "imprint_text": "Before publication, add the full legal name, serviceable address, and all required contact and registration details. This template does not contain verified operator information.",
+    "privacy_title": "Privacy Notice – Placeholder",
+    "privacy_text": "Before publication, prepare and review a privacy notice that reflects actual data processing, services used, legal bases, retention periods, and recipients."
+  },
+  "accessibility": {
+    "open_menu": "Open menu",
+    "close_menu": "Close menu",
+    "switch_to_english": "Switch language to English",
+    "switch_to_german": "Switch language to German"
   }
 }
