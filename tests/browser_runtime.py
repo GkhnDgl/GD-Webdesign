@@ -88,7 +88,7 @@ async def main():
                 assert "menu-open" in (await page.locator("body").get_attribute("class"))
                 await page.wait_for_function(
                     "expected => document.querySelector('.mobile-menu-toggle')?.getAttribute('aria-label') === expected",
-                    de_locale["accessibility"]["close_menu"],
+                    arg=de_locale["accessibility"]["close_menu"],
                 )
 
                 await page.keyboard.press("Escape")
@@ -97,7 +97,7 @@ async def main():
                 assert "menu-open" not in (await page.locator("body").get_attribute("class"))
                 await page.wait_for_function(
                     "expected => document.querySelector('.mobile-menu-toggle')?.getAttribute('aria-label') === expected",
-                    de_locale["accessibility"]["open_menu"],
+                    arg=de_locale["accessibility"]["open_menu"],
                 )
 
                 await menu.click()
