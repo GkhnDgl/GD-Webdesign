@@ -74,46 +74,38 @@ test('Contact form placeholders exist in both locales', () => {
 });
 
 function checkSelectorMatchesHtml(selector, html, docName) {
-  // Validate every selector hook, not just the first class in a compound selector.
-  // Structural assertions below cover important parent/child and nth-child relationships.
-  const sectionMatch = selector.match(/^#([\\w-]+)(?:\\s+|$)/);
-  const scopeHtml = sectionMatch
-    ? (() => {
-        const escapedId = sectionMatch[1].replace(/[.*+?^${}()|[\\]\\\\]/g, '\\$&');
-        const match = html.match(new RegExp(`<section\\b[^>]*id=["']${escapedId}["'][^>]*>[\\s\\S]*?<\\/section>`));
-        assert.ok(match, `Section #${sectionMatch[1]} not found in ${docName}`);
-        return match[0];
-      })()
-    : html;
+  // Validate all selector tokens and key structural relationships, not only the first class.
+  const sectionMatch = selector.match(/^#([\w-]+)(?:\s+|$)/);
+  let scopeHtml = html;
+  if (sectionMatch) {
+    const id = sectionMatch[1];
+    const match = html.match(new RegExp('<section\\b[^>]*id=["\\']' + id + '["\\'][^>]*>[\\s\\S]*?<\\/section>'));
+    assert.ok(match, \`Section #\${id} not found in \${docName}\`);
+    scopeHtml = match[0];
+  }
 
-  const ids = [...selector.matchAll(/#([\\w-]+)/g)].map((match) => match[1]);
-  const classes = [...selector.matchAll(/\\.([\\w-]+)/g)].map((match) => match[1]);
-  const tags = [...selector.matchAll(/(?:^|\\s|>)((?:section|nav|ul|li|a|p|h1|h2|h3|span|strong|label|input|button|div|meta))(?=\\b|[:.#\\[])/g)]
-    .map((match) => match[1]);
-
-  for (const id of ids) {
-    assert.match(scopeHtml, new RegExp(`\\bid=["']${id}["']`), `Selector "${selector}" is missing #${id} in ${docName}`);
+  for (const [, id] of selector.matchAll(/#([\w-]+)/g)) {
+    assert.match(scopeHtml, new RegExp('\\bid=["\\']' + id + '["\\']'), \`Selector "\${selector}" is missing #\${id} in \${docName}\`);
   }
-  for (const className of classes) {
-    assert.match(scopeHtml, new RegExp(`class=["'][^"']*\\b${className}\\b[^"']*["']`), `Selector "${selector}" is missing .${className} in ${docName}`);
+  for (const [, className] of selector.matchAll(/\.([\w-]+)/g)) {
+    assert.match(scopeHtml, new RegExp('class=["\\'][^"\\']*\\b' + className + '\\b[^"\\']*["\\']'), \`Selector "\${selector}" is missing .\${className} in \${docName}\`);
   }
-  for (const tag of tags) {
-    assert.match(scopeHtml, new RegExp(`<${tag}\\b`, 'i'), `Selector "${selector}" is missing <${tag}> in ${docName}`);
+  for (const [, tag] of selector.matchAll(/(?:^|\s|>)((?:section|nav|ul|li|a|p|h1|h2|h3|span|strong|label|input|button|div|meta))(?=\b|[:.#\[])/g)) {
+    assert.match(scopeHtml, new RegExp('<' + tag + '\\b', 'i'), \`Selector "\${selector}" is missing <\${tag}> in \${docName}\`);
   }
-  const forMatch = selector.match(/\\[for=["']([^"']+)["']\\]/);
+  const forMatch = selector.match(/\[for=["']([^"']+)["']\]/);
   if (forMatch) {
-    assert.match(scopeHtml, new RegExp(`for=["']${forMatch[1]}["']`), `Selector "${selector}" is missing its for attribute in ${docName}`);
+    assert.match(scopeHtml, new RegExp('for=["\\']' + forMatch[1] + '["\\']'), \`Selector "\${selector}" is missing its for attribute in \${docName}\`);
   }
 
-  // Catch selector-order regressions that a token-only check would miss.
   if (selector === '.nav-list li:nth-child(1) .nav-link') {
-    assert.match(scopeHtml, /class=["'][^"']*nav-list[^"']*["'][\\s\\S]*?<li>\\s*<a[^>]*class=["'][^"']*nav-link/);
+    assert.match(scopeHtml, /class=["'][^"']*\bnav-list\b[^"']*["'][\s\S]*?<li>\s*<a[^>]*class=["'][^"']*\bnav-link\b/);
   }
   if (selector === '.nav-list li:nth-child(2) .nav-link') {
-    assert.match(scopeHtml, /class=["'][^"']*nav-list[^"']*["'][\\s\\S]*?<li>[^<]*<a[^>]*class=["'][^"']*nav-link[\\s\\S]*?<li>\\s*<a[^>]*class=["'][^"']*nav-link/);
+    assert.match(scopeHtml, /class=["'][^"']*\bnav-list\b[^"']*["'][\s\S]*?<li>\s*<a[^>]*class=["'][^"']*\bnav-link\b[\s\S]*?<li>\s*<a[^>]*class=["'][^"']*\bnav-link\b/);
   }
   if (selector === '#impressum .legal-copy' || selector === '#datenschutz .legal-copy') {
-    assert.match(scopeHtml, /<p\\b[^>]*class=["'][^"']*\\blegal-copy\\b/);
+    assert.match(scopeHtml, /<p\b[^>]*class=["'][^"']*\blegal-copy\b/);
   }
 }
 test('All translation map selectors match elements in both index.html and boilerplate index.html', () => {
@@ -273,6 +265,7 @@ test('DOM translation and accessibility updates function correctly during langua
   assert.ok(mockDoc.body.className.includes('menu-open'));
 
   navLink.click();
+  await new Promise(r => setTimeout(r, 0));
   assert.equal(menuBtn.getAttribute('aria-expanded'), 'false');
   assert.equal(menuBtn.getAttribute('aria-label'), de.accessibility.open_menu);
   assert.ok(!nav.className.includes('is-open'));
