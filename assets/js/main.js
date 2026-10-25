@@ -86,9 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const getValue = (object, path) => path.split('.').reduce((value, key) => value?.[key], object);
 
   async function loadLocale(language) {
-    // Resolve locale files relative to the current page, so the root homepage and
-    // nested boilerplate each load their own locales/{de,en}.json files.
-    const localeUrl = new URL(`locales/${language}.json`, document.baseURI).href;
+    const localeUrl = new URL(`../../locales/${language}.json`, scriptBaseUrl).href;
     const response = await fetch(localeUrl);
     if (!response.ok) throw new Error(`Locale request failed: ${response.status}`);
     return response.json();

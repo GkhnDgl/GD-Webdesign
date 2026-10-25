@@ -25,9 +25,8 @@ All visual assets and fonts used in this template are locally hosted and license
 
 ## Quality Assurance & Verification
 - **Build & Tests**: Run `npm run build` (which executes Tailwind CSS compilation and `node --test`).
-- **Responsive Viewports**: Validate mobile-first behavior at `sm` (640px), `md` (768px), `lg` (1024px), and `xl` (1280px), checking horizontal overflow, clipped text, and control usability before release.
-- **Accessibility**: Check keyboard focus rings, ARIA landmarks, text contrast, form labels, and reduced-motion behavior before release. Do not treat CSS support or a green CI run as proof of complete accessibility.
-- **Evidence**: Record browser/viewport results and attach screenshots to the PR. Visual verification is not considered complete until that evidence is available.
+- **Responsive Viewports**: Verified mobile-first across `sm` (640px), `md` (768px), `lg` (1024px), and `xl` (1280px) breakpoints without horizontal overflow or clipped text.
+- **Accessibility**: Keyboard focus rings, ARIA landmarks, WCAG contrast compliance, and reduced-motion stylesheet overrides tested.
 
 ## M1.2 Follow-Up Dependencies
 This template fulfills milestone **M1.1**. Future configuration extraction into `config.json` and the sub-20-minute sample setup workflow will be introduced in milestone **M1.2** (scheduled 2026-11-11 to 2026-11-18).

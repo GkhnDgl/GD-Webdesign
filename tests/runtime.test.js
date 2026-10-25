@@ -20,28 +20,35 @@ function getValue(object, pathStr) {
   return pathStr.split('.').reduce((value, key) => value?.[key], object);
 }
 
-test('Locale URL path resolution works for the agency root and nested template', () => {
+test('Locale URL path resolution works for GitHub Pages subpath and Netlify root', () => {
   const testCases = [
     {
-      pageUrl: 'https://gkhndgl.github.io/GD-Webdesign/',
+      scriptUrl: 'https://gkhndgl.github.io/GD-Webdesign/assets/js/main.js',
       expectedDe: 'https://gkhndgl.github.io/GD-Webdesign/locales/de.json',
       expectedEn: 'https://gkhndgl.github.io/GD-Webdesign/locales/en.json'
     },
     {
-      pageUrl: 'https://gkhndgl.github.io/GD-Webdesign/templates/one-pager-boilerplate/',
-      expectedDe: 'https://gkhndgl.github.io/GD-Webdesign/templates/one-pager-boilerplate/locales/de.json',
-      expectedEn: 'https://gkhndgl.github.io/GD-Webdesign/templates/one-pager-boilerplate/locales/en.json'
-    },
-    {
-      pageUrl: 'https://agency.netlify.app/',
+      scriptUrl: 'https://agency.netlify.app/assets/js/main.js',
       expectedDe: 'https://agency.netlify.app/locales/de.json',
       expectedEn: 'https://agency.netlify.app/locales/en.json'
+    },
+    {
+      scriptUrl: 'http://localhost:8000/assets/js/main.js',
+      expectedDe: 'http://localhost:8000/locales/de.json',
+      expectedEn: 'http://localhost:8000/locales/en.json'
+    },
+    {
+      scriptUrl: 'http://localhost:8000/templates/one-pager-boilerplate/../../assets/js/main.js',
+      expectedDe: 'http://localhost:8000/locales/de.json',
+      expectedEn: 'http://localhost:8000/locales/en.json'
     }
   ];
 
-  for (const { pageUrl, expectedDe, expectedEn } of testCases) {
-    assert.equal(new URL('locales/de.json', pageUrl).href, expectedDe);
-    assert.equal(new URL('locales/en.json', pageUrl).href, expectedEn);
+  for (const { scriptUrl, expectedDe, expectedEn } of testCases) {
+    const resolvedDe = new URL(`../../locales/de.json`, scriptUrl).href;
+    const resolvedEn = new URL(`../../locales/en.json`, scriptUrl).href;
+    assert.equal(resolvedDe, expectedDe);
+    assert.equal(resolvedEn, expectedEn);
   }
 });
 
@@ -213,7 +220,6 @@ test('DOM translation and accessibility updates function correctly during langua
   const listeners = {};
   const mockDoc = {
     documentElement: docElement,
-    baseURI: 'https://gkhndgl.github.io/GD-Webdesign/',
     body: new MockElement('body'),
     title: '',
     currentScript: { src: 'https://gkhndgl.github.io/GD-Webdesign/assets/js/main.js' },
