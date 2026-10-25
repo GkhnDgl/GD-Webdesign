@@ -79,32 +79,32 @@ function checkSelectorMatchesHtml(selector, html, docName) {
   let scopeHtml = html;
   if (sectionMatch) {
     const id = sectionMatch[1];
-    const match = html.match(new RegExp('<section\\b[^>]*id=["\\']' + id + '["\\'][^>]*>[\\s\\S]*?<\\/section>'));
-    assert.ok(match, \`Section #\${id} not found in \${docName}\`);
+    const match = html.match(new RegExp("<section\\b[^>]*id=[\"']" + id + "[\"'][^>]*>[\\s\\S]*?<\\/section>"));
+    assert.ok(match, "Section #" + id + " not found in " + docName);
     scopeHtml = match[0];
   }
 
   for (const [, id] of selector.matchAll(/#([\w-]+)/g)) {
-    assert.match(scopeHtml, new RegExp('\\bid=["\\']' + id + '["\\']'), \`Selector "\${selector}" is missing #\${id} in \${docName}\`);
+    assert.match(scopeHtml, new RegExp("\\bid=[\"']" + id + "[\"']"), "Selector " + selector + " is missing #" + id + " in " + docName);
   }
   for (const [, className] of selector.matchAll(/\.([\w-]+)/g)) {
-    assert.match(scopeHtml, new RegExp('class=["\\'][^"\\']*\\b' + className + '\\b[^"\\']*["\\']'), \`Selector "\${selector}" is missing .\${className} in \${docName}\`);
+    assert.match(scopeHtml, new RegExp("class=[\"'][^\"']*\\b" + className + "\\b[^\"']*[\"']"), "Selector " + selector + " is missing ." + className + " in " + docName);
   }
   for (const [, tag] of selector.matchAll(/(?:^|\s|>)((?:section|nav|ul|li|a|p|h1|h2|h3|span|strong|label|input|button|div|meta))(?=\b|[:.#\[])/g)) {
-    assert.match(scopeHtml, new RegExp('<' + tag + '\\b', 'i'), \`Selector "\${selector}" is missing <\${tag}> in \${docName}\`);
+    assert.match(scopeHtml, new RegExp("<" + tag + "\\b", "i"), "Selector " + selector + " is missing <" + tag + "> in " + docName);
   }
   const forMatch = selector.match(/\[for=["']([^"']+)["']\]/);
   if (forMatch) {
-    assert.match(scopeHtml, new RegExp('for=["\\']' + forMatch[1] + '["\\']'), \`Selector "\${selector}" is missing its for attribute in \${docName}\`);
+    assert.match(scopeHtml, new RegExp("for=[\"']" + forMatch[1] + "[\"']"), "Selector " + selector + " is missing its for attribute in " + docName);
   }
 
-  if (selector === '.nav-list li:nth-child(1) .nav-link') {
+  if (selector === ".nav-list li:nth-child(1) .nav-link") {
     assert.match(scopeHtml, /class=["'][^"']*\bnav-list\b[^"']*["'][\s\S]*?<li>\s*<a[^>]*class=["'][^"']*\bnav-link\b/);
   }
-  if (selector === '.nav-list li:nth-child(2) .nav-link') {
+  if (selector === ".nav-list li:nth-child(2) .nav-link") {
     assert.match(scopeHtml, /class=["'][^"']*\bnav-list\b[^"']*["'][\s\S]*?<li>\s*<a[^>]*class=["'][^"']*\bnav-link\b[\s\S]*?<li>\s*<a[^>]*class=["'][^"']*\bnav-link\b/);
   }
-  if (selector === '#impressum .legal-copy' || selector === '#datenschutz .legal-copy') {
+  if (selector === "#impressum .legal-copy" || selector === "#datenschutz .legal-copy") {
     assert.match(scopeHtml, /<p\b[^>]*class=["'][^"']*\blegal-copy\b/);
   }
 }
