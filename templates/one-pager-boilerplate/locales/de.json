@@ -1,0 +1,107 @@
+{
+  "meta": {
+    "title": "Ihre Firma – Leistungen und Kontakt",
+    "description": "Entdecken Sie unsere Leistungen, erfahren Sie mehr über unser Unternehmen und nehmen Sie Kontakt mit uns auf."
+  },
+  "nav": {
+    "brand": "Ihr Firmenname",
+    "brand_label": "Startseite",
+    "services": "Leistungen",
+    "process": "So arbeiten wir",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "cta": "Kontakt aufnehmen",
+    "label": "Hauptnavigation"
+  },
+  "hero": {
+    "badge": "Persönlich. Zuverlässig. Vor Ort.",
+    "title": "Gute Arbeit. Klare Lösungen. Für Sie.",
+    "subtitle": "Wir unterstützen unsere Kundinnen und Kunden mit persönlicher Beratung, zuverlässigem Service und Lösungen, die zum Alltag passen.",
+    "primary": "Unverbindlich anfragen",
+    "secondary": "Unsere Leistungen",
+    "metric_code": "Persönliche Betreuung",
+    "metric_speed": "Zuverlässig",
+    "metric_speed_label": "Performance im Fokus",
+    "metric_accessibility": "Für Sie da",
+    "metric_accessibility_label": "Barrierefreiheit im Fokus"
+  },
+  "services": {
+    "tag": "Was wir anbieten",
+    "title": "Unsere Leistungen für Sie",
+    "lead": "Entdecken Sie unser Angebot und finden Sie die passende Unterstützung für Ihr Anliegen.",
+    "primary_badge": "Unser Schwerpunkt",
+    "primary_title": "Unsere Hauptleistung",
+    "primary_description": "Beschreiben Sie hier Ihr wichtigstes Angebot, den Nutzen für Ihre Kundschaft und was Ihren Betrieb auszeichnet.",
+    "list_one": "Persönliche Beratung und klare Absprachen",
+    "list_two": "Sorgfältige Arbeit und verlässlicher Service",
+    "list_three": "Lösungen passend zu Ihrem Bedarf",
+    "second_title": "Beratung und Planung",
+    "second_description": "Erklären Sie, wie Sie Kundinnen und Kunden bei der Planung und Auswahl der passenden Leistung unterstützen.",
+    "third_title": "Qualität und Sorgfalt",
+    "third_description": "Beschreiben Sie Ihre Qualitätsstandards, Erfahrung oder die Sorgfalt, die Sie in Ihre Arbeit investieren.",
+    "fourth_title": "Flexibel und unkompliziert",
+    "fourth_description": "Erklären Sie, wie Ihre Leistungen auf individuelle Wünsche und unterschiedliche Situationen abgestimmt werden.",
+    "fifth_title": "Auch nach dem Auftrag für Sie da",
+    "fifth_description": "Beschreiben Sie Service, Betreuung oder Unterstützung, die Sie nach Abschluss der Arbeit anbieten."
+  },
+  "process": {
+    "tag": "So läuft es ab",
+    "title": "Einfach und transparent von Anfang bis Ende",
+    "lead": "Wir erklären die nächsten Schritte, stimmen uns mit Ihnen ab und halten Sie auf dem Laufenden.",
+    "one_title": "Kontakt aufnehmen",
+    "one_description": "Erzählen Sie uns kurz, wobei Sie Unterstützung benötigen. Gemeinsam klären wir die wichtigsten Fragen.",
+    "two_title": "Lösung abstimmen",
+    "two_description": "Wir besprechen den Bedarf, vereinbaren die Details und erstellen einen passenden Plan oder ein Angebot.",
+    "three_title": "Sorgfältig umsetzen",
+    "three_description": "Wir führen die vereinbarten Arbeiten aus und bleiben bei Fragen und Rückmeldungen erreichbar."
+  },
+  "about": {
+    "tag": "Über unseren Betrieb",
+    "title": "Ein Betrieb, auf den Sie sich verlassen können",
+    "description": "Stellen Sie Ihr Unternehmen, Ihre Erfahrung und Ihre Arbeitsweise vor. Erklären Sie, was Ihnen im Umgang mit Kundinnen und Kunden wichtig ist.",
+    "feature_one_title": "Persönlich",
+    "feature_one_description": "Direkte Kommunikation und individuelle Beratung stehen bei uns im Mittelpunkt.",
+    "feature_two_title": "Verlässlich",
+    "feature_two_description": "Klare Absprachen, sorgfältige Arbeit und ein offenes Ohr für Ihre Anliegen."
+  },
+  "contact": {
+    "tag": "Kontakt",
+    "title": "Sprechen wir über Ihr Anliegen",
+    "lead": "Sie haben eine Frage oder möchten ein Angebot anfragen? Schreiben Sie uns. Wir melden uns so bald wie möglich bei Ihnen.",
+    "name": "Ihr Name",
+    "email": "E-Mail-Adresse",
+    "subject": "Betreff / Anliegen",
+    "message": "Ihre Nachricht",
+    "submit": "Nachricht senden",
+    "placeholders": {
+      "name": "Ihr Name",
+      "email": "name@beispiel.de",
+      "subject": "Worum geht es?",
+      "message": "Beschreiben Sie kurz Ihr Anliegen …"
+    },
+    "privacy_prefix": "Ihre Angaben werden zur Bearbeitung Ihrer Anfrage verwendet. Weitere Informationen finden Sie in der",
+    "privacy_link": "Datenschutzerklärung",
+    "privacy_suffix": "."
+  },
+  "footer": {
+    "tagline": "Persönlicher Service und zuverlässige Lösungen für unsere Kundschaft.",
+    "navigation_heading": "Navigation",
+    "legal_heading": "Rechtliches",
+    "imprint": "Impressum (Platzhalter)",
+    "privacy": "Datenschutz (Platzhalter)",
+    "rights": "© Ihr Firmenname. Alle Rechte vorbehalten.",
+    "notice": "Bitte ergänzen und prüfen Sie die rechtlichen Angaben vor der Veröffentlichung."
+  },
+  "legal": {
+    "imprint_title": "Impressum – Platzhalter",
+    "imprint_text": "Bitte ergänzen Sie vor der Veröffentlichung den vollständigen rechtlichen Namen, die ladungsfähige Anschrift und die erforderlichen Kontakt- und Registerangaben. Diese Vorlage enthält keine verifizierten Betreiberinformationen.",
+    "privacy_title": "Datenschutzerklärung – Platzhalter",
+    "privacy_text": "Erstellen und prüfen Sie vor der Veröffentlichung eine Datenschutzerklärung, die zur tatsächlichen Datenverarbeitung, zu verwendeten Diensten, Rechtsgrundlagen, Aufbewahrungsfristen und Empfängern passt."
+  },
+  "accessibility": {
+    "open_menu": "Menü öffnen",
+    "close_menu": "Menü schließen",
+    "switch_to_english": "Sprache auf Englisch umstellen",
+    "switch_to_german": "Sprache auf Deutsch umstellen"
+  }
+}
