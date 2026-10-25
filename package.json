@@ -3,7 +3,8 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "build": "tailwindcss -i ./assets/css/tailwind.input.css -o ./assets/css/tailwind.generated.css --minify"
+    "build": "tailwindcss -i ./assets/css/tailwind.input.css -o ./assets/css/tailwind.generated.css --minify && npm test",
+    "test": "node --test"
   },
   "devDependencies": {
     "tailwindcss": "3.4.17"
