@@ -21,7 +21,9 @@
     "secondary": "Unsere Leistungen",
     "metric_code": "Persönliche Betreuung",
     "metric_speed": "Zuverlässig",
-    "metric_accessibility": "Für Sie da"
+    "metric_speed_label": "Performance im Fokus",
+    "metric_accessibility": "Für Sie da",
+    "metric_accessibility_label": "Barrierefreiheit im Fokus"
   },
   "services": {
     "tag": "Was wir anbieten",
