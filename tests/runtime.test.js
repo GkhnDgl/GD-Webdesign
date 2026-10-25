@@ -74,30 +74,83 @@ test('Contact form placeholders exist in both locales', () => {
 });
 
 function checkSelectorMatchesHtml(selector, html, docName) {
-  if (selector.startsWith('#') && selector.includes(' ')) {
-    const [idPart, childPart] = selector.split(/\s+/);
-    const id = idPart.replace('#', '');
-    const tagMatch = html.match(new RegExp('<(section|article|div|header|main|footer)\\b[^>]*id=["\']' + id + '["\'][^>]*>[\\s\\S]*?<\\/\\1>'));
-    assert.ok(tagMatch, `Container #${id} not found in ${docName}`);
-    const containerHtml = tagMatch[0];
-    if (childPart.startsWith('.')) {
-      const cls = childPart.replace('.', '');
-      assert.match(containerHtml, new RegExp(`class=["'][^"']*\\b${cls}\\b[^"']*["']`), `Selector "${selector}" failed in ${docName}`);
-    } else {
-      assert.match(containerHtml, new RegExp(`<${childPart}\\b`), `Selector "${selector}" failed in ${docName}`);
-    }
-  } else if (selector.startsWith('#')) {
-    const id = selector.replace('#', '');
-    assert.match(html, new RegExp(`id=["']${id}["']`), `Selector "${selector}" failed in ${docName}`);
-  } else if (selector.startsWith('.')) {
-    const cls = selector.replace('.', '').split(/\s+|>|:|\./)[0];
-    assert.match(html, new RegExp(`class=["'][^"']*\\b${cls}\\b[^"']*["']`), `Selector "${selector}" failed in ${docName}`);
-  } else if (selector.startsWith('label[')) {
-    const forAttr = selector.match(/for="([^"]+)"/)[1];
-    assert.match(html, new RegExp(`for=["']${forAttr}["']`), `Selector "${selector}" failed in ${docName}`);
+  const tokens = [...selector.matchAll(/[^\s>]+|>/g)];
+  const compounds = tokens.filter((token) => token[0] !== '>').map((token) => token[0]);
+  const combinators = [];
+  for (let i = 1; i < tokens.length; i++) {
+    if (tokens[i][0] === '>') combinators.push('>');
+    else if (tokens[i - 1][0] !== '>') combinators.push(' ');
   }
-}
+  assert.ok(compounds.length > 0, \`Empty selector in \${docName}: \${selector}\`);
 
+  const roots = [];
+  const stack = [];
+  const voidTags = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr']);
+  const markup = /<!--[\s\S]*?-->|<![^>]*>|<\/?([a-z][a-z0-9:-]*)\b([^>]*)>/gi;
+  let match;
+  while ((match = markup.exec(html))) {
+    const token = match[0];
+    if (token.startsWith('<!--') || token.startsWith('<!')) continue;
+    const tag = match[1].toLowerCase();
+    if (token.startsWith('</')) {
+      for (let i = stack.length - 1; i >= 0; i--) {
+        if (stack[i].tag === tag) { stack.length = i; break; }
+      }
+      continue;
+    }
+    const attrs = {};
+    for (const attr of match[2].matchAll(/([\w:-]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+)))?/g)) {
+      attrs[attr[1].toLowerCase()] = attr[2] ?? attr[3] ?? attr[4] ?? '';
+    }
+    const node = { tag, attrs, parent: stack.at(-1) ?? null, children: [] };
+    if (node.parent) node.parent.children.push(node);
+    else roots.push(node);
+    if (!voidTags.has(tag) && !/\/\s*>$/.test(token)) stack.push(node);
+  }
+
+  const matchesCompound = (node, compound) => {
+    const tag = compound.match(/^[a-z][\w-]*/i)?.[0];
+    if (tag && node.tag !== tag.toLowerCase()) return false;
+    const id = compound.match(/#([\w-]+)/)?.[1];
+    if (id && node.attrs.id !== id) return false;
+    const classes = [...compound.matchAll(/\.([\w-]+)/g)].map((part) => part[1]);
+    const nodeClasses = (node.attrs.class || '').split(/\s+/).filter(Boolean);
+    if (classes.some((name) => !nodeClasses.includes(name))) return false;
+    const nth = compound.match(/:nth-child\((\d+)\)/)?.[1];
+    const index = (node.parent?.children ?? roots).indexOf(node) + 1;
+    if (nth && index !== Number(nth)) return false;
+    if (compound.includes(':first-child') && index !== 1) return false;
+    for (const attr of compound.matchAll(/\[([\w:-]+)(?:=["']([^"']*)["'])?\]/g)) {
+      if (!(attr[1] in node.attrs)) return false;
+      if (attr[2] !== undefined && node.attrs[attr[1]] !== attr[2]) return false;
+    }
+    return true;
+  };
+
+  const allNodes = [];
+  const collect = (node) => { allNodes.push(node); node.children.forEach(collect); };
+  roots.forEach(collect);
+  const found = allNodes.some((node) => {
+    let current = node;
+    let index = compounds.length - 1;
+    if (!matchesCompound(current, compounds[index])) return false;
+    while (index > 0) {
+      const combinator = combinators[index - 1] ?? ' ';
+      index--;
+      if (combinator === '>') {
+        current = current.parent;
+        if (!current || !matchesCompound(current, compounds[index])) return false;
+      } else {
+        let ancestor = current.parent;
+        while (ancestor && !matchesCompound(ancestor, compounds[index])) ancestor = ancestor.parent;
+        if (!ancestor) return false;
+        current = ancestor;
+      }
+    }
+    return true;
+  });
+  assert.ok(found, \`Selector "\${selector}" did not match a complete element chain in \${docName}\`);
+}
 test('All translation map selectors match elements in both index.html and boilerplate index.html', () => {
   const translations = getTranslations();
   for (const [key, selectors] of Object.entries(translations)) {
