@@ -191,6 +191,7 @@ test('DOM translation and accessibility updates function correctly during langua
 
   const listeners = {};
   const navLink = new MockElement('a');
+  nav.querySelectorAll = (selector) => selector === 'a' ? [navLink] : [];
   const windowListeners = {};
   const mockDoc = {
     documentElement: docElement,
