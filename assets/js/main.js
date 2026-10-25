@@ -2,6 +2,11 @@
  * Accessible mobile navigation and JSON-driven German/English localization.
  * Keep all user-facing copy in locales/{de,en}.json.
  */
+// Capture currentScript at top-level execution scope before event callbacks
+const scriptBaseUrl = document.currentScript && document.currentScript.src
+  ? document.currentScript.src
+  : (typeof location !== 'undefined' ? location.href : '');
+
 document.addEventListener('DOMContentLoaded', () => {
   const menuButton = document.querySelector('.mobile-menu-toggle');
   const navigation = document.querySelector('.primary-navigation');
@@ -81,7 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const getValue = (object, path) => path.split('.').reduce((value, key) => value?.[key], object);
 
   async function loadLocale(language) {
-    const response = await fetch(`../../locales/${language}.json`);
+    const localeUrl = new URL(`../../locales/${language}.json`, scriptBaseUrl).href;
+    const response = await fetch(localeUrl);
     if (!response.ok) throw new Error(`Locale request failed: ${response.status}`);
     return response.json();
   }
