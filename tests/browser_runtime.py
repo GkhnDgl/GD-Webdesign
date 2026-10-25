@@ -87,8 +87,7 @@ async def main():
                 assert "is-open" in (await nav.get_attribute("class"))
                 assert "menu-open" in (await page.locator("body").get_attribute("class"))
                 await page.wait_for_function(
-                    "expected => document.querySelector('.mobile-menu-toggle')?.getAttribute('aria-label') === expected",
-                    arg=de_locale["accessibility"]["close_menu"],
+                    f"document.querySelector('.mobile-menu-toggle')?.getAttribute('aria-label') === {json.dumps(de_locale['accessibility']['close_menu'])}"
                 )
 
                 await page.keyboard.press("Escape")
@@ -96,8 +95,7 @@ async def main():
                 assert "is-open" not in (await nav.get_attribute("class"))
                 assert "menu-open" not in (await page.locator("body").get_attribute("class"))
                 await page.wait_for_function(
-                    "expected => document.querySelector('.mobile-menu-toggle')?.getAttribute('aria-label') === expected",
-                    arg=de_locale["accessibility"]["open_menu"],
+                    f"document.querySelector('.mobile-menu-toggle')?.getAttribute('aria-label') === {json.dumps(de_locale['accessibility']['open_menu'])}"
                 )
 
                 await menu.click()
