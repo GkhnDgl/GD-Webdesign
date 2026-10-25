@@ -351,6 +351,6 @@ test('DOM translation and accessibility updates function correctly during langua
   assert.equal(langBtn.textContent, 'DE');
   assert.equal(langBtn.getAttribute('aria-pressed'), 'true');
   assert.equal(langBtn.getAttribute('aria-label'), en.accessibility.switch_to_german);
-  assert.equal(menuBtn.getAttribute('aria-label'), en.accessibility.close_menu);
+  assert.equal(menuBtn.getAttribute('aria-label'), en.accessibility.open_menu);
   assert.equal(storedLang, 'en');
 });
