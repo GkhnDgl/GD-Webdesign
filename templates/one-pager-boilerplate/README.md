@@ -1,6 +1,6 @@
 # One-Pager Boilerplate Template
 
-A production-ready, reusable single-page website template designed for rapid, standardized client deployments at GD Webdesign.
+A reusable, client-neutral single-page starter template for local businesses. Replace the generic business copy and logo placeholder before use.
 
 ## Features
 - **Semantic HTML5 & Accessibility**: Fully accessible markup with ARIA landmarks, proper heading hierarchy, keyboard navigation, visible focus styles, and `prefers-reduced-motion` considerations.
@@ -19,20 +19,17 @@ templates/one-pager-boilerplate/
 ## How to Reuse & Customize
 
 ### 1. Copy Template Files
-Copy `index.html` from `templates/one-pager-boilerplate/` into your new project's root directory:
-```bash
-cp templates/one-pager-boilerplate/index.html ./index.html
-```
+Keep the repository-relative asset and locale paths intact when previewing this template in place. The page expects `assets/` and `locales/` at the repository root. If moving it into a separate client repository, copy the required shared assets and locale files too, then update the relative paths to match the new directory structure.
 
 ### 2. Update Metadata & Branding
-1. Open `index.html` and customize the page `<title>` and `<meta name="description">`.
-2. Update the brand name, logo text, section titles, and body content to match client requirements.
+1. Edit `locales/de.json` and `locales/en.json` to set the business name, metadata, services, and all page copy.
+2. Update the brand mark initials and customize the color tokens in `assets/css/style.css`.
 3. Replace legal placeholders (`#impressum`, `#datenschutz`) with verified client operator details before production launch.
 
 ### 3. Localization (i18n) Setup
-1. Standard user-facing strings are stored in `locales/de.json` and `locales/en.json`.
-2. Extend or modify JSON keys under `nav`, `hero`, `services`, `process`, `about`, `contact`, and `footer` as needed.
-3. The included JavaScript (`assets/js/main.js`) handles language toggling and persists language preference in `localStorage`.
+1. All visible page copy, form placeholders, accessibility labels, metadata, and legal placeholder text are stored in `locales/de.json` and `locales/en.json`.
+2. Keep both locale files structurally synchronized; `npm test` validates key parity and required translation fields.
+3. The shared JavaScript (`assets/js/main.js`) handles language toggling and stores the preference in `localStorage` when available.
 
 ### 4. Build & Tailwind CSS Integration
 1. Ensure `tailwind.config.js` scans your project HTML files:
