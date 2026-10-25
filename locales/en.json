@@ -79,7 +79,7 @@
       "subject": "e.g. New website for my business",
       "message": "Briefly describe your project, requirements, or questions..."
     },
-    "privacy_prefix": "By submitting, you agree that your details will be used to respond to your enquiry. Read our",
+    "privacy_prefix": "Your details will be used to respond to your enquiry. Read our",
     "privacy_link": "privacy policy",
     "privacy_suffix": " for more information."
   },
@@ -90,13 +90,13 @@
     "imprint": "Imprint (Placeholder)",
     "privacy": "Privacy Policy (Placeholder)",
     "rights": "© GD Webdesign. All rights reserved.",
-    "notice": "Legal details and privacy notices must be reviewed and completed before production launch."
+    "notice": "Complete and review all legal information before publishing."
   },
   "legal": {
     "imprint_title": "Imprint – Placeholder",
-    "imprint_text": "Operator information is still missing. Before publication, please add the full legal name, serviceable address, and required contact and registration details. No information on this page should be understood as verified operator information.",
-    "privacy_title": "Privacy Policy – Placeholder",
-    "privacy_text": "The privacy policy is not yet finalized. Before publication, data controller, legal bases, retention periods, recipients, and processing by Netlify Forms must be reviewed and completed based on the actual configuration."
+    "imprint_text": "Before publication, add the full legal name, serviceable address, and all required contact and registration details. This template does not contain verified operator information.",
+    "privacy_title": "Privacy Notice – Placeholder",
+    "privacy_text": "Before publication, prepare and review a privacy notice that reflects actual data processing, services used, legal bases, retention periods, and recipients."
   },
   "accessibility": {
     "open_menu": "Open menu",
