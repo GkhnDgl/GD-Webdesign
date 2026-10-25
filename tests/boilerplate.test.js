@@ -56,7 +56,10 @@ test('locally hosted woff2 font file and font-face declarations exist', () => {
 
 test('template links to locale files and script updates document language', () => {
   assert.match(template, /assets\/js\/main\.js/);
-  assert.match(script, /\.\.\/\.\.\/locales\/\${language}\.json/);
+  assert.match(script, /new URL\(\`locales\/\$\{language\}\.json\`, document\.baseURI\)/);
+  assert.equal(new URL('locales/de.json', 'https://example.test/').pathname, '/locales/de.json');
+  assert.equal(new URL('locales/en.json', 'https://example.test/templates/one-pager-boilerplate/').pathname, '/templates/one-pager-boilerplate/locales/en.json');
+  assert.notEqual(de.meta.title, boilerplateDe.meta.title, 'Root and template locale content must remain separate');
   assert.match(script, /document\.documentElement\.lang = language/);
   assert.match(script, /preferred_language/);
 });
