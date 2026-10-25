@@ -1,12 +1,22 @@
-/* Base styles & Tailwind-inspired design tokens for GD Webdesign */
+/* Base styles & Tailwind-inspired design tokens for GD Webdesign & Trades Master Template A */
+
+/* Local Font Declarations (Plus Jakarta Sans - SIL OFL 1.1) */
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url('../fonts/PlusJakartaSans-Variable.woff2') format('woff2-variations');
+}
+
 :root {
   color-scheme: light;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: 'Plus Jakarta Sans', Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  /* Color Palette */
-  --color-primary: #4f46e5;       /* Indigo 600 */
-  --color-primary-hover: #4338ca; /* Indigo 700 */
-  --color-primary-light: #e0e7ff; /* Indigo 100 */
+  /* Color Palette - Craftsman & Landscaping Palette */
+  --color-primary: #047857;       /* Emerald 700 - Deep Craftsman Green */
+  --color-primary-hover: #065f46; /* Emerald 800 */
+  --color-primary-light: #d1fae5; /* Emerald 100 */
   --color-dark: #0f172a;          /* Slate 900 */
   --color-heading: #1e293b;       /* Slate 800 */
   --color-body: #334155;          /* Slate 700 */
@@ -14,7 +24,7 @@
   --color-bg-light: #f8fafc;      /* Slate 50 */
   --color-card-bg: #ffffff;
   --color-border: #e2e8f0;        /* Slate 200 */
-  --color-accent: #06b6d4;        /* Cyan 500 */
+  --color-accent: #d97706;        /* Amber 600 - Warm Craftsmanship Accent */
 
   --max-width: 75rem; /* 1200px */
   --header-height: 4.5rem;
@@ -104,13 +114,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .btn-primary {
   background-color: var(--color-primary);
   color: #ffffff;
-  box-shadow: 0 2px 4px rgba(79, 70, 229, 0.2);
+  box-shadow: 0 2px 4px rgba(4, 120, 87, 0.2);
 }
 
 .btn-primary:hover {
   background-color: var(--color-primary-hover);
   color: #ffffff;
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+  box-shadow: 0 4px 12px rgba(4, 120, 87, 0.3);
   transform: translateY(-1px);
 }
 
@@ -130,7 +140,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   display: inline-block;
   padding: 0.25rem 0.75rem;
   font-size: 0.8125rem;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--color-primary);
@@ -145,7 +155,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   top: 0;
   z-index: 100;
   height: var(--header-height);
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-border);
@@ -161,6 +171,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 0.75rem;
 }
 
 .brand {
@@ -168,7 +179,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   align-items: center;
   gap: 0.625rem;
   font-weight: 800;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   color: var(--color-heading);
   text-decoration: none;
 }
@@ -184,6 +195,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   border-radius: var(--radius-sm);
   font-size: 0.875rem;
   font-weight: 800;
+  flex-shrink: 0;
+}
+
+.brand-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  stroke: currentColor;
 }
 
 .mobile-menu-toggle {
@@ -247,7 +265,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
 .nav-link {
   color: var(--color-body);
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1.05rem;
   text-decoration: none;
 }
@@ -422,7 +440,7 @@ section {
   font-size: 2.5rem;
   font-weight: 800;
   color: var(--color-primary);
-  opacity: 0.8;
+  opacity: 0.9;
   line-height: 1;
   margin-bottom: 1rem;
 }
@@ -439,7 +457,7 @@ section {
 
 /* About Section */
 .about-card {
-  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  background: linear-gradient(135deg, #064e3b 0%, #0f172a 100%);
   color: #ffffff;
   padding: clamp(2rem, 5vw, 4rem);
   border-radius: var(--radius-xl);
@@ -450,7 +468,7 @@ section {
 }
 
 .about-card p {
-  color: #94a3b8;
+  color: #cbd5e1;
 }
 
 .about-features {
@@ -459,7 +477,7 @@ section {
   gap: 1.5rem;
   margin-top: 2rem;
   padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .feature-item strong {
@@ -513,7 +531,7 @@ section {
 }
 
 .form-group .required {
-  color: #ef4444;
+  color: #dc2626;
 }
 
 .form-group input, .form-group textarea {
@@ -530,7 +548,7 @@ section {
 
 .form-group input:focus, .form-group textarea:focus {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+  box-shadow: 0 0 0 3px rgba(4, 120, 87, 0.15);
   outline: none;
 }
 
@@ -625,6 +643,10 @@ section {
 
 /* Responsive Media Queries (sm: 640px, md: 768px, lg: 1024px, xl: 1280px) */
 @media (min-width: 640px) {
+  .nav-container {
+    gap: 1rem;
+  }
+
   .mobile-menu-toggle {
     display: none;
   }
@@ -700,6 +722,26 @@ section {
   }
 }
 
+/* Extra-wide desktop refinements (xl: 1280px). */
+@media (min-width: 1280px) {
+  .nav-container,
+  .footer-container {
+    padding-inline: 2.5rem;
+  }
+
+  .bento-grid {
+    gap: 2rem;
+  }
+
+  .hero-container {
+    max-width: 56rem;
+  }
+
+  .section-header {
+    max-width: 48rem;
+  }
+}
+
 /* Reduced Motion Considerations */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -714,7 +756,6 @@ section {
     transform: none !important;
   }
 }
-
 
 /* Language switcher */
 .language-toggle {
@@ -736,7 +777,7 @@ section {
   color: var(--color-primary);
 }
 
-/* Legal placeholders are ordinary page sections, not simulated modal dialogs. */
+/* Legal placeholders are ordinary page sections */
 .legal-information {
   max-width: var(--max-width);
   margin: 1rem auto;
@@ -750,33 +791,4 @@ section {
 .legal-information p {
   max-width: 70ch;
   color: var(--color-muted);
-}
-.nav-container {
-  gap: 0.75rem;
-}
-@media (min-width: 640px) {
-  .nav-container {
-    gap: 1rem;
-  }
-}
-
-
-/* Extra-wide desktop refinements (xl: 1280px). */
-@media (min-width: 1280px) {
-  .nav-container,
-  .footer-container {
-    padding-inline: 2.5rem;
-  }
-
-  .bento-grid {
-    gap: 2rem;
-  }
-
-  .hero-container {
-    max-width: 56rem;
-  }
-
-  .section-header {
-    max-width: 48rem;
-  }
 }

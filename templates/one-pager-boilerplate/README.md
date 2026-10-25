@@ -1,58 +1,32 @@
-# One-Pager Boilerplate Template
+# Master Template A — Trades, Gardening & Landscaping One-Pager
 
-A reusable, client-neutral single-page starter template for local businesses. Replace the generic business copy and logo placeholder before use.
+Master Template A is a single-page website template designed for local tradespeople, craftsmanship businesses, and gardening/landscaping services (Garten- und Landschaftsbau, Handwerk, Renovierung, Objektpflege). It is built on semantic HTML5, shared Vanilla CSS with Tailwind utility output, and Vanilla JavaScript with JSON-based i18n localization.
 
-## Features
-- **Semantic HTML5 & Accessibility**: Fully accessible markup with ARIA landmarks, proper heading hierarchy, keyboard navigation, visible focus styles, and `prefers-reduced-motion` considerations.
-- **Mobile-First Responsive Layout**: Built with a mobile-first approach utilizing Tailwind CSS breakpoints (`sm`, `md`, `lg`, `xl`).
-- **Bento Grid Services & Structured Sections**: Includes a sticky header navigation with mobile drawer, hero section with key metrics, bento grid services overview, process step-by-step workflow, about card, Netlify-compatible contact form, and legal placeholders.
-- **i18n Localization Support**: Pre-configured DE/EN language switcher that dynamically updates page text, `lang` attribute, meta tags, and aria labels using JSON translation files. Persists user preference via `localStorage`.
-- **Client Neutrality & Security**: Contains generic placeholders only. No hardcoded credentials, secret keys, or personal contact details.
+## Visual Identity & Sector Styling
+- **Typography**: Uses locally hosted **Plus Jakarta Sans** (Variable `.woff2`), a modern geometric sans-serif offering a clean, confident, and professional craftsman feel.
+- **Color Palette**: Craftsman emerald green (`#047857`), slate dark accents (`#0f172a`), and warm amber highlights (`#d97706`).
+- **Icons & Graphics**: Embedded accessible inline SVG icons for craftsmanship tools, garden leaves, building outlines, and service badges.
 
-## File Structure
-```
-templates/one-pager-boilerplate/
-├── index.html        # Semantic HTML5 single-page boilerplate structure
-└── README.md         # Template usage & customization documentation
-```
+## Assets & Font Licensing
+All visual assets and fonts used in this template are locally hosted and licensed for free distribution and production use:
 
-## How to Reuse & Customize
+1. **Fonts**:
+   - **Plus Jakarta Sans** (`assets/fonts/PlusJakartaSans-Variable.woff2`)
+   - **Source**: Google Fonts / Tokio City / GDM Type Foundry (`https://github.com/google/fonts/tree/main/ofl/plusjakartasans`)
+   - **License**: SIL Open Font License (OFL) 1.1 (documented in `assets/fonts/LICENSE.txt`). Permitted for free use, modification, and redistribution.
 
-### 1. Copy Template Files
-Keep the repository-relative asset and locale paths intact when previewing this template in place. The page expects `assets/` and `locales/` at the repository root. If moving it into a separate client repository, copy the required shared assets and locale files too, then update the relative paths to match the new directory structure.
+2. **Icons & SVGs**:
+   - Scalable inline vector SVGs integrated into `index.html` and component styles with zero external dependencies.
 
-### 2. Update Metadata & Branding
-1. Edit `locales/de.json` and `locales/en.json` to set the business name, metadata, services, and all page copy.
-2. Update the brand mark initials and customize the color tokens in `assets/css/style.css`.
-3. Replace legal placeholders (`#impressum`, `#datenschutz`) with verified client operator details before production launch.
+## Localization (i18n)
+- Localized copy lives in `locales/de.json` and `locales/en.json`.
+- German copy uses sector-specific trades and gardening terminology (e.g. *Meisterbetrieb*, *Garten- & Landschaftsbau*, *Vor-Ort-Besichtigung*, *Kostenloses Angebot anfragen*).
+- English copy provides an equivalent localized presentation for international or bilingual client inquiries.
 
-### 3. Localization (i18n) Setup
-1. All visible page copy, form placeholders, accessibility labels, metadata, and legal placeholder text are stored in `locales/de.json` and `locales/en.json`.
-2. Keep both locale files structurally synchronized; `npm test` validates key parity and required translation fields.
-3. The shared JavaScript (`assets/js/main.js`) handles language toggling and stores the preference in `localStorage` when available.
+## Quality Assurance & Verification
+- **Build & Tests**: Run `npm run build` (which executes Tailwind CSS compilation and `node --test`).
+- **Responsive Viewports**: Verified mobile-first across `sm` (640px), `md` (768px), `lg` (1024px), and `xl` (1280px) breakpoints without horizontal overflow or clipped text.
+- **Accessibility**: Keyboard focus rings, ARIA landmarks, WCAG contrast compliance, and reduced-motion stylesheet overrides tested.
 
-### 4. Build & Tailwind CSS Integration
-1. Ensure `tailwind.config.js` scans your project HTML files:
-   ```js
-   module.exports = {
-     content: [
-       './index.html',
-       './assets/js/**/*.js',
-       './templates/**/*.html'
-     ],
-     // ...
-   };
-   ```
-2. Build the CSS bundle using npm:
-   ```bash
-   npm run build
-   ```
-3. Test locally using an HTTP server (e.g. `npx serve .` or `python3 -m http.server 8000`).
-
-### 5. Contact Form Deployment (Netlify)
-The contact form is pre-configured for Netlify Forms with spam protection:
-- `data-netlify="true"`
-- `netlify-honeypot="bot-field"`
-- Hidden `form-name` field
-
-Configure notifications and custom redirect endpoints in the Netlify dashboard.
+## M1.2 Follow-Up Dependencies
+This template fulfills milestone **M1.1**. Future configuration extraction into `config.json` and the sub-20-minute sample setup workflow will be introduced in milestone **M1.2** (scheduled 2026-11-11 to 2026-11-18).

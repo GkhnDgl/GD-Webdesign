@@ -40,10 +40,18 @@ test('both locales include the template content and accessibility copy', () => {
   }
 });
 
-test('boilerplate is generic and does not contain agency branding', () => {
+test('boilerplate targets trades and gardening sector with concrete copy and no generic technology language', () => {
   assert.doesNotMatch(template.replace(/<!--[\s\S]*?-->/g, ''), /GD Webdesign|Digitalagentur|Jamstack|SEO-Optimierung/i);
-  assert.match(boilerplateDe.nav.brand, /Ihr Firmenname/);
-  assert.match(boilerplateEn.nav.brand, /Your Business Name/);
+  assert.match(boilerplateDe.nav.brand, /Meisterbetrieb|Handwerk|Gartenbau/);
+  assert.match(boilerplateEn.nav.brand, /Master Craftsman|Trades|Landscaping/);
+  assert.match(boilerplateDe.hero.title, /Gartenbau|Handwerk/);
+  assert.match(boilerplateEn.hero.title, /Gardening|Trades/);
+});
+
+test('locally hosted woff2 font file and font-face declarations exist', () => {
+  assert.ok(fs.existsSync(path.join(root, 'assets/fonts/PlusJakartaSans-Variable.woff2')), 'woff2 font file missing in assets/fonts/');
+  assert.ok(fs.existsSync(path.join(root, 'assets/fonts/LICENSE.txt')), 'Font license file missing in assets/fonts/');
+  assert.match(styles, /@font-face\s*\{[^}]*PlusJakartaSans-Variable\.woff2/);
 });
 
 test('template links to locale files and script updates document language', () => {
