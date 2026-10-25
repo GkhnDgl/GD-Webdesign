@@ -75,14 +75,8 @@ test('Contact form placeholders exist in both locales', () => {
 
 function checkSelectorMatchesHtml(selector, html, docName) {
   // Validate all selector tokens and key structural relationships, not only the first class.
-  const sectionMatch = selector.match(/^#([\w-]+)(?:\s+|$)/);
-  let scopeHtml = html;
-  if (sectionMatch) {
-    const id = sectionMatch[1];
-    const match = html.match(new RegExp("<section\\b[^>]*id=[\"']" + id + "[\"'][^>]*>[\\s\\S]*?<\\/section>"));
-    assert.ok(match, "Section #" + id + " not found in " + docName);
-    scopeHtml = match[0];
-  }
+  // Search the complete document because translation targets may be headings, not sections.
+  const scopeHtml = html;
 
   for (const [, id] of selector.matchAll(/#([\w-]+)/g)) {
     assert.match(scopeHtml, new RegExp("\\bid=[\"']" + id + "[\"']"), "Selector " + selector + " is missing #" + id + " in " + docName);
@@ -259,6 +253,7 @@ test('DOM translation and accessibility updates function correctly during langua
 
   // Mobile navigation opens, updates its accessible name, and closes after navigation.
   menuBtn.click();
+  await new Promise(r => setTimeout(r, 0));
   assert.equal(menuBtn.getAttribute('aria-expanded'), 'true');
   assert.equal(menuBtn.getAttribute('aria-label'), de.accessibility.close_menu);
   assert.ok(nav.className.includes('is-open'));
@@ -273,12 +268,14 @@ test('DOM translation and accessibility updates function correctly during langua
 
   // Escape closes an open menu.
   menuBtn.click();
+  await new Promise(r => setTimeout(r, 0));
   assert.equal(menuBtn.getAttribute('aria-expanded'), 'true');
   listeners.keydown({ key: 'Escape' });
   assert.equal(menuBtn.getAttribute('aria-expanded'), 'false');
 
   // Crossing the desktop breakpoint also closes the menu.
   menuBtn.click();
+  await new Promise(r => setTimeout(r, 0));
   mockWindow.innerWidth = 1024;
   windowListeners.resize();
   assert.equal(menuBtn.getAttribute('aria-expanded'), 'false');
