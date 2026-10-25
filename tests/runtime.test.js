@@ -81,7 +81,7 @@ function checkSelectorMatchesHtml(selector, html, docName) {
     if (tokens[i][0] === '>') combinators.push('>');
     else if (tokens[i - 1][0] !== '>') combinators.push(' ');
   }
-  assert.ok(compounds.length > 0, \`Empty selector in \${docName}: \${selector}\`);
+  assert.ok(compounds.length > 0, `Empty selector in ${docName}: ${selector}`);
 
   const roots = [];
   const stack = [];
@@ -149,7 +149,7 @@ function checkSelectorMatchesHtml(selector, html, docName) {
     }
     return true;
   });
-  assert.ok(found, \`Selector "\${selector}" did not match a complete element chain in \${docName}\`);
+  assert.ok(found, `Selector "${selector}" did not match a complete element chain in ${docName}`);
 }
 test('All translation map selectors match elements in both index.html and boilerplate index.html', () => {
   const translations = getTranslations();
