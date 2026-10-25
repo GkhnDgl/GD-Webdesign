@@ -260,15 +260,15 @@ test('DOM translation and accessibility updates function correctly during langua
   menuBtn.click();
   await new Promise(r => setTimeout(r, 0));
   assert.equal(menuBtn.getAttribute('aria-expanded'), 'true');
-  assert.ok(nav.className.split(/\\s+/).includes('is-open'));
-  assert.ok(mockDoc.body.className.split(/\\s+/).includes('menu-open'));
+  assert.ok(nav.className.split(/\s+/).includes('is-open'));
+  assert.ok(mockDoc.body.className.split(/\s+/).includes('menu-open'));
   assert.equal(menuBtn.getAttribute('aria-label'), de.accessibility.close_menu);
 
   listeners.keydown({ key: 'Escape' });
   await new Promise(r => setTimeout(r, 0));
   assert.equal(menuBtn.getAttribute('aria-expanded'), 'false');
-  assert.ok(!nav.className.split(/\\s+/).includes('is-open'));
-  assert.ok(!mockDoc.body.className.split(/\\s+/).includes('menu-open'));
+  assert.ok(!nav.className.split(/\s+/).includes('is-open'));
+  assert.ok(!mockDoc.body.className.split(/\s+/).includes('menu-open'));
 
   menuBtn.click();
   await new Promise(r => setTimeout(r, 0));
