@@ -190,6 +190,8 @@ test('DOM translation and accessibility updates function correctly during langua
   };
 
   const listeners = {};
+  const navLink = new MockElement('a');
+  const windowListeners = {};
   const mockDoc = {
     documentElement: docElement,
     body: new MockElement('body'),
@@ -205,13 +207,13 @@ test('DOM translation and accessibility updates function correctly during langua
       if (sel === '.form-privacy-note') return privacyNote;
       return queryAll(sel)[0] || null;
     },
-    querySelectorAll: (sel) => queryAll(sel),
+    querySelectorAll: (sel) => sel === 'a' ? [navLink] : queryAll(sel),
     createTextNode: (txt) => txt,
     createElement: (tag) => new MockElement(tag)
   };
 
   const mockWindow = {
-    addEventListener: () => {},
+    addEventListener: (evt, fn) => { windowListeners[evt] = fn; },
     innerWidth: 1024
   };
 
@@ -254,9 +256,31 @@ test('DOM translation and accessibility updates function correctly during langua
   assert.equal(langBtn.getAttribute('aria-pressed'), 'false');
   assert.equal(langBtn.getAttribute('aria-label'), de.accessibility.switch_to_english);
 
-  // Simulate menu toggle expand to test accessibility label handling
-  menuBtn.setAttribute('aria-expanded', 'true');
-  menuBtn.setAttribute('aria-label', de.accessibility.close_menu);
+  // Exercise menu event handlers: open, Escape close, link close, and desktop resize.
+  menuBtn.click();
+  await new Promise(r => setTimeout(r, 0));
+  assert.equal(menuBtn.getAttribute('aria-expanded'), 'true');
+  assert.ok(nav.className.split(/\\s+/).includes('is-open'));
+  assert.ok(mockDoc.body.className.split(/\\s+/).includes('menu-open'));
+  assert.equal(menuBtn.getAttribute('aria-label'), de.accessibility.close_menu);
+
+  listeners.keydown({ key: 'Escape' });
+  await new Promise(r => setTimeout(r, 0));
+  assert.equal(menuBtn.getAttribute('aria-expanded'), 'false');
+  assert.ok(!nav.className.split(/\\s+/).includes('is-open'));
+  assert.ok(!mockDoc.body.className.split(/\\s+/).includes('menu-open'));
+
+  menuBtn.click();
+  await new Promise(r => setTimeout(r, 0));
+  navLink.click();
+  await new Promise(r => setTimeout(r, 0));
+  assert.equal(menuBtn.getAttribute('aria-expanded'), 'false');
+
+  menuBtn.click();
+  await new Promise(r => setTimeout(r, 0));
+  windowListeners.resize();
+  await new Promise(r => setTimeout(r, 0));
+  assert.equal(menuBtn.getAttribute('aria-expanded'), 'false');
 
   // Switch language to EN
   langBtn.click();
