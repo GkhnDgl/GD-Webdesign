@@ -51,6 +51,7 @@ npx serve .
 ## i18n Conventions
 - All visible copy, accessibility labels, form placeholders, and legal placeholder copy for the reusable boilerplate live in `locales/de.json` and `locales/en.json`.
 - Keep both locale files structurally identical; `npm test` checks JSON validity, matching keys, and required template translation hooks.
+- Locale JSON paths are resolved dynamically relative to `assets/js/main.js` via `document.currentScript.src`. This ensures reliable fetch operations whether the site is deployed at a custom root domain (e.g. Netlify) or a GitHub Pages project subpath (e.g. `/GD-Webdesign/`).
 - The boilerplate loads locale JSON over HTTP. Preview it from the repository root using `python3 -m http.server 8000`, then open `http://localhost:8000/templates/one-pager-boilerplate/`.
 - The language preference is stored in localStorage when available; the page remains usable when storage is blocked.
 
