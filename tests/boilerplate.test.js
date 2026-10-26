@@ -68,6 +68,7 @@ test('template uses its own stylesheet and does not inherit the agency styleshee
   assert.doesNotMatch(template, /href="\.\.\/\.\.\/assets\/css\/style\.css"/);
   assert.match(templateStyles, /:root\s*\{/);
   assert.match(templateStyles, /--color-primary:\s*#047857/);
+  assert.match(styles, /--color-primary:\s*#4f46e5/);
 });
 
 test('locale URLs resolve from each page location, including GitHub Pages subpaths', () => {
