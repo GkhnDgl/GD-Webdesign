@@ -9,6 +9,7 @@ const en = JSON.parse(fs.readFileSync(path.join(root, 'locales/en.json'), 'utf8'
 const boilerplateDe = JSON.parse(fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/locales/de.json'), 'utf8'));
 const boilerplateEn = JSON.parse(fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/locales/en.json'), 'utf8'));
 const template = fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/index.html'), 'utf8');
+const agency = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const script = fs.readFileSync(path.join(root, 'assets/js/main.js'), 'utf8');
 const styles = fs.readFileSync(path.join(root, 'assets/css/style.css'), 'utf8');
 const templateStyles = fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/style.css'), 'utf8');
@@ -75,6 +76,15 @@ test('locale URLs resolve from each page location, including GitHub Pages subpat
   const templateUrl = new URL('locales/en.json', 'https://example.github.io/GD-Webdesign/templates/one-pager-boilerplate/index.html');
   assert.equal(agencyUrl.pathname, '/GD-Webdesign/locales/de.json');
   assert.equal(templateUrl.pathname, '/GD-Webdesign/templates/one-pager-boilerplate/locales/en.json');
+});
+
+
+test('Netlify honeypot fields are hidden without inline styles blocked by the Content Security Policy', () => {
+  for (const page of [agency, template]) {
+    assert.match(page, /netlify-honeypot="bot-field"/);
+    assert.match(page, /<p class="hidden-field hidden">[\s\S]*name="bot-field"/);
+    assert.doesNotMatch(page, /<p[^>]*style\s*=/i);
+  }
 });
 
 test('responsive styles include the xl breakpoint and reduced-motion support', () => {
