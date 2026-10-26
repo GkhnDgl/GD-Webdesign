@@ -57,7 +57,7 @@ test('locally hosted woff2 font file and font-face declarations exist', () => {
 
 test('template links to locale files and script updates document language', () => {
   assert.match(template, /assets\/js\/main\.js/);
-  assert.match(script, /\.\.\/\.\.\/locales\/\${language}\.json/);
+  assert.match(script, /new URL\(`locales\/\$\{language\}\.json`, pageBaseUrl\)/);
   assert.match(script, /document\.documentElement\.lang = language/);
   assert.match(script, /preferred_language/);
 });
