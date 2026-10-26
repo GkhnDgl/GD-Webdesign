@@ -11,6 +11,7 @@ const boilerplateEn = JSON.parse(fs.readFileSync(path.join(root, 'templates/one-
 const template = fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/index.html'), 'utf8');
 const script = fs.readFileSync(path.join(root, 'assets/js/main.js'), 'utf8');
 const styles = fs.readFileSync(path.join(root, 'assets/css/style.css'), 'utf8');
+const templateStyles = fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/style.css'), 'utf8');
 
 function keyPaths(value, prefix = '') {
   return Object.entries(value).flatMap(([key, child]) => {
@@ -51,7 +52,7 @@ test('boilerplate targets trades and gardening sector with concrete copy and no 
 test('locally hosted woff2 font file and font-face declarations exist', () => {
   assert.ok(fs.existsSync(path.join(root, 'assets/fonts/PlusJakartaSans-Variable.woff2')), 'woff2 font file missing in assets/fonts/');
   assert.ok(fs.existsSync(path.join(root, 'assets/fonts/LICENSE.txt')), 'Font license file missing in assets/fonts/');
-  assert.match(styles, /@font-face\s*\{[^}]*PlusJakartaSans-Variable\.woff2/);
+  assert.match(templateStyles, /@font-face\s*\{[^}]*PlusJakartaSans-Variable\.woff2/);
 });
 
 test('template links to locale files and script updates document language', () => {
@@ -59,6 +60,21 @@ test('template links to locale files and script updates document language', () =
   assert.match(script, /\.\.\/\.\.\/locales\/\${language}\.json/);
   assert.match(script, /document\.documentElement\.lang = language/);
   assert.match(script, /preferred_language/);
+});
+
+test('template uses its own stylesheet and does not inherit the agency stylesheet', () => {
+  assert.match(template, /<body class="template-master-a">/);
+  assert.match(template, /href="style\.css"/);
+  assert.doesNotMatch(template, /href="\.\.\/\.\.\/assets\/css\/style\.css"/);
+  assert.match(templateStyles, /:root\s*\{/);
+  assert.match(templateStyles, /--color-primary:\s*#047857/);
+});
+
+test('locale URLs resolve from each page location, including GitHub Pages subpaths', () => {
+  const agencyUrl = new URL('locales/de.json', 'https://example.github.io/GD-Webdesign/index.html');
+  const templateUrl = new URL('locales/en.json', 'https://example.github.io/GD-Webdesign/templates/one-pager-boilerplate/index.html');
+  assert.equal(agencyUrl.pathname, '/GD-Webdesign/locales/de.json');
+  assert.equal(templateUrl.pathname, '/GD-Webdesign/templates/one-pager-boilerplate/locales/en.json');
 });
 
 test('responsive styles include the xl breakpoint and reduced-motion support', () => {
