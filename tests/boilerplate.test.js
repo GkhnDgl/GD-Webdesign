@@ -63,6 +63,12 @@ test('template links to locale files and script updates document language', () =
   assert.match(script, /preferred_language/);
 });
 
+test('master template design tokens do not leak into the agency stylesheet', () => {
+  assert.match(styles, /--color-primary:\s*#4f46e5/);
+  assert.doesNotMatch(styles, /PlusJakartaSans-Variable\.woff2|--color-primary:\s*#047857/);
+  assert.match(templateStyles, /--color-primary:\s*#047857/);
+});
+
 test('template uses its own stylesheet and does not inherit the agency stylesheet', () => {
   assert.match(template, /<body class="template-master-a">/);
   assert.match(template, /href="style\.css"/);
