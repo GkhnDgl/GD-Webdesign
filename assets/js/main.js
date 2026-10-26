@@ -3,9 +3,8 @@
  * Keep all user-facing copy in locales/{de,en}.json.
  */
 // Capture currentScript at top-level execution scope before event callbacks
-const scriptBaseUrl = document.currentScript && document.currentScript.src
-  ? document.currentScript.src
-  : (typeof location !== 'undefined' ? location.href : '');
+// Resolve locale files from the current document so root pages and nested templates work on GitHub Pages.
+const pageBaseUrl = document.baseURI || (typeof location !== 'undefined' ? location.href : '');
 
 document.addEventListener('DOMContentLoaded', () => {
   const menuButton = document.querySelector('.mobile-menu-toggle');
@@ -86,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const getValue = (object, path) => path.split('.').reduce((value, key) => value?.[key], object);
 
   async function loadLocale(language) {
-    const localeUrl = new URL(`../../locales/${language}.json`, scriptBaseUrl).href;
+    const localeUrl = new URL(`locales/${language}.json`, pageBaseUrl).href;
     const response = await fetch(localeUrl);
     if (!response.ok) throw new Error(`Locale request failed: ${response.status}`);
     return response.json();
