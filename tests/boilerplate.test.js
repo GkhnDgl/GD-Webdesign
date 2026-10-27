@@ -97,3 +97,12 @@ test('responsive styles include the xl breakpoint and reduced-motion support', (
   assert.match(styles, /@media \(min-width: 1280px\)/);
   assert.match(styles, /prefers-reduced-motion: reduce/);
 });
+
+test('privacy link styling is decoupled from shared localization JavaScript', () => {
+  assert.doesNotMatch(script, /emerald/i, 'shared JavaScript should not contain hardcoded emerald brand colors');
+  assert.match(script, /privacyLink\.className = 'form-privacy-link';/);
+  assert.match(styles, /\.form-privacy-link\s*\{[^}]*color:\s*var\(--color-primary\)/);
+  assert.match(templateStyles, /\.form-privacy-link\s*\{[^}]*color:\s*var\(--color-primary\)/);
+  assert.match(agency, /class="form-privacy-link"/);
+  assert.match(template, /class="form-privacy-link"/);
+});

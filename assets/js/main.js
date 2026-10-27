@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
         privacyNote.replaceChildren(document.createTextNode(locale.contact.privacy_prefix + ' '));
         const privacyLink = document.createElement('a');
         privacyLink.href = '#datenschutz';
-        privacyLink.className = 'underline text-emerald-700 hover:text-emerald-900';
+        privacyLink.className = 'form-privacy-link';
         privacyLink.textContent = locale.contact.privacy_link;
         privacyNote.append(privacyLink, document.createTextNode(locale.contact.privacy_suffix || ''));
       }
