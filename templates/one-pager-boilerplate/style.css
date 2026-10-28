@@ -192,7 +192,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .brand-text {
   min-width: 0;
   line-height: 1.2;
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: auto;
 }
 
 .brand-logo {
@@ -742,6 +744,27 @@ section {
     gap: 1rem;
   }
 
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .btn-submit {
+    width: auto;
+    align-self: flex-start;
+  }
+
+  .footer-top {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+@media (min-width: 960px) {
   .mobile-menu-toggle {
     display: none;
   }
@@ -762,25 +785,6 @@ section {
     flex-direction: row;
     align-items: center;
     gap: 1.5rem;
-  }
-
-  .form-row {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .btn-submit {
-    width: auto;
-    align-self: flex-start;
-  }
-
-  .footer-top {
-    grid-template-columns: 2fr 1fr 1fr;
-  }
-
-  .footer-bottom {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
   }
 }
 
