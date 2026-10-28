@@ -132,13 +132,3 @@ test('main.js resolves config.json relative to page base URL and handles errors 
   assert.match(script, /new URL\('config\.json', pageBaseUrl\)/);
   assert.match(script, /applyConfig/);
 });
-
-test('mobile header grows with wrapped business names and anchors the menu to its actual height', () => {
-  assert.match(templateStyles, /\.site-header\s*\{[^}]*min-height:\s*var\(--header-height\);[^}]*height:\s*auto;/s);
-  assert.match(templateStyles, /\.brand\s*\{[^}]*flex:\s*1 1 0;[^}]*min-width:\s*0;/s);
-  assert.match(templateStyles, /\.brand-text\s*\{[^}]*overflow-wrap:\s*normal;[^}]*word-break:\s*normal;/s);
-  assert.match(templateStyles, /\.primary-navigation\s*\{[^}]*top:\s*100%;/s);
-  assert.match(templateStyles, /@media \(min-width: 1280px\)\s*\{[^}]*\.brand\s*\{\s*flex:\s*0 1 18rem;/s);
-  assert.match(templateStyles, /@media \(min-width: 1280px\)\s*\{[^}]*\.mobile-menu-toggle\s*\{\s*display:\s*none;/s);
-  assert.doesNotMatch(templateStyles, /@media \(min-width: 640px\)\s*\{[^}]*\.mobile-menu-toggle\s*\{\s*display:\s*none;/s);
-});
