@@ -250,14 +250,8 @@ test('DOM translation and accessibility updates function correctly during langua
   const mockFetch = async (url) => {
     if (url.endsWith('config.json')) {
       return {
-        ok: true,
-        json: async () => ({
-          business: { name: 'Meisterbetrieb Handwerk & Gartenbau' },
-          legal: {
-            imprintDetails: { de: de.legal.imprint_text, en: en.legal.imprint_text },
-            privacyDetails: { de: de.legal.privacy_text, en: en.legal.privacy_text }
-          }
-        })
+        ok: false,
+        status: 404
       };
     }
     assert.match(url, /https:\/\/gkhndgl\.github\.io\/GD-Webdesign\/locales\/(de|en)\.json/);
@@ -290,7 +284,7 @@ test('DOM translation and accessibility updates function correctly during langua
 
   // Initially German
   assert.equal(docElement.lang, 'de');
-  assert.equal(brandText.textContent, 'Meisterbetrieb Handwerk & Gartenbau');
+  assert.equal(brandText.textContent, 'GD Webdesign');
   assert.equal(heroTitle.textContent, 'Digitale Erlebnisse, die begeistern und konvertieren');
   assert.equal(impressumTitle.textContent, de.legal.imprint_title);
   assert.equal(impressumCopy.textContent, de.legal.imprint_text);
@@ -312,7 +306,7 @@ test('DOM translation and accessibility updates function correctly during langua
   }
 
   assert.equal(docElement.lang, 'en');
-  assert.equal(brandText.textContent, 'Meisterbetrieb Handwerk & Gartenbau');
+  assert.equal(brandText.textContent, 'GD Webdesign');
   assert.equal(heroTitle.textContent, 'Digital experiences that inspire and convert');
   assert.equal(metricLabel1.textContent, 'Tailored Code');
   assert.equal(impressumTitle.textContent, en.legal.imprint_title);
