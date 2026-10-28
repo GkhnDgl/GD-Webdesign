@@ -177,6 +177,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .brand {
   display: flex;
   align-items: center;
+  min-width: 0;
   gap: 0.625rem;
   font-weight: 800;
   font-size: 1.15rem;
@@ -185,6 +186,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 }
 
 .brand-text {
+  min-width: 0;
+  font-size: 0.95rem;
+  line-height: 1.2;
   word-break: keep-all;
   overflow-wrap: break-word;
 }
@@ -745,28 +749,6 @@ section {
     gap: 1rem;
   }
 
-  .mobile-menu-toggle {
-    display: none;
-  }
-
-  .primary-navigation {
-    display: flex;
-    position: static;
-    padding: 0;
-    box-shadow: none;
-    border-bottom: none;
-    flex-direction: row;
-    align-items: center;
-    gap: 1.25rem;
-    background-color: transparent;
-  }
-
-  .nav-list {
-    flex-direction: row;
-    align-items: center;
-    gap: 1.25rem;
-  }
-
   .form-row {
     grid-template-columns: 1fr 1fr;
   }
@@ -806,12 +788,26 @@ section {
 }
 
 @media (min-width: 1024px) {
+  .mobile-menu-toggle {
+    display: none;
+  }
+
   .primary-navigation {
-    gap: 1.75rem;
+    display: flex;
+    position: static;
+    padding: 0;
+    box-shadow: none;
+    border-bottom: none;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.25rem;
+    background-color: transparent;
   }
 
   .nav-list {
-    gap: 1.5rem;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
   }
 
   .bento-grid {
