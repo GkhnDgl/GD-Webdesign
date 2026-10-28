@@ -1,0 +1,53 @@
+<!--
+  Project Gallery Image: Innenausbau & Renovierung (Interior Work & Renovation)
+  License: CC0 / Public Domain (Original vector illustration created for GD Webdesign Master Template A)
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Modern ausgebauter Innenraum mit Echtholzboden und sauberen Malerarbeiten">
+  <defs>
+    <linearGradient id="wallGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#f1f5f9"/>
+    </linearGradient>
+    <linearGradient id="floorGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#92400e"/>
+    </linearGradient>
+    <linearGradient id="accentWall" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#wallGrad)"/>
+
+  <!-- Modern Accent Wall (Drywall Work) -->
+  <rect x="0" y="0" width="300" height="420" fill="url(#accentWall)"/>
+
+  <!-- Interior Door Frame -->
+  <rect x="100" y="120" width="140" height="300" fill="none" stroke="#f8fafc" stroke-width="8"/>
+  <rect x="110" y="130" width="120" height="290" fill="#334155"/>
+  <circle cx="215" cy="280" r="5" fill="#f8fafc"/>
+
+  <!-- Parquet / Hardwood Flooring with Perspective -->
+  <polygon points="0,420 800,420 800,600 0,600" fill="url(#floorGrad)"/>
+  <line x1="0" y1="450" x2="800" y2="450" stroke="#78350f" stroke-width="2"/>
+  <line x1="0" y1="490" x2="800" y2="490" stroke="#78350f" stroke-width="2"/>
+  <line x1="0" y1="540" x2="800" y2="540" stroke="#78350f" stroke-width="2"/>
+
+  <!-- Skirting Board (Fußleiste) -->
+  <rect x="0" y="412" width="800" height="8" fill="#ffffff"/>
+
+  <!-- Ceiling Light / Modern Recessed Spotlights -->
+  <circle cx="450" cy="40" r="12" fill="#e2e8f0"/>
+  <circle cx="450" cy="40" r="8" fill="#fef08a"/>
+  <polygon points="410,40 490,40 550,420 350,420" fill="#fef08a" opacity="0.15"/>
+
+  <circle cx="650" cy="40" r="12" fill="#e2e8f0"/>
+  <circle cx="650" cy="40" r="8" fill="#fef08a"/>
+  <polygon points="610,40 690,40 750,420 550,420" fill="#fef08a" opacity="0.15"/>
+
+  <!-- Modern Wall Painting / Decor Artwork Frame -->
+  <rect x="420" y="100" width="260" height="180" fill="#ffffff" rx="4" stroke="#cbd5e1" stroke-width="4"/>
+  <path d="M 440 240 L 510 160 L 570 210 L 620 150 L 660 240 Z" fill="#047857"/>
+  <circle cx="620" cy="140" r="16" fill="#fbbf24"/>
+</svg>

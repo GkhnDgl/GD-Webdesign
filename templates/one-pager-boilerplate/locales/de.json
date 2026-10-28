@@ -7,6 +7,7 @@
     "brand": "Meisterbetrieb Handwerk & Gartenbau",
     "brand_label": "Startseite",
     "services": "Leistungen",
+    "gallery": "Galerie",
     "process": "Ablauf",
     "about": "Über uns",
     "contact": "Kontakt",
@@ -43,6 +44,19 @@
     "fourth_description": "Musterberatung vor Ort: Wir wählen gemeinsam langlebige, wetterfeste und ökologische Materialien für Ihr Vorhaben aus.",
     "fifth_title": "Dauerhafte Objekt- & Gartenpflege",
     "fifth_description": "Regelmäßige Jahrespflegeverträge für Privatgärten, Gewerbegrundstücke und Wohnanlagen – damit Ihr Objekt dauerhaft gepflegt bleibt."
+  },
+  "gallery": {
+    "tag": "Referenzen & Galerie",
+    "title": "Auszug unserer fertiggestellten Projekte",
+    "lead": "Lassen Sie sich von unseren Arbeitsbeispielen aus den Bereichen Gartenbau, Terrassenbau, Ausbau und Pflasterarbeiten inspirieren.",
+    "item1_title": "Gartengestaltung & Bepflanzung",
+    "item1_description": "Komplette Neugestaltung einer privaten Gartenanlage mit Bepflanzung und Natursteinpfad.",
+    "item2_title": "Holzterrasse & Steinmauer",
+    "item2_description": "Errichtung einer edlen Echtholzterrasse mit eingefasster Natursteinmauer.",
+    "item3_title": "Innenausbau & Trockenbau",
+    "item3_description": "Fachgerechter Ausbau eines Wohnbereichs mit Parkettboden und Akzentwand.",
+    "item4_title": "Pflaster- & Hofarbeiten",
+    "item4_description": "Präzise Pflasterung einer Garageneinfahrt mit langlebigem Natursteinsystem."
   },
   "process": {
     "tag": "In 3 Schritten zum Ziel",

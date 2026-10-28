@@ -1,0 +1,64 @@
+<!--
+  Project Gallery Image: Terrassenbau & Natursteinarbeiten (Patio & Stone Masonry)
+  License: CC0 / Public Domain (Original vector illustration created for GD Webdesign Master Template A)
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Hochwertige Holzterrasse mit Natursteinmauer und Gartenmöbeln">
+  <defs>
+    <linearGradient id="terraceSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fef3c7"/>
+      <stop offset="100%" stop-color="#bae6fd"/>
+    </linearGradient>
+    <linearGradient id="woodPlank" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#b45309"/>
+      <stop offset="50%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#92400e"/>
+    </linearGradient>
+    <linearGradient id="stoneWall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#64748b"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#terraceSky)"/>
+
+  <!-- House Wall Background -->
+  <rect x="0" y="0" width="800" height="320" fill="#f8fafc"/>
+  <rect x="0" y="300" width="800" height="20" fill="#e2e8f0"/>
+
+  <!-- Large Glass Patio Door -->
+  <rect x="450" y="60" width="280" height="240" fill="#38bdf8" opacity="0.3" stroke="#0f172a" stroke-width="6"/>
+  <line x1="590" y1="60" x2="590" y2="300" stroke="#0f172a" stroke-width="4"/>
+  <line x1="450" y1="180" x2="730" y2="180" stroke="#ffffff" stroke-width="2" opacity="0.6"/>
+
+  <!-- Natural Stone Retaining Wall on Left -->
+  <rect x="0" y="240" width="380" height="120" fill="url(#stoneWall)" rx="4"/>
+  <line x1="0" y1="280" x2="380" y2="280" stroke="#1e293b" stroke-width="3"/>
+  <line x1="0" y1="320" x2="380" y2="320" stroke="#1e293b" stroke-width="3"/>
+  <line x1="120" y1="240" x2="120" y2="280" stroke="#1e293b" stroke-width="2"/>
+  <line x1="250" y1="240" x2="250" y2="280" stroke="#1e293b" stroke-width="2"/>
+  <line x1="60" y1="280" x2="60" y2="320" stroke="#1e293b" stroke-width="2"/>
+  <line x1="190" y1="280" x2="190" y2="320" stroke="#1e293b" stroke-width="2"/>
+  <line x1="310" y1="280" x2="310" y2="320" stroke="#1e293b" stroke-width="2"/>
+
+  <!-- Greenery on top of Stone Wall -->
+  <ellipse cx="80" cy="230" rx="60" ry="25" fill="#10b981"/>
+  <ellipse cx="200" cy="225" rx="70" ry="30" fill="#047857"/>
+  <ellipse cx="310" cy="235" rx="50" ry="20" fill="#059669"/>
+
+  <!-- Wooden Decking Terrace (Planks) -->
+  <rect x="0" y="360" width="800" height="240" fill="url(#woodPlank)"/>
+  <!-- Plank lines -->
+  <line x1="0" y1="390" x2="800" y2="390" stroke="#78350f" stroke-width="3"/>
+  <line x1="0" y1="420" x2="800" y2="420" stroke="#78350f" stroke-width="3"/>
+  <line x1="0" y1="450" x2="800" y2="450" stroke="#78350f" stroke-width="3"/>
+  <line x1="0" y1="480" x2="800" y2="480" stroke="#78350f" stroke-width="3"/>
+  <line x1="0" y1="510" x2="800" y2="510" stroke="#78350f" stroke-width="3"/>
+  <line x1="0" y1="540" x2="800" y2="540" stroke="#78350f" stroke-width="3"/>
+  <line x1="0" y1="570" x2="800" y2="570" stroke="#78350f" stroke-width="3"/>
+
+  <!-- Lounge Chair & Table Silhouette -->
+  <rect x="480" y="420" width="160" height="90" rx="12" fill="#0f172a" opacity="0.85"/>
+  <rect x="490" y="410" width="140" height="20" rx="6" fill="#f8fafc"/>
+  <circle cx="420" cy="460" r="30" fill="#0f172a" opacity="0.85"/>
+  <circle cx="420" cy="460" r="24" fill="#d97706"/>
+</svg>
