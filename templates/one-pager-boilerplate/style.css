@@ -184,6 +184,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   text-decoration: none;
 }
 
+.brand-text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
 .brand-logo {
   display: flex;
   align-items: center;
