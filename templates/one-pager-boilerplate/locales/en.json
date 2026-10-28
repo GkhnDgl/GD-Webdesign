@@ -7,6 +7,7 @@
     "brand": "Master Craftsman Trades & Landscaping",
     "brand_label": "Homepage",
     "services": "Services",
+    "gallery": "Gallery",
     "process": "Process",
     "about": "About Us",
     "contact": "Contact",
@@ -43,6 +44,19 @@
     "fourth_description": "On-site sample consulting: Together we select durable, weather-resistant, and eco-friendly materials for your project.",
     "fifth_title": "Long-Term Grounds & Garden Care",
     "fifth_description": "Regular annual maintenance contracts for private gardens, commercial sites, and residential complexes to keep your grounds pristine."
+  },
+  "gallery": {
+    "tag": "Projects & Gallery",
+    "title": "Selected Reference Projects",
+    "lead": "Get inspired by our completed work across garden design, terrace building, interior finishing, and stone paving.",
+    "item1_title": "Garden Design & Planting",
+    "item1_description": "Complete redesign of a private residential garden with custom planting and natural stone pathway.",
+    "item2_title": "Wooden Terrace & Stone Wall",
+    "item2_description": "Construction of a premium hardwood decking terrace framed by a natural stone retaining wall.",
+    "item3_title": "Interior Finishing & Drywall",
+    "item3_description": "Professional living space renovation with parquet flooring and accent wall design.",
+    "item4_title": "Paving & Driveway Work",
+    "item4_description": "Precision driveway paving with durable natural stone interlocking system."
   },
   "process": {
     "tag": "In 3 Simple Steps",
