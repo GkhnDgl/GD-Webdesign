@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const languageButton = document.querySelector('#language-toggle');
 
   const translations = {
+    'nav.brand': ['.brand-text'],
     'nav.services': ['.nav-list a[href="#services"]', '.footer-nav-group a[href="#services"]'],
     'nav.gallery': ['.nav-list a[href="#gallery"]', '.footer-nav-group a[href="#gallery"]'],
     'nav.process': ['.nav-list a[href="#process"]', '.footer-nav-group a[href="#process"]'],
@@ -75,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'footer.legal_heading': ['.footer-nav-group:nth-child(3) .footer-heading'],
     'footer.imprint': ['.footer-nav-group:nth-child(3) li:nth-child(1) a'],
     'footer.privacy': ['.footer-nav-group:nth-child(3) li:nth-child(2) a'],
+    'footer.rights': ['.footer-bottom p:first-child'],
     'footer.notice': ['.legal-notice'],
     'legal.imprint_title': ['#impressum h2'],
     'legal.imprint_text': ['#impressum .legal-copy'],
