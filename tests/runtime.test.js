@@ -248,6 +248,18 @@ test('DOM translation and accessibility updates function correctly during langua
   };
 
   const mockFetch = async (url) => {
+    if (url.endsWith('config.json')) {
+      return {
+        ok: true,
+        json: async () => ({
+          business: { name: 'GD Webdesign' },
+          legal: {
+            imprintDetails: { de: de.legal.imprint_text, en: en.legal.imprint_text },
+            privacyDetails: { de: de.legal.privacy_text, en: en.legal.privacy_text }
+          }
+        })
+      };
+    }
     assert.match(url, /https:\/\/gkhndgl\.github\.io\/GD-Webdesign\/locales\/(de|en)\.json/);
     const isEn = url.includes('en.json');
     const data = isEn ? en : de;

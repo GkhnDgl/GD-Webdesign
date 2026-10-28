@@ -86,6 +86,106 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const getValue = (object, path) => path.split('.').reduce((value, key) => value?.[key], object);
 
+  let cachedConfig = null;
+  let configLoaded = false;
+
+  async function loadConfig() {
+    if (configLoaded) return cachedConfig;
+    configLoaded = true;
+    try {
+      const configUrl = new URL('config.json', pageBaseUrl).href;
+      const response = await fetch(configUrl);
+      if (response.ok) {
+        cachedConfig = await response.json();
+      }
+    } catch (err) {
+      console.warn('Unable to load or parse config.json:', err);
+      cachedConfig = null;
+    }
+    return cachedConfig;
+  }
+
+  function resolveLocalizedValue(val, language) {
+    if (!val) return null;
+    if (typeof val === 'string') return val;
+    if (typeof val === 'object') return val[language] || val['de'] || val['en'] || null;
+    return null;
+  }
+
+  function applyConfig(config, language = 'de') {
+    if (!config || typeof config !== 'object') return;
+
+    if (config.branding) {
+      if (config.branding.primaryColor) {
+        document.documentElement.style.setProperty('--color-primary', config.branding.primaryColor);
+      }
+      if (config.branding.primaryHoverColor) {
+        document.documentElement.style.setProperty('--color-primary-hover', config.branding.primaryHoverColor);
+      }
+    }
+
+    if (config.business) {
+      if (config.business.name) {
+        document.querySelectorAll('.brand-text').forEach((el) => {
+          el.textContent = config.business.name;
+        });
+      }
+
+      const phoneEl = document.querySelector('.contact-phone');
+      if (phoneEl && config.business.phone) {
+        phoneEl.classList.remove('hidden');
+        phoneEl.href = `tel:${config.business.phone.replace(/[^+\d]/g, '')}`;
+        const span = phoneEl.querySelector('span') || phoneEl;
+        span.textContent = config.business.phone;
+      }
+
+      const emailEl = document.querySelector('.contact-email');
+      if (emailEl && config.business.email) {
+        emailEl.classList.remove('hidden');
+        emailEl.href = `mailto:${config.business.email}`;
+        const span = emailEl.querySelector('span') || emailEl;
+        span.textContent = config.business.email;
+      }
+
+      const addressEl = document.querySelector('.contact-address');
+      if (addressEl && config.business.address) {
+        addressEl.classList.remove('hidden');
+        const span = addressEl.querySelector('span') || addressEl;
+        span.textContent = config.business.address;
+      }
+    }
+
+    if (Array.isArray(config.gallery)) {
+      const gallery = document.querySelector('#gallery');
+      if (gallery) {
+        const cards = gallery.querySelectorAll('.gallery-grid .gallery-card');
+        config.gallery.forEach((item, index) => {
+          if (cards[index] && item && typeof item === 'object') {
+            const img = cards[index].querySelector('img.gallery-image');
+            if (img) {
+              if (item.image) img.src = item.image;
+              if (item.alt) img.alt = item.alt;
+            }
+          }
+        });
+      }
+    }
+
+    if (config.legal) {
+      const imprintText = resolveLocalizedValue(config.legal.imprintDetails, language);
+      if (imprintText) {
+        const imprintEl = document.querySelector('#impressum .legal-copy');
+        if (imprintEl) imprintEl.textContent = imprintText;
+      }
+
+      const privacyText = resolveLocalizedValue(config.legal.privacyDetails, language);
+      if (privacyText) {
+        const privacyEl = document.querySelector('#datenschutz .legal-copy');
+        if (privacyEl) privacyEl.textContent = privacyText;
+      }
+    }
+  }
+
   async function loadLocale(language) {
     const localeUrl = new URL(`locales/${language}.json`, pageBaseUrl).href;
     const response = await fetch(localeUrl);
@@ -168,6 +268,9 @@ document.addEventListener('DOMContentLoaded', () => {
         privacyLink.textContent = locale.contact.privacy_link;
         privacyNote.append(privacyLink, document.createTextNode(locale.contact.privacy_suffix || ''));
       }
+
+      const config = await loadConfig();
+      applyConfig(config, language);
 
       try { localStorage.setItem('preferred_language', language); } catch (_) { /* Storage may be unavailable. */ }
     } catch (error) {

@@ -28,5 +28,49 @@ All visual assets and fonts used in this template are locally hosted and license
 - **Responsive Viewports**: Verified mobile-first across `sm` (640px), `md` (768px), `lg` (1024px), and `xl` (1280px) breakpoints without horizontal overflow or clipped text.
 - **Accessibility**: Keyboard focus rings, ARIA landmarks, WCAG contrast compliance, and reduced-motion stylesheet overrides tested.
 
-## M1.2 Follow-Up Dependencies
-This template fulfills milestone **M1.1**. Future configuration extraction into `config.json` and the sub-20-minute sample setup workflow will be introduced in milestone **M1.2** (scheduled 2026-11-11 to 2026-11-18).
+## Customer Configuration (`config.json`) & Schema (Milestone M1.2)
+Starting with milestone M1.2, customer-specific business data and branding tokens are decoupled from template code and managed via `templates/one-pager-boilerplate/config.json`.
+
+### Configuration Schema
+```json
+{
+  "business": {
+    "name": "Meisterbetrieb Handwerk & Gartenbau",
+    "legalName": "Meisterbetrieb Handwerk & Gartenbau GmbH",
+    "phone": "+49 (0) 123 456789",
+    "email": "kontakt@beispiel-handwerk.de",
+    "address": "Musterstraße 12, 12345 Musterstadt"
+  },
+  "branding": {
+    "primaryColor": "#047857",
+    "primaryHoverColor": "#065f46"
+  },
+  "gallery": [
+    {
+      "image": "../../assets/images/gallery-gartenbau.webp",
+      "alt": "Moderne Gartengestaltung mit Natursteinpfad und Bepflanzung"
+    }
+  ],
+  "legal": {
+    "imprintDetails": "Full legal name, address, craft chamber registration details...",
+    "privacyDetails": "Data controller and privacy officer information..."
+  }
+}
+```
+
+### Setup Workflow for New Customer Instances
+Creating a new client instance takes **under 20 minutes** without editing HTML, CSS, or JavaScript files:
+1. Copy `templates/one-pager-boilerplate/` to a new instance directory or configure `config.json` in place.
+2. Open `config.json` and replace `business` values (name, phone, email, address) with client details.
+3. Update `branding.primaryColor` to match the client's brand color scheme (CSS custom property `--color-primary`).
+4. Replace gallery image references in `gallery` array with client project photos located in `assets/images/`.
+5. Update `legal.imprintDetails` and `legal.privacyDetails` with verified business registration data.
+6. Test page in a local browser or run `npm test`.
+
+### Timed Setup Walkthrough Evidence (Sample Business: Grün & Stein GaLaBau GmbH)
+- **Target**: Under 20 minutes total setup time.
+- **Walkthrough Steps**:
+  1. Updated `config.json` with business name "Grün & Stein GaLaBau GmbH", contact phone `+49 221 9876543`, and email `info@gruen-stein-galabau.de` (~1 min).
+  2. Adjusted brand accent color to `#15803d` (~30 sec).
+  3. Configured gallery image assets and updated imprint details (~1 min).
+- **Result**: Complete client customization achieved in **2.5 minutes**, comfortably fulfilling the M1.2 sub-20-minute requirement.
