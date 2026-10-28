@@ -132,3 +132,29 @@ test('main.js resolves config.json relative to page base URL and handles errors 
   assert.match(script, /new URL\('config\.json', pageBaseUrl\)/);
   assert.match(script, /applyConfig/);
 });
+
+test('customer config includes a separate schema and localized SEO metadata', () => {
+  const configPath = path.join(root, 'templates/one-pager-boilerplate/config.json');
+  const schemaPath = path.join(root, 'templates/one-pager-boilerplate/config.schema.json');
+  const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+  const schema = JSON.parse(fs.readFileSync(schemaPath, 'utf8'));
+  assert.equal(schema.type, 'object');
+  assert.ok(schema.required.includes('business'));
+  assert.ok(schema.properties.business.required.includes('legalName'));
+  assert.ok(schema.properties.business.properties.pageTitle);
+  assert.ok(schema.properties.business.properties.description);
+  assert.deepEqual(Object.keys(config.business.pageTitle).sort(), ['de', 'en']);
+  assert.deepEqual(Object.keys(config.business.description).sort(), ['de', 'en']);
+  assert.ok(config.business.pageTitle.de.length > 0);
+  assert.ok(config.business.pageTitle.en.length > 0);
+});
+
+test('template provides targets for configured contact details and legal name', () => {
+  assert.ok(template.includes('class="contact-phone hidden"'));
+  assert.ok(template.includes('class="contact-email hidden"'));
+  assert.ok(template.includes('class="contact-address hidden"'));
+  assert.ok(template.includes('class="business-legal-name"'));
+  assert.ok(script.includes('document.title = configuredTitle'));
+  assert.ok(script.includes('description.content = configuredDescription'));
+  assert.ok(templateStyles.includes('--color-primary-light: color-mix(in srgb, var(--color-primary) 16%, white)'));
+});
