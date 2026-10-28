@@ -31,7 +31,7 @@
   ],
   "legal": {
     "imprintDetails": {
-      "de": "Meisterbetrieb Handwerk & Gartenbau GmbH\nMusterstraße 12, 12345 Musterstadt\nVertreten durch: Max Mustermann\nE-Mail: kontakt@beispiel-handwerk.de\nHandwerkskammer Musterstadt, Betriebsnummer: 1234567",
+      "de": "{legalName}\nMusterstraße 12, 12345 Musterstadt\nVertreten durch: Max Mustermann\nE-Mail: kontakt@beispiel-handwerk.de\nHandwerkskammer Musterstadt, Betriebsnummer: 1234567",
       "en": "{legalName}\nMusterstraße 12, 12345 Musterstadt, Germany\nRepresented by: Max Mustermann\nEmail: kontakt@beispiel-handwerk.de\nChamber of Crafts Musterstadt, Registration No: 1234567"
     },
     "privacyDetails": {
