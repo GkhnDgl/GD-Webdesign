@@ -43,10 +43,10 @@
           "minLength": 1
         },
         "description": {
-          "type": "string"
+          "$ref": "#/$defs/localizedText"
         },
         "pageTitle": {
-          "type": "string"
+          "$ref": "#/$defs/localizedText"
         }
       }
     },
