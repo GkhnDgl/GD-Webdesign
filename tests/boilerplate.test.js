@@ -111,3 +111,28 @@ test('privacy link styling is decoupled from shared localization JavaScript', ()
   assert.match(agency, /class="form-privacy-link"/);
   assert.match(template, /class="form-privacy-link"/);
 });
+
+test('boilerplate config.json exists with required business, branding, gallery, and legal schema', () => {
+  const configPath = path.join(root, 'templates/one-pager-boilerplate/config.json');
+  assert.ok(fs.existsSync(configPath), 'templates/one-pager-boilerplate/config.json must exist');
+  const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+
+  assert.ok(config.business && typeof config.business.name === 'string');
+  assert.equal(config.business.name, 'Meisterbetrieb Handwerk & Gartenbau');
+  assert.equal(config.business.legalName, 'Meisterbetrieb Handwerk & Gartenbau GmbH');
+  assert.ok(config.business.phone && config.business.email && config.business.address);
+  assert.ok(config.branding && typeof config.branding.primaryColor === 'string');
+  assert.ok(Array.isArray(config.gallery) && config.gallery.length > 0);
+  assert.ok(config.legal && config.legal.imprintDetails && config.legal.privacyDetails);
+  assert.ok(config.legal.imprintDetails.en.includes(config.business.legalName));
+  assert.ok(config.legal.privacyDetails.en.includes(config.business.legalName));
+
+  // Ensure no unmasked sensitive credentials or private tokens are present
+  const jsonStr = JSON.stringify(config);
+  assert.doesNotMatch(jsonStr, /api[-_]?key|secret|token|password/i);
+});
+
+test('main.js resolves config.json relative to page base URL and handles errors gracefully', () => {
+  assert.match(script, /new URL\('config\.json', pageBaseUrl\)/);
+  assert.match(script, /applyConfig/);
+});

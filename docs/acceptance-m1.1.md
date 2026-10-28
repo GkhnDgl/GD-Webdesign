@@ -1,9 +1,9 @@
 # M1.1 Acceptance Record
 
-**Record date:** 2026-10-28  
-**Milestone:** M1.1 — GitHub repository, workflows, responsive Master Template A, local fonts  
-**Planned milestone window:** 2026-11-01 to 2026-11-10  
-**Repository:** [GkhnDgl/GD-Webdesign](https://github.com/GkhnDgl/GD-Webdesign)  
+**Record date:** 2026-10-28
+**Milestone:** M1.1 — GitHub repository, workflows, responsive Master Template A, local fonts
+**Planned milestone window:** 2026-11-01 to 2026-11-10
+**Repository:** [GkhnDgl/GD-Webdesign](https://github.com/GkhnDgl/GD-Webdesign)
 **Live site:** https://gkhndgl.github.io/GD-Webdesign/
 
 ## Verification Summary
