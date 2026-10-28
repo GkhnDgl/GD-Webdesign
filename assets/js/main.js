@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const languageButton = document.querySelector('#language-toggle');
 
   const translations = {
-    'nav.brand': ['.brand-text'],
     'nav.services': ['.nav-list a[href="#services"]', '.footer-nav-group a[href="#services"]'],
     'nav.gallery': ['.nav-list a[href="#gallery"]', '.footer-nav-group a[href="#gallery"]'],
     'nav.process': ['.nav-list a[href="#process"]', '.footer-nav-group a[href="#process"]'],
@@ -76,7 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
     'footer.legal_heading': ['.footer-nav-group:nth-child(3) .footer-heading'],
     'footer.imprint': ['.footer-nav-group:nth-child(3) li:nth-child(1) a'],
     'footer.privacy': ['.footer-nav-group:nth-child(3) li:nth-child(2) a'],
-    'footer.rights': ['.footer-bottom p:first-child'],
     'footer.notice': ['.legal-notice'],
     'legal.imprint_title': ['#impressum h2'],
     'legal.imprint_text': ['#impressum .legal-copy'],
@@ -129,6 +127,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.brand-text').forEach((el) => {
           el.textContent = config.business.name;
         });
+        const footerRights = document.querySelector('.footer-bottom p:first-child');
+        if (footerRights) {
+          const locale = document.documentElement.lang === 'en' ? 'en' : 'de';
+          const rightsTemplate = locale === 'en'
+            ? '© {businessName}. All rights reserved.'
+            : '© {businessName}. Alle Rechte vorbehalten.';
+          footerRights.textContent = rightsTemplate.replace('{businessName}', config.business.name);
+        }
       }
 
       const phoneEl = document.querySelector('.contact-phone');
@@ -172,13 +178,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (config.legal) {
-      const imprintText = resolveLocalizedValue(config.legal.imprintDetails, language);
+      const legalName = config.business?.legalName || config.business?.name || '';
+      const imprintText = resolveLocalizedValue(config.legal.imprintDetails, language)?.replaceAll('{legalName}', legalName);
       if (imprintText) {
         const imprintEl = document.querySelector('#impressum .legal-copy');
         if (imprintEl) imprintEl.textContent = imprintText;
       }
 
-      const privacyText = resolveLocalizedValue(config.legal.privacyDetails, language);
+      const privacyText = resolveLocalizedValue(config.legal.privacyDetails, language)?.replaceAll('{legalName}', legalName);
       if (privacyText) {
         const privacyEl = document.querySelector('#datenschutz .legal-copy');
         if (privacyEl) privacyEl.textContent = privacyText;
