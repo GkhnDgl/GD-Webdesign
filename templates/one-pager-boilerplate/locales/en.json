@@ -56,7 +56,11 @@
     "item3_title": "Interior Finishing & Drywall",
     "item3_description": "Professional living space renovation with parquet flooring and accent wall design.",
     "item4_title": "Paving & Driveway Work",
-    "item4_description": "Precision driveway paving with durable natural stone interlocking system."
+    "item4_description": "Precision driveway paving with durable natural stone interlocking system.",
+    "item1_alt": "Landscaped garden with a natural stone path and planting",
+    "item2_alt": "Wooden terrace with a natural stone wall and garden furniture",
+    "item3_alt": "Finished interior with wood flooring and an accent wall",
+    "item4_alt": "Paved driveway with a stone pattern and natural stone wall"
   },
   "process": {
     "tag": "In 3 Simple Steps",
@@ -116,6 +120,7 @@
     "open_menu": "Open menu",
     "close_menu": "Close menu",
     "switch_to_english": "Switch language to English",
-    "switch_to_german": "Switch language to German"
+    "switch_to_german": "Switch language to German",
+    "honeypot": "Do not fill this out if you are human:"
   }
 }

@@ -56,7 +56,11 @@
     "item3_title": "Innenausbau & Trockenbau",
     "item3_description": "Fachgerechter Ausbau eines Wohnbereichs mit Parkettboden und Akzentwand.",
     "item4_title": "Pflaster- & Hofarbeiten",
-    "item4_description": "Präzise Pflasterung einer Garageneinfahrt mit langlebigem Natursteinsystem."
+    "item4_description": "Präzise Pflasterung einer Garageneinfahrt mit langlebigem Natursteinsystem.",
+    "item1_alt": "Gartengestaltung mit Natursteinpfad und Bepflanzung",
+    "item2_alt": "Holzterrasse mit Natursteinmauer und Gartenmöbeln",
+    "item3_alt": "Ausgebauter Innenraum mit Holzboden und Akzentwand",
+    "item4_alt": "Gepflasterte Einfahrt mit Steinmuster und Natursteinmauer"
   },
   "process": {
     "tag": "In 3 Schritten zum Ziel",
@@ -116,6 +120,7 @@
     "open_menu": "Menü öffnen",
     "close_menu": "Menü schließen",
     "switch_to_english": "Sprache auf Englisch umstellen",
-    "switch_to_german": "Sprache auf Deutsch umstellen"
+    "switch_to_german": "Sprache auf Deutsch umstellen",
+    "honeypot": "Dieses Feld nicht ausfüllen, wenn Sie ein Mensch sind:"
   }
 }
