@@ -13,11 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const translations = {
     'nav.brand': ['.brand-text'],
-    'nav.services': ['.nav-list li:nth-child(1) .nav-link', '.footer-nav-group:nth-child(2) li:nth-child(1) a'],
-    'nav.gallery': ['.nav-list li:nth-child(2) .nav-link', '.footer-nav-group:nth-child(2) li:nth-child(2) a'],
-    'nav.process': ['.nav-list li:nth-child(3) .nav-link', '.footer-nav-group:nth-child(2) li:nth-child(3) a'],
-    'nav.about': ['.nav-list li:nth-child(4) .nav-link', '.footer-nav-group:nth-child(2) li:nth-child(4) a'],
-    'nav.contact': ['.nav-list li:nth-child(5) .nav-link', '.footer-nav-group:nth-child(2) li:nth-child(5) a'],
+    'nav.services': ['.nav-list a[href="#services"]', '.footer-nav-group:nth-child(2) a[href="#services"]'],
+    'nav.gallery': ['.nav-list a[href="#gallery"]', '.footer-nav-group:nth-child(2) a[href="#gallery"]'],
+    'nav.process': ['.nav-list a[href="#process"]', '.footer-nav-group:nth-child(2) a[href="#process"]'],
+    'nav.about': ['.nav-list a[href="#about"]', '.footer-nav-group:nth-child(2) a[href="#about"]'],
+    'nav.contact': ['.nav-list a[href="#contact"]', '.footer-nav-group:nth-child(2) a[href="#contact"]'],
     'nav.cta': ['.nav-cta'],
     'hero.badge': ['.hero-content > .badge'],
     'hero.title': ['#hero-title'],
