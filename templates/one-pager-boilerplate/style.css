@@ -154,9 +154,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   position: sticky;
   top: 0;
   z-index: 100;
-  min-height: var(--header-height);
-  height: auto;
-  padding-block: 0.5rem;
+  height: var(--header-height);
   background-color: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -184,13 +182,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   font-size: 1.15rem;
   color: var(--color-heading);
   text-decoration: none;
-}
-
-.brand-text {
-  min-width: 0;
-  max-width: 22rem;
-  overflow-wrap: anywhere;
-  word-break: normal;
 }
 
 .brand-logo {
