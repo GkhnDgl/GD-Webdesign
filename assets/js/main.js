@@ -13,11 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const translations = {
     'nav.brand': ['.brand-text'],
-    'nav.services': ['.nav-list li:nth-child(1) .nav-link', '.footer-nav-group:nth-child(2) li:nth-child(1) a'],
-    'nav.gallery': ['.nav-list li:nth-child(2) .nav-link', '.footer-nav-group:nth-child(2) li:nth-child(2) a'],
-    'nav.process': ['.nav-list li:nth-child(3) .nav-link', '.footer-nav-group:nth-child(2) li:nth-child(3) a'],
-    'nav.about': ['.nav-list li:nth-child(4) .nav-link', '.footer-nav-group:nth-child(2) li:nth-child(4) a'],
-    'nav.contact': ['.nav-list li:nth-child(5) .nav-link', '.footer-nav-group:nth-child(2) li:nth-child(5) a'],
+    'nav.services': ['.nav-list a[href="#services"]', '.footer-nav-group a[href="#services"]'],
+    'nav.gallery': ['.nav-list a[href="#gallery"]', '.footer-nav-group a[href="#gallery"]'],
+    'nav.process': ['.nav-list a[href="#process"]', '.footer-nav-group a[href="#process"]'],
+    'nav.about': ['.nav-list a[href="#about"]', '.footer-nav-group a[href="#about"]'],
+    'nav.contact': ['.nav-list a[href="#contact"]', '.footer-nav-group a[href="#contact"]'],
     'nav.cta': ['.nav-cta'],
     'hero.badge': ['.hero-content > .badge'],
     'hero.title': ['#hero-title'],
@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'hero.primary': ['.hero-actions .btn-primary'],
     'hero.secondary': ['.hero-actions .btn-secondary'],
     'hero.metric_code': ['.metric-item:nth-child(1) .metric-value'],
+    'hero.metric_code_label': ['.metric-item:nth-child(1) .metric-label'],
     'hero.metric_speed': ['.metric-item:nth-child(2) .metric-value'],
     'hero.metric_speed_label': ['.metric-item:nth-child(2) .metric-label'],
     'hero.metric_accessibility': ['.metric-item:nth-child(3) .metric-value'],
@@ -46,17 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
     'services.fourth_description': ['.bento-card:nth-child(4) p'],
     'services.fifth_title': ['.bento-card-wide h3'],
     'services.fifth_description': ['.bento-card-wide p'],
-    'gallery.tag': ['#gallery .section-tag'],
-    'gallery.title': ['#gallery-title'],
-    'gallery.lead': ['.gallery-section .section-header .section-lead'],
-    'gallery.item1_title': ['.gallery-card:nth-child(1) h3'],
-    'gallery.item1_description': ['.gallery-grid .gallery-card:nth-child(1) .gallery-content p'],
-    'gallery.item2_title': ['.gallery-card:nth-child(2) h3'],
-    'gallery.item2_description': ['.gallery-grid .gallery-card:nth-child(2) .gallery-content p'],
-    'gallery.item3_title': ['.gallery-card:nth-child(3) h3'],
-    'gallery.item3_description': ['.gallery-grid .gallery-card:nth-child(3) .gallery-content p'],
-    'gallery.item4_title': ['.gallery-card:nth-child(4) h3'],
-    'gallery.item4_description': ['.gallery-grid .gallery-card:nth-child(4) .gallery-content p'],
     'process.tag': ['#process .section-tag'],
     'process.title': ['#process-title'],
     'process.lead': ['#process .section-lead'],
@@ -144,12 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
           if (heading && typeof item === 'string') heading.textContent = item;
           if (paragraph && typeof description === 'string') paragraph.textContent = description;
         });
-      }
-
-      // The first metric is the value ("Master Craftsman"), not its descriptive label.
-      const masterCraftsmanMetric = document.querySelector('#hero .metric-item:first-child .metric-value');
-      if (masterCraftsmanMetric && typeof locale.hero.metric_code === 'string') {
-        masterCraftsmanMetric.textContent = locale.hero.metric_code;
       }
 
       document.documentElement.lang = language;

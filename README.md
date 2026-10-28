@@ -7,6 +7,8 @@ GD Webdesign creates modern, performant, accessible, and responsive websites for
 1. The baseline foundation for the GD Webdesign agency landing site.
 2. Shared templates and boilerplates for rapid, standardized client site development.
 
+Detailed operational instructions, decision frameworks, quality gates, and hosting limitations are documented in [docs/WORKFLOW.md](docs/WORKFLOW.md).
+
 ## Tech Stack
 - **HTML5**: Semantic, accessible markup.
 - **CSS**: Mobile-first component styling plus build-time Tailwind CSS utilities.
@@ -31,6 +33,9 @@ GD Webdesign creates modern, performant, accessible, and responsive websites for
 │       └── index.html
 ├── index.html                     # Main GD Webdesign landing page
 ├── netlify.toml                   # Netlify build, routing, caching, & security headers
+├── docs/
+│   ├── roadmap.md                 # Project roadmap and milestone schedule
+│   └── WORKFLOW.md                # Operating procedures, quality gates, & workflow rules
 └── README.md                      # Repository documentation
 ```
 
