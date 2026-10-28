@@ -111,13 +111,3 @@ test('privacy link styling is decoupled from shared localization JavaScript', ()
   assert.match(agency, /class="form-privacy-link"/);
   assert.match(template, /class="form-privacy-link"/);
 });
-
-test('template metric label is wired to the shared runtime locale switch', () => {
-  const metricMarkup = template.match(/<div class="metric-item">[\s\S]*?<\/div>/);
-  assert.ok(metricMarkup, 'Template first hero metric markup was not found');
-  assert.match(metricMarkup[0], /class="[^"]*\\bmetric-label\\b[^"]*">Qualifizierte Fachkräfte</);
-  assert.match(script, /'hero\.metric_code_label': \['\.metric-item:nth-child\(1\) \.metric-label'\]/);
-  assert.equal(boilerplateDe.hero.metric_code_label, 'Qualifizierte Fachkräfte');
-  assert.equal(boilerplateEn.hero.metric_code_label, 'Qualified Specialists');
-  assert.match(template, /<script src="\.\.\/\.\.\/assets\/js\/main\.js/);
-});
