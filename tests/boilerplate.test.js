@@ -44,9 +44,8 @@ test('both locales include the template content and accessibility copy', () => {
 
 test('boilerplate targets trades and gardening sector with concrete copy and no generic technology language', () => {
   assert.doesNotMatch(template.replace(/<!--[\s\S]*?-->/g, ''), /GD Webdesign|Digitalagentur|Jamstack|SEO-Optimierung/i);
-  assert.equal(boilerplateDe.nav.brand, boilerplateEn.nav.brand);
-  assert.equal(boilerplateDe.footer.rights, '© {businessName}. Alle Rechte vorbehalten.');
-  assert.equal(boilerplateEn.footer.rights, '© {businessName}. All rights reserved.');
+  assert.match(boilerplateDe.nav.brand, /Meisterbetrieb|Handwerk|Gartenbau/);
+  assert.match(boilerplateEn.nav.brand, /Master Craftsman|Trades|Landscaping/);
   assert.match(boilerplateDe.hero.title, /Gartenbau|Handwerk/);
   assert.match(boilerplateEn.hero.title, /Gardening|Trades/);
 });
@@ -118,7 +117,7 @@ test('boilerplate config.json exists with required business, branding, gallery, 
   assert.ok(fs.existsSync(configPath), 'templates/one-pager-boilerplate/config.json must exist');
   const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 
-  assert.ok(config.business && typeof config.business.name === 'string');
+  assert.ok(config.business && (typeof config.business.name === 'string' || typeof config.business.name === 'object'));
   assert.ok(config.business.phone && config.business.email && config.business.address);
   assert.ok(config.branding && typeof config.branding.primaryColor === 'string');
   assert.ok(Array.isArray(config.gallery) && config.gallery.length > 0);

@@ -125,18 +125,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (config.business) {
-      if (config.business.name) {
+      const businessName = resolveLocalizedValue(config.business.name, language);
+      if (businessName) {
         document.querySelectorAll('.brand-text').forEach((el) => {
-          el.textContent = config.business.name;
+          el.textContent = businessName;
         });
-        const footerRights = document.querySelector('.footer-bottom p:first-child');
-        if (footerRights) {
-          const locale = document.documentElement.lang === 'en' ? 'en' : 'de';
-          const rightsTemplate = locale === 'en'
-            ? '© {businessName}. All rights reserved.'
-            : '© {businessName}. Alle Rechte vorbehalten.';
-          footerRights.textContent = rightsTemplate.replace('{businessName}', config.business.name);
-        }
       }
 
       const phoneEl = document.querySelector('.contact-phone');
@@ -180,14 +173,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (config.legal) {
-      const legalName = config.business?.legalName || config.business?.name || '';
-      const imprintText = resolveLocalizedValue(config.legal.imprintDetails, language)?.replaceAll('{legalName}', legalName);
+      const imprintText = resolveLocalizedValue(config.legal.imprintDetails, language);
       if (imprintText) {
         const imprintEl = document.querySelector('#impressum .legal-copy');
         if (imprintEl) imprintEl.textContent = imprintText;
       }
 
-      const privacyText = resolveLocalizedValue(config.legal.privacyDetails, language)?.replaceAll('{legalName}', legalName);
+      const privacyText = resolveLocalizedValue(config.legal.privacyDetails, language);
       if (privacyText) {
         const privacyEl = document.querySelector('#datenschutz .legal-copy');
         if (privacyEl) privacyEl.textContent = privacyText;
