@@ -1,5 +1,4 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
   "business": {
     "name": "Meisterbetrieb Handwerk & Gartenbau",
     "legalName": "Meisterbetrieb Handwerk & Gartenbau GmbH",
