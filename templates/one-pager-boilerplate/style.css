@@ -16,7 +16,7 @@
   /* Color Palette - Craftsman & Landscaping Palette */
   --color-primary: #047857;       /* Emerald 700 - Deep Craftsman Green */
   --color-primary-hover: #065f46; /* Emerald 800 */
-  --color-primary-light: color-mix(in srgb, var(--color-primary) 16%, white);
+  --color-primary-light: #d1fae5; /* Emerald 100 */
   --color-dark: #0f172a;          /* Slate 900 */
   --color-heading: #1e293b;       /* Slate 800 */
   --color-body: #334155;          /* Slate 700 */
@@ -182,11 +182,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   font-size: 1.15rem;
   color: var(--color-heading);
   text-decoration: none;
-}
-
-.brand-text {
-  min-width: 0;
-  overflow-wrap: anywhere;
 }
 
 .brand-logo {

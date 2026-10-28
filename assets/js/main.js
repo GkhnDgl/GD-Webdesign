@@ -115,16 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function applyConfig(config, language = 'de') {
     if (!config || typeof config !== 'object') return;
 
-    if (config.business) {
-      const legalName = config.business.legalName || config.business.name;
-      document.querySelectorAll('.business-legal-name').forEach((el) => {
-        el.textContent = legalName;
-      });
-      document.querySelectorAll('.brand').forEach((el) => {
-        el.setAttribute('aria-label', `${config.business.name || legalName} Startseite`);
-      });
-    }
-
     if (config.branding) {
       if (config.branding.primaryColor) {
         document.documentElement.style.setProperty('--color-primary', config.branding.primaryColor);
@@ -180,12 +170,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
     }
-
-    const description = document.querySelector('meta[name="description"]');
-    const configuredTitle = resolveLocalizedValue(config.business?.pageTitle, language);
-    const configuredDescription = resolveLocalizedValue(config.business?.description, language);
-    if (configuredTitle) document.title = configuredTitle;
-    if (description && configuredDescription) description.content = configuredDescription;
 
     if (config.legal) {
       const imprintText = resolveLocalizedValue(config.legal.imprintDetails, language);
