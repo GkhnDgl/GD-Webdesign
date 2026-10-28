@@ -177,11 +177,20 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .brand {
   display: flex;
   align-items: center;
+  min-width: 0;
   gap: 0.625rem;
   font-weight: 800;
   font-size: 1.15rem;
   color: var(--color-heading);
   text-decoration: none;
+}
+
+.brand-text {
+  min-width: 0;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 .brand-logo {
@@ -266,8 +275,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .nav-link {
   color: var(--color-body);
   font-weight: 600;
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   text-decoration: none;
+  white-space: nowrap;
+}
+
+.nav-cta {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-height: 2.5rem;
 }
 
 .nav-link:hover {
@@ -731,28 +749,6 @@ section {
     gap: 1rem;
   }
 
-  .mobile-menu-toggle {
-    display: none;
-  }
-
-  .primary-navigation {
-    display: flex;
-    position: static;
-    padding: 0;
-    box-shadow: none;
-    border-bottom: none;
-    flex-direction: row;
-    align-items: center;
-    gap: 1.75rem;
-    background-color: transparent;
-  }
-
-  .nav-list {
-    flex-direction: row;
-    align-items: center;
-    gap: 1.5rem;
-  }
-
   .form-row {
     grid-template-columns: 1fr 1fr;
   }
@@ -792,6 +788,28 @@ section {
 }
 
 @media (min-width: 1024px) {
+  .mobile-menu-toggle {
+    display: none;
+  }
+
+  .primary-navigation {
+    display: flex;
+    position: static;
+    padding: 0;
+    box-shadow: none;
+    border-bottom: none;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.25rem;
+    background-color: transparent;
+  }
+
+  .nav-list {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+
   .bento-grid {
     grid-template-columns: repeat(3, 1fr);
   }

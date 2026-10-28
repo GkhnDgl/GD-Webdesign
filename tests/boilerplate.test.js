@@ -112,6 +112,25 @@ test('privacy link styling is decoupled from shared localization JavaScript', ()
   assert.match(template, /class="form-privacy-link"/);
 });
 
+test('boilerplate desktop navigation links enforce single-line wrapping and header CTA is visually proportionate', () => {
+  assert.match(templateStyles, /\.nav-link\s*\{[^}]*white-space:\s*nowrap;/);
+  assert.match(templateStyles, /\.nav-cta\s*\{[^}]*padding:\s*0\.5rem\s+1rem;/);
+  assert.match(templateStyles, /\.nav-cta\s*\{[^}]*white-space:\s*nowrap;/);
+  assert.match(templateStyles, /\.nav-cta\s*\{[^}]*flex-shrink:\s*0;/);
+  assert.match(templateStyles, /\.brand-text\s*\{[^}]*word-break:\s*keep-all;/);
+});
+
+test('boilerplate switches from mobile menu to desktop navigation at 1024px to avoid header collisions', () => {
+  const desktopBlock = [...templateStyles.matchAll(/@media \(min-width: 1024px\)\s*\{[\s\S]*?\n\}/g)].map((m) => m[0]).join('\n');
+  assert.match(desktopBlock, /\.mobile-menu-toggle\s*\{[^}]*display:\s*none;/);
+  assert.match(desktopBlock, /\.primary-navigation\s*\{[^}]*position:\s*static;/);
+  assert.match(desktopBlock, /\.nav-list\s*\{[^}]*flex-direction:\s*row;/);
+  const tabletBlock = [...templateStyles.matchAll(/@media \(min-width: 640px\)\s*\{[\s\S]*?\n\}/g)].map((m) => m[0]).join('\n');
+  assert.doesNotMatch(tabletBlock, /\.mobile-menu-toggle|\.primary-navigation/);
+  assert.match(script, /window\.innerWidth >= 1024\) closeMenu\(\)/);
+  assert.match(templateStyles, /\.brand\s*\{[^}]*min-width:\s*0;/);
+});
+
 test('boilerplate config.json exists with required business, branding, gallery, and legal schema', () => {
   const configPath = path.join(root, 'templates/one-pager-boilerplate/config.json');
   assert.ok(fs.existsSync(configPath), 'templates/one-pager-boilerplate/config.json must exist');
