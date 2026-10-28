@@ -570,6 +570,15 @@ section {
   text-align: center;
 }
 
+.form-privacy-link {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.form-privacy-link:hover {
+  color: var(--color-primary-hover);
+}
+
 /* Footer */
 .site-footer {
   border-top: 1px solid var(--color-border);
