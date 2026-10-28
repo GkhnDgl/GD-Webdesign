@@ -7,6 +7,7 @@
     "brand": "GD Webdesign",
     "brand_label": "GD Webdesign Startseite",
     "services": "Leistungen",
+    "gallery": "Galerie",
     "process": "Ablauf",
     "about": "Über uns",
     "contact": "Kontakt",
@@ -43,6 +44,19 @@
     "fourth_description": "Flexible, sichere und wartungsarme Webarchitekturen – perfekt abgestimmt auf modulare Landing Pages und moderne Web-Anwendungen.",
     "fifth_title": "Wartung, Betreuung & DSGVO-Sicherheit",
     "fifth_description": "Zuverlässige Betreuung nach dem Launch: Regelmäßige Updates, Sicherheits-Monitoring und kontinuierliche Weiterentwicklung Ihres Webprojekts."
+  },
+  "gallery": {
+    "tag": "Referenzen & Galerie",
+    "title": "Auszug unserer digitalen Projekte",
+    "lead": "Entdecken Sie eine Auswahl unserer maßgeschneiderten Weblösungen und digitalen Markenauftritte.",
+    "item1_title": "E-Commerce Plattform",
+    "item1_description": "Performanter Online-Shop mit barrierefreier Checkout-Experience und schnellen Ladezeiten.",
+    "item2_title": "Corporate Website",
+    "item2_description": "Modernes Redesign für ein mittelständisches Industrieunternehmen mit klarem Markenauftritt.",
+    "item3_title": "SaaS Landing Page",
+    "item3_description": "Konversionsstarke Landing Page mit interaktiven Komponenten und Jamstack-Architektur.",
+    "item4_title": "Portfolio Webapp",
+    "item4_description": "Maßgeschneidertes Web-Portal mit barrierefreier UI und optimierten Ladezeiten."
   },
   "process": {
     "tag": "Transparenter Ablauf",

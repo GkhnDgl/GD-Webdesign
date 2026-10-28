@@ -7,6 +7,7 @@
     "brand": "GD Webdesign",
     "brand_label": "GD Webdesign Homepage",
     "services": "Services",
+    "gallery": "Gallery",
     "process": "Process",
     "about": "About Us",
     "contact": "Contact",
@@ -43,6 +44,19 @@
     "fourth_description": "Flexible, secure, and low-maintenance web architectures – perfectly tailored to modular landing pages and modern web applications.",
     "fifth_title": "Maintenance, Support & GDPR Security",
     "fifth_description": "Reliable support after launch: Regular updates, security monitoring, and continuous ongoing development of your web project."
+  },
+  "gallery": {
+    "tag": "Portfolio & Showcase",
+    "title": "Excerpt of Our Digital Projects",
+    "lead": "Explore a selection of our tailored web solutions and digital brand presences.",
+    "item1_title": "E-Commerce Platform",
+    "item1_description": "Performant online store with accessible checkout experience and fast load times.",
+    "item2_title": "Corporate Website",
+    "item2_description": "Modern redesign for a medium-sized industrial enterprise with clear brand identity.",
+    "item3_title": "SaaS Landing Page",
+    "item3_description": "High-converting landing page with interactive components and Jamstack architecture.",
+    "item4_title": "Portfolio Webapp",
+    "item4_description": "Custom web portal with accessible UI and optimized loading speeds."
   },
   "process": {
     "tag": "Transparent Process",
