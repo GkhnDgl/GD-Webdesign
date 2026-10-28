@@ -1,14 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "business": {
-    "name": {
-      "de": "Meisterbetrieb Handwerk & Gartenbau",
-      "en": "Master Craftsman Trades & Landscaping"
-    },
-    "legalName": {
-      "de": "Meisterbetrieb Handwerk & Gartenbau GmbH",
-      "en": "Master Craftsman Trades & Landscaping Ltd."
-    },
+    "name": "Meisterbetrieb Handwerk & Gartenbau",
+    "legalName": "Meisterbetrieb Handwerk & Gartenbau GmbH",
     "phone": "+49 (0) 123 456789",
     "email": "kontakt@beispiel-handwerk.de",
     "address": "Musterstraße 12, 12345 Musterstadt"
@@ -38,11 +32,11 @@
   "legal": {
     "imprintDetails": {
       "de": "Meisterbetrieb Handwerk & Gartenbau GmbH\nMusterstraße 12, 12345 Musterstadt\nVertreten durch: Max Mustermann\nE-Mail: kontakt@beispiel-handwerk.de\nHandwerkskammer Musterstadt, Betriebsnummer: 1234567",
-      "en": "Master Craftsman Trades & Landscaping Ltd.\nMusterstraße 12, 12345 Musterstadt, Germany\nRepresented by: Max Mustermann\nEmail: kontakt@beispiel-handwerk.de\nChamber of Crafts Musterstadt, Registration No: 1234567"
+      "en": "Meisterbetrieb Handwerk & Gartenbau GmbH\nMusterstraße 12, 12345 Musterstadt, Germany\nRepresented by: Max Mustermann\nEmail: kontakt@beispiel-handwerk.de\nChamber of Crafts Musterstadt, Registration No: 1234567"
     },
     "privacyDetails": {
       "de": "Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) ist Meisterbetrieb Handwerk & Gartenbau GmbH, Musterstraße 12, 12345 Musterstadt, E-Mail: kontakt@beispiel-handwerk.de.",
-      "en": "Responsible controller within the meaning of the General Data Protection Regulation (GDPR) is Master Craftsman Trades & Landscaping Ltd., Musterstraße 12, 12345 Musterstadt, Email: kontakt@beispiel-handwerk.de."
+      "en": "Responsible controller within the meaning of the General Data Protection Regulation (GDPR) is Meisterbetrieb Handwerk & Gartenbau GmbH, Musterstraße 12, 12345 Musterstadt, Email: kontakt@beispiel-handwerk.de."
     }
   }
 }
