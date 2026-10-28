@@ -111,3 +111,11 @@ test('privacy link styling is decoupled from shared localization JavaScript', ()
   assert.match(agency, /class="form-privacy-link"/);
   assert.match(template, /class="form-privacy-link"/);
 });
+
+test('boilerplate desktop navigation links enforce single-line wrapping and header CTA is visually proportionate', () => {
+  assert.match(templateStyles, /\.nav-link\s*\{[^}]*white-space:\s*nowrap;/);
+  assert.match(templateStyles, /\.nav-cta\s*\{[^}]*padding:\s*0\.5rem\s+1rem;/);
+  assert.match(templateStyles, /\.nav-cta\s*\{[^}]*white-space:\s*nowrap;/);
+  assert.match(templateStyles, /\.nav-cta\s*\{[^}]*flex-shrink:\s*0;/);
+  assert.match(templateStyles, /\.brand-text\s*\{[^}]*word-break:\s*keep-all;/);
+});
