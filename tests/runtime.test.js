@@ -6,6 +6,7 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const de = JSON.parse(fs.readFileSync(path.join(root, 'locales/de.json'), 'utf8'));
 const en = JSON.parse(fs.readFileSync(path.join(root, 'locales/en.json'), 'utf8'));
+const boilerplateConfig = JSON.parse(fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/config.json'), 'utf8'));
 const indexHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const boilerplateHtml = fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/index.html'), 'utf8');
 const mainJs = fs.readFileSync(path.join(root, 'assets/js/main.js'), 'utf8');
@@ -187,6 +188,7 @@ test('DOM translation and accessibility updates function correctly during langua
 
   const docElement = new MockElement('html');
   docElement.lang = 'de';
+  docElement.style = { setProperty: () => {} };
 
   const menuBtn = new MockElement('button', '', 'mobile-menu-toggle', { 'aria-expanded': 'false', 'aria-label': 'Menü öffnen' });
   const nav = new MockElement('nav', 'primary-navigation', 'primary-navigation', { 'aria-label': 'Hauptnavigation' });
@@ -250,8 +252,8 @@ test('DOM translation and accessibility updates function correctly during langua
   const mockFetch = async (url) => {
     if (url.endsWith('config.json')) {
       return {
-        ok: false,
-        status: 404
+        ok: true,
+        json: async () => boilerplateConfig
       };
     }
     assert.match(url, /https:\/\/gkhndgl\.github\.io\/GD-Webdesign\/locales\/(de|en)\.json/);
@@ -284,12 +286,12 @@ test('DOM translation and accessibility updates function correctly during langua
 
   // Initially German
   assert.equal(docElement.lang, 'de');
-  assert.equal(brandText.textContent, 'GD Webdesign');
+  assert.equal(brandText.textContent, boilerplateConfig.business.name);
   assert.equal(heroTitle.textContent, 'Digitale Erlebnisse, die begeistern und konvertieren');
   assert.equal(impressumTitle.textContent, de.legal.imprint_title);
-  assert.equal(impressumCopy.textContent, de.legal.imprint_text);
+  assert.equal(impressumCopy.textContent, boilerplateConfig.legal.imprintDetails.de);
   assert.equal(datenschutzTitle.textContent, de.legal.privacy_title);
-  assert.equal(datenschutzCopy.textContent, de.legal.privacy_text);
+  assert.equal(datenschutzCopy.textContent, boilerplateConfig.legal.privacyDetails.de);
   assert.equal(langBtn.textContent, 'EN');
   assert.equal(langBtn.getAttribute('aria-pressed'), 'false');
   assert.equal(langBtn.getAttribute('aria-label'), de.accessibility.switch_to_english);
@@ -306,13 +308,15 @@ test('DOM translation and accessibility updates function correctly during langua
   }
 
   assert.equal(docElement.lang, 'en');
-  assert.equal(brandText.textContent, 'GD Webdesign');
+  assert.equal(brandText.textContent, boilerplateConfig.business.name);
   assert.equal(heroTitle.textContent, 'Digital experiences that inspire and convert');
   assert.equal(metricLabel1.textContent, 'Tailored Code');
   assert.equal(impressumTitle.textContent, en.legal.imprint_title);
-  assert.equal(impressumCopy.textContent, en.legal.imprint_text);
+  assert.equal(impressumCopy.textContent, boilerplateConfig.legal.imprintDetails.en);
+  assert.ok(impressumCopy.textContent.includes(boilerplateConfig.business.legalName));
   assert.equal(datenschutzTitle.textContent, en.legal.privacy_title);
-  assert.equal(datenschutzCopy.textContent, en.legal.privacy_text);
+  assert.equal(datenschutzCopy.textContent, boilerplateConfig.legal.privacyDetails.en);
+  assert.ok(datenschutzCopy.textContent.includes(boilerplateConfig.business.legalName));
   assert.equal(langBtn.textContent, 'DE');
   assert.equal(langBtn.getAttribute('aria-pressed'), 'true');
   assert.equal(langBtn.getAttribute('aria-label'), en.accessibility.switch_to_german);

@@ -117,11 +117,15 @@ test('boilerplate config.json exists with required business, branding, gallery, 
   assert.ok(fs.existsSync(configPath), 'templates/one-pager-boilerplate/config.json must exist');
   const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 
-  assert.ok(config.business && (typeof config.business.name === 'string' || typeof config.business.name === 'object'));
+  assert.ok(config.business && typeof config.business.name === 'string');
+  assert.equal(config.business.name, 'Meisterbetrieb Handwerk & Gartenbau');
+  assert.equal(config.business.legalName, 'Meisterbetrieb Handwerk & Gartenbau GmbH');
   assert.ok(config.business.phone && config.business.email && config.business.address);
   assert.ok(config.branding && typeof config.branding.primaryColor === 'string');
   assert.ok(Array.isArray(config.gallery) && config.gallery.length > 0);
   assert.ok(config.legal && config.legal.imprintDetails && config.legal.privacyDetails);
+  assert.ok(config.legal.imprintDetails.en.includes(config.business.legalName));
+  assert.ok(config.legal.privacyDetails.en.includes(config.business.legalName));
 
   // Ensure no unmasked sensitive credentials or private tokens are present
   const jsonStr = JSON.stringify(config);

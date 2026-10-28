@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (config.business) {
-      const businessName = resolveLocalizedValue(config.business.name, language);
+      const businessName = config.business.name;
       if (businessName) {
         document.querySelectorAll('.brand-text').forEach((el) => {
           el.textContent = businessName;
