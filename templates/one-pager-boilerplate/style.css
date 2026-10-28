@@ -154,7 +154,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   position: sticky;
   top: 0;
   z-index: 100;
-  height: var(--header-height);
+  min-height: var(--header-height);
+  height: auto;
+  padding-block: 0.5rem;
   background-color: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -186,7 +188,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
 .brand-text {
   min-width: 0;
+  max-width: 22rem;
   overflow-wrap: anywhere;
+  word-break: normal;
 }
 
 .brand-logo {
