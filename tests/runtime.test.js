@@ -312,7 +312,7 @@ test('DOM translation and accessibility updates function correctly during langua
   }
 
   assert.equal(docElement.lang, 'en');
-  assert.equal(brandText.textContent, 'GD Webdesign');
+  assert.equal(brandText.textContent, 'Meisterbetrieb Handwerk & Gartenbau');
   assert.equal(heroTitle.textContent, 'Digital experiences that inspire and convert');
   assert.equal(metricLabel1.textContent, 'Tailored Code');
   assert.equal(impressumTitle.textContent, en.legal.imprint_title);
