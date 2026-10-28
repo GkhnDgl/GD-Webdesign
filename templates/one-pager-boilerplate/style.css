@@ -154,7 +154,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   position: sticky;
   top: 0;
   z-index: 100;
-  height: var(--header-height);
+  min-height: var(--header-height);
+  height: auto;
+  padding-block: 0.5rem;
   background-color: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -171,17 +173,26 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   display: flex;
   align-items: center;
   justify-content: space-between;
+  min-height: var(--header-height);
   gap: 0.75rem;
 }
 
 .brand {
   display: flex;
+  flex: 1 1 0;
+  min-width: 0;
   align-items: center;
   gap: 0.625rem;
   font-weight: 800;
   font-size: 1.15rem;
   color: var(--color-heading);
   text-decoration: none;
+}
+
+.brand-text {
+  min-width: 0;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
 }
 
 .brand-logo {
@@ -239,7 +250,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .primary-navigation {
   display: none;
   position: absolute;
-  top: var(--header-height);
+  top: 100%;
   left: 0;
   right: 0;
   background-color: #ffffff;
