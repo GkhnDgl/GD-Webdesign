@@ -4,7 +4,15 @@
     "legalName": "Meisterbetrieb Handwerk & Gartenbau GmbH",
     "phone": "+49 (0) 123 456789",
     "email": "kontakt@beispiel-handwerk.de",
-    "address": "Musterstraße 12, 12345 Musterstadt"
+    "address": "Musterstraße 12, 12345 Musterstadt",
+    "pageTitle": {
+      "de": "Meisterbetrieb Handwerk & Gartenbau – Ihre Experten vor Ort",
+      "en": "Master Craftsman Trades & Landscaping – Local Experts"
+    },
+    "description": {
+      "de": "Ihr zuverlässiger Meisterbetrieb für Garten- und Landschaftsbau, Renovierung, Ausbau und Objektpflege. Erstklassige Qualität, persönliche Beratung und faire Festpreise.",
+      "en": "Your reliable trades and landscaping company for garden design, renovation, construction and property care. Quality workmanship, personal advice and fair pricing."
+    }
   },
   "branding": {
     "primaryColor": "#047857",
