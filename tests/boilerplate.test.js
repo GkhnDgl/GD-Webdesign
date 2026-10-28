@@ -44,8 +44,9 @@ test('both locales include the template content and accessibility copy', () => {
 
 test('boilerplate targets trades and gardening sector with concrete copy and no generic technology language', () => {
   assert.doesNotMatch(template.replace(/<!--[\s\S]*?-->/g, ''), /GD Webdesign|Digitalagentur|Jamstack|SEO-Optimierung/i);
-  assert.match(boilerplateDe.nav.brand, /Meisterbetrieb|Handwerk|Gartenbau/);
-  assert.match(boilerplateEn.nav.brand, /Master Craftsman|Trades|Landscaping/);
+  assert.equal(boilerplateDe.nav.brand, boilerplateEn.nav.brand);
+  assert.equal(boilerplateDe.footer.rights, '© {businessName}. Alle Rechte vorbehalten.');
+  assert.equal(boilerplateEn.footer.rights, '© {businessName}. All rights reserved.');
   assert.match(boilerplateDe.hero.title, /Gartenbau|Handwerk/);
   assert.match(boilerplateEn.hero.title, /Gardening|Trades/);
 });
