@@ -252,7 +252,7 @@ test('DOM translation and accessibility updates function correctly during langua
       return {
         ok: true,
         json: async () => ({
-          business: { name: 'GD Webdesign' },
+          business: { name: 'Meisterbetrieb Handwerk & Gartenbau' },
           legal: {
             imprintDetails: { de: de.legal.imprint_text, en: en.legal.imprint_text },
             privacyDetails: { de: de.legal.privacy_text, en: en.legal.privacy_text }
@@ -290,7 +290,7 @@ test('DOM translation and accessibility updates function correctly during langua
 
   // Initially German
   assert.equal(docElement.lang, 'de');
-  assert.equal(brandText.textContent, 'GD Webdesign');
+  assert.equal(brandText.textContent, 'Meisterbetrieb Handwerk & Gartenbau');
   assert.equal(heroTitle.textContent, 'Digitale Erlebnisse, die begeistern und konvertieren');
   assert.equal(impressumTitle.textContent, de.legal.imprint_title);
   assert.equal(impressumCopy.textContent, de.legal.imprint_text);
