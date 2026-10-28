@@ -181,13 +181,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    const legalName = config.business?.legalName || config.business?.name;
-    if (legalName) {
-      const description = document.querySelector('meta[data-config-description]');
-      if (description && config.business.description) description.content = config.business.description;
-      const title = config.business.pageTitle || `${legalName} – Ihre Experten vor Ort`;
-      document.title = title;
-    }
+    const description = document.querySelector('meta[name="description"]');
+    const configuredTitle = resolveLocalizedValue(config.business?.pageTitle, language);
+    const configuredDescription = resolveLocalizedValue(config.business?.description, language);
+    if (configuredTitle) document.title = configuredTitle;
+    if (description && configuredDescription) description.content = configuredDescription;
 
     if (config.legal) {
       const imprintText = resolveLocalizedValue(config.legal.imprintDetails, language);
