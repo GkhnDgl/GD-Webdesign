@@ -1,10 +1,10 @@
 {
   "meta": {
-    "title": "Master Craftsman Trades & Landscaping – Local Experts",
+    "title": "Local Experts – Landscaping & Trades",
     "description": "Your reliable master craftsman business for landscaping, renovation, interior finishing, and property maintenance. Superior quality, personal consultation, and fair fixed prices."
   },
   "nav": {
-    "brand": "Master Craftsman Trades & Landscaping",
+    "brand": "Meisterbetrieb Handwerk & Gartenbau GmbH",
     "brand_label": "Homepage",
     "services": "Services",
     "gallery": "Gallery",
@@ -104,7 +104,7 @@
     "legal_heading": "Legal",
     "imprint": "Imprint (Placeholder)",
     "privacy": "Privacy Notice (Placeholder)",
-    "rights": "© Master Craftsman Trades & Landscaping. All rights reserved.",
+    "rights": "© {businessName}. All rights reserved.",
     "notice": "Complete and review all legal information before publishing."
   },
   "legal": {
