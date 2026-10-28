@@ -125,9 +125,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (config.business) {
-      if (config.business.name) {
+      const legalName = config.business.legalName || config.business.name;
+      if (legalName) {
         document.querySelectorAll('.brand-text').forEach((el) => {
-          el.textContent = config.business.name;
+          el.textContent = legalName;
+        });
+        document.querySelectorAll('.brand').forEach((el) => {
+          el.setAttribute('aria-label', `${legalName} Startseite`);
         });
       }
 
