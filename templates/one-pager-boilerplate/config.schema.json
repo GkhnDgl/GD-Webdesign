@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "./config.schema.json",
+  "title": "Master Template A customer configuration",
+  "type": "object",
+  "required": [
+    "business",
+    "branding",
+    "gallery",
+    "legal"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "business": {
+      "type": "object",
+      "required": [
+        "name",
+        "legalName",
+        "phone",
+        "email",
+        "address"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "legalName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "phone": {
+          "type": "string",
+          "minLength": 1
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "address": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "pageTitle": {
+          "type": "string"
+        }
+      }
+    },
+    "branding": {
+      "type": "object",
+      "required": [
+        "primaryColor",
+        "primaryHoverColor"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "primaryColor": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$"
+        },
+        "primaryHoverColor": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$"
+        }
+      }
+    },
+    "gallery": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "image",
+          "alt"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "image": {
+            "type": "string",
+            "minLength": 1
+          },
+          "alt": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "legal": {
+      "type": "object",
+      "required": [
+        "imprintDetails",
+        "privacyDetails"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "imprintDetails": {
+          "$ref": "#/$defs/localizedText"
+        },
+        "privacyDetails": {
+          "$ref": "#/$defs/localizedText"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "localizedText": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "object",
+          "required": [
+            "de",
+            "en"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "de": {
+              "type": "string",
+              "minLength": 1
+            },
+            "en": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      ]
+    }
+  }
+}
