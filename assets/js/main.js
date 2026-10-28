@@ -124,6 +124,34 @@ document.addEventListener('DOMContentLoaded', () => {
         if (typeof value === 'string') selectors.forEach((selector) => setText(selector, value));
       });
 
+      // Apply the template's gallery translations directly within its own section.
+      // Explicit section scoping avoids collisions with other page layouts and ensures
+      // the lead copy and all four card descriptions are updated consistently.
+      const gallery = document.querySelector('#gallery');
+      if (gallery) {
+        const galleryTag = gallery.querySelector('.section-tag');
+        const galleryTitle = gallery.querySelector('#gallery-title');
+        const galleryLead = gallery.querySelector('.section-lead');
+        if (galleryTag) galleryTag.textContent = locale.gallery.tag;
+        if (galleryTitle) galleryTitle.textContent = locale.gallery.title;
+        if (galleryLead) galleryLead.textContent = locale.gallery.lead;
+
+        gallery.querySelectorAll('.gallery-grid .gallery-card').forEach((card, index) => {
+          const item = locale.gallery[`item${index + 1}_title`];
+          const description = locale.gallery[`item${index + 1}_description`];
+          const heading = card.querySelector('h3');
+          const paragraph = card.querySelector('.gallery-content p');
+          if (heading && typeof item === 'string') heading.textContent = item;
+          if (paragraph && typeof description === 'string') paragraph.textContent = description;
+        });
+      }
+
+      // The first metric is the value ("Master Craftsman"), not its descriptive label.
+      const masterCraftsmanMetric = document.querySelector('#hero .metric-item:first-child .metric-value');
+      if (masterCraftsmanMetric && typeof locale.hero.metric_code === 'string') {
+        masterCraftsmanMetric.textContent = locale.hero.metric_code;
+      }
+
       document.documentElement.lang = language;
       document.title = locale.meta.title;
       const description = document.querySelector('meta[name="description"]');
