@@ -158,3 +158,17 @@ test('template provides targets for configured contact details and legal name', 
   assert.ok(script.includes('description.content = configuredDescription'));
   assert.ok(templateStyles.includes('--color-primary-light: color-mix(in srgb, var(--color-primary) 16%, white)'));
 });
+
+test('company legal name remains unchanged in English and contact markup contains real line breaks', () => {
+  const config = JSON.parse(fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/config.json'), 'utf8'));
+  const english = JSON.parse(fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/locales/en.json'), 'utf8'));
+  assert.equal(config.business.name, config.business.legalName);
+  assert.equal(english.nav.brand, config.business.legalName);
+  assert.ok(english.footer.rights.includes(config.business.legalName));
+  assert.ok(config.business.pageTitle.en.startsWith(config.business.legalName));
+  assert.ok(!config.legal.imprintDetails.en.includes('Master Craftsman Trades & Landscaping Ltd.'));
+  assert.ok(!config.legal.privacyDetails.en.includes('Master Craftsman Trades & Landscaping Ltd.'));
+  assert.ok(!template.includes('\\\\n          <a class="contact-phone'));
+  assert.match(template, /<div class="business-contact-details[\\s\\S]*?<a class="contact-phone/);
+  assert.match(templateStyles, /\\.brand-text \\{[\\s\\S]*?overflow-wrap: anywhere;/);
+});
