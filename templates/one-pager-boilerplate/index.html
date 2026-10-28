@@ -287,7 +287,13 @@
           </p>
         </div>
 
-        <div class="business-contact-details mb-6 flex flex-col sm:flex-row flex-wrap gap-4 text-sm text-slate-700" aria-label="Kontaktdaten des Betriebs">\n          <a class="contact-phone hidden" href="#"><span></span></a>\n          <a class="contact-email hidden" href="#"><span></span></a>\n          <p class="contact-address hidden"><span></span></p>\n        </div>\n\n        <form class="contact-form bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <div class="business-contact-details mb-6 flex flex-col sm:flex-row flex-wrap gap-4 text-sm text-slate-700" aria-label="Kontaktdaten des Betriebs">
+          <a class="contact-phone hidden break-words" href="#"><span></span></a>
+          <a class="contact-email hidden break-words" href="#"><span></span></a>
+          <p class="contact-address hidden break-words"><span></span></p>
+        </div>
+
+        <form class="contact-form bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
           <!-- Required hidden input for Netlify form processing -->
           <input type="hidden" name="form-name" value="contact" />
 
