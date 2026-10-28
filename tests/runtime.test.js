@@ -195,6 +195,7 @@ test('DOM translation and accessibility updates function correctly during langua
 
   const heroTitle = new MockElement('h1', 'hero-title');
   const brandText = new MockElement('span', '', 'brand-text');
+  const metricLabel1 = new MockElement('span', '', 'metric-label');
   const impressumTitle = new MockElement('h2', 'impressum-title');
   const impressumCopy = new MockElement('p', '', 'legal-copy');
 
@@ -233,7 +234,10 @@ test('DOM translation and accessibility updates function correctly during langua
       if (sel === '.form-privacy-note') return privacyNote;
       return queryAll(sel)[0] || null;
     },
-    querySelectorAll: (sel) => queryAll(sel),
+    querySelectorAll: (sel) => {
+      if (sel === '.metric-item:nth-child(1) .metric-label') return [metricLabel1];
+      return queryAll(sel);
+    },
     createTextNode: (txt) => txt,
     createElement: (tag) => new MockElement(tag)
   };
@@ -298,6 +302,7 @@ test('DOM translation and accessibility updates function correctly during langua
   assert.equal(docElement.lang, 'en');
   assert.equal(brandText.textContent, 'GD Webdesign');
   assert.equal(heroTitle.textContent, 'Digital experiences that inspire and convert');
+  assert.equal(metricLabel1.textContent, 'Tailored Code');
   assert.equal(impressumTitle.textContent, en.legal.imprint_title);
   assert.equal(impressumCopy.textContent, en.legal.imprint_text);
   assert.equal(datenschutzTitle.textContent, en.legal.privacy_title);

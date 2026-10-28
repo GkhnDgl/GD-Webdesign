@@ -50,6 +50,11 @@ test('boilerplate targets trades and gardening sector with concrete copy and no 
   assert.match(boilerplateEn.hero.title, /Gardening|Trades/);
 });
 
+test('boilerplate hero metrics localize correctly in German and English', () => {
+  assert.equal(boilerplateDe.hero.metric_code_label, 'Qualifizierte Fachkräfte');
+  assert.equal(boilerplateEn.hero.metric_code_label, 'Qualified Specialists');
+});
+
 test('locally hosted woff2 font file and font-face declarations exist', () => {
   assert.ok(fs.existsSync(path.join(root, 'assets/fonts/PlusJakartaSans-Variable.woff2')), 'woff2 font file missing in assets/fonts/');
   assert.ok(fs.existsSync(path.join(root, 'assets/fonts/LICENSE.txt')), 'Font license file missing in assets/fonts/');
