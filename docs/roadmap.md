@@ -57,7 +57,7 @@ gantt
 | ID | Phase | Task / milestone | Start date | End date | Status |
 |---|---|---|---|---|---|
 | P1 | 1 — Technical foundation | Technical foundation and standardization | 2026-11-01 | 2026-11-30 | Planned |
-| M1.1 | 1 — Technical foundation | GitHub repository, workflows, responsive Master Template A, local fonts | 2026-11-01 | 2026-11-10 | Planned |
+| M1.1 | 1 — Technical foundation | GitHub repository, workflows, responsive Master Template A, local fonts | 2026-11-01 | 2026-11-10 | Completed |
 | M1.2 | 1 — Technical foundation | Move customer-specific content into `config.json`; test sample-business setup under 20 minutes | 2026-11-11 | 2026-11-18 | Planned |
 | M1.3 | 1 — Technical foundation | Agency showcase one-pager and mobile onboarding form | 2026-11-19 | 2026-11-30 | Planned |
 | P2 | 2 — Lead generation | Lead generation and outreach preparation | 2026-12-01 | 2026-12-31 | Planned |
@@ -86,5 +86,6 @@ gantt
 ## Planning notes
 
 - The start date is fixed at **2026-11-01**. Phase boundaries follow calendar months for readability.
+- **M1.1 Early Acceptance:** M1.1 was formally accepted by the user on **2026-10-31**, ahead of its planned calendar window (2026-11-01 to 2026-11-10). The planned dates in the schedule are preserved to maintain visibility of the original planning estimates versus actual acceptance.
 - The source roadmap uses relative labels such as “Tag 1–10” and “Woche 5–6” without explicit calendar dates. The specific dates above are a practical schedule interpretation anchored to the required start date; adjust them if execution capacity or dependencies change.
 - Financial assumptions and the 12-month revenue scenario remain in the source document and are intentionally not duplicated here.
