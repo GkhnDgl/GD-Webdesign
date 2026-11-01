@@ -118,5 +118,8 @@
     "close_menu": "Close menu",
     "switch_to_english": "Switch language to English",
     "switch_to_german": "Switch language to German"
+  },
+  "config": {
+    "error": "The website configuration is missing or invalid. Please check config.json before publishing this template."
   }
 }
