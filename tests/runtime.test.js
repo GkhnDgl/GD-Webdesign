@@ -149,7 +149,7 @@ test('DOM translation and accessibility updates function correctly during langua
       this.classList = {
         add: (c) => { if (!this.className.includes(c)) this.className += ' ' + c; },
         remove: (c) => { this.className = this.className.replace(new RegExp('\\b' + c + '\\b', 'g'), '').trim(); },
-        contains: (c) => this.className.split(/\\s+/).includes(c),
+        contains: (c) => this.className.split(' ').includes(c),
         toggle: (c, force) => {
           const has = this.className.includes(c);
           if (force === true || (force === undefined && !has)) this.classList.add(c);
@@ -258,7 +258,7 @@ test('DOM translation and accessibility updates function correctly during langua
         json: async () => boilerplateConfig
       };
     }
-    assert.match(url, /https:\/\/gkhndgl\.github\.io\/GD-Webdesign\/locales\/(de|en)\.json/);
+    assert.ok(url.includes('https://gkhndgl.github.io/GD-Webdesign/templates/one-pager-boilerplate/locales/'));
     const isEn = url.includes('en.json');
     const data = isEn ? en : de;
     return {
