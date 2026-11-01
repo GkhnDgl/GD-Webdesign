@@ -155,3 +155,40 @@ test('main.js resolves config.json relative to page base URL and handles errors 
   assert.match(script, /new URL\('config\.json', pageBaseUrl\)/);
   assert.match(script, /applyConfig/);
 });
+
+
+test('Master Template A customer config matches its documented JSON Schema', () => {
+  const config = JSON.parse(fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/config.json'), 'utf8'));
+  const schema = JSON.parse(fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/config.schema.json'), 'utf8'));
+
+  assert.equal(config.$schema, './config.schema.json');
+  assert.deepEqual(schema.required, ['$schema', 'business', 'branding', 'gallery', 'legal']);
+  assert.equal(schema.properties.gallery.minItems, 4);
+  assert.equal(schema.properties.gallery.maxItems, 4);
+  assert.equal(config.gallery.length, 4);
+  assert.match(config.business.phone, /^[+0-9][0-9\\s()./-]{5,24}$/);
+  assert.match(config.business.email, /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/);
+  assert.match(config.branding.primaryColor, /^#[0-9a-f]{6}$/i);
+  assert.match(config.branding.primaryHoverColor, /^#[0-9a-f]{6}$/i);
+  assert.ok(config.gallery.every((item) => item.image.startsWith('../../assets/images/') && item.alt.trim()));
+  for (const key of ['imprintDetails', 'privacyDetails']) {
+    assert.equal(typeof config.legal[key].de, 'string');
+    assert.equal(typeof config.legal[key].en, 'string');
+  }
+});
+
+test('template configuration is scoped to the template and contact values have render targets', () => {
+  assert.match(script, /document\\.body\\.classList\\.contains\\('template-master-a'\\)/);
+  assert.match(script, /if \\(!isTemplatePage\\) return null/);
+  assert.match(script, /function validateConfig\\(config\\)/);
+  assert.match(script, /configError\\.textContent = locale\\.config\\.error/);
+  assert.match(template, /id="config-error"[^>]*role="alert"/);
+  assert.match(template, /class="contact-phone hidden/);
+  assert.match(template, /class="contact-email hidden/);
+  assert.match(template, /class="contact-address hidden/);
+});
+
+test('template locales include matching configuration error messages', () => {
+  assert.equal(typeof boilerplateDe.config.error, 'string');
+  assert.equal(typeof boilerplateEn.config.error, 'string');
+});
