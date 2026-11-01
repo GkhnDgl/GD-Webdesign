@@ -166,7 +166,7 @@ test('Master Template A customer config matches its documented JSON Schema', () 
   assert.equal(schema.properties.gallery.minItems, 4);
   assert.equal(schema.properties.gallery.maxItems, 4);
   assert.equal(config.gallery.length, 4);
-  assert.ok(config.business.phone.length >= 6);
+  assert.ok(new RegExp(schema.properties.business.properties.phone.pattern).test(config.business.phone));
   assert.ok(config.business.email.includes('@'));
   assert.match(config.branding.primaryColor, /^#[0-9a-fA-F]{6}$/);
   assert.match(config.branding.primaryHoverColor, /^#[0-9a-fA-F]{6}$/);
@@ -183,7 +183,7 @@ test('template configuration is scoped to the template and contact values have r
   assert.ok(script.includes('function validateConfig(config)'));
   assert.ok(script.includes('configError.textContent = locale.config.error'));
   assert.ok(script.includes("document.body.classList.add('config-invalid')"));
-  assert.match(templateStyles, /\\.config-invalid main/);
+  assert.ok(templateStyles.includes('.config-invalid main'));
   assert.match(template, /id="config-error"[^>]*role="alert"/);
   assert.match(template, /class="contact-phone hidden/);
   assert.match(template, /class="contact-email hidden/);
