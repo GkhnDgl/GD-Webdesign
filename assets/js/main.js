@@ -111,8 +111,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const { business, branding, legal } = config;
     if (!['name', 'legalName', 'phone', 'email', 'address'].every((key) => isText(business[key]))) return false;
-    if (!/^[+0-9][0-9\\s()./-]{5,24}$/.test(business.phone)) return false;
-    if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(business.email)) return false;
+    if (!/^[+0-9][0-9\s()./-]{5,24}$/.test(business.phone)) return false;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(business.email)) return false;
     if (!isColor(branding.primaryColor) || !isColor(branding.primaryHoverColor)) return false;
     if (!Array.isArray(config.gallery) || config.gallery.length !== 4 ||
         !config.gallery.every((item) => isRecord(item) && isSafeImagePath(item.image) && isText(item.alt))) return false;
