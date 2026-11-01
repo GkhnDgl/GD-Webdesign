@@ -149,6 +149,7 @@ test('DOM translation and accessibility updates function correctly during langua
       this.classList = {
         add: (c) => { if (!this.className.includes(c)) this.className += ' ' + c; },
         remove: (c) => { this.className = this.className.replace(new RegExp('\\b' + c + '\\b', 'g'), '').trim(); },
+        contains: (c) => this.className.split(/\\s+/).includes(c),
         toggle: (c, force) => {
           const has = this.className.includes(c);
           if (force === true || (force === undefined && !has)) this.classList.add(c);
@@ -223,7 +224,8 @@ test('DOM translation and accessibility updates function correctly during langua
   const listeners = {};
   const mockDoc = {
     documentElement: docElement,
-    body: new MockElement('body'),
+    body: new MockElement('body', '', 'template-master-a'),
+    baseURI: 'https://gkhndgl.github.io/GD-Webdesign/templates/one-pager-boilerplate/index.html',
     title: '',
     currentScript: { src: 'https://gkhndgl.github.io/GD-Webdesign/assets/js/main.js' },
     addEventListener: (evt, fn) => { listeners[evt] = fn; },
