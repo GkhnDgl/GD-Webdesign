@@ -94,6 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function validateConfig(config) {
     const isRecord = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
     const isText = (value) => typeof value === 'string' && value.trim().length > 0;
+    const hasOnlyKeys = (value, keys) => Object.keys(value).every((key) => keys.includes(key));
     const isColor = (value) => typeof value === 'string' && /^#[0-9a-f]{6}$/i.test(value);
     const isSafeImagePath = (value) => {
       if (!isText(value) || value.startsWith('/') || /^[a-z][a-z0-9+.-]*:/i.test(value)) return false;
@@ -105,9 +106,13 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    if (!isRecord(config) || !isRecord(config.business) || !isRecord(config.branding) ||
-        !isRecord(config.legal) || !isRecord(config.legal.imprintDetails) ||
-        !isRecord(config.legal.privacyDetails)) return false;
+    if (!isRecord(config) || !hasOnlyKeys(config, ['$schema', 'business', 'branding', 'gallery', 'legal']) ||
+        config.$schema !== './config.schema.json' || !isRecord(config.business) ||
+        !hasOnlyKeys(config.business, ['name', 'legalName', 'phone', 'email', 'address']) ||
+        !isRecord(config.branding) || !hasOnlyKeys(config.branding, ['primaryColor', 'primaryHoverColor']) ||
+        !isRecord(config.legal) || !hasOnlyKeys(config.legal, ['imprintDetails', 'privacyDetails']) ||
+        !isRecord(config.legal.imprintDetails) || !hasOnlyKeys(config.legal.imprintDetails, ['de', 'en']) ||
+        !isRecord(config.legal.privacyDetails) || !hasOnlyKeys(config.legal.privacyDetails, ['de', 'en'])) return false;
 
     const { business, branding, legal } = config;
     if (!['name', 'legalName', 'phone', 'email', 'address'].every((key) => isText(business[key]))) return false;
@@ -115,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(business.email)) return false;
     if (!isColor(branding.primaryColor) || !isColor(branding.primaryHoverColor)) return false;
     if (!Array.isArray(config.gallery) || config.gallery.length !== 4 ||
-        !config.gallery.every((item) => isRecord(item) && isSafeImagePath(item.image) && isText(item.alt))) return false;
+        !config.gallery.every((item) => isRecord(item) && hasOnlyKeys(item, ['image', 'alt']) && isSafeImagePath(item.image) && isText(item.alt))) return false;
 
     return ['imprintDetails', 'privacyDetails'].every((key) =>
       ['de', 'en'].every((language) => isText(legal[key][language])));
@@ -307,11 +312,15 @@ document.addEventListener('DOMContentLoaded', () => {
       if (isTemplatePage) {
         const config = await loadConfig();
         if (config) {
+          document.body.classList.remove('config-invalid');
           if (configError) configError.classList.add('hidden');
           applyConfig(config, language);
-        } else if (configError) {
-          configError.textContent = locale.config.error;
-          configError.classList.remove('hidden');
+        } else {
+          document.body.classList.add('config-invalid');
+          if (configError) {
+            configError.textContent = locale.config.error;
+            configError.classList.remove('hidden');
+          }
         }
       }
 
