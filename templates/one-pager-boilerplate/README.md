@@ -28,49 +28,38 @@ All visual assets and fonts used in this template are locally hosted and license
 - **Responsive Viewports**: Verified mobile-first across `sm` (640px), `md` (768px), `lg` (1024px), and `xl` (1280px) breakpoints without horizontal overflow or clipped text.
 - **Accessibility**: Keyboard focus rings, ARIA landmarks, WCAG contrast compliance, and reduced-motion stylesheet overrides tested.
 
-## Customer Configuration (`config.json`) & Schema (Milestone M1.2)
-Starting with milestone M1.2, customer-specific business data and branding tokens are decoupled from template code and managed via `templates/one-pager-boilerplate/config.json`.
+## Customer Configuration (Milestone M1.2)
 
-### Configuration Schema
-```json
-{
-  "business": {
-    "name": "Meisterbetrieb Handwerk & Gartenbau",
-    "legalName": "Meisterbetrieb Handwerk & Gartenbau GmbH",
-    "phone": "+49 (0) 123 456789",
-    "email": "kontakt@beispiel-handwerk.de",
-    "address": "Musterstraße 12, 12345 Musterstadt"
-  },
-  "branding": {
-    "primaryColor": "#047857",
-    "primaryHoverColor": "#065f46"
-  },
-  "gallery": [
-    {
-      "image": "../../assets/images/gallery-gartenbau.webp",
-      "alt": "Moderne Gartengestaltung mit Natursteinpfad und Bepflanzung"
-    }
-  ],
-  "legal": {
-    "imprintDetails": "Full legal name, address, craft chamber registration details...",
-    "privacyDetails": "Data controller and privacy officer information..."
-  }
-}
-```
+Master Template A reads customer-specific content from the existing `config.json`. The shared runtime loads this file only when the page uses the `template-master-a` body class. The agency homepage does not request or apply this customer configuration.
 
-### Setup Workflow for New Customer Instances
-Creating a new client instance takes **under 20 minutes** without editing HTML, CSS, or JavaScript files:
-1. Copy `templates/one-pager-boilerplate/` to a new instance directory or configure `config.json` in place.
-2. Open `config.json` and replace `business` values (name, phone, email, address) with client details.
-3. Update `branding.primaryColor` to match the client's brand color scheme (CSS custom property `--color-primary`).
-4. Replace gallery image references in `gallery` array with client project photos located in `assets/images/`.
-5. Update `legal.imprintDetails` and `legal.privacyDetails` with verified business registration data.
-6. Test page in a local browser or run `npm test`.
+- Example configuration: `config.json`
+- Machine-readable JSON Schema: `config.schema.json`
+- Translated interface copy remains in `locales/de.json` and `locales/en.json`.
 
-### Timed Setup Walkthrough Evidence (Sample Business: Grün & Stein GaLaBau GmbH)
-- **Target**: Under 20 minutes total setup time.
-- **Walkthrough Steps**:
-  1. Updated `config.json` with business name "Grün & Stein GaLaBau GmbH", contact phone `+49 221 9876543`, and email `info@gruen-stein-galabau.de` (~1 min).
-  2. Adjusted brand accent color to `#15803d` (~30 sec).
-  3. Configured gallery image assets and updated imprint details (~1 min).
-- **Result**: Complete client customization achieved in **2.5 minutes**, comfortably fulfilling the M1.2 sub-20-minute requirement.
+### Supported fields
+
+| Path | Purpose | Validation |
+|---|---|---|
+| `business.name` | Public business name shown in the brand | Required non-empty string |
+| `business.legalName` | Registered legal name used in legal text | Required non-empty string |
+| `business.phone` | Public telephone number and `tel:` link | Required phone-like string |
+| `business.email` | Public email address and `mailto:` link | Required email address |
+| `business.address` | Public business address | Required non-empty string |
+| `branding.primaryColor`, `primaryHoverColor` | Brand color tokens | Six-digit hexadecimal colors |
+| `gallery` | Four gallery image paths and alternative texts | Exactly four same-origin relative paths with non-empty alt text |
+| `legal.imprintDetails`, `privacyDetails` | Localized legal text | Required German and English strings |
+
+### Setup workflow
+
+1. Copy `templates/one-pager-boilerplate/` to the customer project.
+2. Replace all sample values in `config.json` with customer-approved business details.
+3. Add the four customer gallery images and update their relative paths and descriptive alt text.
+4. Set the brand colors using six-digit hexadecimal values.
+5. Replace both German and English legal text with details reviewed for the actual business and its data processing.
+6. Serve the page over HTTP(S). Check the language switcher, contact links, gallery, legal sections, and browser console.
+
+The runtime validates required values before applying them. Invalid, missing, or malformed configuration produces an accessible error message; incomplete sample data is not silently treated as customer configuration. Configuration image paths must resolve to the same origin as the template.
+
+### Setup-time measurement
+
+The previous claim that a sample business was configured in 2.5 minutes is withdrawn because the repository does not contain reproducible timing evidence. The under-20-minute target remains unverified. It must be demonstrated with a real timed walkthrough recording the start/end method, steps, elapsed time, and any manual edits. Automated tests do not prove the time target.

@@ -118,5 +118,8 @@
     "close_menu": "Menü schließen",
     "switch_to_english": "Sprache auf Englisch umstellen",
     "switch_to_german": "Sprache auf Deutsch umstellen"
+  },
+  "config": {
+    "error": "Die Website-Konfiguration fehlt oder ist ungültig. Bitte prüfen Sie config.json, bevor Sie diese Vorlage veröffentlichen."
   }
 }

@@ -1,0 +1,133 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "./config.schema.json",
+  "title": "Master Template A customer configuration",
+  "description": "Customer-specific business data, branding, gallery images, and legal text.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "business",
+    "branding",
+    "gallery",
+    "legal"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "./config.schema.json"
+    },
+    "business": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "legalName",
+        "phone",
+        "email",
+        "address"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "legalName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "phone": {
+          "type": "string",
+          "minLength": 6,
+          "maxLength": 25,
+          "pattern": "^[+0-9][0-9\\s()./-]{5,24}$"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "address": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "branding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primaryColor",
+        "primaryHoverColor"
+      ],
+      "properties": {
+        "primaryColor": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "primaryHoverColor": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        }
+      }
+    },
+    "gallery": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "image",
+          "alt"
+        ],
+        "properties": {
+          "image": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^(?!/)(?![A-Za-z][A-Za-z0-9+.-]*:).+"
+          },
+          "alt": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "legal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "imprintDetails",
+        "privacyDetails"
+      ],
+      "properties": {
+        "imprintDetails": {
+          "$ref": "#/definitions/localizedText"
+        },
+        "privacyDetails": {
+          "$ref": "#/definitions/localizedText"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "localizedText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "de",
+        "en"
+      ],
+      "properties": {
+        "de": {
+          "type": "string",
+          "minLength": 1
+        },
+        "en": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

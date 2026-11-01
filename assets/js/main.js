@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const menuButton = document.querySelector('.mobile-menu-toggle');
   const navigation = document.querySelector('.primary-navigation');
   const languageButton = document.querySelector('#language-toggle');
+  const isTemplatePage = document.body.classList.contains('template-master-a');
+  const configError = document.querySelector('#config-error');
 
   const translations = {
     'nav.brand': ['.brand-text'],
@@ -89,17 +91,54 @@ document.addEventListener('DOMContentLoaded', () => {
   let cachedConfig = null;
   let configLoaded = false;
 
+  function validateConfig(config) {
+    const isRecord = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
+    const isText = (value) => typeof value === 'string' && value.trim().length > 0;
+    const hasOnlyKeys = (value, keys) => Object.keys(value).every((key) => keys.includes(key));
+    const isColor = (value) => typeof value === 'string' && /^#[0-9a-f]{6}$/i.test(value);
+    const isSafeImagePath = (value) => {
+      if (!isText(value) || value.startsWith('/') || /^[a-z][a-z0-9+.-]*:/i.test(value)) return false;
+      try {
+        const resolved = new URL(value, pageBaseUrl);
+        return ['http:', 'https:'].includes(resolved.protocol) && resolved.origin === new URL(pageBaseUrl).origin;
+      } catch (_) {
+        return false;
+      }
+    };
+
+    if (!isRecord(config) || !hasOnlyKeys(config, ['$schema', 'business', 'branding', 'gallery', 'legal']) ||
+        config.$schema !== './config.schema.json' || !isRecord(config.business) ||
+        !hasOnlyKeys(config.business, ['name', 'legalName', 'phone', 'email', 'address']) ||
+        !isRecord(config.branding) || !hasOnlyKeys(config.branding, ['primaryColor', 'primaryHoverColor']) ||
+        !isRecord(config.legal) || !hasOnlyKeys(config.legal, ['imprintDetails', 'privacyDetails']) ||
+        !isRecord(config.legal.imprintDetails) || !hasOnlyKeys(config.legal.imprintDetails, ['de', 'en']) ||
+        !isRecord(config.legal.privacyDetails) || !hasOnlyKeys(config.legal.privacyDetails, ['de', 'en'])) return false;
+
+    const { business, branding, legal } = config;
+    if (!['name', 'legalName', 'phone', 'email', 'address'].every((key) => isText(business[key]))) return false;
+    if (!/^[+0-9][0-9\s()./-]{5,24}$/.test(business.phone)) return false;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(business.email)) return false;
+    if (!isColor(branding.primaryColor) || !isColor(branding.primaryHoverColor)) return false;
+    if (!Array.isArray(config.gallery) || config.gallery.length !== 4 ||
+        !config.gallery.every((item) => isRecord(item) && hasOnlyKeys(item, ['image', 'alt']) && isSafeImagePath(item.image) && isText(item.alt))) return false;
+
+    return ['imprintDetails', 'privacyDetails'].every((key) =>
+      ['de', 'en'].every((language) => isText(legal[key][language])));
+  }
+
   async function loadConfig() {
+    if (!isTemplatePage) return null;
     if (configLoaded) return cachedConfig;
     configLoaded = true;
     try {
       const configUrl = new URL('config.json', pageBaseUrl).href;
       const response = await fetch(configUrl);
-      if (response.ok) {
-        cachedConfig = await response.json();
-      }
+      if (!response.ok) throw new Error(`Configuration request failed: ${response.status}`);
+      const config = await response.json();
+      if (!validateConfig(config)) throw new Error('Configuration does not match the required schema.');
+      cachedConfig = config;
     } catch (err) {
-      console.warn('Unable to load or parse config.json:', err);
+      console.error('Master Template A configuration is unavailable or invalid:', err);
       cachedConfig = null;
     }
     return cachedConfig;
@@ -270,8 +309,20 @@ document.addEventListener('DOMContentLoaded', () => {
         privacyNote.append(privacyLink, document.createTextNode(locale.contact.privacy_suffix || ''));
       }
 
-      const config = await loadConfig();
-      applyConfig(config, language);
+      if (isTemplatePage) {
+        const config = await loadConfig();
+        if (config) {
+          document.body.classList.remove('config-invalid');
+          if (configError) configError.classList.add('hidden');
+          applyConfig(config, language);
+        } else {
+          document.body.classList.add('config-invalid');
+          if (configError) {
+            configError.textContent = locale.config.error;
+            configError.classList.remove('hidden');
+          }
+        }
+      }
 
       try { localStorage.setItem('preferred_language', language); } catch (_) { /* Storage may be unavailable. */ }
     } catch (error) {
