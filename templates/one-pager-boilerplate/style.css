@@ -918,3 +918,9 @@ section {
   max-width: 70ch;
   color: var(--color-muted);
 }
+
+
+/* Preserve intentional line breaks in customer-provided legal information. */
+.legal-copy {
+  white-space: pre-line;
+}
