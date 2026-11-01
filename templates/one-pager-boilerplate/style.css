@@ -924,3 +924,12 @@ section {
 .legal-copy {
   white-space: pre-line;
 }
+
+
+/* Do not present sample customer content when configuration is invalid. */
+.config-invalid .site-header,
+.config-invalid main,
+.config-invalid .site-footer,
+.config-invalid .legal-information {
+  display: none;
+}
