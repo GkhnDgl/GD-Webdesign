@@ -182,6 +182,8 @@ test('template configuration is scoped to the template and contact values have r
   assert.ok(script.includes('if (!isTemplatePage) return null'));
   assert.ok(script.includes('function validateConfig(config)'));
   assert.ok(script.includes('configError.textContent = locale.config.error'));
+  assert.ok(script.includes("document.body.classList.add('config-invalid')"));
+  assert.match(templateStyles, /\\.config-invalid main/);
   assert.match(template, /id="config-error"[^>]*role="alert"/);
   assert.match(template, /class="contact-phone hidden/);
   assert.match(template, /class="contact-email hidden/);
