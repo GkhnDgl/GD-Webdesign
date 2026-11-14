@@ -1,9 +1,9 @@
-# GD Webdesign
+# GDesign
 
 Welcome to the GD Webdesign repository. This repository houses the main agency site and the reusable website template ecosystem for client projects.
 
 ## Project Purpose
-GD Webdesign creates modern, performant, accessible, and responsive websites for client businesses. This repository provides:
+GDesign creates refined, performant, accessible, and responsive websites for client businesses. This repository provides:
 1. The baseline foundation for the GD Webdesign agency landing site.
 2. Shared templates and boilerplates for rapid, standardized client site development.
 
@@ -76,3 +76,14 @@ npx serve .
 - Security headers include `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, and a same-origin Content Security Policy.
 - Assets under `/assets/*` use a one-hour cache lifetime with revalidation. Do not use `immutable` caching until asset filenames are fingerprinted/versioned.
 - If a future integration needs third-party scripts, fonts, APIs, or embedded content, review and explicitly adjust the CSP directives rather than disabling CSP globally.
+
+
+## GDesign Bespoke Heritage Brand
+The agency homepage uses the approved GDesign brand identity:
+- Midnight Navy `#0E1726`
+- Ivory Cream `#F4F1EA`
+- Muted Champagne `#B89F7D`
+- Deep Slate `#1E293B`
+- Pure White `#FFFFFF`
+
+The approved PDF monogram/wordmark is stored locally in `assets/images/gdesign-logo.png`; the isolated mark is used as the favicon in `assets/images/gdesign-monogram.png`. Display headings use the Cormorant Garamond / Playfair Display / Georgia serif stack; Plus Jakarta Sans remains the locally hosted UI and body font. The customer one-pager boilerplate keeps its independent customer-configurable design system.

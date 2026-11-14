@@ -83,8 +83,8 @@ test('Root locale files contain agency-specific content and no generic business 
     assert.ok(!enStr.includes(placeholder), `en.json still contains generic placeholder: "${placeholder}"`);
   }
 
-  assert.equal(de.nav.brand, 'GD Webdesign');
-  assert.equal(en.nav.brand, 'GD Webdesign');
+  assert.equal(de.nav.brand, 'GDesign');
+  assert.equal(en.nav.brand, 'GDesign');
   assert.match(de.hero.title, /Digitale Erlebnisse/);
   assert.match(en.hero.title, /Digital experiences/);
 });

@@ -55,7 +55,7 @@ test('boilerplate hero metrics localize correctly in German and English', () => 
   assert.equal(boilerplateEn.hero.metric_code_label, 'Qualified Specialists');
 });
 
-test('locally hosted woff2 font file and font-face declarations exist', () => {
+test('locally hosted UI font file and font-face declarations exist', () => {
   assert.ok(fs.existsSync(path.join(root, 'assets/fonts/PlusJakartaSans-Variable.woff2')), 'woff2 font file missing in assets/fonts/');
   assert.ok(fs.existsSync(path.join(root, 'assets/fonts/LICENSE.txt')), 'Font license file missing in assets/fonts/');
   assert.match(templateStyles, /@font-face\s*\{[^}]*PlusJakartaSans-Variable\.woff2/);
@@ -68,9 +68,10 @@ test('template links to locale files and script updates document language', () =
   assert.match(script, /preferred_language/);
 });
 
-test('master template design tokens do not leak into the agency stylesheet', () => {
-  assert.match(styles, /--color-primary:\s*#4f46e5/);
-  assert.doesNotMatch(styles, /PlusJakartaSans-Variable\.woff2|--color-primary:\s*#047857/);
+test('GDesign agency brand tokens remain separate from customer template tokens', () => {
+  assert.match(styles, /--color-primary:\s*var\(--brand-midnight\)/);
+  assert.match(styles, /--brand-midnight:\s*#0E1726/);
+  assert.doesNotMatch(styles, /--color-primary:\s*#047857/);
   assert.match(templateStyles, /--color-primary:\s*#047857/);
 });
 
@@ -98,15 +99,15 @@ test('Netlify honeypot fields are hidden without inline styles blocked by the Co
   }
 });
 
-test('responsive styles include the xl breakpoint and reduced-motion support', () => {
-  assert.match(styles, /@media \(min-width: 1280px\)/);
+test('responsive styles include the desktop breakpoint and reduced-motion support', () => {
+  assert.match(styles, /@media \(min-width: 1024px\)/);
   assert.match(styles, /prefers-reduced-motion: reduce/);
 });
 
 test('privacy link styling is decoupled from shared localization JavaScript', () => {
   assert.doesNotMatch(script, /emerald/i, 'shared JavaScript should not contain hardcoded emerald brand colors');
   assert.match(script, /privacyLink\.className = 'form-privacy-link';/);
-  assert.match(styles, /\.form-privacy-link\s*\{[^}]*color:\s*var\(--color-primary\)/);
+  assert.match(styles, /\.form-privacy-link\s*\{[^}]*color:\s*var\(--brand-midnight\)/);
   assert.match(templateStyles, /\.form-privacy-link\s*\{[^}]*color:\s*var\(--color-primary\)/);
   assert.match(agency, /class="form-privacy-link"/);
   assert.match(template, /class="form-privacy-link"/);
@@ -206,4 +207,45 @@ test('template footer and SEO metadata use the configured business name in both 
   assert.match(script, /locale\?\.meta\?\.description/);
   assert.match(script, /locale\?\.footer\?\.rights/);
   assert.match(script, /replaceAll\('\{businessName\}'/);
+});
+
+
+test('GDesign agency homepage uses the approved Bespoke Heritage logo and color palette', () => {
+  assert.match(agency, /assets\/images\/gdesign-logo\.png/);
+  assert.match(agency, /assets\/images\/favicon-32x32\.png/);
+  assert.match(agency, /assets\/images\/apple-touch-icon\.png/);
+  assert.match(agency, /GDesign/);
+  for (const color of ['#0E1726', '#F4F1EA', '#B89F7D', '#1E293B', '#FFFFFF']) {
+    assert.ok(styles.includes(color), `Missing brand color ${color}`);
+  }
+  assert.match(styles, /--font-display:\s*"Cormorant Garamond"/);
+  assert.match(de.nav.brand, /^GDesign$/);
+  assert.match(en.nav.brand, /^GDesign$/);
+});
+
+test('GDesign homepage retains its responsive component layouts', () => {
+  assert.match(styles, /\.hero-metrics\s*\{[^}]*display:\s*grid/);
+  assert.match(styles, /\.bento-grid\s*\{[^}]*display:\s*grid/);
+  assert.match(styles, /\.process-grid\s*\{[^}]*display:\s*grid/);
+  assert.match(styles, /\.btn\s*\{[^}]*display:\s*inline-flex/);
+  assert.match(styles, /\.form-row\s*\{[^}]*display:\s*grid/);
+});
+
+test('GDesign header remains fully visible and navigation switches at the correct breakpoint', () => {
+  assert.match(styles, /\.site-header\s*\{[^}]*height:\s*auto;[^}]*min-height:\s*5\.5rem/s);
+  assert.match(styles, /\.brand-wordmark\s*\{[^}]*height:\s*auto;[^}]*object-fit:\s*contain/s);
+  assert.match(styles, /\.primary-navigation\s*\{[^}]*display:\s*none;[^}]*background:\s*var\(--brand-midnight\)/s);
+  assert.match(styles, /\.primary-navigation\.is-open\s*\{\s*display:\s*flex;/);
+  assert.match(styles, /@media\s*\(min-width:\s*1024px\)[\s\S]*?\.primary-navigation\s*\{[^}]*display:\s*flex;/);
+  assert.match(styles, /@media\s*\(max-width:\s*1023px\)/);
+  assert.match(styles, /\.nav-link\s*\{[^}]*color:\s*var\(--brand-ivory\);[^}]*background:\s*transparent;/s);
+});
+
+test('GDesign dark surfaces use explicit light text and light surfaces use readable dark text', () => {
+  assert.match(styles, /\.services-section\s*\{[^}]*background:\s*var\(--brand-midnight\);[^}]*color:\s*var\(--brand-ivory\)/s);
+  assert.match(styles, /\.bento-card p\s*\{[^}]*color:\s*#E0E3E8/);
+  assert.match(styles, /\.about-card p\s*\{[^}]*color:\s*#E0E3E8/);
+  assert.match(styles, /\.step-content p\s*\{[^}]*color:\s*#4B5563/);
+  assert.match(styles, /\.contact-form input, \.contact-form textarea\s*\{[^}]*color:\s*var\(--brand-midnight\)/s);
+  assert.match(styles, /\.site-footer a, \.site-footer \.footer-links a\s*\{\s*color:\s*#F4F1EA/);
 });
