@@ -1344,3 +1344,108 @@ section { padding-block: clamp(4rem, 7vw, 6.5rem); }
   white-space: nowrap;
   border: 0;
 }
+
+
+/* Final header alignment override — keep the brand flush to the viewport top. */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+body > .site-header {
+  position: sticky;
+  inset-block-start: 0;
+  margin-block-start: 0 !important;
+  transform: none;
+  z-index: 1000;
+  width: 100%;
+  min-height: 5.75rem;
+  background: var(--brand-midnight);
+}
+.site-header .nav-container {
+  width: min(100%, 80rem);
+  min-height: 5.75rem;
+  margin-inline: auto;
+  padding: .65rem clamp(1.25rem, 4vw, 3rem);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(1rem, 2vw, 2rem);
+}
+.site-header .brand {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+}
+.site-header .brand-wordmark {
+  display: block;
+  width: clamp(12rem, 17vw, 14rem);
+  height: auto;
+  max-height: 4.25rem;
+  object-fit: contain;
+  object-position: left center;
+}
+.site-header .primary-navigation {
+  flex: 1 1 auto;
+  min-width: 0;
+  justify-content: flex-end;
+}
+.site-header .nav-list {
+  gap: clamp(.85rem, 1.6vw, 1.6rem);
+}
+.site-header .nav-link {
+  font-size: .84rem;
+  letter-spacing: .025em;
+}
+.site-header .nav-cta {
+  min-height: 2.9rem;
+  padding: .8rem 1.25rem;
+  white-space: nowrap;
+}
+.site-header .language-toggle {
+  flex: 0 0 2.75rem;
+  width: 2.75rem;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  margin: 0;
+}
+@media (min-width: 1024px) {
+  .site-header .mobile-menu-toggle { display: none; }
+  .site-header .primary-navigation {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: clamp(.85rem, 1.6vw, 1.6rem);
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+  .site-header .nav-list {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+@media (max-width: 1023px) {
+  .site-header .nav-container {
+    min-height: 5.25rem;
+    padding-inline: 1rem;
+  }
+  .site-header .brand-wordmark { width: clamp(10rem, 30vw, 12rem); }
+  .site-header .language-toggle { margin-inline-start: auto; }
+}
+@media (max-width: 420px) {
+  .site-header .brand-wordmark { width: 9rem; }
+  .site-header .nav-container { gap: .65rem; padding-inline: .75rem; }
+  .site-header .language-toggle {
+    width: 2.5rem;
+    min-width: 2.5rem;
+    flex-basis: 2.5rem;
+    min-height: 2.5rem;
+  }
+  .site-header .mobile-menu-toggle {
+    width: 2.5rem;
+    flex-basis: 2.5rem;
+  }
+}
