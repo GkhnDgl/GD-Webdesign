@@ -198,12 +198,12 @@ test('template locales include matching configuration error messages', () => {
 
 test('template footer and SEO metadata use the configured business name in both languages', () => {
   for (const locale of [boilerplateDe, boilerplateEn]) {
-    assert.match(locale.footer.rights, /\\{businessName\\}/);
-    assert.match(locale.meta.title, /\\{businessName\\}/);
-    assert.match(locale.meta.description, /\\{businessName\\}/);
+    assert.match(locale.footer.rights, /\{businessName\}/);
+    assert.match(locale.meta.title, /\{businessName\}/);
+    assert.match(locale.meta.description, /\{businessName\}/);
   }
-  assert.match(script, /locale\\?\\.meta\\?\\.title/);
-  assert.match(script, /locale\\?\\.meta\\?\\.description/);
-  assert.match(script, /locale\\?\\.footer\\?\\.rights/);
-  assert.match(script, /replaceAll\\('\\{businessName\\}'/);
+  assert.match(script, /locale\?\.meta\?\.title/);
+  assert.match(script, /locale\?\.meta\?\.description/);
+  assert.match(script, /locale\?\.footer\?\.rights/);
+  assert.match(script, /replaceAll\('\{businessName\}'/);
 });
