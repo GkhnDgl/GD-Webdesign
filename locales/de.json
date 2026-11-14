@@ -1,11 +1,11 @@
 {
   "meta": {
-    "title": "GD Webdesign – Moderne Webentwicklung & Digitalagentur",
-    "description": "GD Webdesign erstellt moderne, barrierefreie und maßgeschneiderte Websites für Unternehmen mit höchsten Ansprüchen an Performance und Design."
+    "title": "GDesign – Hochwertiges Webdesign & digitale Markenauftritte",
+    "description": "GDesign gestaltet hochwertige, maßgeschneiderte Websites und digitale Markenauftritte für anspruchsvolle Unternehmen."
   },
   "nav": {
-    "brand": "GD Webdesign",
-    "brand_label": "GD Webdesign Startseite",
+    "brand": "GDesign",
+    "brand_label": "GDesign Startseite",
     "services": "Leistungen",
     "gallery": "Galerie",
     "process": "Ablauf",
@@ -71,7 +71,7 @@
     "three_description": "Nach gründlicher Qualitätsprüfung und Abstimmung schalten wir Ihre neue Website live. Auch danach bleiben wir als zuverlässiger Partner an Ihrer Seite."
   },
   "about": {
-    "tag": "Über GD Webdesign",
+    "tag": "Über GDesign",
     "title": "Qualität, Transparenz und technische Exzellenz",
     "description": "Als spezialisierte Digitalagentur glauben wir an schlanke, performante und nachhaltige Webarchitektur. Statt auf überladene Site-Builder setzen wir auf sauberen Code, höchste Barrierefreiheit und maßgeschneidertes Webdesign.",
     "feature_one_title": "Nutzerzentriert",
@@ -99,12 +99,12 @@
     "privacy_suffix": "."
   },
   "footer": {
-    "tagline": "Moderne Webentwicklung & Digitalagentur für performante und barrierefreie digitale Erlebnisse.",
+    "tagline": "Hochwertiges Webdesign und digitale Markenauftritte mit Anspruch an Ästhetik, Performance und Barrierefreiheit.",
     "navigation_heading": "Navigation",
     "legal_heading": "Rechtliches",
     "imprint": "Impressum (Platzhalter)",
     "privacy": "Datenschutz (Platzhalter)",
-    "rights": "© GD Webdesign. Alle Rechte vorbehalten.",
+    "rights": "© GDesign. Alle Rechte vorbehalten.",
     "notice": "Bitte ergänzen und prüfen Sie die rechtlichen Angaben vor der Veröffentlichung."
   },
   "legal": {
