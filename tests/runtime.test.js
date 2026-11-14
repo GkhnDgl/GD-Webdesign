@@ -349,6 +349,7 @@ test('Missing, malformed, and schema-invalid template config show a localized er
       contains: (name) => errorClasses.has(name)
     };
     const configError = { textContent: '', classList: errorClassList };
+    const runtimeErrors = [];
     const docElement = { lang: 'de', style: { setProperty() {} } };
     const listeners = {};
     const mockDocument = {
@@ -376,7 +377,7 @@ test('Missing, malformed, and schema-invalid template config show a localized er
       window: { addEventListener() {}, innerWidth: 1280 },
       fetch: mockFetch,
       localStorage: { getItem: () => 'de', setItem() {} },
-      console: { warn() {}, error() {} },
+      console: { warn() {}, error(...args) { runtimeErrors.push(args.map(String).join(' ')); } },
       URL,
       Promise,
       Set
@@ -388,6 +389,7 @@ test('Missing, malformed, and schema-invalid template config show a localized er
       await new Promise((resolve) => setTimeout(resolve, 5));
     }
 
+    if (!configError.textContent) assert.fail(`${scenario.name}: config error was not rendered. Runtime errors: ${runtimeErrors.join(' | ')}`);
     assert.equal(bodyClassList.contains('config-invalid'), true, scenario.name);
     assert.equal(errorClassList.contains('hidden'), false, scenario.name);
     assert.equal(configError.textContent, boilerplateDe.config.error, scenario.name);
