@@ -223,6 +223,13 @@ test('GDesign agency homepage uses the approved Bespoke Heritage logo and color 
   assert.match(en.nav.brand, /^GDesign$/);
 });
 
+test('GDesign homepage retains its responsive component layouts', () => {
+  assert.match(styles, /\.hero-metrics\s*\{[^}]*display:\s*grid/);
+  assert.match(styles, /\.bento-grid\s*\{[^}]*display:\s*grid/);
+  assert.match(styles, /\.process-grid\s*\{[^}]*display:\s*grid/);
+  assert.match(styles, /\.btn\s*\{[^}]*display:\s*inline-flex/);
+  assert.match(styles, /\.form-row\s*\{[^}]*display:\s*grid/);
+});
 
 test('GDesign header remains fully visible and navigation switches at the correct breakpoint', () => {
   assert.match(styles, /\.site-header\s*\{[^}]*height:\s*auto;[^}]*min-height:\s*5\.5rem/s);
