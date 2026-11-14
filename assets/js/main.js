@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return null;
   }
 
-  function applyConfig(config, language = 'de') {
+  function applyConfig(config, language = 'de', locale = null) {
     if (!config || typeof config !== 'object') return;
 
     if (config.branding) {
@@ -169,6 +169,18 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.brand-text').forEach((el) => {
           el.textContent = businessName;
         });
+
+        // Keep customer identity consistent across visible branding, SEO metadata, and footer copy.
+        if (locale?.meta?.title) {
+          document.title = locale.meta.title.replaceAll('{businessName}', businessName);
+        }
+        const description = document.querySelector('meta[name="description"]');
+        if (description && locale?.meta?.description) {
+          description.content = locale.meta.description.replaceAll('{businessName}', businessName);
+        }
+        if (locale?.footer?.rights) {
+          setText('.footer-bottom p:first-child', locale.footer.rights.replaceAll('{businessName}', businessName));
+        }
       }
 
       const phoneEl = document.querySelector('.contact-phone');
@@ -314,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (config) {
           document.body.classList.remove('config-invalid');
           if (configError) configError.classList.add('hidden');
-          applyConfig(config, language);
+          applyConfig(config, language, locale);
         } else {
           document.body.classList.add('config-invalid');
           if (configError) {
