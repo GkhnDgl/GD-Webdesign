@@ -55,7 +55,7 @@ test('boilerplate hero metrics localize correctly in German and English', () => 
   assert.equal(boilerplateEn.hero.metric_code_label, 'Qualified Specialists');
 });
 
-test('locally hosted woff2 font file and font-face declarations exist', () => {
+test('locally hosted UI font file and font-face declarations exist', () => {
   assert.ok(fs.existsSync(path.join(root, 'assets/fonts/PlusJakartaSans-Variable.woff2')), 'woff2 font file missing in assets/fonts/');
   assert.ok(fs.existsSync(path.join(root, 'assets/fonts/LICENSE.txt')), 'Font license file missing in assets/fonts/');
   assert.match(templateStyles, /@font-face\s*\{[^}]*PlusJakartaSans-Variable\.woff2/);
@@ -68,8 +68,8 @@ test('template links to locale files and script updates document language', () =
   assert.match(script, /preferred_language/);
 });
 
-test('master template design tokens do not leak into the agency stylesheet', () => {
-  assert.match(styles, /--color-primary:\s*#4f46e5/);
+test('GDesign agency brand tokens remain separate from customer template tokens', () => {
+  assert.match(styles, /--color-primary:\s*#0E1726/);
   assert.doesNotMatch(styles, /PlusJakartaSans-Variable\.woff2|--color-primary:\s*#047857/);
   assert.match(templateStyles, /--color-primary:\s*#047857/);
 });
@@ -206,4 +206,17 @@ test('template footer and SEO metadata use the configured business name in both 
   assert.match(script, /locale\?\.meta\?\.description/);
   assert.match(script, /locale\?\.footer\?\.rights/);
   assert.match(script, /replaceAll\('\{businessName\}'/);
+});
+
+
+test('GDesign agency homepage uses the approved Bespoke Heritage logo and color palette', () => {
+  assert.match(agency, /assets\/images\/gdesign-logo\.png/);
+  assert.match(agency, /assets\/images\/gdesign-monogram\.png/);
+  assert.match(agency, /GDesign/);
+  for (const color of ['#0E1726', '#F4F1EA', '#B89F7D', '#1E293B', '#FFFFFF']) {
+    assert.ok(styles.includes(color), `Missing brand color ${color}`);
+  }
+  assert.match(styles, /--font-display:\s*"Cormorant Garamond"/);
+  assert.match(de.nav.brand, /^GDesign$/);
+  assert.match(en.nav.brand, /^GDesign$/);
 });
