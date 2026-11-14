@@ -325,3 +325,73 @@ test('DOM translation and accessibility updates function correctly during langua
   assert.equal(menuBtn.getAttribute('aria-label'), en.accessibility.close_menu);
   assert.equal(storedLang, 'en');
 });
+
+
+test('Missing, malformed, and schema-invalid template config show a localized error and hide sample content', async () => {
+  const vm = require('node:vm');
+  const cases = [
+    { name: 'missing config', configResponse: { ok: false, status: 404 } },
+    { name: 'malformed JSON', configResponse: { ok: true, json: async () => { throw new SyntaxError('Unexpected token'); } } },
+    { name: 'schema-invalid config', configResponse: { ok: true, json: async () => ({ business: {} }) } }
+  ];
+
+  for (const scenario of cases) {
+    const classes = new Set(['template-master-a']);
+    const errorClasses = new Set(['hidden']);
+    const bodyClassList = {
+      contains: (name) => classes.has(name),
+      add: (name) => classes.add(name),
+      remove: (name) => classes.delete(name)
+    };
+    const errorClassList = {
+      add: (name) => errorClasses.add(name),
+      remove: (name) => errorClasses.delete(name),
+      contains: (name) => errorClasses.has(name)
+    };
+    const configError = { textContent: '', classList: errorClassList };
+    const docElement = { lang: 'de', style: { setProperty() {} } };
+    const listeners = {};
+    const mockDocument = {
+      baseURI: 'https://example.test/GD-Webdesign/templates/one-pager-boilerplate/',
+      documentElement: docElement,
+      body: { classList: bodyClassList },
+      title: '',
+      addEventListener: (name, callback) => { listeners[name] = callback; },
+      querySelector: (selector) => {
+        if (selector === '#config-error') return configError;
+        return null;
+      },
+      querySelectorAll: () => [],
+      createTextNode: (value) => value,
+      createElement: () => ({})
+    };
+    const mockFetch = async (url) => {
+      if (url.endsWith('/config.json')) return scenario.configResponse;
+      if (url.endsWith('/locales/de.json')) return { ok: true, json: async () => boilerplateDe };
+      if (url.endsWith('/locales/en.json')) return { ok: true, json: async () => boilerplateEn };
+      throw new Error('Unexpected request: ' + url);
+    };
+    const context = {
+      document: mockDocument,
+      window: { addEventListener() {}, innerWidth: 1280 },
+      fetch: mockFetch,
+      localStorage: { getItem: () => 'de', setItem() {} },
+      console: { warn() {}, error() {} },
+      URL,
+      Promise,
+      Set
+    };
+
+    vm.runInNewContext(mainJs, context);
+    await listeners.DOMContentLoaded();
+    await new Promise((resolve) => setTimeout(resolve, 0));
+
+    assert.equal(bodyClassList.contains('config-invalid'), true, scenario.name);
+    assert.equal(errorClassList.contains('hidden'), false, scenario.name);
+    assert.equal(configError.textContent, boilerplateDe.config.error, scenario.name);
+    assert.match(
+      fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/style.css'), 'utf8'),
+      /\.config-invalid\\s+\.site-header,[\\s\\S]*?\.config-invalid\\s+main,[\\s\\S]*?display:\\s*none/
+    );
+  }
+});
