@@ -69,7 +69,8 @@ test('template links to locale files and script updates document language', () =
 });
 
 test('GDesign agency brand tokens remain separate from customer template tokens', () => {
-  assert.match(styles, /--color-primary:\s*#0E1726/);
+  assert.match(styles, /--color-primary:\s*var\(--brand-midnight\)/);
+  assert.match(styles, /--brand-midnight:\s*#0E1726/);
   assert.doesNotMatch(styles, /--color-primary:\s*#047857/);
   assert.match(templateStyles, /--color-primary:\s*#047857/);
 });
@@ -98,15 +99,15 @@ test('Netlify honeypot fields are hidden without inline styles blocked by the Co
   }
 });
 
-test('responsive styles include the xl breakpoint and reduced-motion support', () => {
-  assert.match(styles, /@media \(min-width: 1280px\)/);
+test('responsive styles include the desktop breakpoint and reduced-motion support', () => {
+  assert.match(styles, /@media \(min-width: 1024px\)/);
   assert.match(styles, /prefers-reduced-motion: reduce/);
 });
 
 test('privacy link styling is decoupled from shared localization JavaScript', () => {
   assert.doesNotMatch(script, /emerald/i, 'shared JavaScript should not contain hardcoded emerald brand colors');
   assert.match(script, /privacyLink\.className = 'form-privacy-link';/);
-  assert.match(styles, /\.form-privacy-link\s*\{[^}]*color:\s*var\(--color-primary\)/);
+  assert.match(styles, /\.form-privacy-link\s*\{[^}]*color:\s*var\(--brand-midnight\)/);
   assert.match(templateStyles, /\.form-privacy-link\s*\{[^}]*color:\s*var\(--color-primary\)/);
   assert.match(agency, /class="form-privacy-link"/);
   assert.match(template, /class="form-privacy-link"/);
@@ -211,7 +212,8 @@ test('template footer and SEO metadata use the configured business name in both 
 
 test('GDesign agency homepage uses the approved Bespoke Heritage logo and color palette', () => {
   assert.match(agency, /assets\/images\/gdesign-logo\.png/);
-  assert.match(agency, /assets\/images\/gdesign-monogram\.png/);
+  assert.match(agency, /assets\/images\/favicon-32x32\.png/);
+  assert.match(agency, /assets\/images\/apple-touch-icon\.png/);
   assert.match(agency, /GDesign/);
   for (const color of ['#0E1726', '#F4F1EA', '#B89F7D', '#1E293B', '#FFFFFF']) {
     assert.ok(styles.includes(color), `Missing brand color ${color}`);
