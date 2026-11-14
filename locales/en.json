@@ -1,11 +1,11 @@
 {
   "meta": {
-    "title": "GD Webdesign – Modern Web Development & Digital Agency",
-    "description": "GD Webdesign creates modern, accessible, and custom websites for businesses with the highest standards for performance and design."
+    "title": "GDesign – Bespoke Web Design & Digital Experiences",
+    "description": "GDesign creates refined, bespoke websites and digital brand experiences for ambitious businesses."
   },
   "nav": {
-    "brand": "GD Webdesign",
-    "brand_label": "GD Webdesign Homepage",
+    "brand": "GDesign",
+    "brand_label": "GDesign Homepage",
     "services": "Services",
     "gallery": "Gallery",
     "process": "Process",
@@ -71,7 +71,7 @@
     "three_description": "After thorough quality assurance and review, we launch your new website live. Afterwards, we remain by your side as a reliable partner."
   },
   "about": {
-    "tag": "About GD Webdesign",
+    "tag": "About GDesign",
     "title": "Quality, transparency, and technical excellence",
     "description": "As a specialized digital agency, we believe in lean, performant, and sustainable web architecture. Instead of bloated site builders, we rely on clean code, maximum accessibility, and custom web design.",
     "feature_one_title": "User-Centric",
@@ -99,12 +99,12 @@
     "privacy_suffix": " for more information."
   },
   "footer": {
-    "tagline": "Modern web development & digital agency for performant and accessible digital experiences.",
+    "tagline": "Refined web design and digital brand experiences shaped by aesthetics, performance, and accessibility.",
     "navigation_heading": "Navigation",
     "legal_heading": "Legal",
     "imprint": "Imprint (Placeholder)",
     "privacy": "Privacy Policy (Placeholder)",
-    "rights": "© GD Webdesign. All rights reserved.",
+    "rights": "© GDesign. All rights reserved.",
     "notice": "Complete and review all legal information before publishing."
   },
   "legal": {
