@@ -975,7 +975,6 @@ p { color: inherit; }
   width: clamp(8.5rem, 16vw, 10.75rem);
   max-width: 100%;
   height: auto;
-  max-height: 3.5rem;
   object-fit: contain;
   object-position: left center;
 }
