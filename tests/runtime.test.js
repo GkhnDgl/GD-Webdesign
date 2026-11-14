@@ -384,7 +384,9 @@ test('Missing, malformed, and schema-invalid template config show a localized er
 
     vm.runInNewContext(mainJs, context);
     await listeners.DOMContentLoaded();
-    await new Promise((resolve) => setTimeout(resolve, 0));
+    for (let attempt = 0; attempt < 20 && !configError.textContent; attempt++) {
+      await new Promise((resolve) => setTimeout(resolve, 5));
+    }
 
     assert.equal(bodyClassList.contains('config-invalid'), true, scenario.name);
     assert.equal(errorClassList.contains('hidden'), false, scenario.name);
