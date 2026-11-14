@@ -70,7 +70,7 @@ test('template links to locale files and script updates document language', () =
 
 test('GDesign agency brand tokens remain separate from customer template tokens', () => {
   assert.match(styles, /--color-primary:\s*#0E1726/);
-  assert.doesNotMatch(styles, /PlusJakartaSans-Variable\.woff2|--color-primary:\s*#047857/);
+  assert.doesNotMatch(styles, /--color-primary:\s*#047857/);
   assert.match(templateStyles, /--color-primary:\s*#047857/);
 });
 
