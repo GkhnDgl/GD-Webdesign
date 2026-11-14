@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="../../assets/css/tailwind.generated.css">
 </head>
 <body class="template-master-a">
+  <p id="config-error" class="hidden mx-auto max-w-6xl px-4 py-3 text-sm font-semibold text-red-800 bg-red-50 border border-red-200" role="alert" aria-live="assertive"></p>
   <!-- Header / Sticky Navigation -->
   <header class="site-header">
     <div class="nav-container mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 xl:px-10">
@@ -285,6 +286,12 @@
           <p class="section-lead mt-3 text-base sm:text-lg text-slate-600">
             Planen Sie ein neues Vorhaben oder benötigen Sie professionelle Unterstützung? Nutzen Sie unser Formular für eine schnelle, kostenfreie Anfrage.
           </p>
+        </div>
+
+        <div class="contact-details mb-6 grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm" aria-label="Kontaktdaten">
+          <a class="contact-phone hidden rounded-lg border border-slate-200 p-3 text-slate-700 hover:border-emerald-600" href="#"><span></span></a>
+          <a class="contact-email hidden rounded-lg border border-slate-200 p-3 text-slate-700 hover:border-emerald-600" href="#"><span></span></a>
+          <p class="contact-address hidden rounded-lg border border-slate-200 p-3 text-slate-700"><span></span></p>
         </div>
 
         <form class="contact-form bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">

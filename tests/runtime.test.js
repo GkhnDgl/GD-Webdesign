@@ -6,6 +6,8 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const de = JSON.parse(fs.readFileSync(path.join(root, 'locales/de.json'), 'utf8'));
 const en = JSON.parse(fs.readFileSync(path.join(root, 'locales/en.json'), 'utf8'));
+const boilerplateDe = JSON.parse(fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/locales/de.json'), 'utf8'));
+const boilerplateEn = JSON.parse(fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/locales/en.json'), 'utf8'));
 const boilerplateConfig = JSON.parse(fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/config.json'), 'utf8'));
 const indexHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 const boilerplateHtml = fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/index.html'), 'utf8');
@@ -149,6 +151,7 @@ test('DOM translation and accessibility updates function correctly during langua
       this.classList = {
         add: (c) => { if (!this.className.includes(c)) this.className += ' ' + c; },
         remove: (c) => { this.className = this.className.replace(new RegExp('\\b' + c + '\\b', 'g'), '').trim(); },
+        contains: (c) => this.className.split(' ').includes(c),
         toggle: (c, force) => {
           const has = this.className.includes(c);
           if (force === true || (force === undefined && !has)) this.classList.add(c);
@@ -223,7 +226,8 @@ test('DOM translation and accessibility updates function correctly during langua
   const listeners = {};
   const mockDoc = {
     documentElement: docElement,
-    body: new MockElement('body'),
+    body: new MockElement('body', '', 'template-master-a'),
+    baseURI: 'https://gkhndgl.github.io/GD-Webdesign/templates/one-pager-boilerplate/index.html',
     title: '',
     currentScript: { src: 'https://gkhndgl.github.io/GD-Webdesign/assets/js/main.js' },
     addEventListener: (evt, fn) => { listeners[evt] = fn; },
@@ -256,7 +260,7 @@ test('DOM translation and accessibility updates function correctly during langua
         json: async () => boilerplateConfig
       };
     }
-    assert.match(url, /https:\/\/gkhndgl\.github\.io\/GD-Webdesign\/locales\/(de|en)\.json/);
+    assert.ok(url.includes('https://gkhndgl.github.io/GD-Webdesign/templates/one-pager-boilerplate/locales/'));
     const isEn = url.includes('en.json');
     const data = isEn ? en : de;
     return {
@@ -322,4 +326,77 @@ test('DOM translation and accessibility updates function correctly during langua
   assert.equal(langBtn.getAttribute('aria-label'), en.accessibility.switch_to_german);
   assert.equal(menuBtn.getAttribute('aria-label'), en.accessibility.close_menu);
   assert.equal(storedLang, 'en');
+});
+
+
+test('Missing, malformed, and schema-invalid template config show a localized error and hide sample content', async () => {
+  const vm = require('node:vm');
+  const cases = [
+    { name: 'missing config', configResponse: { ok: false, status: 404 } },
+    { name: 'malformed JSON', configResponse: { ok: true, json: async () => { throw new SyntaxError('Unexpected token'); } } },
+    { name: 'schema-invalid config', configResponse: { ok: true, json: async () => ({ business: {} }) } }
+  ];
+
+  for (const scenario of cases) {
+    const classes = new Set(['template-master-a']);
+    const errorClasses = new Set(['hidden']);
+    const bodyClassList = {
+      contains: (name) => classes.has(name),
+      add: (name) => classes.add(name),
+      remove: (name) => classes.delete(name)
+    };
+    const errorClassList = {
+      add: (name) => errorClasses.add(name),
+      remove: (name) => errorClasses.delete(name),
+      contains: (name) => errorClasses.has(name)
+    };
+    const configError = { textContent: '', classList: errorClassList };
+    const runtimeErrors = [];
+    const docElement = { lang: 'de', style: { setProperty() {} } };
+    const listeners = {};
+    const mockDocument = {
+      baseURI: 'https://example.test/GD-Webdesign/templates/one-pager-boilerplate/',
+      documentElement: docElement,
+      body: { classList: bodyClassList },
+      title: '',
+      addEventListener: (name, callback) => { listeners[name] = callback; },
+      querySelector: (selector) => {
+        if (selector === '#config-error') return configError;
+        return null;
+      },
+      querySelectorAll: () => [],
+      createTextNode: (value) => value,
+      createElement: () => ({})
+    };
+    const mockFetch = async (url) => {
+      if (url.endsWith('/config.json')) return scenario.configResponse;
+      if (url.endsWith('/locales/de.json')) return { ok: true, json: async () => boilerplateDe };
+      if (url.endsWith('/locales/en.json')) return { ok: true, json: async () => boilerplateEn };
+      throw new Error('Unexpected request: ' + url);
+    };
+    const context = {
+      document: mockDocument,
+      window: { addEventListener() {}, innerWidth: 1280 },
+      fetch: mockFetch,
+      localStorage: { getItem: () => 'de', setItem() {} },
+      console: { warn() {}, error(...args) { runtimeErrors.push(args.map(String).join(' ')); } },
+      URL,
+      Promise,
+      Set
+    };
+
+    vm.runInNewContext(mainJs, context);
+    await listeners.DOMContentLoaded();
+    for (let attempt = 0; attempt < 20 && !configError.textContent; attempt++) {
+      await new Promise((resolve) => setTimeout(resolve, 5));
+    }
+
+    if (!configError.textContent) assert.fail(`${scenario.name}: config error was not rendered. Runtime errors: ${runtimeErrors.join(' | ')}`);
+    assert.equal(bodyClassList.contains('config-invalid'), true, scenario.name);
+    assert.equal(errorClassList.contains('hidden'), false, scenario.name);
+    assert.equal(configError.textContent, boilerplateDe.config.error, scenario.name);
+    const templateStyles = fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/style.css'), 'utf8');
+    assert.ok(templateStyles.includes('.config-invalid .site-header'), scenario.name);
+    assert.ok(templateStyles.includes('.config-invalid main'), scenario.name);
+  }
 });

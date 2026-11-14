@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Meisterbetrieb Handwerk & Gartenbau – Ihre Experten vor Ort",
-    "description": "Ihr zuverlässiger Meisterbetrieb für Garten- und Landschaftsbau, Renovierung, Ausbau und Objektpflege. Erstklassige Qualität, persönliche Beratung und faire Festpreise."
+    "title": "{businessName} – Ihre Experten vor Ort",
+    "description": "{businessName}: Ihr zuverlässiger Fachbetrieb für Garten- und Landschaftsbau, Renovierung, Ausbau und Objektpflege. Erstklassige Qualität, persönliche Beratung und faire Festpreise."
   },
   "nav": {
     "brand": "Meisterbetrieb Handwerk & Gartenbau",
@@ -104,7 +104,7 @@
     "legal_heading": "Rechtliches",
     "imprint": "Impressum (Platzhalter)",
     "privacy": "Datenschutz (Platzhalter)",
-    "rights": "© Meisterbetrieb Handwerk & Gartenbau. Alle Rechte vorbehalten.",
+    "rights": "© {businessName}. Alle Rechte vorbehalten.",
     "notice": "Bitte ergänzen und prüfen Sie die rechtlichen Angaben vor der Veröffentlichung."
   },
   "legal": {
@@ -118,5 +118,8 @@
     "close_menu": "Menü schließen",
     "switch_to_english": "Sprache auf Englisch umstellen",
     "switch_to_german": "Sprache auf Deutsch umstellen"
+  },
+  "config": {
+    "error": "Die Website-Konfiguration fehlt oder ist ungültig. Bitte prüfen Sie config.json, bevor Sie diese Vorlage veröffentlichen."
   }
 }
