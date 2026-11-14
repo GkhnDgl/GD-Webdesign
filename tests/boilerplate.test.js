@@ -220,3 +220,23 @@ test('GDesign agency homepage uses the approved Bespoke Heritage logo and color 
   assert.match(de.nav.brand, /^GDesign$/);
   assert.match(en.nav.brand, /^GDesign$/);
 });
+
+
+test('GDesign header remains fully visible and navigation switches at the correct breakpoint', () => {
+  assert.match(styles, /\.site-header\s*\{[^}]*height:\s*auto;[^}]*min-height:\s*5\.5rem/s);
+  assert.match(styles, /\.brand-wordmark\s*\{[^}]*height:\s*auto;[^}]*object-fit:\s*contain/s);
+  assert.match(styles, /\.primary-navigation\s*\{[^}]*display:\s*none;[^}]*background:\s*var\(--brand-midnight\)/s);
+  assert.match(styles, /\.primary-navigation\.is-open\s*\{\s*display:\s*flex;/);
+  assert.match(styles, /@media\s*\(min-width:\s*1024px\)[\s\S]*?\.primary-navigation\s*\{[^}]*display:\s*flex;/);
+  assert.match(styles, /@media\s*\(max-width:\s*1023px\)/);
+  assert.match(styles, /\.nav-link\s*\{[^}]*color:\s*var\(--brand-ivory\);[^}]*background:\s*transparent;/s);
+});
+
+test('GDesign dark surfaces use explicit light text and light surfaces use readable dark text', () => {
+  assert.match(styles, /\.services-section\s*\{[^}]*background:\s*var\(--brand-midnight\);[^}]*color:\s*var\(--brand-ivory\)/s);
+  assert.match(styles, /\.bento-card p\s*\{[^}]*color:\s*#E0E3E8/);
+  assert.match(styles, /\.about-card p\s*\{[^}]*color:\s*#E0E3E8/);
+  assert.match(styles, /\.step-content p\s*\{[^}]*color:\s*#4B5563/);
+  assert.match(styles, /\.contact-form input, \.contact-form textarea\s*\{[^}]*color:\s*var\(--brand-midnight\)/s);
+  assert.match(styles, /\.site-footer a, \.site-footer \.footer-links a\s*\{\s*color:\s*#F4F1EA/);
+});
