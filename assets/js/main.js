@@ -288,6 +288,47 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
 
+      const showcase = document.querySelector('#template-showcase');
+      if (showcase && locale.template_showcase) {
+        const ts = locale.template_showcase;
+        const setEl = (sel, val) => {
+          const el = showcase.querySelector(sel);
+          if (el && typeof val === 'string') el.textContent = val;
+        };
+        setEl('.showcase-tag', ts.tag);
+        setEl('#showcase-title', ts.title);
+        setEl('.showcase-lead', ts.lead);
+        setEl('#tab-desktop .tab-label', ts.tab_desktop);
+        setEl('#tab-mobile .tab-label', ts.tab_mobile);
+        setEl('#tab-architecture .tab-label', ts.tab_architecture);
+        setEl('.browser-badge', ts.badge_performance);
+        setEl('.mockup-hero-badge', ts.mockup_badge);
+        setEl('.mockup-hero-title', ts.mockup_title);
+        setEl('.mockup-hero-lead', ts.mockup_lead);
+        setEl('.mockup-btn-primary', ts.mockup_cta_primary);
+        setEl('.mockup-btn-secondary', ts.mockup_cta_secondary);
+        setEl('.mockup-stat:nth-child(1) .mockup-stat-val', ts.mockup_stat1_val);
+        setEl('.mockup-stat:nth-child(1) .mockup-stat-lbl', ts.mockup_stat1_lbl);
+        setEl('.mockup-stat:nth-child(2) .mockup-stat-val', ts.mockup_stat2_val);
+        setEl('.mockup-stat:nth-child(2) .mockup-stat-lbl', ts.mockup_stat2_lbl);
+        setEl('.mockup-stat:nth-child(3) .mockup-stat-val', ts.mockup_stat3_val);
+        setEl('.mockup-stat:nth-child(3) .mockup-stat-lbl', ts.mockup_stat3_lbl);
+        setEl('.phone-brand', ts.phone_brand);
+        setEl('.phone-badge', ts.phone_badge);
+        setEl('.phone-title', ts.phone_title);
+        setEl('.phone-text', ts.phone_text);
+        setEl('.phone-cta', ts.phone_cta);
+        setEl('.code-badge', ts.code_badge);
+        setEl('.showcase-feature-card:nth-child(1) .showcase-feature-title', ts.feature1_title);
+        setEl('.showcase-feature-card:nth-child(1) .showcase-feature-desc', ts.feature1_desc);
+        setEl('.showcase-feature-card:nth-child(2) .showcase-feature-title', ts.feature2_title);
+        setEl('.showcase-feature-card:nth-child(2) .showcase-feature-desc', ts.feature2_desc);
+        setEl('.showcase-feature-card:nth-child(3) .showcase-feature-title', ts.feature3_title);
+        setEl('.showcase-feature-card:nth-child(3) .showcase-feature-desc', ts.feature3_desc);
+        setEl('.showcase-btn-demo span', ts.btn_demo);
+        setEl('.showcase-btn-contact', ts.btn_contact);
+      }
+
       document.documentElement.lang = language;
       document.title = locale.meta.title;
       const description = document.querySelector('meta[name="description"]');
@@ -364,6 +405,41 @@ document.addEventListener('DOMContentLoaded', () => {
     navigation.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
     window.addEventListener('resize', () => { if (window.innerWidth >= 1024) closeMenu(); });
     document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closeMenu(); });
+  }
+
+  const showcaseTabs = document.querySelectorAll('.showcase-tab');
+  if (showcaseTabs.length > 0) {
+    showcaseTabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const targetId = tab.getAttribute('aria-controls');
+        showcaseTabs.forEach((t) => {
+          const isCurrent = t === tab;
+          t.classList.toggle('is-active', isCurrent);
+          t.setAttribute('aria-selected', String(isCurrent));
+          t.setAttribute('tabindex', isCurrent ? '0' : '-1');
+        });
+        document.querySelectorAll('.showcase-panel').forEach((panel) => {
+          const isTarget = panel.id === targetId;
+          panel.classList.toggle('is-active', isTarget);
+          panel.classList.toggle('hidden', !isTarget);
+        });
+      });
+      tab.addEventListener('keydown', (e) => {
+        const tabsArray = Array.from(showcaseTabs);
+        const index = tabsArray.indexOf(tab);
+        let nextTab = null;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          nextTab = tabsArray[(index + 1) % tabsArray.length];
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          nextTab = tabsArray[(index - 1 + tabsArray.length) % tabsArray.length];
+        }
+        if (nextTab) {
+          e.preventDefault();
+          nextTab.focus();
+          nextTab.click();
+        }
+      });
+    });
   }
 
   if (languageButton) {
