@@ -584,6 +584,41 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (_) { /* location may be unavailable */ }
   }
 
+  if (isTemplatePage) {
+    // Handle in-page links explicitly inside the template browsing context.
+    // Native fragment navigation can scroll the outer page on mobile browsers
+    // when the template is embedded in an iframe.
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        const href = link.getAttribute('href');
+        if (!href || href === '#') return;
+
+        let targetId;
+        try {
+          targetId = decodeURIComponent(href.slice(1));
+        } catch (_) {
+          return;
+        }
+
+        const target = document.getElementById(targetId);
+        if (!target) return;
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        const scrollPadding = Number.parseFloat(
+          window.getComputedStyle(document.documentElement).scrollPaddingTop
+        ) || 0;
+        const top = Math.max(0, window.scrollY + target.getBoundingClientRect().top - scrollPadding);
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Scroll this iframe's window only; do not invoke ancestor scrolling.
+        window.scrollTo({ top, behavior: reduceMotion ? 'auto' : 'smooth' });
+        window.history.replaceState(null, '', href);
+      });
+    });
+  }
+
   function closeMenu() {
     if (!menuButton || !navigation) return;
     menuButton.setAttribute('aria-expanded', 'false');
