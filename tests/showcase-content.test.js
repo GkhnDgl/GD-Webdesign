@@ -54,7 +54,7 @@ test('Template showcase contains no developer-facing architecture or JSON config
 });
 
 test('Mobile device preview uses a common 390 by 844 CSS pixel viewport proportion', () => {
-  assert.match(css, /\.phone-frame\s*\{[^}]*width:\s*390px/s);
+  assert.match(css, /\.phone-frame\s*\{[^}]*width:\s*422px/s);
   assert.match(css, /\.phone-viewport\s*\{[^}]*aspect-ratio:\s*390\s*\/\s*844/s);
 });
 
