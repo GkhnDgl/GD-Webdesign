@@ -81,3 +81,15 @@ test('Template preview permits same-origin framing without weakening global fram
   assert.match(netlifyConfig, /for = "\/templates\/one-pager-boilerplate\/\*"[\s\S]*?X-Frame-Options = "SAMEORIGIN"/);
   assert.match(netlifyConfig, /for = "\/templates\/one-pager-boilerplate\/\*"[\s\S]*?frame-ancestors 'self'/);
 });
+
+const homepageSource = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+
+test('Desktop showcase is a live interactive template preview with a fictional address', () => {
+  assert.ok(homepageSource.includes('class="desktop-preview-frame"'));
+  assert.ok(homepageSource.includes('src="templates/one-pager-boilerplate/index.html#hero"'));
+  assert.ok(homepageSource.includes('www.meisterbetrieb-gartenbau.example'));
+  assert.ok(!homepageSource.includes('gd-webdesign.de/templates/one-pager-boilerplate/'));
+  assert.ok(css.includes('.desktop-preview-frame'));
+  const mainScript = fs.readFileSync(path.join(root, 'assets/js/main.js'), 'utf8');
+  assert.match(mainScript, /desktop-preview-frame, \.phone-preview-frame/);
+});
