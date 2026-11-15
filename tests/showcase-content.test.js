@@ -57,3 +57,17 @@ test('Mobile device preview uses a common 390 by 844 CSS pixel viewport proporti
   assert.match(css, /\.phone-frame\s*\{[^}]*width:\s*390px/s);
   assert.match(css, /\.phone-viewport\s*\{[^}]*aspect-ratio:\s*390\s*\/\s*844/s);
 });
+
+const homepage = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+const templateHomepage = fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/index.html'), 'utf8');
+
+test('Homepage showcase removes the architecture tab and embeds the real template homepage in mobile view', () => {
+  assert.doesNotMatch(homepage, /tab-architecture|view-architecture|Architektur\\s*&amp;\\s*JSON-Config|Architecture\\s*&amp;\\s*JSON Config/i);
+  assert.match(homepage, /id="tab-desktop"/);
+  assert.match(homepage, /id="tab-mobile"/);
+  assert.match(homepage, /class="phone-preview-frame"[\\s\\S]*?src="templates\\/one-pager-boilerplate\\/index\\.html#hero"/);
+  assert.match(templateHomepage, /Meisterqualität\\. Zuverlässig\\. Regional\\./);
+  assert.match(templateHomepage, /Ihr Fachbetrieb für Gartenbau, Handwerk &amp; Objektpflege/);
+  assert.match(templateHomepage, /Kostenloses Angebot anfragen/);
+  assert.match(css, /\\.phone-preview-frame\\s*\\{[^}]*width:\\s*100%/s);
+});
