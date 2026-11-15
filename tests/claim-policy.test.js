@@ -21,6 +21,7 @@ const unsupportedClaims = [
   /(?:wcag\s*2\.1\s*aa|bitv)[^\n]{0,80}(?:konform|compliant|zertifiz|certif|barrierefrei)/i,
   /(?:dsgvo|gdpr)[- ](?:konform|compliant)/i,
   /99[,.]?99\s*%\s*(?:verfügbarkeit|uptime)/i,
+  /(?:within|innerhalb)\s+(?:von\s+)?24\s*(?:hours?|stunden|h)\b/i,
   /(?:qualified|qualifiziert)[^\n]{0,30}(?:certified|zertifiziert)/i,
   /(?:garantieren|guarantee)[^\n]{0,100}(?:qualität|quality|performance|arbeit|work|konform|compliant)/i
 ];
