@@ -340,9 +340,11 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         const getNavigationKey = (link) => {
           const rawHref = link.getAttribute('href') || '';
-          const pathname = rawHref.split(/[?#]/)[0].replace(/\\/$/, '');
+          let pathname = rawHref.split(/[?#]/)[0];
+          if (pathname.endsWith('/')) pathname = pathname.slice(0, -1);
           const filename = pathname.split('/').pop() || '';
-          return pageFileMap[filename] || pageFileMap[filename.replace(/\\.html$/i, '')] || null;
+          const withoutHtml = filename.toLowerCase().endsWith('.html') ? filename.slice(0, -5) : filename;
+          return pageFileMap[filename] || pageFileMap[withoutHtml] || null;
         };
         document.querySelectorAll('.nav-list a[href], .footer-nav-group a[href]').forEach((link) => {
           const key = getNavigationKey(link);
