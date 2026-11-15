@@ -34,7 +34,7 @@
           <li><a href="#about" class="nav-link">Über uns</a></li>
           <li><a href="#contact" class="nav-link">Kontakt</a></li>
         </ul>
-        <a href="#contact" class="btn btn-primary nav-cta">Angebot anfragen</a>
+        <a href="#contact-form" data-cta-placement="nav-primary" class="btn btn-primary nav-cta">Angebot anfragen</a>
       </nav>
       <button type="button" class="language-toggle" id="language-toggle" aria-label="Switch language to English" aria-pressed="false">EN</button>
     </div>
@@ -53,10 +53,10 @@
             Von der Gartengestaltung über Pflaster- und Steinarbeiten bis hin zu Ausbau und Instandhaltung: Leistungsumfang und Zeitrahmen stimmen wir passend zu Ihrem Vorhaben mit Ihnen ab.
           </p>
           <div class="hero-actions mt-6 flex flex-wrap justify-start sm:justify-center gap-4">
-            <a href="#contact" class="btn btn-primary">Kostenloses Angebot anfragen</a>
-            <a href="#services" class="btn btn-secondary">Unsere Leistungen</a>
+            <a href="#contact-form" data-cta-placement="hero-primary" class="btn btn-primary">Kostenloses Angebot anfragen</a>
+            <a href="#services" data-cta-placement="hero-secondary" class="btn btn-secondary">Unsere Leistungen</a>
           </div>
-          <div class="hero-metrics mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-slate-200">
+          <div class="hero-metrics mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-slate-200" data-config-collection="metrics">
             <div class="metric-item">
               <span class="metric-value text-2xl font-extrabold text-emerald-700">Meisterbetrieb</span>
               <span class="metric-label text-sm text-slate-500">Qualifizierte Fachkräfte</span>
@@ -86,7 +86,7 @@
         </p>
       </div>
 
-      <div class="bento-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:gap-8 gap-6">
+      <div class="bento-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:gap-8 gap-6" data-config-collection="services">
         <!-- Main Highlight Card: Garten- & Landschaftsbau -->
         <article class="bento-card bento-card-featured p-6 bg-white rounded-2xl border border-slate-200 shadow-sm md:col-span-2 lg:col-span-2 lg:row-span-2 flex flex-col">
           <div class="bento-icon mb-4" aria-hidden="true">
@@ -162,7 +162,7 @@
         </p>
       </div>
 
-      <div class="gallery-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="gallery-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" data-config-collection="gallery">
         <article class="gallery-card bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm flex flex-col">
           <div class="gallery-image-wrapper overflow-hidden bg-slate-100 aspect-4/3">
             <img src="../../assets/images/gallery-gartenbau.webp" alt="Moderne Gartengestaltung mit Natursteinpfad und Bepflanzung" loading="lazy" class="gallery-image w-full h-full object-cover transition-transform duration-300 hover:scale-105" width="800" height="600" />
@@ -217,7 +217,7 @@
         </p>
       </div>
 
-      <div class="process-grid grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="process-grid grid grid-cols-1 md:grid-cols-3 gap-6" data-config-collection="process">
         <div class="process-step p-6 bg-slate-50 rounded-2xl border border-slate-200 flex flex-col">
           <div class="step-number text-4xl font-extrabold text-emerald-700 mb-3">01</div>
           <div class="step-content">
@@ -261,7 +261,7 @@
           <p class="text-slate-300 text-base sm:text-lg mb-6">
             Dieses Beispiel zeigt, wie ein regionaler Handwerksbetrieb seine Leistungen und Arbeitsweise präsentieren kann. Passen Sie die Inhalte an den tatsächlichen Betrieb und dessen Qualifikationen an.
           </p>
-          <div class="about-features grid grid-cols-1 sm:grid-cols-2 gap-6 pt-6 border-t border-slate-700">
+          <div class="about-features grid grid-cols-1 sm:grid-cols-2 gap-6 pt-6 border-t border-slate-700" data-config-collection="features">
             <div class="feature-item">
               <strong class="block text-white text-lg mb-1">Sorgfältige Ausführung</strong>
               <p class="text-slate-400 text-sm">Leistungsumfang, Materialien und Ausführung werden passend zu Ihrem Vorhaben abgestimmt.</p>
@@ -294,7 +294,7 @@
           <p class="contact-address hidden rounded-lg border border-slate-200 p-3 text-slate-700"><span></span></p>
         </div>
 
-        <form class="contact-form bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <form id="contact-form" class="contact-form bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
           <!-- Required hidden input for Netlify form processing -->
           <input type="hidden" name="form-name" value="contact" />
 

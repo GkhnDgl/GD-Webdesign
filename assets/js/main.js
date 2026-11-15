@@ -92,38 +92,54 @@ document.addEventListener('DOMContentLoaded', () => {
   let configLoaded = false;
 
   function validateConfig(config) {
-    const isRecord = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
-    const isText = (value) => typeof value === 'string' && value.trim().length > 0;
-    const hasOnlyKeys = (value, keys) => Object.keys(value).every((key) => keys.includes(key));
-    const isColor = (value) => typeof value === 'string' && /^#[0-9a-f]{6}$/i.test(value);
-    const isSafeImagePath = (value) => {
-      if (!isText(value) || value.startsWith('/') || /^[a-z][a-z0-9+.-]*:/i.test(value)) return false;
-      try {
-        const resolved = new URL(value, pageBaseUrl);
-        return ['http:', 'https:'].includes(resolved.protocol) && resolved.origin === new URL(pageBaseUrl).origin;
-      } catch (_) {
-        return false;
-      }
+    const record = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);
+    const text = (v) => typeof v === 'string' && v.trim().length > 0;
+    const keys = (v, allowed) => record(v) && Object.keys(v).every((k) => allowed.includes(k));
+    const localized = (v) => keys(v, ['de', 'en']) && text(v.de) && text(v.en);
+    const localizedList = (v) => keys(v, ['de', 'en']) && Array.isArray(v.de) && Array.isArray(v.en) && v.de.every(text) && v.en.every(text);
+    const color = (v) => typeof v === 'string' && /^#[0-9a-f]{6}$/i.test(v);
+    const asset = (v) => {
+      if (!text(v) || v.startsWith('/') || v.includes('\\') || /^[a-z][a-z0-9+.-]*:/i.test(v)) return false;
+      try { const u = new URL(v, pageBaseUrl); const root = new URL('../../assets/images/', pageBaseUrl); return u.origin === root.origin && u.pathname.startsWith(root.pathname) && !u.search && !u.hash; }
+      catch (_) { return false; }
     };
-
-    if (!isRecord(config) || !hasOnlyKeys(config, ['$schema', 'business', 'branding', 'gallery', 'legal']) ||
-        config.$schema !== './config.schema.json' || !isRecord(config.business) ||
-        !hasOnlyKeys(config.business, ['name', 'legalName', 'phone', 'email', 'address']) ||
-        !isRecord(config.branding) || !hasOnlyKeys(config.branding, ['primaryColor', 'primaryHoverColor']) ||
-        !isRecord(config.legal) || !hasOnlyKeys(config.legal, ['imprintDetails', 'privacyDetails']) ||
-        !isRecord(config.legal.imprintDetails) || !hasOnlyKeys(config.legal.imprintDetails, ['de', 'en']) ||
-        !isRecord(config.legal.privacyDetails) || !hasOnlyKeys(config.legal.privacyDetails, ['de', 'en'])) return false;
-
-    const { business, branding, legal } = config;
-    if (!['name', 'legalName', 'phone', 'email', 'address'].every((key) => isText(business[key]))) return false;
-    if (!/^[+0-9][0-9\s()./-]{5,24}$/.test(business.phone)) return false;
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(business.email)) return false;
-    if (!isColor(branding.primaryColor) || !isColor(branding.primaryHoverColor)) return false;
-    if (!Array.isArray(config.gallery) || config.gallery.length !== 4 ||
-        !config.gallery.every((item) => isRecord(item) && hasOnlyKeys(item, ['image', 'alt']) && isSafeImagePath(item.image) && isText(item.alt))) return false;
-
-    return ['imprintDetails', 'privacyDetails'].every((key) =>
-      ['de', 'en'].every((language) => isText(legal[key][language])));
+    const unique = (list, valid, max = Infinity) => Array.isArray(list) && list.length > 0 && list.length <= max && list.every((v) => record(v) && text(v.id) && valid(v)) && new Set(list.map((v) => v.id)).size === list.length;
+    const localizedItem = (v, allowed) => keys(v, allowed) && localized(v.title) && localized(v.description);
+    if (!keys(config, ['$schema','business','branding','seo','content','ctas','legal']) || config.$schema !== './config.schema.json') return false;
+    const b=config.business, a=config.branding, seo=config.seo, c=config.content, legal=config.legal;
+    if (!keys(b,['name','legalName','legalForm','phone','email','address']) || !['name','legalName','legalForm','phone','email'].every(k=>text(b[k])) ||
+      !/^[+0-9][0-9\s()./-]{5,24}$/.test(b.phone) || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(b.email) ||
+      !keys(b.address,['street','postalCode','locality','region','country']) || !['street','postalCode','locality','country'].every(k=>text(b.address[k])) ||
+      (b.address.region !== undefined && !text(b.address.region))) return false;
+    if (!keys(a,['logo','primaryColor','primaryHoverColor','primaryLightColor','accentColor']) ||
+      !['primaryColor','primaryHoverColor','primaryLightColor','accentColor'].every(k=>color(a[k]))) return false;
+    if (a.logo !== undefined && (!keys(a.logo,['image','alt']) || !asset(a.logo.image) || !localized(a.logo.alt))) return false;
+    if (!keys(seo,['title','description']) || !localized(seo.title) || !localized(seo.description)) return false;
+    if (!keys(c,['hero','services','process','about','gallery','contact','footer'])) return false;
+    const sections={hero:['badge','title','subtitle','metrics'],services:['eyebrow','title','description','items'],process:['eyebrow','title','description','steps'],about:['eyebrow','title','description','features'],gallery:['eyebrow','title','description','items'],contact:['eyebrow','title','description'],footer:['tagline']};
+    for (const [name,fields] of Object.entries(sections)) {
+      if (!keys(c[name],fields)) return false;
+      for (const field of fields) if (!['items','steps','features','metrics'].includes(field) && !localized(c[name][field])) return false;
+    }
+    if (!unique(c.hero.metrics,v=>keys(v,['id','value','label']) && localized(v.value) && localized(v.label),4)) return false;
+    if (!unique(c.services.items,v=>localizedItem(v,['id','title','description','highlights']) && (v.highlights===undefined || (localizedList(v.highlights) && v.highlights.de.length<=8 && v.highlights.en.length<=8)),12)) return false;
+    if (!unique(c.process.steps,v=>localizedItem(v,['id','title','description']),8)) return false;
+    if (!unique(c.about.features,v=>localizedItem(v,['id','title','description']),6)) return false;
+    if (!unique(c.gallery.items,v=>keys(v,['id','image','alt','title','description']) && asset(v.image) && localized(v.alt) && localized(v.title) && localized(v.description),12)) return false;
+    const placements=new Set();
+    if (!Array.isArray(config.ctas) || !config.ctas.length || config.ctas.length > 3 || !config.ctas.every(v=>{
+      if (!keys(v,['id','placement','style','label','type','value']) || !text(v.id) || placements.has(v.placement) ||
+        !['nav-primary','hero-primary','hero-secondary'].includes(v.placement) ||
+        !['primary','secondary','text'].includes(v.style) || !localized(v.label) || !text(v.value)) return false;
+      placements.add(v.placement);
+      if (v.type==='tel') return /^[+0-9][0-9\s()./-]{5,24}$/.test(v.value);
+      if (v.type==='email') return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.value);
+      if (v.type==='url') { try { const url = new URL(v.value); return url.protocol==='https:' && Boolean(url.hostname) && !url.username && !url.password; } catch (_) { return false; } }
+      if (v.type==='anchor') return /^#(?:services|gallery|process|about|contact)$/.test(v.value);
+      if (v.type==='form') return v.value==='#contact-form';
+      return false;
+    }) || new Set(config.ctas.map(v=>v.id)).size!==config.ctas.length) return false;
+    return keys(legal,['imprintDetails','privacyDetails']) && localized(legal.imprintDetails) && localized(legal.privacyDetails);
   }
 
   async function loadConfig() {
@@ -152,90 +168,78 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function applyConfig(config, language = 'de', locale = null) {
-    if (!config || typeof config !== 'object') return;
-
-    if (config.branding) {
-      if (config.branding.primaryColor) {
-        document.documentElement.style.setProperty('--color-primary', config.branding.primaryColor);
-      }
-      if (config.branding.primaryHoverColor) {
-        document.documentElement.style.setProperty('--color-primary-hover', config.branding.primaryHoverColor);
-      }
+    if (!config) return;
+    const val = (v) => resolveLocalizedValue(v, language) || '';
+    const set = (selector, value) => { const el=document.querySelector(selector); if(el) el.textContent=value; };
+    const make = (tag, cls, value) => { const el=document.createElement(tag); if(cls) el.className=cls; if(value!==undefined) el.textContent=value; return el; };
+    const header = (id, data) => {
+      set('#'+id+' .section-tag',val(data.eyebrow));
+      set('#'+id+' .section-header h2',val(data.title));
+      set('#'+id+' .section-header .section-lead',val(data.description));
+    };
+    for (const [token,key] of [['--color-primary','primaryColor'],['--color-primary-hover','primaryHoverColor'],['--color-primary-light','primaryLightColor'],['--color-accent','accentColor']]) {
+      document.documentElement.style.setProperty(token,config.branding[key]);
     }
-
-    if (config.business) {
-      const businessName = config.business.name;
-      if (businessName) {
-        document.querySelectorAll('.brand-text').forEach((el) => {
-          el.textContent = businessName;
-        });
-
-        // Keep customer identity consistent across visible branding, SEO metadata, and footer copy.
-        if (locale?.meta?.title) {
-          document.title = locale.meta.title.replaceAll('{businessName}', businessName);
-        }
-        const description = document.querySelector('meta[name="description"]');
-        if (description && locale?.meta?.description) {
-          description.content = locale.meta.description.replaceAll('{businessName}', businessName);
-        }
-        if (locale?.footer?.rights) {
-          setText('.footer-bottom p:first-child', locale.footer.rights.replaceAll('{businessName}', businessName));
-        }
-      }
-
-      const phoneEl = document.querySelector('.contact-phone');
-      if (phoneEl && config.business.phone) {
-        phoneEl.classList.remove('hidden');
-        phoneEl.href = `tel:${config.business.phone.replace(/[^+\d]/g, '')}`;
-        const span = phoneEl.querySelector('span') || phoneEl;
-        span.textContent = config.business.phone;
-      }
-
-      const emailEl = document.querySelector('.contact-email');
-      if (emailEl && config.business.email) {
-        emailEl.classList.remove('hidden');
-        emailEl.href = `mailto:${config.business.email}`;
-        const span = emailEl.querySelector('span') || emailEl;
-        span.textContent = config.business.email;
-      }
-
-      const addressEl = document.querySelector('.contact-address');
-      if (addressEl && config.business.address) {
-        addressEl.classList.remove('hidden');
-        const span = addressEl.querySelector('span') || addressEl;
-        span.textContent = config.business.address;
-      }
-    }
-
-    if (Array.isArray(config.gallery)) {
-      const gallery = document.querySelector('#gallery');
-      if (gallery) {
-        const cards = gallery.querySelectorAll('.gallery-grid .gallery-card');
-        config.gallery.forEach((item, index) => {
-          if (cards[index] && item && typeof item === 'object') {
-            const img = cards[index].querySelector('img.gallery-image');
-            if (img) {
-              if (item.image) img.src = item.image;
-              if (item.alt) img.alt = item.alt;
-            }
-          }
-        });
-      }
-    }
-
-    if (config.legal) {
-      const imprintText = resolveLocalizedValue(config.legal.imprintDetails, language);
-      if (imprintText) {
-        const imprintEl = document.querySelector('#impressum .legal-copy');
-        if (imprintEl) imprintEl.textContent = imprintText;
-      }
-
-      const privacyText = resolveLocalizedValue(config.legal.privacyDetails, language);
-      if (privacyText) {
-        const privacyEl = document.querySelector('#datenschutz .legal-copy');
-        if (privacyEl) privacyEl.textContent = privacyText;
-      }
-    }
+    document.querySelectorAll('.brand-text').forEach(el=>el.textContent=config.business.name);
+    set('.footer-tagline',val(config.content.footer.tagline));
+    document.querySelectorAll('.footer-bottom p:first-child').forEach(el=>el.textContent=(locale?.footer?.rights||'').replaceAll('{businessName}',config.business.name));
+    const a=config.business.address;
+    const address=[a.street,[a.postalCode,a.locality].filter(Boolean).join(' '),a.region,a.country].filter(Boolean).join(', ');
+    const phone=document.querySelector('.contact-phone');
+    if(phone){phone.classList.remove('hidden');phone.href='tel:'+config.business.phone.replace(/[^+\d]/g,'');(phone.querySelector('span')||phone).textContent=config.business.phone;}
+    const email=document.querySelector('.contact-email');
+    if(email){email.classList.remove('hidden');email.href='mailto:'+config.business.email;(email.querySelector('span')||email).textContent=config.business.email;}
+    const addressNode=document.querySelector('.contact-address');
+    if(addressNode){addressNode.classList.remove('hidden');(addressNode.querySelector('span')||addressNode).textContent=address;}
+    if(config.branding.logo) document.querySelectorAll('.brand-logo').forEach(wrapper=>{
+      const img=make('img','brand-customer-logo');img.src=new URL(config.branding.logo.image,pageBaseUrl).href;img.alt=val(config.branding.logo.alt);wrapper.replaceChildren(img);wrapper.removeAttribute('aria-hidden');
+    });
+    set('.hero-content > .badge',val(config.content.hero.badge));set('#hero-title',val(config.content.hero.title));set('.hero-description',val(config.content.hero.subtitle));
+    const metrics=document.querySelector('.hero-metrics');
+    if(metrics){metrics.replaceChildren();config.content.hero.metrics.forEach(item=>{const card=make('div','metric-item');card.append(make('span','metric-value text-2xl font-extrabold',val(item.value)),make('span','metric-label text-sm text-slate-500',val(item.label)));metrics.append(card);});}
+    header('services',config.content.services);header('process',config.content.process);header('gallery',config.content.gallery);
+    set('#contact .contact-header .section-tag',val(config.content.contact.eyebrow));
+    set('#contact .contact-header h2',val(config.content.contact.title));
+    set('#contact .contact-header .section-lead',val(config.content.contact.description));
+    set('#about .section-tag',val(config.content.about.eyebrow));set('#about-title',val(config.content.about.title));set('.about-content > p',val(config.content.about.description));
+    const services=document.querySelector('#services .bento-grid');
+    if(services){services.replaceChildren();config.content.services.items.forEach((item,i)=>{
+      const card=make('article',i===0 && config.content.services.items.length>1?'bento-card bento-card-featured p-6 bg-white rounded-2xl border border-slate-200 shadow-sm flex flex-col':'bento-card p-6 bg-white rounded-2xl border border-slate-200 shadow-sm flex flex-col');
+      card.append(make('h3','text-xl font-bold text-slate-900 mb-2',val(item.title)),make('p','text-slate-600 text-sm sm:text-base',val(item.description)));
+      if(item.highlights){const list=make('ul','bento-list mt-4 space-y-2 list-disc list-inside text-sm text-slate-700');item.highlights[language].forEach(x=>list.append(make('li','',x)));card.append(list);}
+      services.append(card);
+    });}
+    const process=document.querySelector('#process .process-grid');
+    if(process){process.replaceChildren();config.content.process.steps.forEach((step,i)=>{
+      const card=make('article','process-step p-6 bg-slate-50 rounded-2xl border border-slate-200 flex flex-col');
+      card.append(make('div','step-number text-4xl font-extrabold mb-3',String(i+1).padStart(2,'0')));
+      const body=make('div','step-content');body.append(make('h3','text-xl font-bold text-slate-900 mb-2',val(step.title)),make('p','text-slate-600 text-sm sm:text-base',val(step.description)));card.append(body);process.append(card);
+    });}
+    const features=document.querySelector('#about .about-features');
+    if(features){features.replaceChildren();config.content.about.features.forEach(item=>{
+      const node=make('div','feature-item');node.append(make('strong','block text-white text-lg mb-1',val(item.title)),make('p','text-slate-400 text-sm',val(item.description)));features.append(node);
+    });}
+    const gallery=document.querySelector('#gallery .gallery-grid');
+    if(gallery){gallery.replaceChildren();config.content.gallery.items.forEach(item=>{
+      const card=make('article','gallery-card bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm flex flex-col');
+      const wrap=make('div','gallery-image-wrapper overflow-hidden bg-slate-100 aspect-4/3'),img=make('img','gallery-image w-full h-full object-cover');
+      img.src=new URL(item.image,pageBaseUrl).href;img.alt=val(item.alt);img.loading='lazy';img.width=800;img.height=600;wrap.append(img);
+      const copy=make('div','gallery-content p-5 flex flex-col flex-grow');copy.append(make('h3','text-lg font-bold text-slate-900 mb-2',val(item.title)),make('p','text-slate-600 text-sm',val(item.description)));card.append(wrap,copy);gallery.append(card);
+    });}
+    config.ctas.forEach(cta=>{
+      const target=document.querySelector('[data-cta-placement="'+cta.placement+'"]');if(!target)return;
+      target.textContent=val(cta.label);
+      target.classList.remove('btn-primary','btn-secondary','btn-link');
+      target.classList.add(cta.style==='primary'?'btn-primary':cta.style==='secondary'?'btn-secondary':'btn-link');
+      if(cta.type==='tel')target.href='tel:'+cta.value.replace(/[^+\d]/g,'');
+      else if(cta.type==='email')target.href='mailto:'+cta.value;
+      else if(cta.type==='url'){target.href=cta.value;target.target='_blank';target.rel='noopener noreferrer';}
+      else target.href=cta.value;
+    });
+    document.title=val(config.seo.title);
+    const meta=document.querySelector('meta[name="description"]');if(meta)meta.content=val(config.seo.description);
+    const imprint=document.querySelector('#impressum .legal-copy');if(imprint)imprint.textContent=val(config.legal.imprintDetails);
+    const privacy=document.querySelector('#datenschutz .legal-copy');if(privacy)privacy.textContent=val(config.legal.privacyDetails);
   }
 
   async function loadLocale(language) {

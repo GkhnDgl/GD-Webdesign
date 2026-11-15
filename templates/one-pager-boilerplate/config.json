@@ -3,30 +3,387 @@
   "business": {
     "name": "Meisterbetrieb Handwerk & Gartenbau",
     "legalName": "Meisterbetrieb Handwerk & Gartenbau GmbH",
+    "legalForm": "GmbH",
     "phone": "+49 (0) 123 456789",
     "email": "kontakt@beispiel-handwerk.de",
-    "address": "Musterstraße 12, 12345 Musterstadt"
+    "address": {
+      "street": "Musterstraße 12",
+      "postalCode": "12345",
+      "locality": "Musterstadt",
+      "region": "Baden-Württemberg",
+      "country": "Deutschland"
+    }
   },
   "branding": {
     "primaryColor": "#047857",
-    "primaryHoverColor": "#065f46"
+    "primaryHoverColor": "#065f46",
+    "primaryLightColor": "#d1fae5",
+    "accentColor": "#d97706"
   },
-  "gallery": [
+  "seo": {
+    "title": {
+      "de": "Meisterbetrieb Handwerk & Gartenbau – Ihre Experten vor Ort",
+      "en": "Master Craftsman Trades & Landscaping – Local Experts"
+    },
+    "description": {
+      "de": "Beispielhafte Website-Vorlage für einen regionalen Betrieb aus Garten- und Landschaftsbau, Handwerk und Objektpflege.",
+      "en": "Example website template for a local landscaping, trades, and property maintenance business."
+    }
+  },
+  "content": {
+    "hero": {
+      "badge": {
+        "de": "Beispielbetrieb · Gartenbau & Handwerk",
+        "en": "Example business · Landscaping & Trades"
+      },
+      "title": {
+        "de": "Ihr Fachbetrieb für Gartenbau, Handwerk & Objektpflege",
+        "en": "Your local experts for landscaping, trades & property care"
+      },
+      "subtitle": {
+        "de": "Von der Gartengestaltung über Pflaster- und Steinarbeiten bis hin zu Ausbau und Instandhaltung: Leistungsumfang und Zeitrahmen stimmen wir passend zu Ihrem Vorhaben mit Ihnen ab.",
+        "en": "From garden design and paving to renovation and maintenance, we tailor the scope and schedule to your project."
+      },
+      "metrics": [
+        {
+          "id": "expertise",
+          "value": {
+            "de": "Meisterbetrieb",
+            "en": "Master craftspeople"
+          },
+          "label": {
+            "de": "Qualifizierte Fachkräfte",
+            "en": "Qualified specialists"
+          }
+        },
+        {
+          "id": "planning",
+          "value": {
+            "de": "Planung",
+            "en": "Planning"
+          },
+          "label": {
+            "de": "Ablauf nach Absprache",
+            "en": "A schedule agreed with you"
+          }
+        },
+        {
+          "id": "local",
+          "value": {
+            "de": "Regionale Nähe",
+            "en": "Local service"
+          },
+          "label": {
+            "de": "Vor Ort für Sie da",
+            "en": "Here when you need us"
+          }
+        }
+      ]
+    },
+    "services": {
+      "eyebrow": {
+        "de": "Unsere Handwerksleistungen",
+        "en": "Our services"
+      },
+      "title": {
+        "de": "Gartenbau & Handwerk aus Meisterhand",
+        "en": "Landscaping & craftsmanship"
+      },
+      "description": {
+        "de": "Ob Neugestaltung Ihrer Außenanlagen, Terrassenbau, Innenausbau oder regelmäßige Objektpflege – entdecken Sie unser vielseitiges Angebot.",
+        "en": "Explore our services, from outdoor spaces and patios to interior renovation and ongoing property care."
+      },
+      "items": [
+        {
+          "id": "landscaping",
+          "title": {
+            "de": "Garten- & Landschaftsbau",
+            "en": "Landscaping & garden design"
+          },
+          "description": {
+            "de": "Wir planen und gestalten Ihre individuelle Oase im Grünen – von Bepflanzung und Rasen bis zu Wegen und Natursteinmauern.",
+            "en": "We plan and create your outdoor space, from planting and lawns to pathways and natural stone walls."
+          },
+          "highlights": {
+            "de": [
+              "Individuelle Gartenplanung",
+              "Pflaster-, Terrassen- und Natursteinarbeiten",
+              "Baumpflege und Rasenerneuerung"
+            ],
+            "en": [
+              "Tailored garden planning",
+              "Paving, patios and natural stone work",
+              "Tree care and lawn renewal"
+            ]
+          }
+        },
+        {
+          "id": "renovation",
+          "title": {
+            "de": "Ausbau & Renovierung",
+            "en": "Renovation & refurbishment"
+          },
+          "description": {
+            "de": "Fachgerechte Maler-, Trockenbau- und Reparaturarbeiten für Wohngebäude und Gewerbeobjekte.",
+            "en": "Professional painting, drywall and repair work for residential and commercial properties."
+          }
+        },
+        {
+          "id": "maintenance",
+          "title": {
+            "de": "Reparatur & Instandhaltung",
+            "en": "Repairs & maintenance"
+          },
+          "description": {
+            "de": "Zuverlässige Unterstützung bei Abnutzung, kleineren Schäden und laufenden Instandhaltungsarbeiten.",
+            "en": "Reliable support with wear, minor damage and ongoing maintenance."
+          }
+        },
+        {
+          "id": "materials",
+          "title": {
+            "de": "Beratung & Materialauswahl",
+            "en": "Consultation & material selection"
+          },
+          "description": {
+            "de": "Wir stimmen Materialien und Ausführung passend zu Ihrem Vorhaben ab.",
+            "en": "We help select materials and finishes to suit your project."
+          }
+        },
+        {
+          "id": "property-care",
+          "title": {
+            "de": "Objekt- & Gartenpflege",
+            "en": "Property & garden care"
+          },
+          "description": {
+            "de": "Regelmäßige Pflege für Privatgärten, Gewerbegrundstücke und Wohnanlagen.",
+            "en": "Regular care for private gardens, commercial grounds and residential properties."
+          }
+        }
+      ]
+    },
+    "process": {
+      "eyebrow": {
+        "de": "In 3 Schritten zum Ziel",
+        "en": "Three steps to get started"
+      },
+      "title": {
+        "de": "Einfach und transparent von der Idee bis zur Fertigstellung",
+        "en": "A clear process from first idea to completion"
+      },
+      "description": {
+        "de": "Wir begleiten Ihr Vorhaben persönlich und stimmen die nächsten Schritte transparent mit Ihnen ab.",
+        "en": "We guide your project personally and agree on each next step with you."
+      },
+      "steps": [
+        {
+          "id": "consultation",
+          "title": {
+            "de": "Besichtigung & Erstgespräch",
+            "en": "Site visit & first conversation"
+          },
+          "description": {
+            "de": "Wir besprechen Ihr Anliegen sowie die örtlichen Gegebenheiten.",
+            "en": "We discuss your needs and the site conditions."
+          }
+        },
+        {
+          "id": "proposal",
+          "title": {
+            "de": "Individuelles Angebot",
+            "en": "A tailored proposal"
+          },
+          "description": {
+            "de": "Sie erhalten ein nachvollziehbares Angebot auf Basis des abgestimmten Leistungsumfangs.",
+            "en": "You receive a clear proposal based on the agreed scope of work."
+          }
+        },
+        {
+          "id": "delivery",
+          "title": {
+            "de": "Abgestimmte Ausführung",
+            "en": "Agreed project delivery"
+          },
+          "description": {
+            "de": "Wir führen die vereinbarten Arbeiten aus und besprechen Änderungen vorab.",
+            "en": "We complete the agreed work and discuss changes in advance."
+          }
+        }
+      ]
+    },
+    "about": {
+      "eyebrow": {
+        "de": "Über unseren Betrieb",
+        "en": "About our business"
+      },
+      "title": {
+        "de": "Handwerkstradition trifft moderne Arbeitsweise",
+        "en": "Craftsmanship meets a modern approach"
+      },
+      "description": {
+        "de": "Dieses Beispiel zeigt, wie ein regionaler Handwerksbetrieb seine Leistungen und Arbeitsweise präsentieren kann. Passen Sie die Inhalte an den tatsächlichen Betrieb an.",
+        "en": "This example shows how a local trades business can present its services and approach. Adapt the content to the actual business."
+      },
+      "features": [
+        {
+          "id": "quality",
+          "title": {
+            "de": "Sorgfältige Ausführung",
+            "en": "Careful workmanship"
+          },
+          "description": {
+            "de": "Leistungsumfang, Materialien und Ausführung werden passend abgestimmt.",
+            "en": "Scope, materials and workmanship are agreed to suit your project."
+          }
+        },
+        {
+          "id": "transparency",
+          "title": {
+            "de": "Transparentes Angebot",
+            "en": "Clear proposals"
+          },
+          "description": {
+            "de": "Das Angebot beschreibt die vereinbarten Leistungen und Kosten nachvollziehbar.",
+            "en": "Your proposal clearly explains the agreed services and costs."
+          }
+        }
+      ]
+    },
+    "gallery": {
+      "eyebrow": {
+        "de": "Referenzen & Galerie",
+        "en": "Projects & gallery"
+      },
+      "title": {
+        "de": "Auszug unserer fertiggestellten Projekte",
+        "en": "A selection of completed projects"
+      },
+      "description": {
+        "de": "Lassen Sie sich von unseren Arbeitsbeispielen inspirieren.",
+        "en": "Explore a selection of our work."
+      },
+      "items": [
+        {
+          "id": "garden",
+          "image": "../../assets/images/gallery-gartenbau.webp",
+          "alt": {
+            "de": "Moderne Gartengestaltung mit Natursteinpfad und Bepflanzung",
+            "en": "Modern garden design with a natural stone path and planting"
+          },
+          "title": {
+            "de": "Gartengestaltung & Bepflanzung",
+            "en": "Garden design & planting"
+          },
+          "description": {
+            "de": "Neugestaltung einer privaten Gartenanlage mit Bepflanzung und Natursteinpfad.",
+            "en": "Redesign of a private garden with planting and a natural stone path."
+          }
+        },
+        {
+          "id": "patio",
+          "image": "../../assets/images/gallery-terrassenbau.webp",
+          "alt": {
+            "de": "Holzterrasse mit Natursteinmauer",
+            "en": "Timber patio with a natural stone wall"
+          },
+          "title": {
+            "de": "Holzterrasse & Steinmauer",
+            "en": "Timber patio & stone wall"
+          },
+          "description": {
+            "de": "Errichtung einer Holzterrasse mit eingefasster Natursteinmauer.",
+            "en": "Construction of a timber patio with a natural stone wall."
+          }
+        },
+        {
+          "id": "interior",
+          "image": "../../assets/images/gallery-ausbau.webp",
+          "alt": {
+            "de": "Modern ausgebauter Innenraum",
+            "en": "Modern refurbished interior"
+          },
+          "title": {
+            "de": "Innenausbau & Trockenbau",
+            "en": "Interior renovation & drywall"
+          },
+          "description": {
+            "de": "Fachgerechter Ausbau eines Wohnbereichs.",
+            "en": "Professional refurbishment of a residential space."
+          }
+        },
+        {
+          "id": "paving",
+          "image": "../../assets/images/gallery-pflasterarbeiten.webp",
+          "alt": {
+            "de": "Gepflasterter Auffahrtsbereich",
+            "en": "Paved driveway area"
+          },
+          "title": {
+            "de": "Pflaster- & Hofarbeiten",
+            "en": "Paving & courtyard work"
+          },
+          "description": {
+            "de": "Präzise Pflasterung einer Garageneinfahrt.",
+            "en": "Careful paving of a garage driveway."
+          }
+        }
+      ]
+    },
+    "contact": {
+      "eyebrow": {
+        "de": "Angebot anfragen",
+        "en": "Request a proposal"
+      },
+      "title": {
+        "de": "Sprechen wir über Ihr Handwerks- oder Gartenprojekt",
+        "en": "Let's discuss your project"
+      },
+      "description": {
+        "de": "Planen Sie ein neues Vorhaben oder benötigen Sie Unterstützung? Nutzen Sie unser Formular für eine Anfrage.",
+        "en": "Planning a project or need support? Use the form to send us an enquiry."
+      }
+    },
+    "footer": {
+      "tagline": {
+        "de": "Ihr Ansprechpartner für Garten- & Landschaftsbau, Ausbau und Objektpflege in der Region.",
+        "en": "Your local partner for landscaping, renovation and property care."
+      }
+    }
+  },
+  "ctas": [
     {
-      "image": "../../assets/images/gallery-gartenbau.webp",
-      "alt": "Moderne Gartengestaltung mit Natursteinpfad und Bepflanzung"
+      "id": "navigation-contact",
+      "placement": "nav-primary",
+      "style": "primary",
+      "label": {
+        "de": "Angebot anfragen",
+        "en": "Request a quote"
+      },
+      "type": "form",
+      "value": "#contact-form"
     },
     {
-      "image": "../../assets/images/gallery-terrassenbau.webp",
-      "alt": "Hochwertige Holzterrasse mit Natursteinmauer und Gartenmöbeln"
+      "id": "hero-primary",
+      "placement": "hero-primary",
+      "style": "primary",
+      "label": {
+        "de": "Kostenloses Angebot anfragen",
+        "en": "Request a free quote"
+      },
+      "type": "form",
+      "value": "#contact-form"
     },
     {
-      "image": "../../assets/images/gallery-ausbau.webp",
-      "alt": "Modern ausgebauter Innenraum mit Echtholzboden und sauberen Malerarbeiten"
-    },
-    {
-      "image": "../../assets/images/gallery-pflasterarbeiten.webp",
-      "alt": "Gepflasterter Auffahrtsbereich mit präzisem Steinmuster und Natursteinmauer"
+      "id": "hero-secondary",
+      "placement": "hero-secondary",
+      "style": "secondary",
+      "label": {
+        "de": "Unsere Leistungen",
+        "en": "Our services"
+      },
+      "type": "anchor",
+      "value": "#services"
     }
   ],
   "legal": {
@@ -35,8 +392,8 @@
       "en": "Meisterbetrieb Handwerk & Gartenbau GmbH\nMusterstraße 12, 12345 Musterstadt, Germany\nRepresented by: Max Mustermann\nEmail: kontakt@beispiel-handwerk.de\nChamber of Crafts Musterstadt, Registration No: 1234567"
     },
     "privacyDetails": {
-      "de": "Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) ist Meisterbetrieb Handwerk & Gartenbau GmbH, Musterstraße 12, 12345 Musterstadt, E-Mail: kontakt@beispiel-handwerk.de.",
-      "en": "Responsible controller within the meaning of the General Data Protection Regulation (GDPR) is Meisterbetrieb Handwerk & Gartenbau GmbH, Musterstraße 12, 12345 Musterstadt, Email: kontakt@beispiel-handwerk.de."
+      "de": "Verantwortlicher im Sinne der DSGVO ist Meisterbetrieb Handwerk & Gartenbau GmbH, Musterstraße 12, 12345 Musterstadt, E-Mail: kontakt@beispiel-handwerk.de.",
+      "en": "Responsible controller under the GDPR is Meisterbetrieb Handwerk & Gartenbau GmbH, Musterstraße 12, 12345 Musterstadt, Email: kontakt@beispiel-handwerk.de."
     }
   }
 }

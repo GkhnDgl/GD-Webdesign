@@ -141,8 +141,14 @@ test('boilerplate config.json exists with required business, branding, gallery, 
   assert.equal(config.business.name, 'Meisterbetrieb Handwerk & Gartenbau');
   assert.equal(config.business.legalName, 'Meisterbetrieb Handwerk & Gartenbau GmbH');
   assert.ok(config.business.phone && config.business.email && config.business.address);
+  assert.equal(config.business.legalForm, 'GmbH');
+  assert.equal(typeof config.business.address.street, 'string');
   assert.ok(config.branding && typeof config.branding.primaryColor === 'string');
-  assert.ok(Array.isArray(config.gallery) && config.gallery.length > 0);
+  assert.ok(config.seo && config.content && Array.isArray(config.content.gallery.items));
+  assert.ok(config.content.services.items.length >= 1);
+  assert.ok(config.content.process.steps.length >= 1);
+  assert.ok(config.content.about.features.length >= 1);
+  assert.ok(config.ctas.length >= 1);
   assert.ok(config.legal && config.legal.imprintDetails && config.legal.privacyDetails);
   assert.ok(config.legal.imprintDetails.en.includes(config.business.legalName));
   assert.ok(config.legal.privacyDetails.en.includes(config.business.legalName));
@@ -163,15 +169,23 @@ test('Master Template A customer config matches its documented JSON Schema', () 
   const schema = JSON.parse(fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/config.schema.json'), 'utf8'));
 
   assert.equal(config.$schema, './config.schema.json');
-  assert.deepEqual(schema.required, ['$schema', 'business', 'branding', 'gallery', 'legal']);
-  assert.equal(schema.properties.gallery.minItems, 4);
-  assert.equal(schema.properties.gallery.maxItems, 4);
-  assert.equal(config.gallery.length, 4);
+  assert.deepEqual(schema.required, ['$schema', 'business', 'branding', 'seo', 'content', 'ctas', 'legal']);
+  assert.ok(schema.properties.content.properties.gallery.properties.items.minItems >= 1);
+  assert.ok(config.content.gallery.items.length >= 1);
   assert.ok(new RegExp(schema.properties.business.properties.phone.pattern).test(config.business.phone));
   assert.ok(config.business.email.includes('@'));
   assert.match(config.branding.primaryColor, /^#[0-9a-fA-F]{6}$/);
   assert.match(config.branding.primaryHoverColor, /^#[0-9a-fA-F]{6}$/);
-  assert.ok(config.gallery.every((item) => item.image.startsWith('../../assets/images/') && item.alt.trim()));
+  assert.match(config.branding.primaryLightColor, /^#[0-9a-fA-F]{6}$/);
+  assert.match(config.branding.accentColor, /^#[0-9a-fA-F]{6}$/);
+  assert.ok(config.content.gallery.items.every((item) => item.image.startsWith('../../assets/images/') && item.alt.de.trim() && item.alt.en.trim()));
+  const assetPattern = new RegExp(schema.properties.content.properties.gallery.properties.items.items.properties.image.pattern);
+  assert.ok(config.content.gallery.items.every((item) => assetPattern.test(item.image)), 'Gallery paths must match the schema asset-root pattern');
+  assert.equal(schema.properties.ctas.items.allOf.length, 5, 'CTA schema must validate all supported action types');
+  const urlPattern = new RegExp(schema.properties.ctas.items.allOf.find((rule) => rule.if.properties.type.const === 'url').then.properties.value.pattern);
+  assert.equal(urlPattern.test('https://example.com/path'), true);
+  assert.equal(urlPattern.test('https://user:password@example.com'), false, 'Schema must reject URL credentials');
+  assert.ok(config.content.services.items.every((item) => item.title.de && item.title.en && item.description.de && item.description.en));
   for (const key of ['imprintDetails', 'privacyDetails']) {
     assert.equal(typeof config.legal[key].de, 'string');
     assert.equal(typeof config.legal[key].en, 'string');
@@ -203,8 +217,8 @@ test('template footer and SEO metadata use the configured business name in both 
     assert.match(locale.meta.title, /\{businessName\}/);
     assert.match(locale.meta.description, /\{businessName\}/);
   }
-  assert.match(script, /locale\?\.meta\?\.title/);
-  assert.match(script, /locale\?\.meta\?\.description/);
+  assert.match(script, /config\.seo\.title/);
+  assert.match(script, /config\.seo\.description/);
   assert.match(script, /locale\?\.footer\?\.rights/);
   assert.match(script, /replaceAll\('\{businessName\}'/);
 });
@@ -298,4 +312,82 @@ test('Multi-page localization keys exist in both locales and tailwind config cap
 
   const tailwindConfig = fs.readFileSync(path.join(root, 'tailwind.config.js'), 'utf8');
   assert.match(tailwindConfig, /'\.\/\*\.html'/, 'tailwind.config.js must include ./*.html');
+});
+
+ 
+test('Master Template A runtime validator accepts the complete config and rejects unsafe or inconsistent customer data', () => {
+  const config = JSON.parse(fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/config.json'), 'utf8'));
+  const match = script.match(/function validateConfig\(config\) \{[\s\S]*?\n  \}/);
+  assert.ok(match, 'Runtime config validator must remain directly testable');
+  const validate = new Function('pageBaseUrl', 'URL', 'return (' + match[0] + ')')(
+    'https://example.github.io/GD-Webdesign/templates/one-pager-boilerplate/index.html',
+    URL
+  );
+  assert.equal(validate(config), true, 'Sample configuration should pass runtime validation');
+
+  const variableCollections = structuredClone(config);
+  variableCollections.content.hero.metrics = variableCollections.content.hero.metrics.slice(0, 1);
+  variableCollections.content.services.items = variableCollections.content.services.items.slice(0, 1);
+  variableCollections.content.process.steps = variableCollections.content.process.steps.slice(0, 2);
+  variableCollections.content.about.features = variableCollections.content.about.features.slice(0, 1);
+  variableCollections.content.gallery.items = variableCollections.content.gallery.items.slice(0, 2);
+  assert.equal(validate(variableCollections), true, 'Content collections must support variable lengths');
+
+  for (const [type, value] of [
+    ['tel', '+49 123 456789'],
+    ['email', 'office@example.de'],
+    ['url', 'https://example.com/contact'],
+    ['anchor', '#about'],
+    ['form', '#contact-form']
+  ]) {
+    const candidate = structuredClone(config);
+    candidate.ctas = [{ ...candidate.ctas[0], type, value }];
+    assert.equal(validate(candidate), true, 'Supported CTA type should validate: ' + type);
+  }
+
+  const configuredLogo = structuredClone(config);
+  configuredLogo.branding.logo = {
+    image: '../../assets/images/customer-logo.svg',
+    alt: { de: 'Unternehmenslogo', en: 'Company logo' }
+  };
+  assert.equal(validate(configuredLogo), true, 'A valid optional customer logo should be accepted');
+
+  const externalLogo = structuredClone(configuredLogo);
+  externalLogo.branding.logo.image = 'https://evil.example/logo.svg';
+  assert.equal(validate(externalLogo), false, 'External logo URLs must be rejected');
+
+  const tooManyServices = structuredClone(config);
+  tooManyServices.content.services.items = Array.from({ length: 13 }, (_, index) => ({
+    ...config.content.services.items[0],
+    id: 'service-' + index
+  }));
+  assert.equal(validate(tooManyServices), false, 'Service collection upper bound must be enforced');
+
+  const duplicateId = structuredClone(config);
+  duplicateId.content.services.items[1].id = duplicateId.content.services.items[0].id;
+  assert.equal(validate(duplicateId), false, 'Duplicate collection IDs must be rejected');
+
+  const externalAsset = structuredClone(config);
+  externalAsset.content.gallery.items[0].image = 'https://evil.example/assets/images/payload.svg';
+  assert.equal(validate(externalAsset), false, 'External image URLs must be rejected');
+
+  const traversingAsset = structuredClone(config);
+  traversingAsset.content.gallery.items[0].image = '../../assets/images/../../../outside/assets/images/payload.svg';
+  assert.equal(validate(traversingAsset), false, 'Asset paths escaping the site asset root must be rejected');
+
+  for (const unsafe of [
+    { type: 'url', value: 'http://example.com' },
+    { type: 'url', value: 'javascript:alert(1)' },
+    { type: 'url', value: 'https://user:password@example.com' },
+    { type: 'anchor', value: '#unknown' },
+    { type: 'form', value: '#other-form' }
+  ]) {
+    const candidate = structuredClone(config);
+    candidate.ctas = [{ ...candidate.ctas[0], ...unsafe }];
+    assert.equal(validate(candidate), false, 'Unsafe CTA destination must be rejected: ' + unsafe.type + ' ' + unsafe.value);
+  }
+
+  const missingTranslation = structuredClone(config);
+  missingTranslation.content.hero.title.en = ' ';
+  assert.equal(validate(missingTranslation), false, 'Empty localized content must be rejected');
 });

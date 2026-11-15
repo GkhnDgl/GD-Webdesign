@@ -304,7 +304,7 @@ test('DOM translation and accessibility updates function correctly during langua
   // Initially German
   assert.equal(docElement.lang, 'de');
   assert.equal(brandText.textContent, boilerplateConfig.business.name);
-  assert.equal(heroTitle.textContent, de.hero.title);
+  assert.equal(heroTitle.textContent, boilerplateConfig.content.hero.title.de);
   assert.equal(impressumTitle.textContent, de.legal.imprint_title);
   assert.equal(impressumCopy.textContent, boilerplateConfig.legal.imprintDetails.de);
   assert.equal(datenschutzTitle.textContent, de.legal.privacy_title);
@@ -326,7 +326,7 @@ test('DOM translation and accessibility updates function correctly during langua
 
   assert.equal(docElement.lang, 'en');
   assert.equal(brandText.textContent, boilerplateConfig.business.name);
-  assert.equal(heroTitle.textContent, en.hero.title);
+  assert.equal(heroTitle.textContent, boilerplateConfig.content.hero.title.en);
   assert.equal(metricLabel1.textContent, 'Adapted to your brand');
   assert.equal(impressumTitle.textContent, en.legal.imprint_title);
   assert.equal(impressumCopy.textContent, boilerplateConfig.legal.imprintDetails.en);
@@ -466,4 +466,100 @@ test('Homepage About CTA is translated when switching between German and English
   assert.ok(indexHtml.includes('class="btn btn-secondary">Mehr über GDesign erfahren</a>'));
   assert.match(mainJs, /\.section-cta-row-left \.btn-secondary/);
   assert.match(mainJs, /locale\.about\.cta_link/);
+});
+
+
+test('Master Template A renders configured customer content and typed CTAs in both languages', () => {
+  const match = mainJs.match(/function applyConfig\(config, language = 'de', locale = null\) \{[\s\S]*?\n  \}\n\n  async function loadLocale/);
+  assert.ok(match, 'Configured rendering function must remain testable');
+  const applyConfigSource = match[0].replace(/\n\n  async function loadLocale[\s\S]*$/, '');
+  let applyConfig;
+
+  class Element {
+    constructor(tag = 'div', className = '') {
+      this.tagName = tag.toUpperCase();
+      this.className = className;
+      this.textContent = '';
+      this.children = [];
+      this.attributes = {};
+      this.style = { setProperty: () => {} };
+      this.classList = {
+        add: (name) => { if (!this.className.split(/\s+/).includes(name)) this.className = (this.className + ' ' + name).trim(); },
+        remove: (...names) => { this.className = this.className.split(/\s+/).filter((name) => !names.includes(name)).join(' '); }
+      };
+    }
+    append(...children) { this.children.push(...children); }
+    replaceChildren(...children) { this.children = [...children]; this.textContent = ''; }
+    setAttribute(name, value) { this.attributes[name] = String(value); }
+    removeAttribute(name) { delete this.attributes[name]; }
+    querySelector() { return null; }
+  }
+
+  const nodes = new Map();
+  const getNode = (selector) => {
+    if (!nodes.has(selector)) nodes.set(selector, new Element());
+    return nodes.get(selector);
+  };
+  const ctas = Object.fromEntries(['nav-primary', 'hero-primary', 'hero-secondary'].map((placement) => [placement, new Element('a')]));
+  const document = {
+    title: '',
+    documentElement: new Element('html'),
+    querySelector(selector) {
+      if (selector.startsWith('[data-cta-placement=')) {
+        const placement = selector.match(/"([^"]+)"/)?.[1];
+        return ctas[placement] || null;
+      }
+      return getNode(selector);
+    },
+    querySelectorAll(selector) {
+      if (selector === '.brand-text') return [getNode('.brand-text')];
+      if (selector === '.brand-logo') return [getNode('.brand-logo')];
+      if (selector.startsWith('[data-cta-placement=')) {
+        const placement = selector.match(/"([^"]+)"/)?.[1];
+        return ctas[placement] ? [ctas[placement]] : [];
+      }
+      return [];
+    },
+    createElement(tag) { return new Element(tag); }
+  };
+  document.documentElement.style.setProperty = (key, value) => { document.documentElement.style[key] = value; };
+
+  applyConfig = new Function('document', 'pageBaseUrl', 'resolveLocalizedValue', 'URL', 'return (' + applyConfigSource + ')')(
+    document,
+    'https://example.github.io/GD-Webdesign/templates/one-pager-boilerplate/index.html',
+    (value, language) => typeof value === 'object' && value !== null ? value[language] : value,
+    URL
+  );
+
+  const config = structuredClone(boilerplateConfig);
+  config.branding.logo = {
+    image: '../../assets/images/customer-logo.svg',
+    alt: { de: 'Kundenlogo', en: 'Customer logo' }
+  };
+  config.ctas[0] = { ...config.ctas[0], type: 'url', value: 'https://example.com/contact' };
+
+  applyConfig(config, 'de', { footer: { rights: '© {businessName}' } });
+  assert.equal(getNode('#hero-title').textContent, config.content.hero.title.de);
+  assert.equal(getNode('#services .bento-grid').children.length, config.content.services.items.length);
+  assert.equal(getNode('#process .process-grid').children.length, config.content.process.steps.length);
+  assert.equal(getNode('#about .about-features').children.length, config.content.about.features.length);
+  assert.equal(getNode('#gallery .gallery-grid').children.length, config.content.gallery.items.length);
+  assert.equal(getNode('#gallery .gallery-grid').children[0].children[0].children[0].alt, config.content.gallery.items[0].alt.de);
+  assert.equal(getNode('.contact-phone').href, 'tel:' + config.business.phone.replace(/[^+0-9]/g, ''));
+  assert.equal(getNode('.contact-email').href, 'mailto:' + config.business.email);
+  assert.equal(ctas['nav-primary'].href, 'https://example.com/contact');
+  assert.equal(ctas['nav-primary'].target, '_blank');
+  assert.equal(ctas['nav-primary'].rel, 'noopener noreferrer');
+  assert.equal(document.title, config.seo.title.de);
+  assert.equal(getNode('meta[name="description"]').content, config.seo.description.de);
+  assert.equal(getNode('.brand-logo').children[0].alt, 'Kundenlogo');
+
+  applyConfig(config, 'en', { footer: { rights: '© {businessName}' } });
+  assert.equal(getNode('#hero-title').textContent, config.content.hero.title.en);
+  assert.equal(getNode('#services .bento-grid').children[0].children[0].textContent, config.content.services.items[0].title.en);
+  assert.equal(getNode('#gallery .gallery-grid').children[0].children[1].children[0].textContent, config.content.gallery.items[0].title.en);
+  assert.equal(getNode('#impressum .legal-copy').textContent, config.legal.imprintDetails.en);
+  assert.equal(getNode('#datenschutz .legal-copy').textContent, config.legal.privacyDetails.en);
+  assert.equal(getNode('.brand-logo').children[0].alt, 'Customer logo');
+  assert.equal(document.title, config.seo.title.en);
 });

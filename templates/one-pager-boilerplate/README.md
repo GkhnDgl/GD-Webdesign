@@ -19,9 +19,9 @@ All visual assets and fonts used in this template are locally hosted and license
    - Scalable inline vector SVGs integrated into `index.html` and component styles with zero external dependencies.
 
 ## Localization (i18n)
-- Localized copy lives in `locales/de.json` and `locales/en.json`.
-- German copy uses sector-specific trades and gardening terminology (e.g. *Meisterbetrieb*, *Garten- & Landschaftsbau*, *Vor-Ort-Besichtigung*, *Kostenloses Angebot anfragen*).
-- English copy provides an equivalent localized presentation for international or bilingual client inquiries.
+- General interface copy (navigation labels, form labels, validation messages, and accessibility text) lives in `locales/de.json` and `locales/en.json`.
+- Customer-specific presentation content, SEO metadata, section headings, metrics, service descriptions, process steps, company features, gallery copy, and CTA labels live in the existing `config.json` and provide both `de` and `en` values.
+- The template locale files are not the per-customer content store; keep their German and English key hierarchies aligned.
 
 ## Quality Assurance & Verification
 - **Build & Tests**: Run `npm run build` (which executes Tailwind CSS compilation and `node --test`).
@@ -36,29 +36,49 @@ Master Template A reads customer-specific content from the existing `config.json
 - Machine-readable JSON Schema: `config.schema.json`
 - Translated interface copy remains in `locales/de.json` and `locales/en.json`.
 
-### Supported fields
+### Configuration contract
 
-| Path | Purpose | Validation |
-|---|---|---|
-| `business.name` | Public business name shown in the brand | Required non-empty string |
-| `business.legalName` | Registered legal name used in legal text | Required non-empty string |
-| `business.phone` | Public telephone number and `tel:` link | Required phone-like string |
-| `business.email` | Public email address and `mailto:` link | Required email address |
-| `business.address` | Public business address | Required non-empty string |
-| `branding.primaryColor`, `primaryHoverColor` | Brand color tokens | Six-digit hexadecimal colors |
-| `gallery` | Four gallery image paths and alternative texts | Exactly four same-origin relative paths with non-empty alt text |
-| `legal.imprintDetails`, `privacyDetails` | Localized legal text | Required German and English strings |
+The complete customer configuration is stored in this file. The machine-readable contract is defined in `config.schema.json`.
+
+| Object | Fields and purpose |
+|---|---|
+| `business` | Public name, registered legal name, legal form, phone, email, structured address |
+| `branding` | Optional logo path and localized alt text; primary, hover, light and accent HEX colors |
+| `seo` | German and English page title and meta description |
+| `content.hero` | Localized badge, title, subtitle and 1–4 metrics |
+| `content.services` | Localized section heading/description and 1–12 services; optional localized highlights (up to 8 per language) |
+| `content.process` | Localized section heading/description and 1–8 process steps |
+| `content.about` | Localized company introduction and 1–6 company features |
+| `content.gallery` | Localized section copy and 1–12 project items with image, alt text, title and description |
+| `content.contact` | Localized contact section copy |
+| `content.footer` | Localized customer-specific footer tagline |
+| `ctas` | Up to 3 stable CTA definitions with placement, style, localized label, typed action and value |
+| `legal` | Localized `imprintDetails` and `privacyDetails` |
+
+Every customer-facing text value is supplied in both `de` and `en`. General interface text such as navigation labels, form labels, validation messages and accessibility copy remains in `locales/de.json` and `locales/en.json`.
+
+### Validation and asset paths
+
+- Business address fields are structured; `region` is optional.
+- Brand colors must be six-digit HEX values.
+- Logo and gallery images must resolve to same-origin files under the site's `assets/images/` directory. Use relative paths compatible with GitHub Pages project subpaths (the sample uses `../../assets/images/...`).
+- Service, process, feature and gallery entries require unique stable IDs and localized text.
+- CTA placements and styles are allowlisted. Supported action types are `tel`, `email`, `url` (HTTPS only), `anchor` (allowlisted section IDs), and `form` (the existing `#contact-form` target).
+- Customer text is rendered as text, not interpreted as HTML.
+- Legal text must be reviewed for the actual business and its data processing before publication.
 
 ### Setup workflow
 
 1. Copy `templates/one-pager-boilerplate/` to the customer project.
-2. Replace all sample values in `config.json` with customer-approved business details.
-3. Add the four customer gallery images and update their relative paths and descriptive alt text.
+2. Replace the sample business identity, legal form, contact details and structured address.
+3. Add the customer's logo and project images under `assets/images/`; update their relative paths and localized alternative text. The logo is optional and the template retains its accessible generic mark when omitted.
 4. Set the brand colors using six-digit hexadecimal values.
-5. Replace both German and English legal text with details reviewed for the actual business and its data processing.
-6. Serve the page over HTTP(S). Check the language switcher, contact links, gallery, legal sections, and browser console.
+5. Replace all customer presentation content in `content`, including services, process steps, company features, gallery items, SEO metadata and footer tagline, in both German and English.
+6. Configure each CTA with an allowed placement, style, action type and valid value.
+7. Replace both German and English legal text with customer-approved details.
+8. Serve the page over HTTP(S). Check both languages, contact links, variable content collections, image paths, legal sections, responsive layouts and the browser console.
 
-The runtime validates required values before applying them. Invalid, missing, or malformed configuration produces an accessible error message; incomplete sample data is not silently treated as customer configuration. Configuration image paths must resolve to the same origin as the template.
+The runtime validates the configuration before applying it. Invalid, missing, or malformed configuration produces an accessible localized error message; incomplete sample content is not silently accepted. The agency homepage does not load this template-specific configuration.
 
 ### Setup-time measurement
 
