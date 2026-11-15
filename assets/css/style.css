@@ -592,6 +592,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   min-height: 34rem;
   padding: 0;
   overflow: hidden;
+  overscroll-behavior: contain;
   background: #FFFFFF;
 }
 .desktop-preview-frame {
@@ -709,6 +710,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   aspect-ratio: 390 / 844;
   min-height: 0;
   overflow: hidden;
+  overscroll-behavior: contain;
   background: #FFFFFF;
   border-radius: 20px;
 }
