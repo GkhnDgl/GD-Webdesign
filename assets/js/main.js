@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!keys(config, ['$schema','business','branding','seo','content','ctas','legal']) || config.$schema !== './config.schema.json') return false;
     const b=config.business, a=config.branding, seo=config.seo, c=config.content, legal=config.legal;
     if (!keys(b,['name','legalName','legalForm','phone','email','address']) || !['name','legalName','legalForm','phone','email'].every(k=>text(b[k])) ||
-      !/^[+0-9][0-9\\s()./-]{5,24}$/.test(b.phone) || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(b.email) ||
+      !/^[+0-9][0-9\s()./-]{5,24}$/.test(b.phone) || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(b.email) ||
       !keys(b.address,['street','postalCode','locality','region','country']) || !['street','postalCode','locality','country'].every(k=>text(b.address[k])) ||
       (b.address.region !== undefined && !text(b.address.region))) return false;
     if (!keys(a,['logo','primaryColor','primaryHoverColor','primaryLightColor','accentColor']) ||
@@ -131,8 +131,8 @@ document.addEventListener('DOMContentLoaded', () => {
         !['nav-primary','hero-primary','hero-secondary','contact-primary'].includes(v.placement) ||
         !['primary','secondary','text'].includes(v.style) || !localized(v.label) || !text(v.value)) return false;
       placements.add(v.placement);
-      if (v.type==='tel') return /^[+0-9][0-9\\s()./-]{5,24}$/.test(v.value);
-      if (v.type==='email') return /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(v.value);
+      if (v.type==='tel') return /^[+0-9][0-9\s()./-]{5,24}$/.test(v.value);
+      if (v.type==='email') return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.value);
       if (v.type==='url') { try { return new URL(v.value).protocol==='https:'; } catch (_) { return false; } }
       if (v.type==='anchor') return /^#(?:services|gallery|process|about|contact)$/.test(v.value);
       if (v.type==='form') return v.value==='#contact-form';
@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const a=config.business.address;
     const address=[a.street,[a.postalCode,a.locality].filter(Boolean).join(' '),a.region,a.country].filter(Boolean).join(', ');
     const phone=document.querySelector('.contact-phone');
-    if(phone){phone.classList.remove('hidden');phone.href='tel:'+config.business.phone.replace(/[^+\\d]/g,'');(phone.querySelector('span')||phone).textContent=config.business.phone;}
+    if(phone){phone.classList.remove('hidden');phone.href='tel:'+config.business.phone.replace(/[^+\d]/g,'');(phone.querySelector('span')||phone).textContent=config.business.phone;}
     const email=document.querySelector('.contact-email');
     if(email){email.classList.remove('hidden');email.href='mailto:'+config.business.email;(email.querySelector('span')||email).textContent=config.business.email;}
     const addressNode=document.querySelector('.contact-address');
@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const img=make('img','brand-customer-logo');img.src=new URL(config.branding.logo.image,pageBaseUrl).href;img.alt=val(config.branding.logo.alt);wrapper.replaceChildren(img);wrapper.removeAttribute('aria-hidden');
     });
     set('.hero-content > .badge',val(config.content.hero.badge));set('#hero-title',val(config.content.hero.title));set('.hero-description',val(config.content.hero.subtitle));
-    header('services',config.content.services);header('process',config.content.process);header('gallery',config.content.gallery);header('contact',config.content.contact);
+    header('services',config.content.services);header('process',config.content.process);header('gallery',config.content.gallery);\n    set('#contact .contact-header .section-tag',val(config.content.contact.eyebrow));\n    set('#contact .contact-header h2',val(config.content.contact.title));\n    set('#contact .contact-header .section-lead',val(config.content.contact.description));
     set('#about .section-tag',val(config.content.about.eyebrow));set('#about-title',val(config.content.about.title));set('.about-content > p',val(config.content.about.description));
     const services=document.querySelector('#services .bento-grid');
     if(services){services.replaceChildren();config.content.services.items.forEach((item,i)=>{
@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
     config.ctas.forEach(cta=>{
       const target=document.querySelector('[data-cta-placement="'+cta.placement+'"]');if(!target)return;
       target.textContent=val(cta.label);\n      target.classList.remove('btn-primary','btn-secondary','btn-link');\n      target.classList.add(cta.style==='primary'?'btn-primary':cta.style==='secondary'?'btn-secondary':'btn-link');
-      if(cta.type==='tel')target.href='tel:'+cta.value.replace(/[^+\\d]/g,'');
+      if(cta.type==='tel')target.href='tel:'+cta.value.replace(/[^+\d]/g,'');
       else if(cta.type==='email')target.href='mailto:'+cta.value;
       else if(cta.type==='url'){target.href=cta.value;target.target='_blank';target.rel='noopener noreferrer';}
       else target.href=cta.value;
