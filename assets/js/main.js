@@ -442,6 +442,29 @@ document.addEventListener('DOMContentLoaded', () => {
           setC('.faq-question', locale.kontakt_page[k + '_q']);
           setC('.faq-answer', locale.kontakt_page[k + '_a']);
         });
+        setPageEl('.direct-contact-section .section-tag', locale.kontakt_page.direct_tag);
+        setPageEl('.direct-contact-section h2', locale.kontakt_page.direct_title);
+        setPageEl('.direct-contact-note', locale.kontakt_page.direct_response);
+      }
+      // Subpage i18n: Impressum page
+      const impressumPage = document.querySelector('#impressum-page-title, #impressum-hero');
+      if (impressumPage && locale.impressum_page) {
+        const setPageEl = (sel, val) => { const el = document.querySelector(sel); if (el && typeof val === 'string') el.textContent = val; };
+        setPageEl('.impressum-hero-eyebrow', locale.impressum_page.hero_badge);
+        setPageEl('#impressum-page-title', locale.impressum_page.title);
+        setPageEl('#impressum-hero h1', locale.impressum_page.title);
+        setPageEl('.legal-notice-placeholder', locale.impressum_page.notice);
+        setPageEl('.legal-back-link', locale.impressum_page.back_link);
+      }
+      // Subpage i18n: Datenschutz page
+      const datenschutzPage = document.querySelector('#datenschutz-page-title, #datenschutz-hero');
+      if (datenschutzPage && locale.datenschutz_page) {
+        const setPageEl = (sel, val) => { const el = document.querySelector(sel); if (el && typeof val === 'string') el.textContent = val; };
+        setPageEl('.datenschutz-hero-eyebrow', locale.datenschutz_page.hero_badge);
+        setPageEl('#datenschutz-page-title', locale.datenschutz_page.title);
+        setPageEl('#datenschutz-hero h1', locale.datenschutz_page.title);
+        setPageEl('.legal-notice-placeholder', locale.datenschutz_page.notice);
+        setPageEl('.legal-back-link', locale.datenschutz_page.back_link);
       }
       document.documentElement.lang = language;
       document.title = locale.meta.title;

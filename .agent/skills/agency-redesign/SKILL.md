@@ -24,8 +24,9 @@ Die Website ist als modulare, mehrseitige Webpräsenz mit 7 Einzelseiten im Root
   - Muted Champagne: `#B89F7D` (`--brand-champagne`) & `#725B3F` (`--brand-champagne-ink` für AA-Kontrast auf hellem Grund)
   - Deep Slate: `#1E293B` (`--brand-slate`)
   - Pure White: `#FFFFFF` (`--brand-white`)
-- **Typografie:** Display-Headlines (`h1`–`h4`, `.metric-value`, `.step-number`, `.package-title`, `.study-metric-val`) in `"Cormorant Garamond", "Playfair Display", Georgia, serif` (`--font-display`), UI & Fließtext in lokal gehosteter `"Plus Jakarta Sans"` (`--font-ui`). Binde Schriften ausschließlich lokal über `assets/fonts/` ein.
-- **Gestaltungssprache:** Reduzierte Eckradien (`2px–4px`), feine `1px`-Rahmen in Champagne (`rgb(184 159 125 / .35)`), asymmetrische Bento-Layouts, großzügiger Weißraum, barrierefreie Fokus-Ringe und fließende Micro-Interactions mit `prefers-reduced-motion`-Fallback.
+- **Typografie:** Display-Headlines (`h1`–`h4`, `.metric-value`, `.step-number`, `.package-title`, `.study-metric-val`) in `"Cormorant Garamond", "Playfair Display", Georgia, serif` (`--font-display`), UI & Fließtext in lokal gehosteter `"Plus Jakarta Sans"` (`--font-ui`). Binde Schriften ausschließlich lokal über `assets/fonts/` ein. Überschriften dürfen kein `hyphens: auto;` enthalten, um unschöne Worttrennungen zu verhindern.
+- **Gestaltungssprache & Rhythmus:** Harmonischer Wechsel zwischen Midnight Navy (`#0E1726`) und Ivory Cream (`#F4F1EA`) auf allen Seiten, sodass niemals zwei gleichfarbige Abschnitte ohne visuellen Bruch aneinandergrenzen. Der Startseiten-Hero (`index.html`) ist auf allen Viewports zentriert (`.hero-metrics` max 56rem).
+- **Kontraste & Barrierefreiheit:** `.btn-secondary` auf dunklen Flächen nutzt Champagne-Border und helle Schrift (`var(--brand-ivory)`) im Normalzustand sowie Champagne-Hintergrund mit Midnight-Schrift im Hover-/Focus-Zustand (WCAG AA >= 4.5:1). Alle Buttons bieten mindestens 44px Touch-Höhe. Metriken (`.study-metrics`) stacken auf mobilen Geräten (< 480px) einspaltig.
 - **Header & Navigation:** Einheitlicher Sticky-Header auf allen Seiten. `markActivePage()` in `main.js` setzt dynamisch `aria-current="page"` auf den aktiven Nav-Link.
 - **Logos & Favicons:** Nutze ausschließlich `assets/images/gdesign-logo.png`, `assets/images/favicon-32x32.png` und `assets/images/apple-touch-icon.png`.
 

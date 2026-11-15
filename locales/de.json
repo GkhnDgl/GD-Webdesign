@@ -273,7 +273,7 @@
     "budget_label": "Budget (optional)",
     "budget_placeholder": "z. B. 2.000 – 5.000 €",
     "timeline_label": "Wunsch-Starttermin (optional)",
-    "timeline_placeholder": "z. B. Januar 2026",
+    "timeline_placeholder": "z. B. Q1 2027",
     "faq_tag": "Häufige Fragen",
     "faq_title": "Fragen zur Zusammenarbeit",
     "faq1_q": "Wie läuft ein typisches Projekt ab?",
@@ -287,11 +287,15 @@
     "direct_response": "Antwort i. d. R. innerhalb von 24 Stunden."
   },
   "impressum_page": {
+    "hero_badge": "Rechtliche Hinweise",
     "title": "Impressum",
-    "notice": "Angaben gemäß § 5 TMG (Platzhalter — vor Veröffentlichung zu ergänzen)"
+    "notice": "Angaben gemäß § 5 TMG. Diese Angaben sind Platzhalter und müssen vor der Veröffentlichung durch vollständige, rechtsverbindliche Betreiberinformationen ersetzt werden.",
+    "back_link": "← Zurück zur Startseite"
   },
   "datenschutz_page": {
+    "hero_badge": "Datenschutz",
     "title": "Datenschutzerklärung",
-    "notice": "Datenschutzerklärung (Platzhalter — vor Veröffentlichung zu ergänzen)"
+    "notice": "Diese Angaben sind Platzhalter und müssen vor der Veröffentlichung durch eine vollständige, rechtsverbindliche Datenschutzerklärung ersetzt werden.",
+    "back_link": "← Zurück zur Startseite"
   }
 }

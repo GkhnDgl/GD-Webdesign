@@ -273,7 +273,7 @@
     "budget_label": "Budget (optional)",
     "budget_placeholder": "e.g. €2,000 – €5,000",
     "timeline_label": "Desired start date (optional)",
-    "timeline_placeholder": "e.g. January 2026",
+    "timeline_placeholder": "e.g. Q1 2027",
     "faq_tag": "Common Questions",
     "faq_title": "Questions about working together",
     "faq1_q": "How does a typical project work?",
@@ -287,11 +287,15 @@
     "direct_response": "Response usually within 24 hours."
   },
   "impressum_page": {
+    "hero_badge": "Legal Notice",
     "title": "Legal Notice",
-    "notice": "Legal disclosure pursuant to § 5 TMG (Placeholder — to be completed before publication)"
+    "notice": "Information pursuant to § 5 TMG. These details are placeholders and must be replaced with verified operator information prior to publication.",
+    "back_link": "← Back to Homepage"
   },
   "datenschutz_page": {
+    "hero_badge": "Privacy Policy",
     "title": "Privacy Policy",
-    "notice": "Privacy Policy (Placeholder — to be completed before publication)"
+    "notice": "These details are placeholders and must be replaced with a complete, legally verified privacy policy prior to publication.",
+    "back_link": "← Back to Homepage"
   }
 }
