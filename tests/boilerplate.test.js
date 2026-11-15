@@ -311,7 +311,7 @@ test('Multi-page localization keys exist in both locales and tailwind config cap
  
 test('Master Template A runtime validator accepts the complete config and rejects unsafe or inconsistent customer data', () => {
   const config = JSON.parse(fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/config.json'), 'utf8'));
-  const match = script.match(/function validateConfig\\(config\\) \\{[\\s\\S]*?\\n  \\}/);
+  const match = script.match(/function validateConfig\(config\) \{[\s\S]*?\n  \}/);
   assert.ok(match, 'Runtime config validator must remain directly testable');
   const validate = new Function('pageBaseUrl', 'URL', 'return (' + match[0] + ')')(
     'https://example.github.io/GD-Webdesign/templates/one-pager-boilerplate/index.html',
