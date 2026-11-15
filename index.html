@@ -15,7 +15,7 @@
   <!-- Header / Sticky Navigation -->
   <header class="site-header">
     <div class="nav-container mx-auto w-full max-w-6xl px-5">
-      <a href="#" class="brand" aria-label="GDesign Startseite">
+      <a href="index.html" class="brand" aria-label="GDesign Startseite">
         <img class="brand-wordmark" src="assets/images/gdesign-logo.png" alt="" width="374" height="118">
         <span class="brand-text visually-hidden">GDesign</span>
       </a>
@@ -28,12 +28,13 @@
 
       <nav id="primary-navigation" class="primary-navigation" aria-label="Hauptnavigation">
         <ul class="nav-list">
-          <li><a href="#services" class="nav-link">Leistungen</a></li>
-          <li><a href="#process" class="nav-link">Ablauf</a></li>
-          <li><a href="#about" class="nav-link">Über uns</a></li>
-          <li><a href="#contact" class="nav-link">Kontakt</a></li>
+          <li><a href="index.html" class="nav-link">Start</a></li>
+          <li><a href="leistungen.html" class="nav-link">Leistungen</a></li>
+          <li><a href="projekte.html" class="nav-link">Projekte</a></li>
+          <li><a href="ueber-uns.html" class="nav-link">Über uns</a></li>
+          <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
         </ul>
-        <a href="#contact" class="btn btn-primary nav-cta">Projekt anfragen</a>
+        <a href="kontakt.html" class="btn btn-primary nav-cta">Projekt anfragen</a>
       </nav>
       <button type="button" class="language-toggle" id="language-toggle" aria-label="Switch language to English" aria-pressed="false">EN</button>
     </div>
@@ -42,16 +43,16 @@
   <main>
     <!-- Hero Section -->
     <section id="hero" class="hero-section" aria-labelledby="hero-title">
-      <div class="hero-container mx-auto w-full max-w-3xl">
+      <div class="hero-container mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8">
         <div class="hero-content">
           <span class="badge">Webdesign &amp; Entwicklung aus Expertenhand</span>
-          <h1 id="hero-title">Digitale Erlebnisse, die begeistern und konvertieren</h1>
+          <h1 id="hero-title">Hochwertige Website-Templates. Individuell für Ihre Marke.</h1>
           <p class="hero-description">
-            Wir gestalten und entwickeln performante, barrierefreie Websites und maßgeschneiderte Weblösungen für Unternehmen, die digital nachhaltig wachsen wollen.
+            Wir verbinden hochwertige, wiederverwendbare Website-Templates mit individueller Markenanpassung und passenden Inhalten – für lokale Unternehmen, die professionell online auftreten möchten.
           </p>
           <div class="hero-actions">
-            <a href="#contact" class="btn btn-primary">Jetzt Projekt starten</a>
-            <a href="#services" class="btn btn-secondary">Leistungen entdecken</a>
+            <a href="kontakt.html" class="btn btn-primary">Jetzt Projekt starten</a>
+            <a href="leistungen.html" class="btn btn-secondary">Leistungen entdecken</a>
           </div>
           <div class="hero-metrics">
             <div class="metric-item">
@@ -71,13 +72,119 @@
       </div>
     </section>
 
+    <!-- Template Showcase Section: Master Template A -->
+    <section id="template-showcase" class="showcase-section" aria-labelledby="showcase-title">
+      <div class="showcase-container mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div class="section-header mx-auto w-full max-w-2xl text-center">
+          <span class="section-tag showcase-tag">Flagship Boilerplate</span>
+          <h2 id="showcase-title">Master Template A · Handwerk &amp; Meisterbetriebe</h2>
+          <p class="section-lead showcase-lead">
+            Konzipiert für maximale Konversion, 100/100 Lighthouse-Performance und kompromisslose Barrierefreiheit – schlüsselfertig und modular anpassbar.
+          </p>
+        </div>
+
+        <!-- Interactive Control Bar -->
+        <div class="showcase-controls" role="tablist" aria-label="Template Vorschau Ansichten">
+          <button type="button" class="showcase-tab is-active" role="tab" id="tab-desktop" aria-selected="true" aria-controls="view-desktop" tabindex="0">
+            <svg class="tab-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            <span class="tab-label">Desktop-Vorschau</span>
+          </button>
+          <button type="button" class="showcase-tab" role="tab" id="tab-mobile" aria-selected="false" aria-controls="view-mobile" tabindex="-1">
+            <svg class="tab-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            <span class="tab-label">Mobile Ansicht</span>
+          </button>
+        </div>
+
+        <!-- Showcase Stage / Tab Panels -->
+        <div class="showcase-stage">
+          <!-- Panel 1: Desktop Viewport Mockup -->
+          <div id="view-desktop" class="showcase-panel is-active" role="tabpanel" aria-labelledby="tab-desktop" tabindex="0">
+            <div class="browser-frame">
+              <div class="browser-header">
+                <div class="browser-dots" aria-hidden="true">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="browser-address-bar">
+                  <span class="browser-security-lock" aria-hidden="true">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  </span>
+                  <span class="browser-url">www.meisterbetrieb-gartenbau.example</span>
+                </div>
+                <div class="browser-badge">100% Performance</div>
+              </div>
+              <div class="browser-viewport">
+                <iframe
+                  class="desktop-preview-frame"
+                  src="templates/one-pager-boilerplate/index.html#hero"
+                  title="Live desktop preview of the Master Template A homepage"
+                  loading="lazy"></iframe>
+              </div>
+            </div>
+          </div>
+
+          <!-- Panel 2: Mobile Viewport Mockup -->
+          <div id="view-mobile" class="showcase-panel hidden" role="tabpanel" aria-labelledby="tab-mobile" tabindex="0">
+            <div class="phone-frame">
+              <div class="phone-notch" aria-hidden="true"></div>
+              <div class="phone-viewport">
+              <iframe
+                class="phone-preview-frame"
+                src="templates/one-pager-boilerplate/index.html#hero"
+                title="Live mobile preview of the Master Template A homepage"
+                loading="lazy"></iframe>
+            </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Spec Feature Pillars -->
+        <div class="showcase-meta-grid">
+          <div class="showcase-feature-card">
+            <div class="feature-card-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <h4 class="showcase-feature-title">100/100 Core Web Vitals</h4>
+            <p class="showcase-feature-desc">Reines semantisches HTML &amp; CSS. Blitzschnelle Ladezeiten unter 40 ms ohne ressourcenhungrige Frameworks.</p>
+          </div>
+
+          <div class="showcase-feature-card">
+            <div class="feature-card-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h4 class="showcase-feature-title">DSGVO &amp; Barrierefreiheit</h4>
+            <p class="showcase-feature-desc">Keine externen Schrift- oder Tracking-CDNs. Barrierefrei nach WCAG 2.1 AA und BITV-Standards.</p>
+          </div>
+
+          <div class="showcase-feature-card">
+            <div class="feature-card-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+            </div>
+            <h4 class="showcase-feature-title">JSON-basierte Pflege</h4>
+            <p class="showcase-feature-desc">Kontaktdaten, Akzentfarben und Galeriebilder lassen sich sekundenschnell ohne Entwickler-Kenntnisse pflegen.</p>
+          </div>
+        </div>
+
+        <!-- Showcase Actions / Live Demo Link -->
+        <div class="showcase-actions">
+          <a href="templates/one-pager-boilerplate/index.html" class="btn btn-primary showcase-btn-demo" target="_blank" rel="noopener noreferrer">
+            <span>Live-Demo im Vollbild öffnen</span>
+            <svg class="btn-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+          <a href="kontakt.html" class="btn btn-secondary showcase-btn-contact">
+            Template für Ihr Unternehmen anfragen
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- Services Bento Grid Section -->
     <section id="services" class="services-section" aria-labelledby="services-title">
       <div class="section-header mx-auto w-full max-w-2xl text-center">
         <span class="section-tag">Unsere Expertise</span>
-        <h2 id="services-title">Maßgeschneiderte Weblösungen für Ihren Erfolg</h2>
+        <h2 id="services-title">Hochwertige Website-Templates, individuell angepasst</h2>
         <p class="section-lead">
-          Alles aus einer Hand: Vom durchdachten Konzept über ästhetisches Design bis hin zu erstklassiger technischer Umsetzung.
+          Ein durchdachtes Fundament statt jedes Mal bei null zu beginnen: Wir verbinden erprobte Strukturen mit Ihrem individuellen Branding, Ihren Inhalten und den Anforderungen Ihres Unternehmens.
         </p>
       </div>
 
@@ -90,7 +197,7 @@
           <span class="bento-badge">Kernkompetenz</span>
           <h3>Webdesign &amp; Frontend-Entwicklung</h3>
           <p>
-            Moderne, responsive Websites mit maßgeschneidertem Design, blitzschnellen Ladezeiten und intuitiver Nutzerführung auf allen Endgeräten.
+            Responsive Websites auf Basis hochwertiger Templates – individuell angepasst an Ihre Marke, Ihre Leistungen und Ihre Zielgruppe.
           </p>
           <ul class="bento-list">
             <li>Mobile-First &amp; Responsive Layouts</li>
@@ -104,7 +211,7 @@
           <div class="bento-icon" aria-hidden="true">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
           </div>
-          <h3>Performance &amp; SEO Optimization</h3>
+          <h3>Performance &amp; Suchmaschinenoptimierung</h3>
           <p>
             Optimierte Ladezeiten und technische Suchmaschinenoptimierung für maximale Sichtbarkeit und die Nutzererfahrung und technische Qualität verbessern.
           </p>
@@ -142,6 +249,10 @@
             Zuverlässige Betreuung nach dem Launch: Regelmäßige Updates, Sicherheits-Monitoring und kontinuierliche Weiterentwicklung Ihres Webprojekts.
           </p>
         </article>
+      </div>
+
+      <div class="section-cta-row">
+        <a href="leistungen.html" class="btn btn-secondary">Alle Leistungen &amp; Pakete ansehen</a>
       </div>
     </section>
 
@@ -195,7 +306,7 @@
           <span class="section-tag">Über GDesign</span>
           <h2 id="about-title">Qualität, Transparenz und technische Exzellenz</h2>
           <p>
-            Als spezialisierte Digitalagentur glauben wir an schlanke, performante und nachhaltige Webarchitektur. Statt auf überladene Site-Builder setzen wir auf sauberen Code, höchste Barrierefreiheit und maßgeschneidertes Webdesign.
+            GDesign entwickelt hochwertige, wiederverwendbare Website-Templates für lokale kleine und mittlere Unternehmen. Wir kombinieren ein solides technisches Fundament mit individueller Markenanpassung, passenden Inhalten und einem klar strukturierten Ablauf.
           </p>
           <div class="about-features">
             <div class="feature-item">
@@ -206,6 +317,9 @@
               <strong>Zukunftssicher</strong>
               <p>Mit Blick auf Bedienbarkeit, Sicherheit und Datenschutz entwickelt.</p>
             </div>
+          </div>
+          <div class="section-cta-row-left">
+            <a href="ueber-uns.html" class="btn btn-secondary">Mehr über GDesign erfahren</a>
           </div>
         </div>
       </div>
@@ -228,7 +342,7 @@
 
           <!-- Honeypot field for spam prevention -->
           <p class="hidden-field hidden">
-            <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
           </p>
 
           <div class="form-row">
@@ -256,7 +370,7 @@
           <div class="form-actions">
             <button type="submit" class="btn btn-primary btn-submit">Nachricht senden</button>
             <p class="form-privacy-note">
-              Mit dem Absenden stimmen Sie zu, dass Ihre Angaben zur Kontaktaufnahme verwendet werden. Weitere Informationen finden Sie in der <a href="#datenschutz" class="form-privacy-link">Datenschutzerklärung</a>.
+              Mit dem Absenden stimmen Sie zu, dass Ihre Angaben zur Kontaktaufnahme verwendet werden. Weitere Informationen finden Sie in der <a href="datenschutz.html" class="form-privacy-link">Datenschutzerklärung</a>.
             </p>
           </div>
         </form>
@@ -269,7 +383,7 @@
     <div class="footer-container">
       <div class="footer-top">
         <div class="footer-brand">
-          <a href="#" class="brand" aria-label="GDesign Startseite">
+          <a href="index.html" class="brand" aria-label="GDesign Startseite">
             <img class="brand-wordmark brand-wordmark-footer" src="assets/images/gdesign-logo.png" alt="" width="366" height="114">
             <span class="brand-text visually-hidden">GDesign</span>
           </a>
@@ -281,18 +395,18 @@
         <div class="footer-nav-group">
           <span class="footer-heading">Navigation</span>
           <ul class="footer-links">
-            <li><a href="#services">Leistungen</a></li>
-            <li><a href="#process">Ablauf</a></li>
-            <li><a href="#about">Über uns</a></li>
-            <li><a href="#contact">Kontakt</a></li>
+            <li><a href="leistungen.html">Leistungen</a></li>
+            <li><a href="projekte.html">Projekte</a></li>
+            <li><a href="ueber-uns.html">Über uns</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
           </ul>
         </div>
 
         <div class="footer-nav-group">
           <span class="footer-heading">Rechtliches</span>
           <ul class="footer-links">
-            <li><a href="#impressum">Impressum (Platzhalter)</a></li>
-            <li><a href="#datenschutz">Datenschutz (Platzhalter)</a></li>
+            <li><a href="impressum.html">Impressum</a></li>
+            <li><a href="datenschutz.html">Datenschutz</a></li>
           </ul>
         </div>
       </div>
@@ -304,18 +418,18 @@
     </div>
   </footer>
 
-  <!-- Legal information placeholders: replace with verified operator details before production. -->
-  <section id="impressum" class="legal-information" aria-labelledby="impressum-title">
+  <!-- Legal information placeholders: required for DOM hooks, hidden from view. -->
+  <section id="impressum" class="legal-information" aria-hidden="true" hidden>
     <div class="section-container">
-      <h2 id="impressum-title">Impressum – Platzhalter</h2>
-      <p class="legal-copy"><strong>Angaben zum Betreiber fehlen noch.</strong> Bitte ergänzen Sie vor der Veröffentlichung den vollständigen rechtlichen Namen, die ladungsfähige Anschrift und die erforderlichen Kontakt- und Registerangaben. Keine Angaben auf dieser Seite sind als verifizierte Betreiberinformationen zu verstehen.</p>
+      <h2>Impressum – Platzhalter</h2>
+      <p class="legal-copy">Vollständige Angaben auf der <a href="impressum.html">Impressums-Seite</a>.</p>
     </div>
   </section>
 
-  <section id="datenschutz" class="legal-information" aria-labelledby="datenschutz-title">
+  <section id="datenschutz" class="legal-information" aria-hidden="true" hidden>
     <div class="section-container">
-      <h2 id="datenschutz-title">Datenschutzerklärung – Platzhalter</h2>
-      <p class="legal-copy"><strong>Die Datenschutzerklärung ist noch nicht fertiggestellt.</strong> Vor der Veröffentlichung müssen insbesondere Verantwortlicher, Rechtsgrundlagen, Aufbewahrungsfristen, Empfänger und die Verarbeitung durch Netlify Forms anhand der tatsächlichen Konfiguration geprüft und ergänzt werden.</p>
+      <h2>Datenschutzerklärung – Platzhalter</h2>
+      <p class="legal-copy">Vollständige Angaben auf der <a href="datenschutz.html">Datenschutz-Seite</a>.</p>
     </div>
   </section>
 

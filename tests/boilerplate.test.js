@@ -249,3 +249,53 @@ test('GDesign dark surfaces use explicit light text and light surfaces use reada
   assert.match(styles, /\.contact-form input, \.contact-form textarea\s*\{[^}]*color:\s*var\(--brand-midnight\)/s);
   assert.match(styles, /\.site-footer a, \.site-footer \.footer-links a\s*\{\s*color:\s*#F4F1EA/);
 });
+
+test('Multi-page localization keys exist in both locales and tailwind config captures all root HTML files', () => {
+  for (const locale of [de, en]) {
+    assert.ok(locale.nav_pages, 'Missing nav_pages in locale');
+    assert.equal(typeof locale.nav_pages.home, 'string');
+    assert.equal(typeof locale.nav_pages.leistungen, 'string');
+    assert.equal(typeof locale.nav_pages.projekte, 'string');
+    assert.equal(typeof locale.nav_pages.ueber, 'string');
+    assert.equal(typeof locale.nav_pages.kontakt, 'string');
+
+    assert.ok(locale.leistungen, 'Missing leistungen in locale');
+    assert.equal(typeof locale.leistungen.title, 'string');
+    assert.equal(typeof locale.leistungen.meta_title, 'string');
+    assert.equal(typeof locale.leistungen.meta_description, 'string');
+    assert.equal(typeof locale.leistungen.package1_title, 'string');
+
+    assert.ok(locale.projekte, 'Missing projekte in locale');
+    assert.equal(typeof locale.projekte.title, 'string');
+    assert.equal(typeof locale.projekte.meta_title, 'string');
+    assert.equal(typeof locale.projekte.meta_description, 'string');
+    assert.equal(typeof locale.projekte.study1_title, 'string');
+
+    assert.ok(locale.ueber, 'Missing ueber in locale');
+    assert.equal(typeof locale.ueber.title, 'string');
+    assert.equal(typeof locale.ueber.meta_title, 'string');
+    assert.equal(typeof locale.ueber.meta_description, 'string');
+    assert.equal(typeof locale.ueber.philosophy_title, 'string');
+    assert.equal(typeof locale.ueber.cta_title, 'string');
+
+    assert.ok(locale.kontakt_page, 'Missing kontakt_page in locale');
+    assert.equal(typeof locale.kontakt_page.title, 'string');
+    assert.equal(typeof locale.kontakt_page.meta_title, 'string');
+    assert.equal(typeof locale.kontakt_page.meta_description, 'string');
+    assert.equal(typeof locale.kontakt_page.form_title, 'string');
+    assert.equal(typeof locale.kontakt_page.faq1_q, 'string');
+
+    assert.ok(locale.impressum_page, 'Missing impressum_page in locale');
+    assert.equal(typeof locale.impressum_page.meta_title, 'string');
+    assert.equal(typeof locale.impressum_page.meta_description, 'string');
+    assert.equal(typeof locale.impressum_page.hero_lead, 'string');
+
+    assert.ok(locale.datenschutz_page, 'Missing datenschutz_page in locale');
+    assert.equal(typeof locale.datenschutz_page.meta_title, 'string');
+    assert.equal(typeof locale.datenschutz_page.meta_description, 'string');
+    assert.equal(typeof locale.datenschutz_page.hero_lead, 'string');
+  }
+
+  const tailwindConfig = fs.readFileSync(path.join(root, 'tailwind.config.js'), 'utf8');
+  assert.match(tailwindConfig, /'\.\/\*\.html'/, 'tailwind.config.js must include ./*.html');
+});

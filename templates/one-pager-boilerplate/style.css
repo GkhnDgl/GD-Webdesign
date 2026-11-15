@@ -50,6 +50,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header-height) + 1.5rem);
+  overscroll-behavior-y: contain;
 }
 
 body {
@@ -59,6 +60,7 @@ body {
   color: var(--color-body);
   background-color: #ffffff;
   overflow-x: hidden;
+  overscroll-behavior-y: contain;
 }
 
 body.menu-open {

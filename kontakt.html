@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projektanfrage &amp; Kontakt – GDesign</title>
+  <meta name="description" content="Starten Sie Ihr Projekt mit GDesign. Strukturiertes Anfrageformular, Direktkontakt und FAQ zur Zusammenarbeit.">
+  <meta name="theme-color" content="#0E1726">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+  <link rel="stylesheet" href="assets/css/tailwind.generated.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-container mx-auto w-full max-w-6xl px-5">
+      <a href="index.html" class="brand" aria-label="GDesign Startseite">
+        <img class="brand-wordmark" src="assets/images/gdesign-logo.png" alt="" width="374" height="118">
+        <span class="brand-text visually-hidden">GDesign</span>
+      </a>
+
+      <button type="button" class="mobile-menu-toggle" aria-expanded="false" aria-controls="primary-navigation" aria-label="Menü öffnen">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+
+      <nav id="primary-navigation" class="primary-navigation" aria-label="Hauptnavigation">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Start</a></li>
+          <li><a href="leistungen.html" class="nav-link">Leistungen</a></li>
+          <li><a href="projekte.html" class="nav-link">Projekte</a></li>
+          <li><a href="ueber-uns.html" class="nav-link">Über uns</a></li>
+          <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
+        </ul>
+        <a href="kontakt.html" class="btn btn-primary nav-cta">Projekt anfragen</a>
+      </nav>
+      <button type="button" class="language-toggle" id="language-toggle" aria-label="Switch language to English" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Page Hero -->
+    <section class="page-hero" id="kontakt-hero" aria-labelledby="kontakt-title">
+      <div class="page-hero-container mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8">
+        <span class="kontakt-hero-eyebrow section-tag">Projektanfrage</span>
+        <h1 id="kontakt-title">Lassen Sie uns Ihr Projekt besprechen</h1>
+        <p class="kontakt-hero-lead page-hero-lead">
+          Füllen Sie das Formular aus und wir melden uns innerhalb von 24 Stunden mit einem ersten Konzeptvorschlag.
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact" class="contact-section" aria-labelledby="contact-form-title">
+      <div class="contact-container mx-auto w-full max-w-3xl">
+        <div class="contact-header">
+          <span class="section-tag">Kontakt</span>
+          <h2 id="contact-form-title">Projektanfrage stellen</h2>
+          <p class="section-lead">
+            Je mehr Details Sie angeben, desto präziser können wir Ihnen ein maßgeschneidertes Angebot unterbreiten.
+          </p>
+        </div>
+
+        <form class="contact-form" name="contact-anfrage" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="contact-anfrage" />
+
+          <!-- Honeypot -->
+          <p class="hidden-field hidden">
+            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+          </p>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Ihr Name <span class="required" aria-hidden="true">*</span></label>
+              <input type="text" id="name" name="name" required autocomplete="name" placeholder="z. B. Max Mustermann" />
+            </div>
+
+            <div class="form-group">
+              <label for="email">E-Mail-Adresse <span class="required" aria-hidden="true">*</span></label>
+              <input type="email" id="email" name="email" required autocomplete="email" placeholder="max@beispiel.de" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="project-type">Projekttyp</label>
+            <input type="text" id="project-type" name="project-type" placeholder="z. B. Business Website, Landing Page, Template" />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="budget">Budget (ca.)</label>
+              <input type="text" id="budget" name="budget" placeholder="z. B. 2.000–5.000 €" />
+            </div>
+
+            <div class="form-group">
+              <label for="timeline">Gewünschter Zeitrahmen</label>
+              <input type="text" id="timeline" name="timeline" placeholder="z. B. Q1 2027" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Betreff / Anliegen</label>
+            <input type="text" id="subject" name="subject" placeholder="Kurze Beschreibung Ihres Projekts" />
+          </div>
+
+          <div class="form-group">
+            <label for="message">Projektbeschreibung <span class="required" aria-hidden="true">*</span></label>
+            <textarea id="message" name="message" rows="6" required placeholder="Was ist Ihr Ziel? Welche Zielgruppe sprechen Sie an? Was unterscheidet Sie vom Wettbewerb?"></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-submit">Anfrage absenden</button>
+            <p class="form-privacy-note">
+              Mit dem Absenden stimmen Sie zu, dass Ihre Angaben zur Kontaktaufnahme verwendet werden. Weitere Informationen finden Sie in der <a href="datenschutz.html" class="form-privacy-link">Datenschutzerklärung</a>.
+            </p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Direct Contact -->
+    <section class="direct-contact-section" aria-label="Direktkontakt">
+      <div class="contact-container mx-auto w-full max-w-3xl">
+        <span class="section-tag">Direktkontakt</span>
+        <h2>Lieber direkt schreiben?</h2>
+        <div class="direct-contact-box">
+          <a href="mailto:kontakt@gd-webdesign.de" class="direct-contact-email">kontakt@gd-webdesign.de</a>
+          <p class="direct-contact-note">Wir antworten in der Regel innerhalb eines Werktages.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq-section" aria-labelledby="faq-title">
+      <div class="contact-container mx-auto w-full max-w-3xl">
+        <div class="section-header">
+          <span class="section-tag">Häufige Fragen</span>
+          <h2 id="faq-title">FAQ zur Zusammenarbeit</h2>
+        </div>
+
+        <ul class="faq-list">
+          <li class="faq-item">
+            <p class="faq-question">Wie läuft eine typische Zusammenarbeit ab?</p>
+            <p class="faq-answer">Nach Ihrer Anfrage melden wir uns innerhalb von 24 h mit einem Erstgespräch-Termin. Daraus folgt ein Konzept, ein Festpreisangebot und ein Zeitplan. Die Entwicklung erfolgt in enger Abstimmung mit Ihnen – Sie sehen früh, was entsteht.</p>
+          </li>
+          <li class="faq-item">
+            <p class="faq-question">Welche Laufzeit hat ein Wartungsvertrag?</p>
+            <p class="faq-answer">Unsere Wartungsverträge sind monatlich kündbar – kein Lock-in, keine Mindestlaufzeiten. Sie zahlen nur für das, was Sie tatsächlich benötigen.</p>
+          </li>
+          <li class="faq-item">
+            <p class="faq-question">Kann ich später eigenständig Inhalte pflegen?</p>
+            <p class="faq-answer">Ja – je nach Paket integrieren wir ein JSON-basiertes oder Headless-CMS-System, das Ihnen einfache Inhaltspflege ohne Programmierkenntnisse ermöglicht.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="brand" aria-label="GDesign Startseite">
+            <img class="brand-wordmark brand-wordmark-footer" src="assets/images/gdesign-logo.png" alt="" width="366" height="114">
+            <span class="brand-text visually-hidden">GDesign</span>
+          </a>
+          <p class="footer-tagline">
+            Moderne Webentwicklung &amp; Digitalagentur für performante und barrierefreie digitale Erlebnisse.
+          </p>
+        </div>
+
+        <div class="footer-nav-group">
+          <span class="footer-heading">Navigation</span>
+          <ul class="footer-links">
+            <li><a href="leistungen.html">Leistungen</a></li>
+            <li><a href="projekte.html">Projekte</a></li>
+            <li><a href="ueber-uns.html">Über uns</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-nav-group">
+          <span class="footer-heading">Rechtliches</span>
+          <ul class="footer-links">
+            <li><a href="impressum.html">Impressum</a></li>
+            <li><a href="datenschutz.html">Datenschutz</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; GDesign. Alle Rechte vorbehalten.</p>
+        <p class="legal-notice">Rechtliche Angaben müssen vor dem Produktivstart ergänzt werden.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
