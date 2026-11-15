@@ -225,7 +225,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });}
     config.ctas.forEach(cta=>{
       const target=document.querySelector('[data-cta-placement="'+cta.placement+'"]');if(!target)return;
-      target.textContent=val(cta.label);\n      target.classList.remove('btn-primary','btn-secondary','btn-link');\n      target.classList.add(cta.style==='primary'?'btn-primary':cta.style==='secondary'?'btn-secondary':'btn-link');
+      target.textContent=val(cta.label);
+      target.classList.remove('btn-primary','btn-secondary','btn-link');
+      target.classList.add(cta.style==='primary'?'btn-primary':cta.style==='secondary'?'btn-secondary':'btn-link');
       if(cta.type==='tel')target.href='tel:'+cta.value.replace(/[^+\d]/g,'');
       else if(cta.type==='email')target.href='mailto:'+cta.value;
       else if(cta.type==='url'){target.href=cta.value;target.target='_blank';target.rel='noopener noreferrer';}
