@@ -99,3 +99,11 @@ test('Desktop showcase is a live interactive template preview with a fictional a
   const mainScript = fs.readFileSync(path.join(root, 'assets/js/main.js'), 'utf8');
   assert.match(mainScript, /desktop-preview-frame, \.phone-preview-frame/);
 });
+
+test('Embedded preview scrolling stays contained and cannot chain to the agency homepage', () => {
+  const templateCss = fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/style.css'), 'utf8');
+  assert.match(css, /\.browser-viewport\s*\{[^}]*overscroll-behavior:\s*contain/s);
+  assert.match(css, /\.phone-viewport\s*\{[^}]*overscroll-behavior:\s*contain/s);
+  assert.match(templateCss, /html\s*\{[^}]*overscroll-behavior-y:\s*contain/s);
+  assert.match(templateCss, /body\s*\{[^}]*overscroll-behavior-y:\s*contain/s);
+});
