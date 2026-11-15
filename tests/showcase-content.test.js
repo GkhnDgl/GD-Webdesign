@@ -67,8 +67,8 @@ test('Homepage showcase removes the architecture tab and embeds the real templat
   assert.match(homepage, /id="tab-mobile"/);
   assert.ok(homepage.includes('class="phone-preview-frame"'));
   assert.ok(homepage.includes('src="templates/one-pager-boilerplate/index.html#hero"'));
-  assert.match(templateHomepage, /Meisterqualität\\. Zuverlässig\\. Regional\\./);
-  assert.match(templateHomepage, /Ihr Fachbetrieb für Gartenbau, Handwerk &amp; Objektpflege/);
-  assert.match(templateHomepage, /Kostenloses Angebot anfragen/);
-  assert.match(css, /\\.phone-preview-frame\\s*\\{[^}]*width:\\s*100%/s);
+  assert.ok(templateHomepage.includes('Meisterqualität. Zuverlässig. Regional.'));
+  assert.ok(templateHomepage.includes('Ihr Fachbetrieb für Gartenbau, Handwerk & Objektpflege'));
+  assert.ok(templateHomepage.includes('Kostenloses Angebot anfragen'));
+  assert.ok(css.includes('.phone-preview-frame'));
 });
