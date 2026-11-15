@@ -383,6 +383,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const setC = (sel, val) => { const el = card.querySelector(sel); if (el && typeof val === 'string') el.textContent = val; };
           setC('.study-tag', locale.projekte[k + '_tag']);
           setC('.study-title', locale.projekte[k + '_title']);
+          setC('.study-description', locale.projekte[k + '_description']);
           card.querySelectorAll('.study-metric').forEach((m, j) => {
             const setM = (sel, val) => { const el = m.querySelector(sel); if (el && typeof val === 'string') el.textContent = val; };
             setM('.study-metric-val', locale.projekte[k + '_metric' + (j + 1) + '_val']);
