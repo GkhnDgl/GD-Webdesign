@@ -420,6 +420,12 @@ document.addEventListener('DOMContentLoaded', () => {
         setPageEl('#dsgvo-title', locale.ueber.dsgvo_title);
         setPageEl('.dsgvo-desc', locale.ueber.dsgvo_desc);
         document.querySelectorAll('.dsgvo-item').forEach((item, i) => { const val = locale.ueber['dsgvo_item' + (i + 1)]; if (val) item.textContent = val; });
+        setPageEl('#about .section-tag', locale.ueber.philosophy_tag);
+        setPageEl('.ueber-cta-section .section-tag', locale.ueber.cta_tag);
+        setPageEl('#cta-contact-title', locale.ueber.cta_title);
+        setPageEl('.ueber-cta-section .section-lead', locale.ueber.cta_lead);
+        setPageEl('.ueber-cta-section .btn-primary', locale.ueber.cta_primary);
+        setPageEl('.ueber-cta-section .btn-secondary', locale.ueber.cta_secondary);
       }
       // Subpage i18n: Kontakt page
       const kontaktSection = document.querySelector('#kontakt-hero');
@@ -428,6 +434,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setPageEl('.kontakt-hero-eyebrow', locale.kontakt_page.hero_badge);
         setPageEl('#kontakt-title', locale.kontakt_page.title);
         setPageEl('.kontakt-hero-lead', locale.kontakt_page.lead);
+        setPageEl('#contact-form-title', locale.kontakt_page.form_title);
         setPageEl('label[for="project-type"]', locale.kontakt_page.project_type_label);
         setPageEl('label[for="budget"]', locale.kontakt_page.budget_label);
         setPageEl('label[for="timeline"]', locale.kontakt_page.timeline_label);
@@ -453,6 +460,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setPageEl('.impressum-hero-eyebrow', locale.impressum_page.hero_badge);
         setPageEl('#impressum-page-title', locale.impressum_page.title);
         setPageEl('#impressum-hero h1', locale.impressum_page.title);
+        setPageEl('.impressum-hero-lead', locale.impressum_page.hero_lead);
         setPageEl('.legal-notice-placeholder', locale.impressum_page.notice);
         setPageEl('.legal-back-link', locale.impressum_page.back_link);
       }
@@ -463,13 +471,37 @@ document.addEventListener('DOMContentLoaded', () => {
         setPageEl('.datenschutz-hero-eyebrow', locale.datenschutz_page.hero_badge);
         setPageEl('#datenschutz-page-title', locale.datenschutz_page.title);
         setPageEl('#datenschutz-hero h1', locale.datenschutz_page.title);
+        setPageEl('.datenschutz-hero-lead', locale.datenschutz_page.hero_lead);
         setPageEl('.legal-notice-placeholder', locale.datenschutz_page.notice);
         setPageEl('.legal-back-link', locale.datenschutz_page.back_link);
       }
+
+      let pageTitle = locale.meta.title;
+      let pageDesc = locale.meta.description;
+      if (document.querySelector('#leistungen-hero') && locale.leistungen && locale.leistungen.meta_title) {
+        pageTitle = locale.leistungen.meta_title;
+        pageDesc = locale.leistungen.meta_description || pageDesc;
+      } else if (document.querySelector('#projekte-hero') && locale.projekte && locale.projekte.meta_title) {
+        pageTitle = locale.projekte.meta_title;
+        pageDesc = locale.projekte.meta_description || pageDesc;
+      } else if (document.querySelector('#ueber-hero') && locale.ueber && locale.ueber.meta_title) {
+        pageTitle = locale.ueber.meta_title;
+        pageDesc = locale.ueber.meta_description || pageDesc;
+      } else if (document.querySelector('#kontakt-hero') && locale.kontakt_page && locale.kontakt_page.meta_title) {
+        pageTitle = locale.kontakt_page.meta_title;
+        pageDesc = locale.kontakt_page.meta_description || pageDesc;
+      } else if (document.querySelector('#impressum-hero') && locale.impressum_page && locale.impressum_page.meta_title) {
+        pageTitle = locale.impressum_page.meta_title;
+        pageDesc = locale.impressum_page.meta_description || pageDesc;
+      } else if (document.querySelector('#datenschutz-hero') && locale.datenschutz_page && locale.datenschutz_page.meta_title) {
+        pageTitle = locale.datenschutz_page.meta_title;
+        pageDesc = locale.datenschutz_page.meta_description || pageDesc;
+      }
+
       document.documentElement.lang = language;
-      document.title = locale.meta.title;
+      document.title = pageTitle;
       const description = document.querySelector('meta[name="description"]');
-      if (description) description.content = locale.meta.description;
+      if (description) description.content = pageDesc;
 
       const brandLabel = getValue(locale, 'nav.brand_label');
       document.querySelectorAll('.brand').forEach((brand) => brand.setAttribute('aria-label', brandLabel));

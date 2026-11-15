@@ -162,6 +162,8 @@
     "switch_to_german": "Switch language to German"
   },
   "leistungen": {
+    "meta_title": "Services & Packages – GDesign",
+    "meta_description": "Our services: web design, performance, UX/UI, Jamstack hosting, maintenance and GDPR-compliant solutions for your business.",
     "hero_badge": "Services Overview",
     "title": "Services & Website Packages",
     "lead": "Transparent web design services — from concept to launch. No builders, no compromise.",
@@ -197,6 +199,8 @@
     "package3_cta": "Request Enterprise"
   },
   "projekte": {
+    "meta_title": "Projects & Template Showcase – GDesign",
+    "meta_description": "Interactive showcase of our client template system and selected reference case studies focused on performance and conversion.",
     "hero_badge": "Portfolio & Showcase",
     "title": "Projects & Template Showcase",
     "lead": "Selected references and our client template system in practice.",
@@ -229,6 +233,8 @@
     "study3_metric3_lbl": "More enquiries"
   },
   "ueber": {
+    "meta_title": "About GDesign – Philosophy, Stack & Standards",
+    "meta_description": "Craftsmanship instead of site builders: our agency philosophy, tech stack, accessibility and GDPR standards.",
     "hero_badge": "Our Philosophy",
     "title": "Craft, not builders",
     "lead": "Why we choose clean code, accessibility, and GDPR compliance — and why that makes all the difference for your project.",
@@ -262,11 +268,19 @@
     "dsgvo_item1": "Local fonts instead of Google Fonts CDN",
     "dsgvo_item2": "Netlify Forms instead of third-party form services",
     "dsgvo_item3": "Strict Content Security Policy (CSP)",
-    "dsgvo_item4": "No tracking without explicit consent"
+    "dsgvo_item4": "No tracking without explicit consent",
+    "cta_tag": "Work Together",
+    "cta_title": "Ready for your next project?",
+    "cta_lead": "Tell us about your vision – we turn it into an exceptional digital presence.",
+    "cta_primary": "Request Project",
+    "cta_secondary": "View Services"
   },
   "kontakt_page": {
+    "meta_title": "Project Enquiry & Contact – GDesign",
+    "meta_description": "Start your project with GDesign. Structured enquiry form, direct contact and collaboration FAQ.",
     "hero_badge": "Get in touch",
     "title": "Request your project",
+    "form_title": "Submit Project Enquiry",
     "lead": "Describe your project — we will respond within 24 hours.",
     "project_type_label": "Project type",
     "project_type_placeholder": "e.g. New website, redesign, landing page",
@@ -287,14 +301,20 @@
     "direct_response": "Response usually within 24 hours."
   },
   "impressum_page": {
+    "meta_title": "Legal Notice – GDesign",
+    "meta_description": "Legal notice and provider identification pursuant to § 5 TMG for GDesign.",
     "hero_badge": "Legal Notice",
     "title": "Legal Notice",
+    "hero_lead": "Legal disclosure and provider identification pursuant to § 5 TMG.",
     "notice": "Information pursuant to § 5 TMG. These details are placeholders and must be replaced with verified operator information prior to publication.",
     "back_link": "← Back to Homepage"
   },
   "datenschutz_page": {
+    "meta_title": "Privacy Policy – GDesign",
+    "meta_description": "Privacy policy and data protection information for the GDesign website.",
     "hero_badge": "Privacy Policy",
     "title": "Privacy Policy",
+    "hero_lead": "Information regarding the processing of your personal data pursuant to GDPR.",
     "notice": "These details are placeholders and must be replaced with a complete, legally verified privacy policy prior to publication.",
     "back_link": "← Back to Homepage"
   }

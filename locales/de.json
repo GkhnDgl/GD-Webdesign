@@ -162,6 +162,8 @@
     "switch_to_german": "Sprache auf Deutsch umstellen"
   },
   "leistungen": {
+    "meta_title": "Leistungen & Pakete – GDesign",
+    "meta_description": "Unsere Leistungen: Webdesign, Performance, UX/UI, Jamstack-Hosting, Wartung und DSGVO-konforme Lösungen für Ihr Unternehmen.",
     "hero_badge": "Leistungsübersicht",
     "title": "Leistungen & Website-Pakete",
     "lead": "Transparente Webdesign-Leistungen — vom Konzept bis zum Launch. Kein Baukasten, kein Kompromiss.",
@@ -197,6 +199,8 @@
     "package3_cta": "Enterprise anfragen"
   },
   "projekte": {
+    "meta_title": "Projekte & Template-Showcase – GDesign",
+    "meta_description": "Interaktiver Showcase unseres Kunden-Template-Systems und ausgewählte Referenz-Case-Studies mit Fokus auf Performance und Conversion.",
     "hero_badge": "Referenzen & Showcase",
     "title": "Projekte & Template-Showcase",
     "lead": "Ausgewählte Referenzen und unser Kunden-Template-System in der Praxis.",
@@ -229,6 +233,8 @@
     "study3_metric3_lbl": "Mehr Anfragen"
   },
   "ueber": {
+    "meta_title": "Über GDesign – Philosophie, Stack & Standards",
+    "meta_description": "Handwerk statt Baukasten: Unsere Agentur-Philosophie, unser Technologie-Stack und unsere Barrierefreiheits- und DSGVO-Standards.",
     "hero_badge": "Unsere Philosophie",
     "title": "Handwerk statt Baukasten",
     "lead": "Warum wir auf sauberen Code, Barrierefreiheit und DSGVO-Konformität setzen — und warum das für Ihr Projekt den entscheidenden Unterschied macht.",
@@ -262,11 +268,19 @@
     "dsgvo_item1": "Lokale Schriften statt Google Fonts CDN",
     "dsgvo_item2": "Netlify Forms statt Drittanbieter-Formulare",
     "dsgvo_item3": "Strikte Content Security Policy (CSP)",
-    "dsgvo_item4": "Kein Tracking ohne explizite Einwilligung"
+    "dsgvo_item4": "Kein Tracking ohne explizite Einwilligung",
+    "cta_tag": "Gemeinsam arbeiten",
+    "cta_title": "Bereit für Ihr nächstes Projekt?",
+    "cta_lead": "Erzählen Sie uns von Ihrer Vision – wir machen daraus eine außergewöhnliche digitale Präsenz.",
+    "cta_primary": "Projekt anfragen",
+    "cta_secondary": "Leistungen ansehen"
   },
   "kontakt_page": {
+    "meta_title": "Projektanfrage & Kontakt – GDesign",
+    "meta_description": "Starten Sie Ihr Projekt mit GDesign. Strukturiertes Anfrageformular, Direktkontakt und FAQ zur Zusammenarbeit.",
     "hero_badge": "Jetzt anfragen",
     "title": "Ihr Projekt anfragen",
+    "form_title": "Projektanfrage stellen",
     "lead": "Beschreiben Sie Ihr Vorhaben — wir melden uns innerhalb von 24 Stunden.",
     "project_type_label": "Projekttyp",
     "project_type_placeholder": "z. B. Neue Website, Redesign, Landing Page",
@@ -287,14 +301,20 @@
     "direct_response": "Antwort i. d. R. innerhalb von 24 Stunden."
   },
   "impressum_page": {
+    "meta_title": "Impressum – GDesign",
+    "meta_description": "Impressum und Anbieterkennzeichnung gemäß § 5 TMG für GDesign.",
     "hero_badge": "Rechtliche Hinweise",
     "title": "Impressum",
+    "hero_lead": "Gesetzliche Anbieterkennzeichnung und rechtliche Hinweise gemäß § 5 TMG.",
     "notice": "Angaben gemäß § 5 TMG. Diese Angaben sind Platzhalter und müssen vor der Veröffentlichung durch vollständige, rechtsverbindliche Betreiberinformationen ersetzt werden.",
     "back_link": "← Zurück zur Startseite"
   },
   "datenschutz_page": {
+    "meta_title": "Datenschutzerklärung – GDesign",
+    "meta_description": "Datenschutzerklärung und Datenschutzhinweise für die Website von GDesign.",
     "hero_badge": "Datenschutz",
     "title": "Datenschutzerklärung",
+    "hero_lead": "Informationen über die Verarbeitung Ihrer personenbezogenen Daten gemäß DSGVO.",
     "notice": "Diese Angaben sind Platzhalter und müssen vor der Veröffentlichung durch eine vollständige, rechtsverbindliche Datenschutzerklärung ersetzt werden.",
     "back_link": "← Zurück zur Startseite"
   }

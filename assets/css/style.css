@@ -488,6 +488,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   display: inline-flex;
   align-items: center;
   gap: .5rem;
+  min-height: 2.75rem;
   padding: .65rem 1.25rem;
   border: 1px solid rgb(184 159 125 / .4);
   border-radius: 2px;
@@ -1176,11 +1177,15 @@ a { text-decoration: none; }
 .section-cta-row {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
   margin-top: clamp(2rem, 4vw, 3rem);
 }
 .section-cta-row-left {
   display: flex;
   justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
   margin-top: 2rem;
 }
 
