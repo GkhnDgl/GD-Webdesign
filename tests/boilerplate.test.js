@@ -342,6 +342,17 @@ test('Master Template A runtime validator accepts the complete config and reject
     assert.equal(validate(candidate), true, 'Supported CTA type should validate: ' + type);
   }
 
+  const configuredLogo = structuredClone(config);
+  configuredLogo.branding.logo = {
+    image: '../../assets/images/customer-logo.svg',
+    alt: { de: 'Unternehmenslogo', en: 'Company logo' }
+  };
+  assert.equal(validate(configuredLogo), true, 'A valid optional customer logo should be accepted');
+
+  const externalLogo = structuredClone(configuredLogo);
+  externalLogo.branding.logo.image = 'https://evil.example/logo.svg';
+  assert.equal(validate(externalLogo), false, 'External logo URLs must be rejected');
+
   const duplicateId = structuredClone(config);
   duplicateId.content.services.items[1].id = duplicateId.content.services.items[0].id;
   assert.equal(validate(duplicateId), false, 'Duplicate collection IDs must be rejected');
@@ -357,6 +368,7 @@ test('Master Template A runtime validator accepts the complete config and reject
   for (const unsafe of [
     { type: 'url', value: 'http://example.com' },
     { type: 'url', value: 'javascript:alert(1)' },
+    { type: 'url', value: 'https://user:password@example.com' },
     { type: 'anchor', value: '#unknown' },
     { type: 'form', value: '#other-form' }
   ]) {

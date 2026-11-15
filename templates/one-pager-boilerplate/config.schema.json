@@ -538,7 +538,8 @@
               "properties": {
                 "value": {
                   "type": "string",
-                  "pattern": "^https://"
+                  "pattern": "^https://",
+                  "format": "uri"
                 }
               }
             }

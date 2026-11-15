@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
       placements.add(v.placement);
       if (v.type==='tel') return /^[+0-9][0-9\s()./-]{5,24}$/.test(v.value);
       if (v.type==='email') return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.value);
-      if (v.type==='url') { try { return new URL(v.value).protocol==='https:'; } catch (_) { return false; } }
+      if (v.type==='url') { try { const url = new URL(v.value); return url.protocol==='https:' && Boolean(url.hostname) && !url.username && !url.password; } catch (_) { return false; } }
       if (v.type==='anchor') return /^#(?:services|gallery|process|about|contact)$/.test(v.value);
       if (v.type==='form') return v.value==='#contact-form';
       return false;
