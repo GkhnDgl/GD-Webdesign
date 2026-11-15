@@ -194,7 +194,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const img=make('img','brand-customer-logo');img.src=new URL(config.branding.logo.image,pageBaseUrl).href;img.alt=val(config.branding.logo.alt);wrapper.replaceChildren(img);wrapper.removeAttribute('aria-hidden');
     });
     set('.hero-content > .badge',val(config.content.hero.badge));set('#hero-title',val(config.content.hero.title));set('.hero-description',val(config.content.hero.subtitle));
-    header('services',config.content.services);header('process',config.content.process);header('gallery',config.content.gallery);\n    set('#contact .contact-header .section-tag',val(config.content.contact.eyebrow));\n    set('#contact .contact-header h2',val(config.content.contact.title));\n    set('#contact .contact-header .section-lead',val(config.content.contact.description));
+    header('services',config.content.services);header('process',config.content.process);header('gallery',config.content.gallery);
+    set('#contact .contact-header .section-tag',val(config.content.contact.eyebrow));
+    set('#contact .contact-header h2',val(config.content.contact.title));
+    set('#contact .contact-header .section-lead',val(config.content.contact.description));
     set('#about .section-tag',val(config.content.about.eyebrow));set('#about-title',val(config.content.about.title));set('.about-content > p',val(config.content.about.description));
     const services=document.querySelector('#services .bento-grid');
     if(services){services.replaceChildren();config.content.services.items.forEach((item,i)=>{
