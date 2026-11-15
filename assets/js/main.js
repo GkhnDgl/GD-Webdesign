@@ -557,11 +557,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       try { localStorage.setItem('preferred_language', language); } catch (_) { /* Storage may be unavailable. */ }
-      // The embedded template is same-origin; reload it so it picks up the newly selected locale.
-      const mobilePreview = document.querySelector('.phone-preview-frame');
-      if (mobilePreview?.contentWindow) {
-        try { mobilePreview.contentWindow.location.reload(); } catch (_) { /* Preview may not be ready yet. */ }
-      }
+      // Keep both same-origin live previews in sync with the selected locale.
+      document.querySelectorAll('.desktop-preview-frame, .phone-preview-frame').forEach((preview) => {
+        if (preview.contentWindow) {
+          try { preview.contentWindow.location.reload(); } catch (_) { /* Preview may not be ready yet. */ }
+        }
+      });
     } catch (error) {
       console.error('Unable to apply the selected language:', error);
     }
