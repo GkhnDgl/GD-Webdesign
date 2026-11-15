@@ -332,21 +332,24 @@ document.addEventListener('DOMContentLoaded', () => {
       // Multi-page navigation labels
       if (locale.nav_pages) {
         const pageFileMap = {
-          'index.html': 'home', 'leistungen.html': 'leistungen',
-          'projekte.html': 'projekte', 'ueber-uns.html': 'ueber', 'kontakt.html': 'kontakt'
+          '': 'home', 'index': 'home', 'index.html': 'home',
+          'leistungen': 'leistungen', 'leistungen.html': 'leistungen',
+          'projekte': 'projekte', 'projekte.html': 'projekte',
+          'ueber-uns': 'ueber', 'ueber-uns.html': 'ueber',
+          'kontakt': 'kontakt', 'kontakt.html': 'kontakt'
         };
-        document.querySelectorAll('.nav-list a[href]').forEach((link) => {
-          const filename = (link.getAttribute('href') || '').split('/').pop() || 'index.html';
-          const key = pageFileMap[filename];
+        const getNavigationKey = (link) => {
+          const rawHref = link.getAttribute('href') || '';
+          const pathname = rawHref.split(/[?#]/)[0].replace(/\\/$/, '');
+          const filename = pathname.split('/').pop() || '';
+          return pageFileMap[filename] || pageFileMap[filename.replace(/\\.html$/i, '')] || null;
+        };
+        document.querySelectorAll('.nav-list a[href], .footer-nav-group a[href]').forEach((link) => {
+          const key = getNavigationKey(link);
           if (key && locale.nav_pages[key]) link.textContent = locale.nav_pages[key];
         });
         const navCtaEl = document.querySelector('.nav-cta');
         if (navCtaEl && locale.nav_pages.cta) navCtaEl.textContent = locale.nav_pages.cta;
-        document.querySelectorAll('.footer-nav-group a[href]').forEach((link) => {
-          const filename = (link.getAttribute('href') || '').split('/').pop() || 'index.html';
-          const key = pageFileMap[filename];
-          if (key && locale.nav_pages[key]) link.textContent = locale.nav_pages[key];
-        });
       }
       // Homepage About-section CTA
       if (locale.about && locale.about.cta_link) {
