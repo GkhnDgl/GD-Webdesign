@@ -2,14 +2,16 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "./config.schema.json",
   "title": "Master Template A customer configuration",
-  "description": "Customer-specific business data, branding, gallery images, and legal text.",
+  "description": "Customer identity, branding, localized presentation content, SEO, CTAs and legal information.",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "$schema",
     "business",
     "branding",
-    "gallery",
+    "seo",
+    "content",
+    "ctas",
     "legal"
   ],
   "properties": {
@@ -22,6 +24,7 @@
       "required": [
         "name",
         "legalName",
+        "legalForm",
         "phone",
         "email",
         "address"
@@ -35,19 +38,51 @@
           "type": "string",
           "minLength": 1
         },
+        "legalForm": {
+          "type": "string",
+          "minLength": 1
+        },
         "phone": {
           "type": "string",
           "minLength": 6,
           "maxLength": 25,
-          "pattern": "^[+0-9][0-9\\s()./-]{5,24}$"
+          "pattern": "^[+0-9][0-9\\\\s()./-]{5,24}$"
         },
         "email": {
           "type": "string",
           "format": "email"
         },
         "address": {
-          "type": "string",
-          "minLength": 1
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "street",
+            "postalCode",
+            "locality",
+            "country"
+          ],
+          "properties": {
+            "street": {
+              "type": "string",
+              "minLength": 1
+            },
+            "postalCode": {
+              "type": "string",
+              "minLength": 1
+            },
+            "locality": {
+              "type": "string",
+              "minLength": 1
+            },
+            "region": {
+              "type": "string",
+              "minLength": 1
+            },
+            "country": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
         }
       }
     },
@@ -56,9 +91,28 @@
       "additionalProperties": false,
       "required": [
         "primaryColor",
-        "primaryHoverColor"
+        "primaryHoverColor",
+        "primaryLightColor",
+        "accentColor"
       ],
       "properties": {
+        "logo": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "image",
+            "alt"
+          ],
+          "properties": {
+            "image": {
+              "type": "string",
+              "minLength": 1
+            },
+            "alt": {
+              "$ref": "#/definitions/localizedText"
+            }
+          }
+        },
         "primaryColor": {
           "type": "string",
           "pattern": "^#[0-9a-fA-F]{6}$"
@@ -66,27 +120,346 @@
         "primaryHoverColor": {
           "type": "string",
           "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "primaryLightColor": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "accentColor": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$"
         }
       }
     },
-    "gallery": {
+    "seo": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "description"
+      ],
+      "properties": {
+        "title": {
+          "$ref": "#/definitions/localizedText"
+        },
+        "description": {
+          "$ref": "#/definitions/localizedText"
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "hero",
+        "services",
+        "process",
+        "about",
+        "gallery",
+        "contact",
+        "footer"
+      ],
+      "properties": {
+        "hero": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "badge",
+            "title",
+            "subtitle"
+          ],
+          "properties": {
+            "badge": {
+              "$ref": "#/definitions/localizedText"
+            },
+            "title": {
+              "$ref": "#/definitions/localizedText"
+            },
+            "subtitle": {
+              "$ref": "#/definitions/localizedText"
+            }
+          }
+        },
+        "services": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "eyebrow",
+            "title",
+            "description",
+            "items"
+          ],
+          "properties": {
+            "eyebrow": {
+              "$ref": "#/definitions/localizedText"
+            },
+            "title": {
+              "$ref": "#/definitions/localizedText"
+            },
+            "description": {
+              "$ref": "#/definitions/localizedText"
+            },
+            "items": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "title",
+                  "description"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "title": {
+                    "$ref": "#/definitions/localizedText"
+                  },
+                  "description": {
+                    "$ref": "#/definitions/localizedText"
+                  },
+                  "highlights": {
+                    "$ref": "#/definitions/localizedList"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "process": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "eyebrow",
+            "title",
+            "description",
+            "steps"
+          ],
+          "properties": {
+            "eyebrow": {
+              "$ref": "#/definitions/localizedText"
+            },
+            "title": {
+              "$ref": "#/definitions/localizedText"
+            },
+            "description": {
+              "$ref": "#/definitions/localizedText"
+            },
+            "steps": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "title",
+                  "description"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "title": {
+                    "$ref": "#/definitions/localizedText"
+                  },
+                  "description": {
+                    "$ref": "#/definitions/localizedText"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "about": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "eyebrow",
+            "title",
+            "description",
+            "features"
+          ],
+          "properties": {
+            "eyebrow": {
+              "$ref": "#/definitions/localizedText"
+            },
+            "title": {
+              "$ref": "#/definitions/localizedText"
+            },
+            "description": {
+              "$ref": "#/definitions/localizedText"
+            },
+            "features": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "title",
+                  "description"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "title": {
+                    "$ref": "#/definitions/localizedText"
+                  },
+                  "description": {
+                    "$ref": "#/definitions/localizedText"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "gallery": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "eyebrow",
+            "title",
+            "description",
+            "items"
+          ],
+          "properties": {
+            "eyebrow": {
+              "$ref": "#/definitions/localizedText"
+            },
+            "title": {
+              "$ref": "#/definitions/localizedText"
+            },
+            "description": {
+              "$ref": "#/definitions/localizedText"
+            },
+            "items": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "image",
+                  "alt",
+                  "title",
+                  "description"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "image": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "alt": {
+                    "$ref": "#/definitions/localizedText"
+                  },
+                  "title": {
+                    "$ref": "#/definitions/localizedText"
+                  },
+                  "description": {
+                    "$ref": "#/definitions/localizedText"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "contact": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "eyebrow",
+            "title",
+            "description"
+          ],
+          "properties": {
+            "eyebrow": {
+              "$ref": "#/definitions/localizedText"
+            },
+            "title": {
+              "$ref": "#/definitions/localizedText"
+            },
+            "description": {
+              "$ref": "#/definitions/localizedText"
+            }
+          }
+        },
+        "footer": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "tagline"
+          ],
+          "properties": {
+            "tagline": {
+              "$ref": "#/definitions/localizedText"
+            }
+          }
+        }
+      }
+    },
+    "ctas": {
       "type": "array",
-      "minItems": 4,
-      "maxItems": 4,
+      "minItems": 1,
       "items": {
         "type": "object",
         "additionalProperties": false,
         "required": [
-          "image",
-          "alt"
+          "id",
+          "placement",
+          "style",
+          "label",
+          "type",
+          "value"
         ],
         "properties": {
-          "image": {
+          "id": {
             "type": "string",
-            "minLength": 1,
-            "pattern": "^(?!/)(?![A-Za-z][A-Za-z0-9+.-]*:).+"
+            "minLength": 1
           },
-          "alt": {
+          "placement": {
+            "type": "string",
+            "enum": [
+              "nav-primary",
+              "hero-primary",
+              "hero-secondary",
+              "contact-primary"
+            ]
+          },
+          "style": {
+            "type": "string",
+            "enum": [
+              "primary",
+              "secondary",
+              "text"
+            ]
+          },
+          "label": {
+            "$ref": "#/definitions/localizedText"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "tel",
+              "email",
+              "url",
+              "anchor",
+              "form"
+            ]
+          },
+          "value": {
             "type": "string",
             "minLength": 1
           }
@@ -126,6 +499,30 @@
         "en": {
           "type": "string",
           "minLength": 1
+        }
+      }
+    },
+    "localizedList": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "de",
+        "en"
+      ],
+      "properties": {
+        "de": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "en": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
         }
       }
     }
