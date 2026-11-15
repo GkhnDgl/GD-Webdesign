@@ -450,7 +450,7 @@ test('Homepage About CTA is translated when switching between German and English
   assert.equal(typeof de.about?.cta_link, 'string', 'Missing German homepage About CTA translation');
   assert.equal(typeof en.about?.cta_link, 'string', 'Missing English homepage About CTA translation');
   assert.notEqual(de.about.cta_link, en.about.cta_link, 'Homepage About CTA must differ by locale');
-  assert.match(indexHtml, /class="btn btn-secondary">Mehr über GDesign erfahren<\\/a>/);
+  assert.ok(indexHtml.includes('class="btn btn-secondary">Mehr über GDesign erfahren</a>'));
   assert.match(mainJs, /\.section-cta-row-left \.btn-secondary/);
   assert.match(mainJs, /locale\.about\.cta_link/);
 });
