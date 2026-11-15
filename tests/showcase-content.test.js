@@ -13,6 +13,7 @@ test('Portfolio examples are clearly identified as concepts, not client referenc
   assert.match(projects, /Template-Konzepte/);
   assert.match(projects, /nicht um veröffentlichte Kundenprojekte/);
   assert.equal((projects.match(/class="case-study-card"/g) || []).length, 3);
+  assert.equal((projects.match(/class="study-description"/g) || []).length, 3);
   assert.doesNotMatch(projects, /\+68%|\+42%|\+31%|Lighthouse Score|Performance Score|Anfragen\/Monat|Conversion Rate/);
 });
 
@@ -28,5 +29,7 @@ test('German and English homepage positioning consistently describes reusable te
     assert.match(locale.hero.subtitle, /template/i);
     assert.match(locale.services.title, /template/i);
     assert.match(locale.about.description, /template/i);
+    assert.match(locale.projekte.studies_lead, /concept|entwürfe|konzepte/i);
+    for (let index = 1; index <= 3; index += 1) assert.match(locale.projekte[`study${index}_description`], /./);
   }
 });
