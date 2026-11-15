@@ -182,6 +182,9 @@ test('Master Template A customer config matches its documented JSON Schema', () 
   const assetPattern = new RegExp(schema.properties.content.properties.gallery.properties.items.items.properties.image.pattern);
   assert.ok(config.content.gallery.items.every((item) => assetPattern.test(item.image)), 'Gallery paths must match the schema asset-root pattern');
   assert.equal(schema.properties.ctas.items.allOf.length, 5, 'CTA schema must validate all supported action types');
+  const urlPattern = new RegExp(schema.properties.ctas.items.allOf.find((rule) => rule.if.properties.type.const === 'url').then.properties.value.pattern);
+  assert.equal(urlPattern.test('https://example.com/path'), true);
+  assert.equal(urlPattern.test('https://user:password@example.com'), false, 'Schema must reject URL credentials');
   assert.ok(config.content.services.items.every((item) => item.title.de && item.title.en && item.description.de && item.description.en));
   for (const key of ['imprintDetails', 'privacyDetails']) {
     assert.equal(typeof config.legal[key].de, 'string');
