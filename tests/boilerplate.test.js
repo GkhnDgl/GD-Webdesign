@@ -141,8 +141,14 @@ test('boilerplate config.json exists with required business, branding, gallery, 
   assert.equal(config.business.name, 'Meisterbetrieb Handwerk & Gartenbau');
   assert.equal(config.business.legalName, 'Meisterbetrieb Handwerk & Gartenbau GmbH');
   assert.ok(config.business.phone && config.business.email && config.business.address);
+  assert.equal(config.business.legalForm, 'GmbH');
+  assert.equal(typeof config.business.address.street, 'string');
   assert.ok(config.branding && typeof config.branding.primaryColor === 'string');
-  assert.ok(Array.isArray(config.gallery) && config.gallery.length > 0);
+  assert.ok(config.seo && config.content && Array.isArray(config.content.gallery.items));
+  assert.ok(config.content.services.items.length >= 1);
+  assert.ok(config.content.process.steps.length >= 1);
+  assert.ok(config.content.about.features.length >= 1);
+  assert.ok(config.ctas.length >= 1);
   assert.ok(config.legal && config.legal.imprintDetails && config.legal.privacyDetails);
   assert.ok(config.legal.imprintDetails.en.includes(config.business.legalName));
   assert.ok(config.legal.privacyDetails.en.includes(config.business.legalName));
@@ -163,15 +169,17 @@ test('Master Template A customer config matches its documented JSON Schema', () 
   const schema = JSON.parse(fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/config.schema.json'), 'utf8'));
 
   assert.equal(config.$schema, './config.schema.json');
-  assert.deepEqual(schema.required, ['$schema', 'business', 'branding', 'gallery', 'legal']);
-  assert.equal(schema.properties.gallery.minItems, 4);
-  assert.equal(schema.properties.gallery.maxItems, 4);
-  assert.equal(config.gallery.length, 4);
+  assert.deepEqual(schema.required, ['$schema', 'business', 'branding', 'seo', 'content', 'ctas', 'legal']);
+  assert.ok(schema.properties.content.properties.gallery.properties.items.minItems >= 1);
+  assert.ok(config.content.gallery.items.length >= 1);
   assert.ok(new RegExp(schema.properties.business.properties.phone.pattern).test(config.business.phone));
   assert.ok(config.business.email.includes('@'));
   assert.match(config.branding.primaryColor, /^#[0-9a-fA-F]{6}$/);
   assert.match(config.branding.primaryHoverColor, /^#[0-9a-fA-F]{6}$/);
-  assert.ok(config.gallery.every((item) => item.image.startsWith('../../assets/images/') && item.alt.trim()));
+  assert.match(config.branding.primaryLightColor, /^#[0-9a-fA-F]{6}$/);
+  assert.match(config.branding.accentColor, /^#[0-9a-fA-F]{6}$/);
+  assert.ok(config.content.gallery.items.every((item) => item.image.startsWith('../../assets/images/') && item.alt.de.trim() && item.alt.en.trim()));
+  assert.ok(config.content.services.items.every((item) => item.title.de && item.title.en && item.description.de && item.description.en));
   for (const key of ['imprintDetails', 'privacyDetails']) {
     assert.equal(typeof config.legal[key].de, 'string');
     assert.equal(typeof config.legal[key].en, 'string');
@@ -203,8 +211,8 @@ test('template footer and SEO metadata use the configured business name in both 
     assert.match(locale.meta.title, /\{businessName\}/);
     assert.match(locale.meta.description, /\{businessName\}/);
   }
-  assert.match(script, /locale\?\.meta\?\.title/);
-  assert.match(script, /locale\?\.meta\?\.description/);
+  assert.match(script, /config\.seo\.title/);
+  assert.match(script, /config\.seo\.description/);
   assert.match(script, /locale\?\.footer\?\.rights/);
   assert.match(script, /replaceAll\('\{businessName\}'/);
 });

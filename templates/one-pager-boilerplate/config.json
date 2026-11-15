@@ -15,13 +15,6 @@
     }
   },
   "branding": {
-    "logo": {
-      "image": "../../assets/images/customer-logo.svg",
-      "alt": {
-        "de": "Logo des Unternehmens",
-        "en": "Company logo"
-      }
-    },
     "primaryColor": "#047857",
     "primaryHoverColor": "#065f46",
     "primaryLightColor": "#d1fae5",

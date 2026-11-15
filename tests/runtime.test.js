@@ -304,7 +304,7 @@ test('DOM translation and accessibility updates function correctly during langua
   // Initially German
   assert.equal(docElement.lang, 'de');
   assert.equal(brandText.textContent, boilerplateConfig.business.name);
-  assert.equal(heroTitle.textContent, de.hero.title);
+  assert.equal(heroTitle.textContent, boilerplateConfig.content.hero.title.de);
   assert.equal(impressumTitle.textContent, de.legal.imprint_title);
   assert.equal(impressumCopy.textContent, boilerplateConfig.legal.imprintDetails.de);
   assert.equal(datenschutzTitle.textContent, de.legal.privacy_title);
@@ -326,7 +326,7 @@ test('DOM translation and accessibility updates function correctly during langua
 
   assert.equal(docElement.lang, 'en');
   assert.equal(brandText.textContent, boilerplateConfig.business.name);
-  assert.equal(heroTitle.textContent, en.hero.title);
+  assert.equal(heroTitle.textContent, boilerplateConfig.content.hero.title.en);
   assert.equal(metricLabel1.textContent, 'Adapted to your brand');
   assert.equal(impressumTitle.textContent, en.legal.imprint_title);
   assert.equal(impressumCopy.textContent, boilerplateConfig.legal.imprintDetails.en);
