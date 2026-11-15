@@ -1687,3 +1687,46 @@ a { text-decoration: none; }
 @media (prefers-reduced-motion: reduce) {
   .package-cta { transition: none; }
 }
+
+
+/* Keep the browser mockup header inside the available width on narrow screens. */
+@media (max-width: 640px) {
+  .browser-header {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: .65rem;
+    padding: .75rem;
+  }
+
+  .browser-address-bar {
+    order: 3;
+    flex: 1 1 100%;
+    min-width: 0;
+    max-width: none;
+    overflow: hidden;
+  }
+
+  .browser-url {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .browser-badge {
+    margin-left: auto;
+    white-space: normal;
+    text-align: right;
+  }
+
+  .browser-viewport {
+    padding-inline: 1rem;
+  }
+
+  .mockup-hero-stats {
+    grid-template-columns: minmax(0, 1fr);
+    gap: .85rem;
+  }
+
+  .mockup-stat {
+    min-width: 0;
+  }
+}
