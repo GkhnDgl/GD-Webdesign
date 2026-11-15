@@ -107,7 +107,7 @@
             "image": {
               "type": "string",
               "minLength": 1,
-              "pattern": "^\\\\.\\\\./\\\\.\\\\./assets/images/[^?#]+$"
+              "pattern": "^\\.\\./\\.\\./assets/images/[^?#]+$"
             },
             "alt": {
               "$ref": "#/definitions/localizedText"
@@ -388,7 +388,7 @@
                   "image": {
                     "type": "string",
                     "minLength": 1,
-                    "pattern": "^\\\\.\\\\./\\\\.\\\\./assets/images/[^?#]+$"
+                    "pattern": "^\\.\\./\\.\\./assets/images/[^?#]+$"
                   },
                   "alt": {
                     "$ref": "#/definitions/localizedText"

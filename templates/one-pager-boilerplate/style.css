@@ -943,3 +943,6 @@ section {
 
 .metric-value { color: var(--color-primary); }
 [data-config-collection="metrics"] { grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr)); }
+
+.btn-link { display:inline-flex; align-items:center; color:var(--color-primary); text-decoration:underline; text-underline-offset:0.2em; background:transparent; border:0; }
+.btn-link:hover { color:var(--color-primary-hover); }

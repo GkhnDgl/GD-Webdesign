@@ -179,6 +179,9 @@ test('Master Template A customer config matches its documented JSON Schema', () 
   assert.match(config.branding.primaryLightColor, /^#[0-9a-fA-F]{6}$/);
   assert.match(config.branding.accentColor, /^#[0-9a-fA-F]{6}$/);
   assert.ok(config.content.gallery.items.every((item) => item.image.startsWith('../../assets/images/') && item.alt.de.trim() && item.alt.en.trim()));
+  const assetPattern = new RegExp(schema.properties.content.properties.gallery.properties.items.items.properties.image.pattern);
+  assert.ok(config.content.gallery.items.every((item) => assetPattern.test(item.image)), 'Gallery paths must match the schema asset-root pattern');
+  assert.equal(schema.properties.ctas.items.allOf.length, 5, 'CTA schema must validate all supported action types');
   assert.ok(config.content.services.items.every((item) => item.title.de && item.title.en && item.description.de && item.description.en));
   for (const key of ['imprintDetails', 'privacyDetails']) {
     assert.equal(typeof config.legal[key].de, 'string');
