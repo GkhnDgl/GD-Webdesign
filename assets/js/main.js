@@ -317,7 +317,6 @@ document.addEventListener('DOMContentLoaded', () => {
         setEl('.phone-title', ts.phone_title);
         setEl('.phone-text', ts.phone_text);
         setEl('.phone-cta', ts.phone_cta);
-        setEl('.code-badge', ts.code_badge);
         setEl('.showcase-feature-card:nth-child(1) .showcase-feature-title', ts.feature1_title);
         setEl('.showcase-feature-card:nth-child(1) .showcase-feature-desc', ts.feature1_desc);
         setEl('.showcase-feature-card:nth-child(2) .showcase-feature-title', ts.feature2_title);
