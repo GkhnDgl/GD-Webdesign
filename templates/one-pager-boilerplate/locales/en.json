@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "{businessName} – Local Experts",
-    "description": "{businessName}: Your reliable specialists for landscaping, renovation, construction, and property maintenance. Quality workmanship, personal advice, and transparent pricing."
+    "description": "{businessName}: Example website template for landscaping, trades, renovation, and property care businesses."
   },
   "nav": {
     "brand": "Master Craftsman Trades & Landscaping",
@@ -15,15 +15,15 @@
     "label": "Main navigation"
   },
   "hero": {
-    "badge": "Master Quality. Reliable. Regional.",
+    "badge": "Example business · Landscaping & trades",
     "title": "Your Specialist for Gardening, Trades & Property Care",
-    "subtitle": "From professional garden design and paving to interior renovation and maintenance: We deliver your project expertly, on time, and from a single source.",
+    "subtitle": "From garden design and paving to interior work and maintenance: We agree the project scope and schedule with you based on your requirements.",
     "primary": "Request Free Quote",
     "secondary": "Our Services",
     "metric_code": "Master Craftsman",
     "metric_code_label": "Qualified Specialists",
-    "metric_speed": "100%",
-    "metric_speed_label": "On Time & Transparent",
+    "metric_speed": "Planning",
+    "metric_speed_label": "Schedule by agreement",
     "metric_accessibility": "Local Proximity",
     "metric_accessibility_label": "Free Site Inspection"
   },
@@ -66,18 +66,18 @@
     "one_title": "Site Inspection & Initial Consultation",
     "one_description": "Contact us to arrange a free on-site consultation so we can understand your requirements in detail.",
     "two_title": "Transparent Cost Estimate",
-    "two_description": "Receive a binding, clear quotation detailing every item and a agreed completion schedule.",
-    "three_title": "On-Time Craftsman Delivery",
-    "three_description": "Our skilled team carries out all work cleanly, punctually, and to master standards right up to final sign-off."
+    "two_description": "You receive a clear proposal outlining the agreed scope of work and anticipated costs.",
+    "three_title": "Delivery & coordination",
+    "three_description": "Work is carried out according to the agreed scope. Any changes are discussed with you in advance."
   },
   "about": {
     "tag": "About Our Business",
     "title": "Craftsmanship Tradition Meets Modern Standards",
     "description": "As a regional master craftsman business, we prioritize precision workmanship, honest advice, and client satisfaction. With an experienced team and modern equipment, we execute projects of all sizes successfully.",
-    "feature_one_title": "Qualified & Certified",
-    "feature_one_description": "Trained specialists and master quality standards ensure durable and compliant craftsmanship.",
-    "feature_two_title": "Fixed Prices & Punctuality",
-    "feature_two_description": "Binding schedules and transparent quotes offer total peace of mind from day one."
+    "feature_one_title": "Careful workmanship",
+    "feature_one_description": "The scope, materials, and approach are agreed to suit your project.",
+    "feature_two_title": "Transparent proposal",
+    "feature_two_description": "The proposal clearly outlines the agreed services and costs."
   },
   "contact": {
     "tag": "Request Quote",

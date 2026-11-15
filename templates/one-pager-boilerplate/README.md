@@ -25,8 +25,8 @@ All visual assets and fonts used in this template are locally hosted and license
 
 ## Quality Assurance & Verification
 - **Build & Tests**: Run `npm run build` (which executes Tailwind CSS compilation and `node --test`).
-- **Responsive Viewports**: Verified mobile-first across `sm` (640px), `md` (768px), `lg` (1024px), and `xl` (1280px) breakpoints without horizontal overflow or clipped text.
-- **Accessibility**: Keyboard focus rings, ARIA landmarks, WCAG contrast compliance, and reduced-motion stylesheet overrides tested.
+- **Responsive Viewports**: The layout is designed mobile-first with responsive behavior for `sm` (640px), `md` (768px), `lg` (1024px), and `xl` (1280px) breakpoints. Verify overflow and clipping for each customer configuration before launch.
+- **Accessibility**: The template includes keyboard focus styling, ARIA landmarks, and reduced-motion stylesheet overrides. Check contrast, keyboard operation, and assistive-technology behavior against each project's requirements before launch.
 
 ## Customer Configuration (Milestone M1.2)
 

@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "{businessName} – Ihre Experten vor Ort",
-    "description": "{businessName}: Ihr zuverlässiger Fachbetrieb für Garten- und Landschaftsbau, Renovierung, Ausbau und Objektpflege. Erstklassige Qualität, persönliche Beratung und faire Festpreise."
+    "description": "{businessName}: Beispielhafte Website-Vorlage für Garten- und Landschaftsbau, Handwerk und Objektpflege."
   },
   "nav": {
     "brand": "Meisterbetrieb Handwerk & Gartenbau",
@@ -15,15 +15,15 @@
     "label": "Hauptnavigation"
   },
   "hero": {
-    "badge": "Meisterqualität. Zuverlässig. Regional.",
+    "badge": "Beispielbetrieb · Gartenbau & Handwerk",
     "title": "Ihr Fachbetrieb für Gartenbau, Handwerk & Objektpflege",
-    "subtitle": "Von der professionellen Gartengestaltung über Pflaster- und Steinarbeiten bis hin zu Ausbau und Instandhaltung: Wir setzen Ihr Projekt fachgerecht, termintreu und aus einer Hand um.",
+    "subtitle": "Von der Gartengestaltung über Pflaster- und Steinarbeiten bis hin zu Ausbau und Instandhaltung: Leistungsumfang und Zeitrahmen stimmen wir passend zu Ihrem Vorhaben mit Ihnen ab.",
     "primary": "Kostenloses Angebot anfragen",
     "secondary": "Unsere Leistungen",
     "metric_code": "Meisterbetrieb",
     "metric_code_label": "Qualifizierte Fachkräfte",
-    "metric_speed": "100%",
-    "metric_speed_label": "Termintreu & Transparent",
+    "metric_speed": "Planung",
+    "metric_speed_label": "Ablauf nach Absprache",
     "metric_accessibility": "Regionale Nähe",
     "metric_accessibility_label": "Kostenfreie Besichtigung"
   },
@@ -66,18 +66,18 @@
     "one_title": "Besichtigung & Erstgespräch",
     "one_description": "Sie kontaktieren uns und wir vereinbaren eine kostenfreie Vor-Ort-Besichtigung, um Ihr Anliegen genau aufzunehmen.",
     "two_title": "Transparenter Kostenvoranschlag",
-    "two_description": "Sie erhalten ein verbindliches, klares Angebot mit detaillierten Positionen und fest vereinbartem Zeitplan.",
-    "three_title": "Termingerechte Ausführung",
-    "three_description": "Unser qualifiziertes Handwerker-Team setzt alle Arbeiten sauber, pünktlich und meisterhaft bis zur Abnahme um."
+    "two_description": "Sie erhalten ein transparentes Angebot mit dem abgestimmten Leistungsumfang und den vorgesehenen Kosten.",
+    "three_title": "Ausführung & Abstimmung",
+    "three_description": "Die Arbeiten erfolgen nach dem gemeinsam abgestimmten Leistungsumfang. Änderungen besprechen wir vorab."
   },
   "about": {
     "tag": "Über unseren Betrieb",
     "title": "Handwerkstradition trifft moderne Arbeitsweise",
     "description": "Als regionaler Meisterbetrieb legen wir höchsten Wert auf handwerkliche Präzision, ehrliche Beratung und zufriedene Kundschaft. Mit erfahrener Mannschaft und modernem Fuhrpark setzen wir kleine wie große Projekte erfolgreich um.",
-    "feature_one_title": "Qualifiziert & Zertifiziert",
-    "feature_one_description": "Ausgebildete Fachkräfte und meisterliche Qualitätsstandards garantieren langlebige und normgerechte Arbeit.",
-    "feature_two_title": "Festpreis & Pünktlichkeit",
-    "feature_two_description": "Verbindliche Zeit- und Kostenpläne geben Ihnen volle Planungssicherheit von Beginn an."
+    "feature_one_title": "Sorgfältige Ausführung",
+    "feature_one_description": "Leistungsumfang, Materialien und Ausführung werden passend zu Ihrem Vorhaben abgestimmt.",
+    "feature_two_title": "Transparentes Angebot",
+    "feature_two_description": "Das Angebot beschreibt die vereinbarten Leistungen und Kosten nachvollziehbar."
   },
   "contact": {
     "tag": "Angebot anfragen",
