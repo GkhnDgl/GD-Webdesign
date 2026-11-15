@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const process=document.querySelector('#process .process-grid');
     if(process){process.replaceChildren();config.content.process.steps.forEach((step,i)=>{
       const card=make('article','process-step p-6 bg-slate-50 rounded-2xl border border-slate-200 flex flex-col');
-      card.append(make('div','step-number text-4xl font-extrabold text-emerald-700 mb-3',String(i+1).padStart(2,'0')));
+      card.append(make('div','step-number text-4xl font-extrabold mb-3',String(i+1).padStart(2,'0')));
       const body=make('div','step-content');body.append(make('h3','text-xl font-bold text-slate-900 mb-2',val(step.title)),make('p','text-slate-600 text-sm sm:text-base',val(step.description)));card.append(body);process.append(card);
     });}
     const features=document.querySelector('#about .about-features');
@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });}
     config.ctas.forEach(cta=>{
       const target=document.querySelector('[data-cta-placement="'+cta.placement+'"]');if(!target)return;
-      target.textContent=val(cta.label);
+      target.textContent=val(cta.label);\n      target.classList.remove('btn-primary','btn-secondary','btn-link');\n      target.classList.add(cta.style==='primary'?'btn-primary':cta.style==='secondary'?'btn-secondary':'btn-link');
       if(cta.type==='tel')target.href='tel:'+cta.value.replace(/[^+\\d]/g,'');
       else if(cta.type==='email')target.href='mailto:'+cta.value;
       else if(cta.type==='url'){target.href=cta.value;target.target='_blank';target.rel='noopener noreferrer';}
