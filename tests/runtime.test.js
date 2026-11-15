@@ -473,12 +473,7 @@ test('Master Template A renders configured customer content and typed CTAs in bo
   const match = mainJs.match(/function applyConfig\(config, language = 'de', locale = null\) \{[\s\S]*?\n  \}\n\n  async function loadLocale/);
   assert.ok(match, 'Configured rendering function must remain testable');
   const applyConfigSource = match[0].replace(/\n\n  async function loadLocale[\s\S]*$/, '');
-  const applyConfig = new Function('document', 'pageBaseUrl', 'resolveLocalizedValue', 'URL', 'return (' + applyConfigSource + ')')(
-    null,
-    'https://example.github.io/GD-Webdesign/templates/one-pager-boilerplate/index.html',
-    (value, language) => typeof value === 'object' && value !== null ? value[language] : value,
-    URL
-  );
+  let applyConfig;
 
   class Element {
     constructor(tag = 'div', className = '') {
@@ -528,6 +523,13 @@ test('Master Template A renders configured customer content and typed CTAs in bo
     createElement(tag) { return new Element(tag); }
   };
   document.documentElement.style.setProperty = (key, value) => { document.documentElement.style[key] = value; };
+
+  applyConfig = new Function('document', 'pageBaseUrl', 'resolveLocalizedValue', 'URL', 'return (' + applyConfigSource + ')')(
+    document,
+    'https://example.github.io/GD-Webdesign/templates/one-pager-boilerplate/index.html',
+    (value, language) => typeof value === 'object' && value !== null ? value[language] : value,
+    URL
+  );
 
   const config = structuredClone(boilerplateConfig);
   config.branding.logo = {
