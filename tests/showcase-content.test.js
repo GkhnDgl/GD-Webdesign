@@ -107,3 +107,11 @@ test('Embedded preview scrolling stays contained and cannot chain to the agency 
   assert.match(templateCss, /html\s*\{[^}]*overscroll-behavior-y:\s*contain/s);
   assert.match(templateCss, /body\s*\{[^}]*overscroll-behavior-y:\s*contain/s);
 });
+
+test('Template anchor navigation scrolls only its own iframe browsing context', () => {
+  const mainScript = fs.readFileSync(path.join(root, 'assets/js/main.js'), 'utf8');
+  assert.match(mainScript, /if \(isTemplatePage\)\s*\{[\s\S]*?querySelectorAll\('a\[href\^="#"\]'\)/);
+  assert.match(mainScript, /event\.preventDefault\(\);[\s\S]*?window\.scrollTo\(\{ top, behavior:/);
+  assert.match(mainScript, /window\.history\.replaceState\(null, '', href\)/);
+  assert.match(mainScript, /Scroll this iframe's window only/);
+});
