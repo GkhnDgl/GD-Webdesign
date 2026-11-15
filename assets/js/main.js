@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
       for (const field of fields) if (!['items','steps','features','metrics'].includes(field) && !localized(c[name][field])) return false;
     }
     if (!unique(c.hero.metrics,v=>keys(v,['id','value','label']) && localized(v.value) && localized(v.label),4)) return false;
-    if (!unique(c.services.items,v=>localizedItem(v,['id','title','description','highlights']) && (v.highlights===undefined || (localizedList(v.highlights) && v.highlights.de.length<=8 && v.highlights.en.length<=8)),12))) return false;
+    if (!unique(c.services.items,v=>localizedItem(v,['id','title','description','highlights']) && (v.highlights===undefined || (localizedList(v.highlights) && v.highlights.de.length<=8 && v.highlights.en.length<=8)),12)) return false;
     if (!unique(c.process.steps,v=>localizedItem(v,['id','title','description']),8)) return false;
     if (!unique(c.about.features,v=>localizedItem(v,['id','title','description']),6)) return false;
     if (!unique(c.gallery.items,v=>keys(v,['id','image','alt','title','description']) && asset(v.image) && localized(v.alt) && localized(v.title) && localized(v.description),12)) return false;
