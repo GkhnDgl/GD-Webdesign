@@ -314,7 +314,7 @@ test('DOM translation and accessibility updates function correctly during langua
   assert.equal(docElement.lang, 'en');
   assert.equal(brandText.textContent, boilerplateConfig.business.name);
   assert.equal(heroTitle.textContent, en.hero.title);
-  assert.equal(metricLabel1.textContent, 'Tailored Code');
+  assert.equal(metricLabel1.textContent, 'Adapted to your brand');
   assert.equal(impressumTitle.textContent, en.legal.imprint_title);
   assert.equal(impressumCopy.textContent, boilerplateConfig.legal.imprintDetails.en);
   assert.ok(impressumCopy.textContent.includes(boilerplateConfig.business.legalName));
