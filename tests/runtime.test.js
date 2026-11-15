@@ -23,6 +23,19 @@ function getValue(object, pathStr) {
   return pathStr.split('.').reduce((value, key) => value?.[key], object);
 }
 
+test('Homepage template previews do not trigger outer-page fragment scrolling', () => {
+  const previewSources = [...indexHtml.matchAll(/<iframe\\b[^>]*class="(?:desktop-preview-frame|phone-preview-frame)"[^>]*src="([^"]+)"/g)]
+    .map((match) => match[1]);
+
+  assert.equal(previewSources.length, 2, 'Expected desktop and mobile preview iframes');
+  for (const source of previewSources) {
+    assert.equal(source, 'templates/one-pager-boilerplate/index.html');
+    assert.equal(new URL(source, 'https://gkhndgl.github.io/GD-Webdesign/').hash, '');
+  }
+
+  assert.match(indexHtml, /<section id="hero"/, 'Agency homepage must retain its own hero section');
+});
+
 test('Locale URL path resolution works for GitHub Pages subpath and Netlify root', () => {
   const testCases = [
     {
