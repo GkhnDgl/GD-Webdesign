@@ -53,9 +53,15 @@ test('Template showcase contains no developer-facing architecture or JSON config
   assert.doesNotMatch(fs.readFileSync(path.join(root, 'assets/js/main.js'), 'utf8'), /tab-architecture|tab_architecture/);
 });
 
-test('Mobile device preview uses a common 390 by 844 CSS pixel viewport proportion', () => {
-  assert.match(css, /\.phone-frame\s*\{[^}]*width:\s*422px/s);
-  assert.match(css, /\.phone-viewport\s*\{[^}]*aspect-ratio:\s*390\s*\/\s*844/s);
+test('Mobile device preview keeps the live page inside a proportional phone viewport', () => {
+  assert.match(css, /\.phone-frame\s*\{[^}]*box-sizing:\s*border-box[^}]*width:\s*422px/s);
+  assert.match(css, /\.phone-viewport\s*\{[^}]*position:\s*relative[^}]*aspect-ratio:\s*390\s*\/\s*844[^}]*min-height:\s*0/s);
+  assert.match(css, /\.phone-preview-frame\s*\{[^}]*position:\s*absolute[^}]*inset:\s*0[^}]*width:\s*100%[^}]*height:\s*100%[^}]*min-height:\s*0/s);
+});
+
+test('Desktop live page is constrained to the browser mockup viewport', () => {
+  assert.match(css, /\.browser-viewport\s*\{[^}]*position:\s*relative[^}]*overflow:\s*hidden/s);
+  assert.match(css, /\.desktop-preview-frame\s*\{[^}]*position:\s*absolute[^}]*inset:\s*0[^}]*width:\s*100%[^}]*height:\s*100%[^}]*min-height:\s*0/s);
 });
 
 const homepage = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
