@@ -45,14 +45,14 @@ The complete customer configuration is stored in this file. The machine-readable
 | `business` | Public name, registered legal name, legal form, phone, email, structured address |
 | `branding` | Optional logo path and localized alt text; primary, hover, light and accent HEX colors |
 | `seo` | German and English page title and meta description |
-| `content.hero` | Localized badge, title, subtitle and variable metrics list |
-| `content.services` | Localized section heading/description and a variable list of services; optional localized highlights |
-| `content.process` | Localized section heading/description and variable process steps |
-| `content.about` | Localized company introduction and variable feature list |
-| `content.gallery` | Localized section copy and variable project items with image, alt text, title and description |
+| `content.hero` | Localized badge, title, subtitle and variable metrics list | (1–4 metrics)
+| `content.services` | Localized section heading/description and 1–12 services; optional localized highlights (up to 8 per language) |
+| `content.process` | Localized section heading/description and 1–8 process steps |
+| `content.about` | Localized company introduction and 1–6 company features |
+| `content.gallery` | Localized section copy and 1–12 project items with image, alt text, title and description |
 | `content.contact` | Localized contact section copy |
 | `content.footer` | Localized customer-specific footer tagline |
-| `ctas` | Stable ID, placement, style, localized label, typed action and value |
+| `ctas` | Up to 3 stable CTA definitions with placement, style, localized label, typed action and value |
 | `legal` | Localized `imprintDetails` and `privacyDetails` |
 
 Every customer-facing text value is supplied in both `de` and `en`. General interface text such as navigation labels, form labels, validation messages and accessibility copy remains in `locales/de.json` and `locales/en.json`.

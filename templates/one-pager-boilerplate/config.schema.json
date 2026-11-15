@@ -203,7 +203,8 @@
                     "$ref": "#/definitions/localizedText"
                   }
                 }
-              }
+              },
+              "maxItems": 4
             }
           }
         },
@@ -252,7 +253,8 @@
                     "$ref": "#/definitions/localizedList"
                   }
                 }
-              }
+              },
+              "maxItems": 12
             }
           }
         },
@@ -298,7 +300,8 @@
                     "$ref": "#/definitions/localizedText"
                   }
                 }
-              }
+              },
+              "maxItems": 8
             }
           }
         },
@@ -344,7 +347,8 @@
                     "$ref": "#/definitions/localizedText"
                   }
                 }
-              }
+              },
+              "maxItems": 6
             }
           }
         },
@@ -400,7 +404,8 @@
                     "$ref": "#/definitions/localizedText"
                   }
                 }
-              }
+              },
+              "maxItems": 12
             }
           }
         },
@@ -584,7 +589,8 @@
             }
           }
         ]
-      }
+      },
+      "maxItems": 3
     },
     "legal": {
       "type": "object",
@@ -635,14 +641,16 @@
           "items": {
             "type": "string",
             "minLength": 1
-          }
+          },
+          "maxItems": 8
         },
         "en": {
           "type": "array",
           "items": {
             "type": "string",
             "minLength": 1
-          }
+          },
+          "maxItems": 8
         }
       }
     }

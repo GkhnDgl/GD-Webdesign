@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
       try { const u = new URL(v, pageBaseUrl); const root = new URL('../../assets/images/', pageBaseUrl); return u.origin === root.origin && u.pathname.startsWith(root.pathname) && !u.search && !u.hash; }
       catch (_) { return false; }
     };
-    const unique = (list, valid) => Array.isArray(list) && list.length > 0 && list.every((v) => record(v) && text(v.id) && valid(v)) && new Set(list.map((v) => v.id)).size === list.length;
+    const unique = (list, valid, max = Infinity) => Array.isArray(list) && list.length > 0 && list.length <= max && list.every((v) => record(v) && text(v.id) && valid(v)) && new Set(list.map((v) => v.id)).size === list.length;
     const localizedItem = (v, allowed) => keys(v, allowed) && localized(v.title) && localized(v.description);
     if (!keys(config, ['$schema','business','branding','seo','content','ctas','legal']) || config.$schema !== './config.schema.json') return false;
     const b=config.business, a=config.branding, seo=config.seo, c=config.content, legal=config.legal;
@@ -121,13 +121,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!keys(c[name],fields)) return false;
       for (const field of fields) if (!['items','steps','features','metrics'].includes(field) && !localized(c[name][field])) return false;
     }
-    if (!unique(c.hero.metrics,v=>keys(v,['id','value','label']) && localized(v.value) && localized(v.label))) return false;
-    if (!unique(c.services.items,v=>localizedItem(v,['id','title','description','highlights']) && (v.highlights===undefined || localizedList(v.highlights)))) return false;
-    if (!unique(c.process.steps,v=>localizedItem(v,['id','title','description']))) return false;
-    if (!unique(c.about.features,v=>localizedItem(v,['id','title','description']))) return false;
-    if (!unique(c.gallery.items,v=>keys(v,['id','image','alt','title','description']) && asset(v.image) && localized(v.alt) && localized(v.title) && localized(v.description))) return false;
+    if (!unique(c.hero.metrics,v=>keys(v,['id','value','label']) && localized(v.value) && localized(v.label),4)) return false;
+    if (!unique(c.services.items,v=>localizedItem(v,['id','title','description','highlights']) && (v.highlights===undefined || (localizedList(v.highlights) && v.highlights.de.length<=8 && v.highlights.en.length<=8)),12))) return false;
+    if (!unique(c.process.steps,v=>localizedItem(v,['id','title','description']),8)) return false;
+    if (!unique(c.about.features,v=>localizedItem(v,['id','title','description']),6)) return false;
+    if (!unique(c.gallery.items,v=>keys(v,['id','image','alt','title','description']) && asset(v.image) && localized(v.alt) && localized(v.title) && localized(v.description),12)) return false;
     const placements=new Set();
-    if (!Array.isArray(config.ctas) || !config.ctas.length || !config.ctas.every(v=>{
+    if (!Array.isArray(config.ctas) || !config.ctas.length || config.ctas.length > 3 || !config.ctas.every(v=>{
       if (!keys(v,['id','placement','style','label','type','value']) || !text(v.id) || placements.has(v.placement) ||
         !['nav-primary','hero-primary','hero-secondary'].includes(v.placement) ||
         !['primary','secondary','text'].includes(v.style) || !localized(v.label) || !text(v.value)) return false;
@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
     set('#about .section-tag',val(config.content.about.eyebrow));set('#about-title',val(config.content.about.title));set('.about-content > p',val(config.content.about.description));
     const services=document.querySelector('#services .bento-grid');
     if(services){services.replaceChildren();config.content.services.items.forEach((item,i)=>{
-      const card=make('article',i===0?'bento-card bento-card-featured p-6 bg-white rounded-2xl border border-slate-200 shadow-sm flex flex-col':'bento-card p-6 bg-white rounded-2xl border border-slate-200 shadow-sm flex flex-col');
+      const card=make('article',i===0 && config.content.services.items.length>1?'bento-card bento-card-featured p-6 bg-white rounded-2xl border border-slate-200 shadow-sm flex flex-col':'bento-card p-6 bg-white rounded-2xl border border-slate-200 shadow-sm flex flex-col');
       card.append(make('h3','text-xl font-bold text-slate-900 mb-2',val(item.title)),make('p','text-slate-600 text-sm sm:text-base',val(item.description)));
       if(item.highlights){const list=make('ul','bento-list mt-4 space-y-2 list-disc list-inside text-sm text-slate-700');item.highlights[language].forEach(x=>list.append(make('li','',x)));card.append(list);}
       services.append(card);

@@ -356,6 +356,13 @@ test('Master Template A runtime validator accepts the complete config and reject
   externalLogo.branding.logo.image = 'https://evil.example/logo.svg';
   assert.equal(validate(externalLogo), false, 'External logo URLs must be rejected');
 
+  const tooManyServices = structuredClone(config);
+  tooManyServices.content.services.items = Array.from({ length: 13 }, (_, index) => ({
+    ...config.content.services.items[0],
+    id: 'service-' + index
+  }));
+  assert.equal(validate(tooManyServices), false, 'Service collection upper bound must be enforced');
+
   const duplicateId = structuredClone(config);
   duplicateId.content.services.items[1].id = duplicateId.content.services.items[0].id;
   assert.equal(validate(duplicateId), false, 'Duplicate collection IDs must be rejected');
