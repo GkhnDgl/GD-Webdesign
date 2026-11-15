@@ -106,7 +106,8 @@
           "properties": {
             "image": {
               "type": "string",
-              "minLength": 1
+              "minLength": 1,
+              "pattern": "^(?:\\\\.\\\\./\\\\.\\\\./assets/images/|assets/images/)[^?#]+$"
             },
             "alt": {
               "$ref": "#/definitions/localizedText"
@@ -360,7 +361,8 @@
                   },
                   "image": {
                     "type": "string",
-                    "minLength": 1
+                    "minLength": 1,
+                    "pattern": "^(?:\\\\.\\\\./\\\\.\\\\./assets/images/|assets/images/)[^?#]+$"
                   },
                   "alt": {
                     "$ref": "#/definitions/localizedText"
@@ -463,7 +465,99 @@
             "type": "string",
             "minLength": 1
           }
-        }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "tel"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "value": {
+                  "type": "string",
+                  "pattern": "^[+0-9][0-9\\\\s()./-]{5,24}$"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "email"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "value": {
+                  "type": "string",
+                  "format": "email"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "url"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "value": {
+                  "type": "string",
+                  "pattern": "^https://"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "anchor"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "value": {
+                  "type": "string",
+                  "enum": [
+                    "#services",
+                    "#gallery",
+                    "#process",
+                    "#about",
+                    "#contact"
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "form"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "value": {
+                  "const": "#contact-form"
+                }
+              }
+            }
+          }
+        ]
       }
     },
     "legal": {

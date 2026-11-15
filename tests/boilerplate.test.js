@@ -307,3 +307,61 @@ test('Multi-page localization keys exist in both locales and tailwind config cap
   const tailwindConfig = fs.readFileSync(path.join(root, 'tailwind.config.js'), 'utf8');
   assert.match(tailwindConfig, /'\.\/\*\.html'/, 'tailwind.config.js must include ./*.html');
 });
+
+ 
+test('Master Template A runtime validator accepts the complete config and rejects unsafe or inconsistent customer data', () => {
+  const config = JSON.parse(fs.readFileSync(path.join(root, 'templates/one-pager-boilerplate/config.json'), 'utf8'));
+  const match = script.match(/function validateConfig\\(config\\) \\{[\\s\\S]*?\\n  \\}/);
+  assert.ok(match, 'Runtime config validator must remain directly testable');
+  const validate = new Function('pageBaseUrl', 'URL', 'return (' + match[0] + ')')(
+    'https://example.github.io/GD-Webdesign/templates/one-pager-boilerplate/index.html',
+    URL
+  );
+  assert.equal(validate(config), true, 'Sample configuration should pass runtime validation');
+
+  const variableCollections = structuredClone(config);
+  variableCollections.content.services.items = variableCollections.content.services.items.slice(0, 1);
+  variableCollections.content.process.steps = variableCollections.content.process.steps.slice(0, 2);
+  variableCollections.content.about.features = variableCollections.content.about.features.slice(0, 1);
+  variableCollections.content.gallery.items = variableCollections.content.gallery.items.slice(0, 2);
+  assert.equal(validate(variableCollections), true, 'Content collections must support variable lengths');
+
+  for (const [type, value] of [
+    ['tel', '+49 123 456789'],
+    ['email', 'office@example.de'],
+    ['url', 'https://example.com/contact'],
+    ['anchor', '#about'],
+    ['form', '#contact-form']
+  ]) {
+    const candidate = structuredClone(config);
+    candidate.ctas = [{ ...candidate.ctas[0], type, value }];
+    assert.equal(validate(candidate), true, 'Supported CTA type should validate: ' + type);
+  }
+
+  const duplicateId = structuredClone(config);
+  duplicateId.content.services.items[1].id = duplicateId.content.services.items[0].id;
+  assert.equal(validate(duplicateId), false, 'Duplicate collection IDs must be rejected');
+
+  const externalAsset = structuredClone(config);
+  externalAsset.content.gallery.items[0].image = 'https://evil.example/assets/images/payload.svg';
+  assert.equal(validate(externalAsset), false, 'External image URLs must be rejected');
+
+  const traversingAsset = structuredClone(config);
+  traversingAsset.content.gallery.items[0].image = '../../assets/images/../../../outside/assets/images/payload.svg';
+  assert.equal(validate(traversingAsset), false, 'Asset paths escaping the site asset root must be rejected');
+
+  for (const unsafe of [
+    { type: 'url', value: 'http://example.com' },
+    { type: 'url', value: 'javascript:alert(1)' },
+    { type: 'anchor', value: '#unknown' },
+    { type: 'form', value: '#other-form' }
+  ]) {
+    const candidate = structuredClone(config);
+    candidate.ctas = [{ ...candidate.ctas[0], ...unsafe }];
+    assert.equal(validate(candidate), false, 'Unsafe CTA destination must be rejected: ' + unsafe.type + ' ' + unsafe.value);
+  }
+
+  const missingTranslation = structuredClone(config);
+  missingTranslation.content.hero.title.en = ' ';
+  assert.equal(validate(missingTranslation), false, 'Empty localized content must be rejected');
+});

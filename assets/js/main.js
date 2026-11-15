@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const color = (v) => typeof v === 'string' && /^#[0-9a-f]{6}$/i.test(v);
     const asset = (v) => {
       if (!text(v) || v.startsWith('/') || v.includes('\\') || /^[a-z][a-z0-9+.-]*:/i.test(v)) return false;
-      try { const u = new URL(v, pageBaseUrl); return u.origin === new URL(pageBaseUrl).origin && u.pathname.includes('/assets/images/') && !u.search && !u.hash; }
+      try { const u = new URL(v, pageBaseUrl); const root = new URL('../../assets/images/', pageBaseUrl); return u.origin === root.origin && u.pathname.startsWith(root.pathname) && !u.search && !u.hash; }
       catch (_) { return false; }
     };
     const unique = (list, valid) => Array.isArray(list) && list.length > 0 && list.every((v) => record(v) && text(v.id) && valid(v)) && new Set(list.map((v) => v.id)).size === list.length;
