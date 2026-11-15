@@ -34,7 +34,7 @@
           <li><a href="#about" class="nav-link">Über uns</a></li>
           <li><a href="#contact" class="nav-link">Kontakt</a></li>
         </ul>
-        <a href="#contact" class="btn btn-primary nav-cta">Angebot anfragen</a>
+        <a href="#contact-form" data-cta-placement="nav-primary" class="btn btn-primary nav-cta">Angebot anfragen</a>
       </nav>
       <button type="button" class="language-toggle" id="language-toggle" aria-label="Switch language to English" aria-pressed="false">EN</button>
     </div>
@@ -53,8 +53,8 @@
             Von der Gartengestaltung über Pflaster- und Steinarbeiten bis hin zu Ausbau und Instandhaltung: Leistungsumfang und Zeitrahmen stimmen wir passend zu Ihrem Vorhaben mit Ihnen ab.
           </p>
           <div class="hero-actions mt-6 flex flex-wrap justify-start sm:justify-center gap-4">
-            <a href="#contact" class="btn btn-primary">Kostenloses Angebot anfragen</a>
-            <a href="#services" class="btn btn-secondary">Unsere Leistungen</a>
+            <a href="#contact-form" data-cta-placement="hero-primary" class="btn btn-primary">Kostenloses Angebot anfragen</a>
+            <a href="#services" data-cta-placement="hero-secondary" class="btn btn-secondary">Unsere Leistungen</a>
           </div>
           <div class="hero-metrics mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-slate-200">
             <div class="metric-item">
@@ -294,7 +294,7 @@
           <p class="contact-address hidden rounded-lg border border-slate-200 p-3 text-slate-700"><span></span></p>
         </div>
 
-        <form class="contact-form bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <form id="contact-form" class="contact-form bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
           <!-- Required hidden input for Netlify form processing -->
           <input type="hidden" name="form-name" value="contact" />
 
