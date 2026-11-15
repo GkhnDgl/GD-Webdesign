@@ -545,7 +545,7 @@ test('Master Template A renders configured customer content and typed CTAs in bo
   assert.equal(getNode('#about .about-features').children.length, config.content.about.features.length);
   assert.equal(getNode('#gallery .gallery-grid').children.length, config.content.gallery.items.length);
   assert.equal(getNode('#gallery .gallery-grid').children[0].children[0].children[0].alt, config.content.gallery.items[0].alt.de);
-  assert.equal(getNode('.contact-phone').href, 'tel:' + config.business.phone.replace(/[^+\\d]/g, ''));
+  assert.equal(getNode('.contact-phone').href, 'tel:' + config.business.phone.replace(/[^+0-9]/g, ''));
   assert.equal(getNode('.contact-email').href, 'mailto:' + config.business.email);
   assert.equal(ctas['nav-primary'].href, 'https://example.com/contact');
   assert.equal(ctas['nav-primary'].target, '_blank');
