@@ -329,6 +329,120 @@ document.addEventListener('DOMContentLoaded', () => {
         setEl('.showcase-btn-contact', ts.btn_contact);
       }
 
+      // Multi-page navigation labels
+      if (locale.nav_pages) {
+        const pageFileMap = {
+          'index.html': 'home', 'leistungen.html': 'leistungen',
+          'projekte.html': 'projekte', 'ueber-uns.html': 'ueber', 'kontakt.html': 'kontakt'
+        };
+        document.querySelectorAll('.nav-list a[href]').forEach((link) => {
+          const filename = (link.getAttribute('href') || '').split('/').pop() || 'index.html';
+          const key = pageFileMap[filename];
+          if (key && locale.nav_pages[key]) link.textContent = locale.nav_pages[key];
+        });
+        const navCtaEl = document.querySelector('.nav-cta');
+        if (navCtaEl && locale.nav_pages.cta) navCtaEl.textContent = locale.nav_pages.cta;
+        document.querySelectorAll('.footer-nav-group a[href]').forEach((link) => {
+          const filename = (link.getAttribute('href') || '').split('/').pop() || 'index.html';
+          const key = pageFileMap[filename];
+          if (key && locale.nav_pages[key]) link.textContent = locale.nav_pages[key];
+        });
+      }
+      // Subpage i18n: Leistungen page
+      const leistungenSection = document.querySelector('#leistungen-hero');
+      if (leistungenSection && locale.leistungen) {
+        const setPageEl = (sel, val) => { const el = document.querySelector(sel); if (el && typeof val === 'string') el.textContent = val; };
+        setPageEl('.leistungen-hero-eyebrow', locale.leistungen.hero_badge);
+        setPageEl('#leistungen-title', locale.leistungen.title);
+        setPageEl('.leistungen-hero-lead', locale.leistungen.lead);
+        setPageEl('#packages .section-tag', locale.leistungen.packages_tag);
+        setPageEl('#packages-title', locale.leistungen.packages_title);
+        setPageEl('.packages-lead', locale.leistungen.packages_lead);
+        document.querySelectorAll('.package-card').forEach((card, i) => {
+          const k = ['package1', 'package2', 'package3'][i]; if (!k || !locale.leistungen[k + '_title']) return;
+          const setC = (sel, val) => { const el = card.querySelector(sel); if (el && typeof val === 'string') el.textContent = val; };
+          setC('.package-badge', locale.leistungen[k + '_badge']);
+          setC('.package-title', locale.leistungen[k + '_title']);
+          setC('.package-desc', locale.leistungen[k + '_desc']);
+          setC('.package-cta', locale.leistungen[k + '_cta']);
+          card.querySelectorAll('.package-feature').forEach((el, j) => { const fKey = k + '_feature' + (j + 1); if (locale.leistungen[fKey]) el.textContent = locale.leistungen[fKey]; });
+        });
+      }
+      // Subpage i18n: Projekte page
+      const projekteSection = document.querySelector('#projekte-hero');
+      if (projekteSection && locale.projekte) {
+        const setPageEl = (sel, val) => { const el = document.querySelector(sel); if (el && typeof val === 'string') el.textContent = val; };
+        setPageEl('.projekte-hero-eyebrow', locale.projekte.hero_badge);
+        setPageEl('#projekte-title', locale.projekte.title);
+        setPageEl('.projekte-hero-lead', locale.projekte.lead);
+        setPageEl('#studies .section-tag', locale.projekte.studies_tag);
+        setPageEl('#studies-title', locale.projekte.studies_title);
+        setPageEl('.studies-lead', locale.projekte.studies_lead);
+        document.querySelectorAll('.case-study-card').forEach((card, i) => {
+          const k = 'study' + (i + 1); if (!locale.projekte[k + '_title']) return;
+          const setC = (sel, val) => { const el = card.querySelector(sel); if (el && typeof val === 'string') el.textContent = val; };
+          setC('.study-tag', locale.projekte[k + '_tag']);
+          setC('.study-title', locale.projekte[k + '_title']);
+          card.querySelectorAll('.study-metric').forEach((m, j) => {
+            const setM = (sel, val) => { const el = m.querySelector(sel); if (el && typeof val === 'string') el.textContent = val; };
+            setM('.study-metric-val', locale.projekte[k + '_metric' + (j + 1) + '_val']);
+            setM('.study-metric-lbl', locale.projekte[k + '_metric' + (j + 1) + '_lbl']);
+          });
+        });
+      }
+      // Subpage i18n: Über uns page
+      const ueberSection = document.querySelector('#ueber-hero');
+      if (ueberSection && locale.ueber) {
+        const setPageEl = (sel, val) => { const el = document.querySelector(sel); if (el && typeof val === 'string') el.textContent = val; };
+        setPageEl('.ueber-hero-eyebrow', locale.ueber.hero_badge);
+        setPageEl('#ueber-title', locale.ueber.title);
+        setPageEl('.ueber-hero-lead', locale.ueber.lead);
+        setPageEl('#philosophy-title', locale.ueber.philosophy_title);
+        setPageEl('.philosophy-desc', locale.ueber.philosophy_desc);
+        setPageEl('#stack .section-tag', locale.ueber.stack_tag);
+        setPageEl('#stack-title', locale.ueber.stack_title);
+        setPageEl('.stack-lead', locale.ueber.stack_lead);
+        document.querySelectorAll('.tech-item').forEach((item, i) => {
+          const k = 'stack_item' + (i + 1);
+          const setC = (sel, val) => { const el = item.querySelector(sel); if (el && typeof val === 'string') el.textContent = val; };
+          setC('.tech-item-title', locale.ueber[k + '_title']);
+          setC('.tech-item-desc', locale.ueber[k + '_desc']);
+        });
+        setPageEl('#benchmarks .section-tag', locale.ueber.benchmarks_tag);
+        setPageEl('#benchmarks-title', locale.ueber.benchmarks_title);
+        document.querySelectorAll('.benchmark-item').forEach((item, i) => {
+          const k = 'benchmark' + (i + 1);
+          const setC = (sel, val) => { const el = item.querySelector(sel); if (el && typeof val === 'string') el.textContent = val; };
+          setC('.benchmark-val', locale.ueber[k + '_val']);
+          setC('.benchmark-lbl', locale.ueber[k + '_lbl']);
+        });
+        setPageEl('#dsgvo .section-tag', locale.ueber.dsgvo_tag);
+        setPageEl('#dsgvo-title', locale.ueber.dsgvo_title);
+        setPageEl('.dsgvo-desc', locale.ueber.dsgvo_desc);
+        document.querySelectorAll('.dsgvo-item').forEach((item, i) => { const val = locale.ueber['dsgvo_item' + (i + 1)]; if (val) item.textContent = val; });
+      }
+      // Subpage i18n: Kontakt page
+      const kontaktSection = document.querySelector('#kontakt-hero');
+      if (kontaktSection && locale.kontakt_page) {
+        const setPageEl = (sel, val) => { const el = document.querySelector(sel); if (el && typeof val === 'string') el.textContent = val; };
+        setPageEl('.kontakt-hero-eyebrow', locale.kontakt_page.hero_badge);
+        setPageEl('#kontakt-title', locale.kontakt_page.title);
+        setPageEl('.kontakt-hero-lead', locale.kontakt_page.lead);
+        setPageEl('label[for="project-type"]', locale.kontakt_page.project_type_label);
+        setPageEl('label[for="budget"]', locale.kontakt_page.budget_label);
+        setPageEl('label[for="timeline"]', locale.kontakt_page.timeline_label);
+        const ptInput = document.querySelector('#project-type'); if (ptInput) ptInput.placeholder = locale.kontakt_page.project_type_placeholder;
+        const budgetInput = document.querySelector('#budget'); if (budgetInput) budgetInput.placeholder = locale.kontakt_page.budget_placeholder;
+        const timelineInput = document.querySelector('#timeline'); if (timelineInput) timelineInput.placeholder = locale.kontakt_page.timeline_placeholder;
+        setPageEl('#faq .section-tag', locale.kontakt_page.faq_tag);
+        setPageEl('#faq-title', locale.kontakt_page.faq_title);
+        document.querySelectorAll('.faq-item').forEach((item, i) => {
+          const k = 'faq' + (i + 1);
+          const setC = (sel, val) => { const el = item.querySelector(sel); if (el && typeof val === 'string') el.textContent = val; };
+          setC('.faq-question', locale.kontakt_page[k + '_q']);
+          setC('.faq-answer', locale.kontakt_page[k + '_a']);
+        });
+      }
       document.documentElement.lang = language;
       document.title = locale.meta.title;
       const description = document.querySelector('meta[name="description"]');
@@ -356,7 +470,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (privacyNote) {
         privacyNote.replaceChildren(document.createTextNode(locale.contact.privacy_prefix + ' '));
         const privacyLink = document.createElement('a');
-        privacyLink.href = '#datenschutz';
+        privacyLink.href = isTemplatePage ? '#datenschutz' : 'datenschutz.html';
         privacyLink.className = 'form-privacy-link';
         privacyLink.textContent = locale.contact.privacy_link;
         privacyNote.append(privacyLink, document.createTextNode(locale.contact.privacy_suffix || ''));
@@ -381,6 +495,22 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (error) {
       console.error('Unable to apply the selected language:', error);
     }
+  }
+
+  function markActivePage() {
+    try {
+      const currentFile = (typeof location !== 'undefined'
+        ? location.pathname.split('/').pop()
+        : '') || 'index.html';
+      document.querySelectorAll('.nav-link[href]').forEach((link) => {
+        const linkFile = (link.getAttribute('href') || '').split('/').pop() || 'index.html';
+        if (linkFile === currentFile) {
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.removeAttribute('aria-current');
+        }
+      });
+    } catch (_) { /* location may be unavailable */ }
   }
 
   function closeMenu() {
@@ -448,6 +578,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  markActivePage();
   let preferredLanguage = 'de';
   try {
     const stored = localStorage.getItem('preferred_language');

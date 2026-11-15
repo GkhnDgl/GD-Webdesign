@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Über GDesign – Philosophie, Stack &amp; Standards</title>
+  <meta name="description" content="Handwerk statt Baukasten: Unsere Agentur-Philosophie, unser Technologie-Stack und unsere Barrierefreiheits- und DSGVO-Standards.">
+  <meta name="theme-color" content="#0E1726">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+  <link rel="stylesheet" href="assets/css/tailwind.generated.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-container mx-auto w-full max-w-6xl px-5">
+      <a href="index.html" class="brand" aria-label="GDesign Startseite">
+        <img class="brand-wordmark" src="assets/images/gdesign-logo.png" alt="" width="374" height="118">
+        <span class="brand-text visually-hidden">GDesign</span>
+      </a>
+
+      <button type="button" class="mobile-menu-toggle" aria-expanded="false" aria-controls="primary-navigation" aria-label="Menü öffnen">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+
+      <nav id="primary-navigation" class="primary-navigation" aria-label="Hauptnavigation">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Start</a></li>
+          <li><a href="leistungen.html" class="nav-link">Leistungen</a></li>
+          <li><a href="projekte.html" class="nav-link">Projekte</a></li>
+          <li><a href="ueber-uns.html" class="nav-link">Über uns</a></li>
+          <li><a href="kontakt.html" class="nav-link">Kontakt</a></li>
+        </ul>
+        <a href="kontakt.html" class="btn btn-primary nav-cta">Projekt anfragen</a>
+      </nav>
+      <button type="button" class="language-toggle" id="language-toggle" aria-label="Switch language to English" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Page Hero -->
+    <section class="page-hero" id="ueber-hero" aria-labelledby="ueber-title">
+      <div class="page-hero-container mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8">
+        <span class="ueber-hero-eyebrow section-tag">Über GDesign</span>
+        <h1 id="ueber-title">Handwerk statt Baukasten</h1>
+        <p class="ueber-hero-lead page-hero-lead">
+          Wir glauben, dass großes Webdesign aus Haltung entsteht: aus dem Respekt vor Nutzern, Lesbarkeit und technischer Präzision.
+        </p>
+      </div>
+    </section>
+
+    <!-- Philosophy / About Section -->
+    <section id="about" class="about-section" aria-labelledby="philosophy-title">
+      <div class="about-card">
+        <div class="about-content">
+          <span class="section-tag">Philosophie</span>
+          <h2 id="philosophy-title">Warum wir anders arbeiten</h2>
+          <p class="philosophy-desc">
+            Während die Branche auf Template-Baukästen und Page-Builder setzt, bauen wir jede Website von Grund auf neu – mit sauberem, semantischem HTML, maßgeschneidertem CSS und minimalem, effizientem JavaScript. Das Ergebnis: Websites, die schneller laden, besser ranken, zugänglicher sind und länger funktionieren als der Wettbewerb.
+          </p>
+          <div class="about-features">
+            <div class="feature-item">
+              <strong>Nutzerzentriert</strong>
+              <p>Optimale Bedienbarkeit auf allen Smartphones, Tablets und Desktops.</p>
+            </div>
+            <div class="feature-item">
+              <strong>Zukunftssicher</strong>
+              <p>Mit Blick auf Bedienbarkeit, Sicherheit und Datenschutz entwickelt.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section id="stack" class="tech-stack-section" aria-labelledby="stack-title">
+      <div class="section-header mx-auto w-full max-w-2xl text-center">
+        <span class="section-tag">Technologie</span>
+        <h2 id="stack-title">Unser bewährter Tech-Stack</h2>
+        <p class="stack-lead">Keine Abhängigkeiten von kommerziellen Plattformen – nur offene, dokumentierte Webstandards.</p>
+      </div>
+
+      <div class="tech-stack-grid">
+        <div class="tech-item">
+          <h3 class="tech-item-title">HTML5 &amp; CSS3</h3>
+          <p class="tech-item-desc">Semantisches Markup, Custom Properties, moderne Grid- und Flex-Layouts ohne Framework-Overhead.</p>
+        </div>
+        <div class="tech-item">
+          <h3 class="tech-item-title">Vanilla JavaScript</h3>
+          <p class="tech-item-desc">Schlankes, typsicheres JS ohne Framework-Lock-in – wartbar, testbar und zukunftsfest.</p>
+        </div>
+        <div class="tech-item">
+          <h3 class="tech-item-title">Netlify &amp; GitHub Pages</h3>
+          <p class="tech-item-desc">CDN-basiertes Hosting mit automatischem Deployment, Formverarbeitung und HTTPS ohne Serverkosten.</p>
+        </div>
+        <div class="tech-item">
+          <h3 class="tech-item-title">Tailwind CSS (Build)</h3>
+          <p class="tech-item-desc">Utility-First-Framework für schnelle Prototypen und konsistente Spacing-Skalen – nur im Build-Prozess.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benchmarks -->
+    <section id="benchmarks" class="benchmarks-section" aria-labelledby="benchmarks-title">
+      <div class="section-header mx-auto w-full max-w-2xl text-center">
+        <span class="section-tag">Qualitätsstandards</span>
+        <h2 id="benchmarks-title">Unsere Mindeststandards für jeden Launch</h2>
+      </div>
+
+      <div class="benchmarks-grid">
+        <div class="benchmark-item">
+          <span class="benchmark-val">100</span>
+          <span class="benchmark-lbl">Lighthouse Performance</span>
+        </div>
+        <div class="benchmark-item">
+          <span class="benchmark-val">AA</span>
+          <span class="benchmark-lbl">WCAG 2.1 Konformität</span>
+        </div>
+        <div class="benchmark-item">
+          <span class="benchmark-val">&lt;40ms</span>
+          <span class="benchmark-lbl">Time to First Byte</span>
+        </div>
+        <div class="benchmark-item">
+          <span class="benchmark-val">0</span>
+          <span class="benchmark-lbl">Externe Tracking-Scripts</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- DSGVO -->
+    <section id="dsgvo" class="dsgvo-section" aria-labelledby="dsgvo-title">
+      <div class="section-header mx-auto w-full max-w-2xl text-center">
+        <span class="section-tag">DSGVO by Design</span>
+        <h2 id="dsgvo-title">Datenschutz als Grundprinzip</h2>
+        <p class="dsgvo-desc">
+          Wir integrieren Datenschutz von Beginn an – nicht als nachträglichen Compliance-Aufwand, sondern als Designentscheidung.
+        </p>
+      </div>
+
+      <ul class="dsgvo-list">
+        <li class="dsgvo-item">Keine externen Schrift- oder Icon-CDNs (Fonts lokal gehostet)</li>
+        <li class="dsgvo-item">Kein Google Analytics oder vergleichbare Tracking-Tools ohne explizite Einwilligung</li>
+        <li class="dsgvo-item">Netlify Forms mit Honeypot-Spam-Schutz ohne externe Bibliotheken</li>
+        <li class="dsgvo-item">Content Security Policy (CSP) in netlify.toml – keine Inline-Scripts</li>
+      </ul>
+    </section>
+
+    <!-- CTA -->
+    <section class="contact-section" aria-label="Kontakt aufnehmen">
+      <div class="contact-container mx-auto w-full max-w-3xl">
+        <div class="contact-header">
+          <span class="section-tag">Gemeinsam arbeiten</span>
+          <h2 id="contact-title">Bereit für Ihr nächstes Projekt?</h2>
+          <p class="section-lead">Erzählen Sie uns von Ihrer Vision – wir machen daraus eine außergewöhnliche digitale Präsenz.</p>
+        </div>
+        <div class="section-cta-row">
+          <a href="kontakt.html" class="btn btn-primary">Projekt anfragen</a>
+          <a href="leistungen.html" class="btn btn-secondary">Leistungen ansehen</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="brand" aria-label="GDesign Startseite">
+            <img class="brand-wordmark brand-wordmark-footer" src="assets/images/gdesign-logo.png" alt="" width="366" height="114">
+            <span class="brand-text visually-hidden">GDesign</span>
+          </a>
+          <p class="footer-tagline">
+            Moderne Webentwicklung &amp; Digitalagentur für performante und barrierefreie digitale Erlebnisse.
+          </p>
+        </div>
+
+        <div class="footer-nav-group">
+          <span class="footer-heading">Navigation</span>
+          <ul class="footer-links">
+            <li><a href="leistungen.html">Leistungen</a></li>
+            <li><a href="projekte.html">Projekte</a></li>
+            <li><a href="ueber-uns.html">Über uns</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-nav-group">
+          <span class="footer-heading">Rechtliches</span>
+          <ul class="footer-links">
+            <li><a href="impressum.html">Impressum</a></li>
+            <li><a href="datenschutz.html">Datenschutz</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; GDesign. Alle Rechte vorbehalten.</p>
+        <p class="legal-notice">Rechtliche Angaben müssen vor dem Produktivstart ergänzt werden.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

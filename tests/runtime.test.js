@@ -400,3 +400,47 @@ test('Missing, malformed, and schema-invalid template config show a localized er
     assert.ok(templateStyles.includes('.config-invalid main'), scenario.name);
   }
 });
+
+test('Multi-page architecture: all 7 agency pages exist with shared assets, relative links, and strict CSP compliance', () => {
+  const pages = [
+    'index.html',
+    'leistungen.html',
+    'projekte.html',
+    'ueber-uns.html',
+    'kontakt.html',
+    'impressum.html',
+    'datenschutz.html'
+  ];
+
+  for (const pageName of pages) {
+    const filePath = path.join(root, pageName);
+    assert.ok(fs.existsSync(filePath), `Page file missing: ${pageName}`);
+    const content = fs.readFileSync(filePath, 'utf8');
+
+    // Shared CSS & JS assets
+    assert.match(content, /assets\/css\/tailwind\.generated\.css/, `${pageName} must link tailwind.generated.css`);
+    assert.match(content, /assets\/css\/style\.css/, `${pageName} must link style.css`);
+    assert.match(content, /assets\/js\/main\.js/, `${pageName} must link main.js`);
+
+    // Strict CSP compliance: no inline styles, no inline script tags
+    assert.doesNotMatch(content, /\sstyle\s*=/i, `${pageName} contains inline style attribute violating CSP`);
+    assert.doesNotMatch(content, /<script(?![^>]*src=)[^>]*>[\s\S]*?<\/script>/i, `${pageName} contains inline script block violating CSP`);
+
+    // All internal navigation links must use relative paths without leading slash
+    const hrefMatches = [...content.matchAll(/href=["']([^"']+)["']/g)].map(m => m[1]);
+    for (const href of hrefMatches) {
+      if (!href.startsWith('http') && !href.startsWith('mailto:') && !href.startsWith('tel:') && !href.startsWith('#')) {
+        assert.ok(!href.startsWith('/'), `Absolute path with leading slash found in ${pageName}: "${href}". Use relative paths.`);
+      }
+    }
+
+    // Every agency page has language toggle button
+    assert.match(content, /id=["']language-toggle["']/, `${pageName} must have language toggle button`);
+  }
+
+  // Kontakt page Netlify form checks
+  const kontaktHtml = fs.readFileSync(path.join(root, 'kontakt.html'), 'utf8');
+  assert.match(kontaktHtml, /data-netlify="true"/);
+  assert.match(kontaktHtml, /netlify-honeypot="bot-field"/);
+  assert.match(kontaktHtml, /<p class="hidden-field hidden">[\s\S]*name="bot-field"/);
+});
