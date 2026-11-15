@@ -673,7 +673,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
 /* Smartphone Mockup */
 .phone-frame {
-  width: 390px;
+  width: 422px;
   max-width: 100%;
   margin: 0 auto;
   background: var(--brand-midnight);
