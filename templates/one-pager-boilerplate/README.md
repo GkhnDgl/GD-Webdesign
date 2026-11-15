@@ -19,9 +19,9 @@ All visual assets and fonts used in this template are locally hosted and license
    - Scalable inline vector SVGs integrated into `index.html` and component styles with zero external dependencies.
 
 ## Localization (i18n)
-- Localized copy lives in `locales/de.json` and `locales/en.json`.
-- German copy uses sector-specific trades and gardening terminology (e.g. *Meisterbetrieb*, *Garten- & Landschaftsbau*, *Vor-Ort-Besichtigung*, *Kostenloses Angebot anfragen*).
-- English copy provides an equivalent localized presentation for international or bilingual client inquiries.
+- General interface copy (navigation labels, form labels, validation messages, and accessibility text) lives in `locales/de.json` and `locales/en.json`.
+- Customer-specific presentation content, SEO metadata, section headings, metrics, service descriptions, process steps, company features, gallery copy, and CTA labels live in the existing `config.json` and provide both `de` and `en` values.
+- The template locale files are not the per-customer content store; keep their German and English key hierarchies aligned.
 
 ## Quality Assurance & Verification
 - **Build & Tests**: Run `npm run build` (which executes Tailwind CSS compilation and `node --test`).
