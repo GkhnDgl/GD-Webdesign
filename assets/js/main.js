@@ -116,11 +116,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (a.logo !== undefined && (!keys(a.logo,['image','alt']) || !asset(a.logo.image) || !localized(a.logo.alt))) return false;
     if (!keys(seo,['title','description']) || !localized(seo.title) || !localized(seo.description)) return false;
     if (!keys(c,['hero','services','process','about','gallery','contact','footer'])) return false;
-    const sections={hero:['badge','title','subtitle'],services:['eyebrow','title','description','items'],process:['eyebrow','title','description','steps'],about:['eyebrow','title','description','features'],gallery:['eyebrow','title','description','items'],contact:['eyebrow','title','description'],footer:['tagline']};
+    const sections={hero:['badge','title','subtitle','metrics'],services:['eyebrow','title','description','items'],process:['eyebrow','title','description','steps'],about:['eyebrow','title','description','features'],gallery:['eyebrow','title','description','items'],contact:['eyebrow','title','description'],footer:['tagline']};
     for (const [name,fields] of Object.entries(sections)) {
       if (!keys(c[name],fields)) return false;
-      for (const field of fields) if (!['items','steps','features'].includes(field) && !localized(c[name][field])) return false;
+      for (const field of fields) if (!['items','steps','features','metrics'].includes(field) && !localized(c[name][field])) return false;
     }
+    if (!unique(c.hero.metrics,v=>keys(v,['id','value','label']) && localized(v.value) && localized(v.label))) return false;
     if (!unique(c.services.items,v=>localizedItem(v,['id','title','description','highlights']) && (v.highlights===undefined || localizedList(v.highlights)))) return false;
     if (!unique(c.process.steps,v=>localizedItem(v,['id','title','description']))) return false;
     if (!unique(c.about.features,v=>localizedItem(v,['id','title','description']))) return false;
@@ -128,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const placements=new Set();
     if (!Array.isArray(config.ctas) || !config.ctas.length || !config.ctas.every(v=>{
       if (!keys(v,['id','placement','style','label','type','value']) || !text(v.id) || placements.has(v.placement) ||
-        !['nav-primary','hero-primary','hero-secondary','contact-primary'].includes(v.placement) ||
+        !['nav-primary','hero-primary','hero-secondary'].includes(v.placement) ||
         !['primary','secondary','text'].includes(v.style) || !localized(v.label) || !text(v.value)) return false;
       placements.add(v.placement);
       if (v.type==='tel') return /^[+0-9][0-9\s()./-]{5,24}$/.test(v.value);
@@ -194,6 +195,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const img=make('img','brand-customer-logo');img.src=new URL(config.branding.logo.image,pageBaseUrl).href;img.alt=val(config.branding.logo.alt);wrapper.replaceChildren(img);wrapper.removeAttribute('aria-hidden');
     });
     set('.hero-content > .badge',val(config.content.hero.badge));set('#hero-title',val(config.content.hero.title));set('.hero-description',val(config.content.hero.subtitle));
+    const metrics=document.querySelector('.hero-metrics');
+    if(metrics){metrics.replaceChildren();config.content.hero.metrics.forEach(item=>{const card=make('div','metric-item');card.append(make('span','metric-value text-2xl font-extrabold',val(item.value)),make('span','metric-label text-sm text-slate-500',val(item.label)));metrics.append(card);});}
     header('services',config.content.services);header('process',config.content.process);header('gallery',config.content.gallery);
     set('#contact .contact-header .section-tag',val(config.content.contact.eyebrow));
     set('#contact .contact-header h2',val(config.content.contact.title));

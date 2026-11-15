@@ -940,3 +940,6 @@ section {
 /* Customer-configured logo and flexible content collections */
 .brand-customer-logo { display:block; width:2rem; height:2rem; object-fit:contain; }
 [data-config-collection="services"], [data-config-collection="process"], [data-config-collection="gallery"], [data-config-collection="features"] { grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); }
+
+.metric-value { color: var(--color-primary); }
+[data-config-collection="metrics"] { grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr)); }

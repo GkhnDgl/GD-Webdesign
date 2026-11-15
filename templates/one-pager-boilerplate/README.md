@@ -45,7 +45,7 @@ The complete customer configuration is stored in this file. The machine-readable
 | `business` | Public name, registered legal name, legal form, phone, email, structured address |
 | `branding` | Optional logo path and localized alt text; primary, hover, light and accent HEX colors |
 | `seo` | German and English page title and meta description |
-| `content.hero` | Localized badge, title and subtitle |
+| `content.hero` | Localized badge, title, subtitle and variable metrics list |
 | `content.services` | Localized section heading/description and a variable list of services; optional localized highlights |
 | `content.process` | Localized section heading/description and variable process steps |
 | `content.about` | Localized company introduction and variable feature list |

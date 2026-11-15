@@ -43,7 +43,42 @@
       "subtitle": {
         "de": "Von der Gartengestaltung über Pflaster- und Steinarbeiten bis hin zu Ausbau und Instandhaltung: Leistungsumfang und Zeitrahmen stimmen wir passend zu Ihrem Vorhaben mit Ihnen ab.",
         "en": "From garden design and paving to renovation and maintenance, we tailor the scope and schedule to your project."
-      }
+      },
+      "metrics": [
+        {
+          "id": "expertise",
+          "value": {
+            "de": "Meisterbetrieb",
+            "en": "Master craftspeople"
+          },
+          "label": {
+            "de": "Qualifizierte Fachkräfte",
+            "en": "Qualified specialists"
+          }
+        },
+        {
+          "id": "planning",
+          "value": {
+            "de": "Planung",
+            "en": "Planning"
+          },
+          "label": {
+            "de": "Ablauf nach Absprache",
+            "en": "A schedule agreed with you"
+          }
+        },
+        {
+          "id": "local",
+          "value": {
+            "de": "Regionale Nähe",
+            "en": "Local service"
+          },
+          "label": {
+            "de": "Vor Ort für Sie da",
+            "en": "Here when you need us"
+          }
+        }
+      ]
     },
     "services": {
       "eyebrow": {

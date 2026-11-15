@@ -320,6 +320,7 @@ test('Master Template A runtime validator accepts the complete config and reject
   assert.equal(validate(config), true, 'Sample configuration should pass runtime validation');
 
   const variableCollections = structuredClone(config);
+  variableCollections.content.hero.metrics = variableCollections.content.hero.metrics.slice(0, 1);
   variableCollections.content.services.items = variableCollections.content.services.items.slice(0, 1);
   variableCollections.content.process.steps = variableCollections.content.process.steps.slice(0, 2);
   variableCollections.content.about.features = variableCollections.content.about.features.slice(0, 1);
