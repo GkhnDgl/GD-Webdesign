@@ -72,7 +72,8 @@ test('Homepage showcase removes the architecture tab and embeds the real templat
   assert.match(homepage, /id="tab-desktop"/);
   assert.match(homepage, /id="tab-mobile"/);
   assert.ok(homepage.includes('class="phone-preview-frame"'));
-  assert.ok(homepage.includes('src="templates/one-pager-boilerplate/index.html#hero"'));
+  assert.ok(homepage.includes('src="templates/one-pager-boilerplate/index.html"'));
+  assert.ok(!homepage.includes('templates/one-pager-boilerplate/index.html#hero'));
   assert.ok(templateHomepage.includes('Beispielbetrieb · Gartenbau & Handwerk'));
   assert.ok(templateHomepage.includes('Ihr Fachbetrieb für Gartenbau, Handwerk & Objektpflege'));
   assert.ok(templateHomepage.includes('Kostenloses Angebot anfragen'));
@@ -92,7 +93,8 @@ const homepageSource = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 
 test('Desktop showcase is a live interactive template preview with a fictional address', () => {
   assert.ok(homepageSource.includes('class="desktop-preview-frame"'));
-  assert.ok(homepageSource.includes('src="templates/one-pager-boilerplate/index.html#hero"'));
+  assert.ok(homepageSource.includes('src="templates/one-pager-boilerplate/index.html"'));
+  assert.ok(!homepageSource.includes('templates/one-pager-boilerplate/index.html#hero'));
   assert.ok(homepageSource.includes('www.meisterbetrieb-gartenbau.example'));
   assert.ok(!homepageSource.includes('gd-webdesign.de/templates/one-pager-boilerplate/'));
   assert.ok(css.includes('.desktop-preview-frame'));
