@@ -24,7 +24,7 @@ function getValue(object, pathStr) {
 }
 
 test('Homepage template previews do not trigger outer-page fragment scrolling', () => {
-  const previewSources = [...indexHtml.matchAll(/<iframe\\b[^>]*class="(?:desktop-preview-frame|phone-preview-frame)"[^>]*src="([^"]+)"/g)]
+  const previewSources = [...indexHtml.matchAll(/<iframe\b[^>]*class="(?:desktop-preview-frame|phone-preview-frame)"[^>]*src="([^"]+)"/g)]
     .map((match) => match[1]);
 
   assert.equal(previewSources.length, 2, 'Expected desktop and mobile preview iframes');
