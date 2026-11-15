@@ -300,7 +300,6 @@ document.addEventListener('DOMContentLoaded', () => {
         setEl('.showcase-lead', ts.lead);
         setEl('#tab-desktop .tab-label', ts.tab_desktop);
         setEl('#tab-mobile .tab-label', ts.tab_mobile);
-        setEl('#tab-architecture .tab-label', ts.tab_architecture);
         setEl('.browser-badge', ts.badge_performance);
         setEl('.mockup-hero-badge', ts.mockup_badge);
         setEl('.mockup-hero-title', ts.mockup_title);
