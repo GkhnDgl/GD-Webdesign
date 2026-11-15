@@ -72,3 +72,12 @@ test('Homepage showcase removes the architecture tab and embeds the real templat
   assert.ok(templateHomepage.includes('Kostenloses Angebot anfragen'));
   assert.ok(css.includes('.phone-preview-frame'));
 });
+
+const netlifyConfig = fs.readFileSync(path.join(root, 'netlify.toml'), 'utf8');
+
+test('Template preview permits same-origin framing without weakening global frame protection', () => {
+  assert.match(netlifyConfig, /for = "\/\*"[\s\S]*?X-Frame-Options = "DENY"/);
+  assert.match(netlifyConfig, /frame-ancestors 'none'/);
+  assert.match(netlifyConfig, /for = "\/templates\/one-pager-boilerplate\/\*"[\s\S]*?X-Frame-Options = "SAMEORIGIN"/);
+  assert.match(netlifyConfig, /for = "\/templates\/one-pager-boilerplate\/\*"[\s\S]*?frame-ancestors 'self'/);
+});
