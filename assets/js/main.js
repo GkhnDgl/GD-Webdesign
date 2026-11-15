@@ -348,6 +348,12 @@ document.addEventListener('DOMContentLoaded', () => {
           if (key && locale.nav_pages[key]) link.textContent = locale.nav_pages[key];
         });
       }
+      // Homepage About-section CTA
+      if (locale.about && locale.about.cta_link) {
+        const aboutCta = document.querySelector('.section-cta-row-left .btn-secondary');
+        if (aboutCta) aboutCta.textContent = locale.about.cta_link;
+      }
+
       // Subpage i18n: Leistungen page
       const leistungenSection = document.querySelector('#leistungen-hero');
       if (leistungenSection && locale.leistungen) {
