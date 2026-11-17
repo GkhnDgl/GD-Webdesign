@@ -26,7 +26,7 @@ See [Architecture & Hosting Decisions](architecture.md) for boundaries, security
 
 ## Revised Gantt schedule
 
-The dates below are planning estimates reconciled with the `main` branch as of 2026-11-17. Parallel work is intentional where noted. Parallel work is intentional where noted.
+The dates below are planning estimates reconciled with the `main` branch as of 2026-11-17. Parallel work is intentional where noted.
 
 ```mermaid
 gantt
@@ -72,7 +72,7 @@ gantt
 | P1 | 1 — Technical foundation | Technical foundation, standardization, and production hosting migration | 2026-11-01 | 2026-12-12 | In progress |
 | M1.1 | 1 — Technical foundation | GitHub repository, workflows, responsive Master Template A, local fonts | 2026-11-01 | 2026-11-10 | Completed (user accepted 2026-10-31) |
 | M1.2 | 1 — Technical foundation | Complete configurable customer content, schema/runtime validation and automated tests; timed sample-business setup under 20 minutes remains to be evidenced | 2026-11-11 | 2026-11-15 | In progress — implementation merged and nine browser acceptance areas passed; timed walkthrough outstanding |
-| M1.3 | 1 — Technical foundation | Agency showcase and mobile onboarding/intake form | 2026-11-16 | 2026-11-28 | In progress — showcase and enquiry forms exist on `main`; dedicated mobile onboarding acceptance remains unverified |
+| M1.3 | 1 — Technical foundation | Agency showcase and mobile onboarding/intake form | 2026-11-16 | 2026-11-28 | In progress — homepage showcase and general project enquiry form exist on `main`; no separate onboarding/intake form is evidenced, so this part remains open |
 | M1.4 | 1 — Technical foundation | Audit public repository and Git history; connect Netlify; verify build, forms, headers, assets, redirects, and production behavior; switch repository to private after successful validation; configure domain/HTTPS; retire GitHub Pages only after user acceptance | 2026-11-29 | 2026-12-12 | Planned — Netlify PR deploy-preview check observed; production migration not verified |
 | P2 | 2 — Lead generation | Lead generation, outreach preparation, and acquisition dashboard | 2026-12-13 | 2027-01-24 | Planned |
 | M2.1 | 2 — Lead generation | Research local businesses and compile at least 40 qualified leads | 2026-12-13 | 2027-01-02 | Planned |
@@ -116,5 +116,5 @@ gantt
 - The original start date remains **2026-11-01**. The revised horizon ends **2027-05-31**.
 - **M1.1 Early Acceptance:** M1.1 was formally accepted by the user on **2026-10-31**, ahead of its planned calendar window. This status is preserved from the prior roadmap.
 - The original source plan uses relative labels such as “Tag 1–10” and “Woche 5–6” without explicit calendar dates. The calendar dates above are estimates anchored to the project start and updated to include the new scope.
-- Statuses reflect repository evidence available on `main` as of **2026-11-17**. M1.2 is not marked fully complete because the timed setup walkthrough remains outstanding. M1.3 is partial because the showcase and enquiry forms exist, but a dedicated mobile onboarding acceptance has not been evidenced. The latest successful production workflow observed is GitHub Pages on 2026-11-15; PR #44 has a successful Netlify deploy-preview check, not a verified production migration.
+- Statuses reflect repository evidence available on `main` as of **2026-11-17**. M1.2 is not marked fully complete because the timed setup walkthrough remains outstanding. M1.3 is partial because the homepage showcase and general project enquiry form exist, but no separate onboarding/intake form is evidenced on `main`. The latest successful production workflow observed is GitHub Pages on 2026-11-15; PR #44 has a successful Netlify deploy-preview check, not a verified production migration.
 - Financial assumptions and the 12-month revenue scenario remain in the source business calculation. Additional dashboard/backend subscription costs are not yet priced; update the financial model after selecting actual providers and plans.
