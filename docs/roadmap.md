@@ -1,91 +1,120 @@
 # Project Roadmap — GD Webdesign
 
 **Project start:** 2026-11-01  
-**Planning horizon:** 6 months, through 2027-04-30  
-**Status convention:** All entries start as **Planned**. Dates are calendar-based estimates derived from the six-month phases and milestone sequence in `Roadmap_und_Kalkulation.md`; they are not claims that work has already started or completed.
+**Revised planning horizon:** 7 months, through 2027-05-31  
+**Revision:** Hosting migration and staged internal dashboard scope added on 2026-11-17.  
+**Status convention:** Dates are estimates, not evidence of completion. All new work starts as **Planned** unless repository evidence supports another status.
 
 ## Overview
 
-The roadmap follows the source plan's five phases:
+The original six-month horizon is extended to seven months to accommodate the Netlify production migration and the two staged dashboard milestones. The current `main` branch is ahead of the earlier Phase 1 schedule in two respects: M1.1 was accepted early, and the complete Master Template A configuration implementation for M1.2 was merged on 2026-11-15 (three days before the original 2026-11-18 target). The agency homepage already contains a working template showcase and enquiry forms. However, the under-20-minute customer setup target still lacks a timed walkthrough, and a dedicated mobile onboarding flow has not been evidenced. Therefore M1.2 and M1.3 are not marked fully complete. The Phase 1 dates have been pulled forward modestly; the overall horizon remains 2027-05-31 because the added hosting and dashboard scope still requires delivery and verification time.
 
-1. **Technical foundation & standardization (November 2026):** establish the repository and core template, validate content/config separation, and prepare the agency showcase and onboarding form.
-2. **Lead generation & outreach preparation (December 2026):** research local businesses, build a qualified list of at least 40 leads, and prepare three branded demos plus outreach templates.
-3. **Market entry & pilot customers (January 2027):** run the first outreach campaign, onboard the first paying customer(s), and validate the end-to-end delivery process.
-4. **Scaling & routine building (February–March 2027):** establish a consistent outreach rhythm, encourage referrals, optimize reusable components, and prepare Master Template B.
-5. **Consolidation & Template B launch (April 2027):** launch the second template for service providers/studios and review finances and automation.
+The live hosting migration has not happened: `main` is still public and the latest successful production workflow observed on 2026-11-15 is GitHub Pages. A successful Netlify deploy-preview check exists for PR #44, but that does not prove a production Netlify project, domain, HTTPS, or private-repository integration has been accepted.
 
-The original plan describes the target outcomes as a qualified 40-lead pipeline in Phase 2, 1–2 paying pilot customers in Phase 3, 4–6 active customers across Phases 4–5, and 8–10 active support contracts by the end of Month 6. These are targets, not guaranteed results.
+The roadmap keeps the original commercial targets as goals, not guarantees: at least 40 qualified leads, 1–2 paying pilot customers, 4–6 active customers during scaling, and a target of 8–10 active support contracts by the end of the revised horizon.
 
-## Gantt schedule
+## Target repository and deployment architecture
+
+- **Agency website and master templates:** retain the existing `GkhnDgl/GD-Webdesign` repository initially. It remains public during development, then is switched to private as part of the approved production migration. Netlify serves the public agency website; private source code does not make the published website private.
+- **Internal dashboard:** separate private repository and separate Netlify project, with authentication and a protected backend. It is not an `/admin` area of the public agency website.
+- **Customer websites:** create a separate private GitHub repository and separate Netlify project for each customer when that customer project is started. Do not create empty customer repositories in advance.
+- **Shared backend services:** evaluate Supabase for database, authentication, and private file storage; use Netlify Functions for privileged server-side operations. Select concrete plans and configure access controls before implementation.
+- **Domains:** initially manage domain registration and DNS manually through the selected provider. Preserve the customer as the legal domain holder; document delegated technical administration.
+- **Automation:** start with assisted workflows and explicit user approval before consequential actions. Do not send unsolicited marketing messages automatically. Lead research and contact preparation must respect applicable privacy and marketing rules.
+
+See [Architecture & Hosting Decisions](architecture.md) for boundaries, security requirements, and the staged operating model.
+
+## Revised Gantt schedule
+
+The dates below are planning estimates reconciled with the `main` branch as of 2026-11-17. Parallel work is intentional where noted.
 
 ```mermaid
 gantt
-    title GD Webdesign — Six-Month Roadmap
+    title GD Webdesign — Revised Seven-Month Roadmap
     dateFormat YYYY-MM-DD
     axisFormat %d %b %Y
     tickInterval 1week
 
-    section Phase 1 — Technical foundation
-    P1 Technical foundation and standardization :p1, 2026-11-01, 2026-11-30
-    M1.1 Repository and Core Template A         :milestone, m11, 2026-11-10, 0d
-    M1.2 Config separation validated            :milestone, m12, 2026-11-18, 0d
-    M1.3 Showcase and onboarding form            :milestone, m13, 2026-11-30, 0d
+    section Phase 1 — Technical foundation and production hosting
+    P1 Technical foundation and hosting migration :p1, 2026-11-01, 2026-12-12
+    M1.1 Repository and Core Template A            :milestone, m11, 2026-11-10, 0d
+    M1.2 Config separation validated               :milestone, m12, 2026-11-15, 0d
+    M1.3 Showcase and onboarding form               :milestone, m13, 2026-11-28, 0d
+    M1.4 Netlify production migration               :milestone, m14, 2026-12-12, 0d
 
-    section Phase 2 — Lead generation
-    P2 Lead generation and outreach preparation :p2, 2026-12-01, 2026-12-31
-    M2.1 Research and 40 qualified leads         :milestone, m21, 2026-12-14, 0d
-    M2.2 Three demos and outreach templates      :milestone, m22, 2026-12-31, 0d
+    section Phase 2 — Lead generation and acquisition dashboard
+    P2 Lead generation and acquisition workflow    :p2, 2026-12-13, 2027-01-24
+    M2.1 Research and 40 qualified leads            :milestone, m21, 2027-01-02, 0d
+    M2.2 Three demos and outreach templates         :milestone, m22, 2027-01-24, 0d
+    M2.3 Internal CRM and acquisition MVP           :milestone, m23, 2027-01-24, 0d
 
-    section Phase 3 — Market entry
-    P3 Market entry and pilot customers          :p3, 2027-01-01, 2027-01-31
-    M3.1 First outreach campaign                 :milestone, m31, 2027-01-14, 0d
-    M3.2 First contract and onboarding           :milestone, m32, 2027-01-31, 0d
+    section Phase 3 — Market entry and customer operations
+    P3 Market entry, pilot customers and operations :p3, 2027-01-25, 2027-03-08
+    M3.1 First outreach campaign                    :milestone, m31, 2027-02-07, 0d
+    M3.2 First contract and onboarding              :milestone, m32, 2027-02-21, 0d
+    M3.3 Customer operations MVP                    :milestone, m33, 2027-03-08, 0d
 
     section Phase 4 — Scaling
-    P4 Scaling and routine building              :p4, 2027-02-01, 2027-03-31
-    M4.1 Acquisition rhythm and referrals        :milestone, m41, 2027-02-28, 0d
-    M4.2 Feedback loop and Template B prep       :milestone, m42, 2027-03-31, 0d
+    P4 Scaling and routine building                  :p4, 2027-03-09, 2027-04-22
+    M4.1 Acquisition rhythm and referrals            :milestone, m41, 2027-04-02, 0d
+    M4.2 Feedback loop and Template B prep           :milestone, m42, 2027-04-22, 0d
 
     section Phase 5 — Consolidation
-    P5 Consolidation and Template B launch       :p5, 2027-04-01, 2027-04-30
-    M5.1 Master Template B launch                :milestone, m51, 2027-04-15, 0d
-    M5.2 Financial and automation review         :milestone, m52, 2027-04-30, 0d
+    P5 Consolidation and Template B launch           :p5, 2027-04-23, 2027-05-31
+    M5.1 Master Template B launch                    :milestone, m51, 2027-05-15, 0d
+    M5.2 Financial and automation review             :milestone, m52, 2027-05-31, 0d
 ```
 
 ## Milestone register
 
 | ID | Phase | Task / milestone | Start date | End date | Status |
 |---|---|---|---|---|---|
-| P1 | 1 — Technical foundation | Technical foundation and standardization | 2026-11-01 | 2026-11-30 | Planned |
-| M1.1 | 1 — Technical foundation | GitHub repository, workflows, responsive Master Template A, local fonts | 2026-11-01 | 2026-11-10 | Completed |
-| M1.2 | 1 — Technical foundation | Move customer-specific content into `config.json`; test sample-business setup under 20 minutes | 2026-11-11 | 2026-11-18 | Planned |
-| M1.3 | 1 — Technical foundation | Agency showcase one-pager and mobile onboarding form | 2026-11-19 | 2026-11-30 | Planned |
-| P2 | 2 — Lead generation | Lead generation and outreach preparation | 2026-12-01 | 2026-12-31 | Planned |
-| M2.1 | 2 — Lead generation | Research local businesses and compile at least 40 qualified leads | 2026-12-01 | 2026-12-14 | Planned |
-| M2.2 | 2 — Lead generation | Brand three demo sites and prepare WhatsApp, email, and phone outreach templates | 2026-12-15 | 2026-12-31 | Planned |
-| P3 | 3 — Market entry | Market entry and pilot customers | 2027-01-01 | 2027-01-31 | Planned |
-| M3.1 | 3 — Market entry | Send the three demos and conduct the first outreach follow-ups | 2027-01-01 | 2027-01-14 | Planned |
-| M3.2 | 3 — Market entry | Sign first contract(s), onboard customer, launch on customer domain with SSL, review delivery effort | 2027-01-15 | 2027-01-31 | Planned |
-| P4 | 4 — Scaling | Scaling and routine building | 2027-02-01 | 2027-03-31 | Planned |
-| M4.1 | 4 — Scaling | Establish five personalized contacts per week and start referral marketing | 2027-02-01 | 2027-02-28 | Planned |
-| M4.2 | 4 — Scaling | Analyze feedback, improve reusable CSS/JS components, prepare Master Template B | 2027-03-01 | 2027-03-31 | Planned |
-| P5 | 5 — Consolidation | Consolidation and Template B launch | 2027-04-01 | 2027-04-30 | Planned |
-| M5.1 | 5 — Consolidation | Launch Master Template B for fitness, beauty, and practice/service businesses; include booking links and pricing tables | 2027-04-01 | 2027-04-15 | Planned |
-| M5.2 | 5 — Consolidation | Review customer-care time against recurring revenue and assess automation level | 2027-04-16 | 2027-04-30 | Planned |
+| P1 | 1 — Technical foundation | Technical foundation, standardization, and production hosting migration | 2026-11-01 | 2026-12-12 | In progress |
+| M1.1 | 1 — Technical foundation | GitHub repository, workflows, responsive Master Template A, local fonts | 2026-11-01 | 2026-11-10 | Completed (user accepted 2026-10-31) |
+| M1.2 | 1 — Technical foundation | Complete configurable customer content, schema/runtime validation and automated tests; timed sample-business setup under 20 minutes remains to be evidenced | 2026-11-11 | 2026-11-15 | In progress — implementation merged and nine browser acceptance areas passed; timed walkthrough outstanding |
+| M1.3 | 1 — Technical foundation | Agency showcase and mobile onboarding/intake form | 2026-11-16 | 2026-11-28 | In progress — homepage showcase and general project enquiry form exist on `main`; no separate onboarding/intake form is evidenced, so this part remains open |
+| M1.4 | 1 — Technical foundation | Audit public repository and Git history; connect Netlify; verify build, forms, headers, assets, redirects, and production behavior; switch repository to private after successful validation; configure domain/HTTPS; retire GitHub Pages only after user acceptance | 2026-11-29 | 2026-12-12 | Planned — Netlify PR deploy-preview check observed; production migration not verified |
+| P2 | 2 — Lead generation | Lead generation, outreach preparation, and acquisition dashboard | 2026-12-13 | 2027-01-24 | Planned |
+| M2.1 | 2 — Lead generation | Research local businesses and compile at least 40 qualified leads | 2026-12-13 | 2027-01-02 | Planned |
+| M2.2 | 2 — Lead generation | Brand three demo sites and prepare legally reviewed outreach templates | 2027-01-03 | 2027-01-24 | Planned |
+| M2.3 | 2 — Lead generation | Build the private internal CRM/acquisition MVP: lead records, pipeline, research notes and scoring, AI-assisted website analysis and contact-draft preparation, review/approval before actions, and response tracking | 2026-12-29 | 2027-01-24 | Planned |
+| P3 | 3 — Market entry | Market entry, pilot customers, and customer operations | 2027-01-25 | 2027-03-08 | Planned |
+| M3.1 | 3 — Market entry | Send the three demos and conduct the first outreach follow-ups using the approved, legally permitted channels | 2027-01-25 | 2027-02-07 | Planned |
+| M3.2 | 3 — Market entry | Sign first contract(s), onboard customer, launch on customer domain with SSL, review delivery effort | 2027-02-08 | 2027-02-21 | Planned |
+| M3.3 | 3 — Market entry | Extend the dashboard for active customers: contacts, contracts, domains, websites/Netlify projects, service tasks, maintenance status, activity history, and a read-only financial overview; no bookkeeping or invoicing engine in this MVP | 2027-02-22 | 2027-03-08 | Planned |
+| P4 | 4 — Scaling | Scaling and routine building | 2027-03-09 | 2027-04-22 | Planned |
+| M4.1 | 4 — Scaling | Establish five personalized contacts per week and start referral marketing | 2027-03-09 | 2027-04-02 | Planned |
+| M4.2 | 4 — Scaling | Analyze feedback, improve reusable CSS/JS components, prepare Master Template B | 2027-04-03 | 2027-04-22 | Planned |
+| P5 | 5 — Consolidation | Consolidation and Template B launch | 2027-04-23 | 2027-05-31 | Planned |
+| M5.1 | 5 — Consolidation | Launch Master Template B for fitness, beauty, and practice/service businesses; include booking links and pricing tables | 2027-05-01 | 2027-05-15 | Planned |
+| M5.2 | 5 — Consolidation | Review customer-care time against recurring revenue, operating costs, and the appropriate next automation level | 2027-05-16 | 2027-05-31 | Planned |
 
 ## Phase exit targets
 
 | Phase | Target outcome |
 |---|---|
-| 1 | A sales-ready Master Template A, validated `config.json` workflow, agency showcase, and onboarding form |
-| 2 | At least 40 qualified regional leads, three demo prototypes, and prepared outreach scripts |
-| 3 | 1–2 paying pilot customers and a tested end-to-end onboarding and launch process |
+| 1 | Sales-ready Master Template A, validated `config.json` workflow, agency showcase and onboarding form, and accepted public Netlify production deployment from a private source repository |
+| 2 | At least 40 qualified regional leads, three demo prototypes, prepared outreach scripts, and a usable private acquisition/CRM MVP |
+| 3 | 1–2 paying pilot customers, tested end-to-end onboarding and launch process, and a customer operations MVP for managing active engagements |
 | 4 | Progress toward 4–6 active customers, repeatable outreach, and a prepared second template |
 | 5 | Target of 8–10 active support contracts, Master Template B launched, and financial/automation review completed |
 
+## Scope boundaries and dependencies
+
+- M1.4 is a release gate for the agency website, not a reason to stop all Phase 2 preparation. Lead research and demo preparation may proceed while migration work is being completed.
+- Do not switch the repository to private until Netlify's Git integration has been verified with the intended permissions and the production deployment has been tested. Do not disable GitHub Pages until the Netlify site, domain, HTTPS, forms, and critical journeys have been accepted.
+- If a credential was ever committed to the public repository or its history, revoke/rotate it. Making the repository private does not undo prior exposure.
+- M2.3 is intentionally a small internal MVP. Manual lead research remains valid; do not delay outreach while building advanced scraping, bulk automation, or integrations.
+- M3.3 depends on the customer and contract data model established during the first pilot. Keep finance to operational metrics (revenue, recurring revenue, costs, payment/contract status); use a dedicated accounting/invoicing provider rather than building bookkeeping into this milestone.
+- The dashboard is private and authenticated. Employee roles and a customer portal are future extensions, not MVP requirements.
+- Customer repositories and Netlify projects are created per actual customer project, not pre-provisioned.
+- Use explicit user approval before changing repository visibility, production domains/DNS, production deployment settings, or sending external communications.
+- The revised plan retains the seven-month horizon through 2027-05-31, but pulls the Phase 1 exit and all downstream phase starts forward by nine days compared with the first PR draft. This recovery is based on M1.2 implementation and the agency showcase already being present on `main`; it does not treat the timed setup walkthrough, mobile onboarding acceptance, or production Netlify migration as complete.
+
 ## Planning notes
 
-- The start date is fixed at **2026-11-01**. Phase boundaries follow calendar months for readability.
-- **M1.1 Early Acceptance:** M1.1 was formally accepted by the user on **2026-10-31**, ahead of its planned calendar window (2026-11-01 to 2026-11-10). The planned dates in the schedule are preserved to maintain visibility of the original planning estimates versus actual acceptance.
-- The source roadmap uses relative labels such as “Tag 1–10” and “Woche 5–6” without explicit calendar dates. The specific dates above are a practical schedule interpretation anchored to the required start date; adjust them if execution capacity or dependencies change.
-- Financial assumptions and the 12-month revenue scenario remain in the source document and are intentionally not duplicated here.
+- The original start date remains **2026-11-01**. The revised horizon ends **2027-05-31**.
+- **M1.1 Early Acceptance:** M1.1 was formally accepted by the user on **2026-10-31**, ahead of its planned calendar window. This status is preserved from the prior roadmap.
+- The original source plan uses relative labels such as “Tag 1–10” and “Woche 5–6” without explicit calendar dates. The calendar dates above are estimates anchored to the project start and updated to include the new scope.
+- Statuses reflect repository evidence available on `main` as of **2026-11-17**. M1.2 is not marked fully complete because the timed setup walkthrough remains outstanding. M1.3 is partial because the homepage showcase and general project enquiry form exist, but no separate onboarding/intake form is evidenced on `main`. The latest successful production workflow observed is GitHub Pages on 2026-11-15; PR #44 has a successful Netlify deploy-preview check, not a verified production migration.
+- Financial assumptions and the 12-month revenue scenario remain in the source business calculation. Additional dashboard/backend subscription costs are not yet priced; update the financial model after selecting actual providers and plans.
